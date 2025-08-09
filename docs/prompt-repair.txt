@@ -1,0 +1,10 @@
+Your last output did not validate against the schema. Here are the errors:
+
+<<insert concise list of JSON Schema validation errors>>
+
+Constraints:
+- Do not change fields that already validate unless necessary to fix the errors.
+- Do not introduce new keys.
+- Output YAML ONLY, fully replacing the previous document, and conforming to the schema.
+
+Re-emit the corrected YAML now.

@@ -1,0 +1,195 @@
+version: 1.2
+workout_id: "2025-08-09-home-01"
+date: "2025-08-09"
+location: "home"
+units: "lbs"
+duration_minutes: 50
+goal: "hypertrophy"
+notes_to_user: "Keep 1–2 RIR on compounds. Cut C then B if short on time."
+cut_order: ["C", "B"]
+
+sets:
+  - id: "W-GEN-1"
+    tier: "W"
+    must: true
+    superset: null
+    order: 1
+    exercise: "General Warm-up (light cardio/mobility, 5–8 min total across W sets)"
+    equipment: "any"
+    target_reps: null
+    target_weight: null
+    rir: null
+    rest_s: 0
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "W-BPA-1"
+    tier: "W"
+    must: true
+    superset: null
+    order: 2
+    exercise: "Band Pull-Apart"
+    equipment: "band"
+    target_reps: 20
+    target_weight: null
+    rir: 3
+    rest_s: 0
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "A-RDL-WU1"
+    tier: "A"
+    must: true
+    superset: "A1"
+    order: 3
+    exercise: "Romanian Deadlift (Barbell) — Warm-up 1"
+    equipment: "barbell"
+    target_reps: 8
+    target_weight: 95
+    rir: null
+    rest_s: 60
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "A-RDL-WU2"
+    tier: "A"
+    must: true
+    superset: "A1"
+    order: 4
+    exercise: "Romanian Deadlift (Barbell) — Warm-up 2"
+    equipment: "barbell"
+    target_reps: 5
+    target_weight: 135
+    rir: null
+    rest_s: 90
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "A-RDL-1"
+    tier: "A"
+    must: true
+    superset: "A1"
+    order: 5
+    exercise: "Romanian Deadlift (Barbell)"
+    equipment: "barbell"
+    target_reps: "6-8"
+    target_weight: 185
+    rir: 2
+    rest_s: 120
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "A-RDL-2"
+    tier: "A"
+    must: true
+    superset: "A1"
+    order: 6
+    exercise: "Romanian Deadlift (Barbell)"
+    equipment: "barbell"
+    target_reps: "6-8"
+    target_weight: 185
+    rir: 2
+    rest_s: 120
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "A-PU-1"
+    tier: "A"
+    must: true
+    superset: "A1"
+    order: 7
+    exercise: "Pull-Up"
+    equipment: "bodyweight"
+    target_reps: "6-10"
+    target_weight: 0
+    rir: 2
+    rest_s: 90
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "A-PU-2"
+    tier: "A"
+    must: true
+    superset: "A1"
+    order: 8
+    exercise: "Pull-Up"
+    equipment: "bodyweight"
+    target_reps: "6-10"
+    target_weight: 0
+    rir: 2
+    rest_s: 90
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "B-DBIP-1"
+    tier: "B"
+    must: false
+    superset: "B1"
+    order: 9
+    exercise: "DB Incline Press"
+    equipment: "dumbbell"
+    target_reps: "8-10"
+    target_weight: 65
+    rir: 2
+    rest_s: 90
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "B-DBCSROW-1"
+    tier: "B"
+    must: false
+    superset: "B1"
+    order: 10
+    exercise: "Chest-Supported DB Row"
+    equipment: "dumbbell"
+    target_reps: "8-10"
+    target_weight: 70
+    rir: 2
+    rest_s: 60
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "C-FP-1"
+    tier: "C"
+    must: false
+    superset: null
+    order: 11
+    exercise: "Face Pull (Band or Cable)"
+    equipment: "cable_or_band"
+    target_reps: 20
+    target_weight: 20
+    rir: 2
+    rest_s: 45
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+  - id: "C-RT-1"
+    tier: "C"
+    must: false
+    superset: null
+    order: 12
+    exercise: "Russian Twist"
+    equipment: "dumbbell"
+    target_reps: "20/side"
+    target_weight: 25
+    rir: 2
+    rest_s: 30
+    actual_weight: null
+    actual_reps: null
+    notes: null
+
+post_workout:
+  perceived_difficulty: null
+  completion_time_minutes: null
+  notes: null

@@ -1,0 +1,18 @@
+Inputs:
+- instructions_text: <<paste resolved instructions markdown here>>
+- history_json: <<set-level history JSON here (loads, reps, dates, RIR/RPE, exercise names)>>
+- strava_recent: <<recent activities summary including Relative Effort or equivalent load>>
+- upcoming_cardio_text: <<free-text upcoming cardio next 2–4 days>>
+- recovery_signals: {"sleep_score": <<int or null>>, "body_battery": <<int or null>>}
+- equipment_inventory: <<array of strings>>
+- meta: {"date": "<<YYYY-MM-DD>>", "location": "<<string>>", "units": "lbs", "duration_minutes": <<int>>, "goal": "<<string>>"}
+
+Constraints:
+- Two-week anti-repeat logic unless last workout ≥7 days ago (then reset).
+- Only use available equipment.
+- Rep ranges for compounds typically 6–10 or 6–8; accessories 10–20.
+- RIR default 1–3 unless fatigue_policy increases it.
+
+Schema (for validation): <<embed Analyzer v1 JSON Schema>>
+
+Now produce ONLY the JSON object that conforms to the schema.
