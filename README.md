@@ -95,7 +95,7 @@ The YAML output is:
 - `rir`: integer or `null`.
 - `rest_s`: integer seconds.
 
-A full JSON Schema for validation is defined in [`schemas/validator-workout-v1.json`](schemas/validator-workout-v1.json).
+A full JSON Schema for validation is defined in [`schemas/workout-v1.2.json`](schemas/workout-v1.2.json).
 
 ---
 
@@ -103,7 +103,7 @@ A full JSON Schema for validation is defined in [`schemas/validator-workout-v1.j
 
 1. **Analyzer (Step 1)**
    - Input: all user data (instructions, history, Strava, recovery, equipment, etc.).
-   - Output: compact JSON plan ([`schemas/validator-analyzer-v1.json`](schemas/validator-analyzer-v1.json)) selecting session type, tiers, fatigue policy, time budget, and per-exercise set counts/targets.
+   - Output: compact JSON plan ([`schemas/analyzer-v1.json`](schemas/analyzer-v1.json)) selecting session type, tiers, fatigue policy, time budget, and per-exercise set counts/targets.
    - Uses 90d history for recent bests, 14d for anti-repeat.
 
 2. **Generator (Step 2)**
@@ -120,8 +120,8 @@ A full JSON Schema for validation is defined in [`schemas/validator-workout-v1.j
 
 ## Validation
 
-- **Analyzer JSON Schema**: [`schemas/validator-analyzer-v1.json`](schemas/validator-analyzer-v1.json)
-- **Workout YAML Schema**: [`schemas/validator-workout-v1.json`](schemas/validator-workout-v1.json)
+- **Analyzer JSON Schema**: [`schemas/analyzer-v1.json`](schemas/analyzer-v1.json)
+- **Workout YAML Schema**: [`schemas/workout-v1.2.json`](schemas/workout-v1.2.json)
 - On failure, re-prompt the LLM with validation errors and require a corrected re-emission.
 
 ---
@@ -138,8 +138,101 @@ A full JSON Schema for validation is defined in [`schemas/validator-workout-v1.j
 
 ---
 
+## Quick Start (MVP)
+
+1. **Clone repo:**
+   ```bash
+   git clone https://github.com/aaronromeo/swolegen.git
+   cd swolegen
+   ```
+
+2. **Prepare your inputs:**
+   - `instructions_url` → link to your goals/restrictions markdown.
+   - `history_url` → link to your past workout YAML.
+   - Strava data & upcoming cardio text.
+
+3. **Call the analyzer:**
+   ```bash
+   openai api chat.completions.create      -m gpt-4o      -g prompts/analyzer-system.md      -u prompts/analyzer-user.md
+   ```
+
+4. **Call the generator:**
+   ```bash
+   openai api chat.completions.create      -m gpt-4o      -g prompts/generator-system.md      -u prompts/generator-user.md
+   ```
+
+5. **Validate the output:**
+   ```bash
+   ajv validate -s schemas/workout-v1.2.json -d output.yaml
+   ```
+
+---
+
+## Schemas
+
+Validation is critical for ensuring generated plans are consistent and machine-parseable.
+
+- **Analyzer JSON Schema:** `schemas/analyzer-v1.json`
+- **Workout YAML Schema:** `schemas/workout-v1.2.json`
+
+You can validate using:
+
+```bash
+# JSON validation
+ajv validate -s schemas/analyzer-v1.json -d examples/analyzer-v1.example.json
+
+# YAML validation (convert to JSON first)
+yq -o=json eval examples/workout-v1.2.example.yaml |   ajv validate -s schemas/workout-v1.2.json -d /dev/stdin
+```
+
+---
+
+## ID Generation Rules
+
+- **workout_id**: `YYYY-MM-DD-<kebab-location>-NN`  
+  NN is a deterministic 2-digit seed from:
+  - goal
+  - duration
+  - sorted equipment list
+  - last-14d session pattern
+
+- **set_id**: `<TIER>-<SLUG>-(WU#|#)`  
+  - Slug is a short, uppercase identifier from the exercise name.
+  - Examples: `A-RDL-1`, `B-DBIP-3`, `A-RDL-WU1`.
+
+Stable IDs allow safe round-trip logging, merge safety, and historical analytics.
+
+---
+
+## Repo Structure Recommendation
+
+```
+swolegen/
+├── README.md
+├── prompts/
+│   ├── analyzer-system.md
+│   ├── analyzer-user.md
+│   ├── generator-system.md
+│   ├── generator-user.md
+│   ├── repair-prompt.md
+├── schemas/
+│   ├── workout-v1.2.json
+│   └── analyzer-v1.json
+├── examples/
+│   ├── workout-v1.2.example.yaml
+│   └── analyzer-v1.example.json
+└── LICENSE
+```
+
+**Why:**
+- Prompts are modular and versionable.
+- Schemas are explicit and testable.
+- Examples double as fixtures for CI validation.
+
+---
+
 ## References
 
 - [Output YAML Gist](docs/sample-output.yaml)
-- [JSON Schema: Workout](schemas/validator-workout-v1.json)
-- [JSON Schema: Analyzer](schemas/validator-analyzer-v1.json)
+- [JSON Schema: Workout](schemas/workout-v1.2.json)
+- [JSON Schema: Analyzer](schemas/analyzer-v1.json)
