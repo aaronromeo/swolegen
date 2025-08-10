@@ -1,6 +1,6 @@
 Inputs:
 - instructions_text: <<paste resolved instructions markdown here>>
-- history_json: <<set-level history JSON here (loads, reps, dates, RIR/RPE, exercise names)>>
+- history_json_or_markdown: <<set-level history JSON or raw Markdown>>
 - strava_recent: <<recent activities summary including Relative Effort or equivalent load>>
 - upcoming_cardio_text: <<free-text upcoming cardio next 2–4 days>>
 - recovery_signals: {"sleep_score": <<int or null>>, "body_battery": <<int or null>>}
