@@ -5,6 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
+	"strconv"
+	"sync/atomic"
+	"time"
 
 	"github.com/hashicorp/go-retryablehttp"
 )
@@ -14,16 +18,42 @@ type TokenSource interface {
 	Save(ctx context.Context, t *Token) error
 }
 
-// EnvTokenSource is a single-user MVP token source stored in env vars.
-type EnvTokenSource struct{}
+// In-memory process-global token cache using atomic.Pointer (MVP single user).
+var memTok atomic.Pointer[Token]
 
-func (EnvTokenSource) Current(ctx context.Context) (*Token, error) {
-	// In MVP, read from env vars if present. Caller may overwrite in memory after refresh.
-	// We keep it simple: the httpapi layer can keep a process-global cached token.
-	return nil, fmt.Errorf("EnvTokenSource.Current not implemented (wire your storage)")
+func SetProcessToken(t *Token) {
+	if t == nil {
+		memTok.Store(nil)
+		return
+	}
+	cp := *t // store a copy to avoid external mutation
+	memTok.Store(&cp)
 }
-func (EnvTokenSource) Save(ctx context.Context, t *Token) error {
-	// MVP: no-op; you may print to logs for manual env update.
+
+func GetProcessToken() *Token {
+	p := memTok.Load()
+	if p == nil {
+		return nil
+	}
+	cp := *p
+	return &cp
+}
+
+// ProcessTokenSource returns/updates the in-memory process token only.
+type ProcessTokenSource struct{}
+
+func (ProcessTokenSource) Current(ctx context.Context) (*Token, error) {
+	t := GetProcessToken()
+	if t == nil {
+		return nil, fmt.Errorf("no process token set; run OAuth handshake first")
+	}
+	return t, nil
+}
+
+func (ProcessTokenSource) Save(ctx context.Context, t *Token) error {
+	if t != nil {
+		SetProcessToken(t)
+	}
 	return nil
 }
 
@@ -39,10 +69,10 @@ func NewWithTokenSource(ts TokenSource) *Client {
 }
 
 type Activity struct {
-	Name   string `json:"name"`
-	Type   string `json:"type"`
-	Start  string `json:"start_date"`
-	Effort int    `json:"suffer_score"` // may be missing for some accounts
+	Name   string  `json:"name"`
+	Type   string  `json:"type"`
+	Start  string  `json:"start_date"`
+	Effort float64 `json:"suffer_score"` // Strava may return numbers with decimals
 }
 
 func (c *Client) GetRecentActivities(ctx context.Context, sinceDays int) ([]Activity, error) {
@@ -54,9 +84,19 @@ func (c *Client) GetRecentActivities(ctx context.Context, sinceDays int) ([]Acti
 	if err != nil {
 		return nil, err
 	}
-	_ = c.source.Save(ctx, tok) // best-effort
+	_ = c.source.Save(ctx, tok) // best-effort (stores refreshed token in memory)
 
-	req, _ := retryablehttp.NewRequestWithContext(ctx, http.MethodGet, "https://www.strava.com/api/v3/athlete/activities", nil)
+	// Build URL with sinceDays → after=unix seconds, per_page=100 (single page MVP)
+	u, _ := url.Parse(activitiesURL)
+	q := u.Query()
+	q.Set("per_page", "100")
+	if sinceDays > 0 {
+		after := time.Now().Add(-time.Duration(sinceDays) * 24 * time.Hour).Unix()
+		q.Set("after", strconv.FormatInt(after, 10))
+	}
+	u.RawQuery = q.Encode()
+
+	req, _ := retryablehttp.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
 	req.Header.Set("Authorization", "Bearer "+tok.AccessToken)
 	resp, err := c.h.Do(req)
 	if err != nil {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/aaronromeo/swolegen/internal/strava"
 	"github.com/gofiber/fiber/v2"
@@ -33,10 +34,30 @@ func registerStravaOAuth(app *fiber.App) {
 		if err != nil {
 			return c.Status(http.StatusInternalServerError).SendString(err.Error())
 		}
-		// Return token JSON (and print in logs upstream) so user can store in env if desired.
+		// Save token in process-global cache for immediate use by smoke endpoint
+		strava.SetProcessToken(tok)
+		// Return token JSON so user can persist if desired.
 		c.Set("Content-Type", "application/json")
 		enc := json.NewEncoder(c)
 		enc.SetIndent("", "  ")
 		return enc.Encode(tok)
+	})
+
+	// Smoke test endpoint: fetch recent activities via Strava client
+	app.Get("/strava/recent", func(c *fiber.Ctx) error {
+		daysStr := c.Query("days", "7")
+		days, err := strconv.Atoi(daysStr)
+		if err != nil || days < 0 {
+			days = 7
+		}
+		cl := strava.NewWithTokenSource(strava.ProcessTokenSource{})
+		acts, err := cl.GetRecentActivities(context.Background(), days)
+		if err != nil {
+			return c.Status(http.StatusInternalServerError).SendString(err.Error())
+		}
+		return c.JSON(struct {
+			Count      int               `json:"count"`
+			Activities []strava.Activity `json:"activities"`
+		}{Count: len(acts), Activities: acts})
 	})
 }

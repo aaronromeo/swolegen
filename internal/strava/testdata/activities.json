@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Morning Weight Training",
+    "type": "WeightTraining",
+    "start_date": "2025-08-09T12:07:07Z",
+    "suffer_score": 9
+  },
+  {
+    "name": "Morning Run",
+    "type": "Run",
+    "start_date": "2025-08-10T13:06:40Z",
+    "suffer_score": 65
+  }
+]

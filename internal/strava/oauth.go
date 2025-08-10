@@ -16,11 +16,6 @@ import (
 	"github.com/hashicorp/go-retryablehttp"
 )
 
-const (
-	authURL  = "https://www.strava.com/oauth/authorize"
-	tokenURL = "https://www.strava.com/oauth/token"
-)
-
 type Token struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
