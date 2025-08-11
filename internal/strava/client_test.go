@@ -19,11 +19,11 @@ func (f fixedTokenSource) Current(ctx context.Context) (*Token, error) { return 
 func (f fixedTokenSource) Save(ctx context.Context, t *Token) error    { return nil }
 
 type fixtureTransport struct {
-	t        *testing.T
-	status   int
-	body     []byte
-	lastURL  string
-	sawAuth  string
+	t       *testing.T
+	status  int
+	body    []byte
+	lastURL string
+	sawAuth string
 }
 
 func (ft *fixtureTransport) RoundTrip(req *http.Request) (*http.Response, error) {
@@ -50,7 +50,7 @@ func readFixture(t *testing.T, name string) []byte {
 
 func TestGetRecentActivities_Success(t *testing.T) {
 	// Prepare client with fixed token far in future (no refresh)
-	ts := fixedTokenSource{tok: &Token{AccessToken: "x", RefreshToken: "", ExpiresAt: time.Now().Add(365*24*time.Hour).Unix()}}
+	ts := fixedTokenSource{tok: &Token{AccessToken: "x", RefreshToken: "", ExpiresAt: time.Now().Add(365 * 24 * time.Hour).Unix()}}
 	c := NewWithTokenSource(ts)
 	c.h.RetryMax = 0
 
@@ -76,7 +76,7 @@ func TestGetRecentActivities_Success(t *testing.T) {
 }
 
 func TestGetRecentActivities_HTTPError(t *testing.T) {
-	ts := fixedTokenSource{tok: &Token{AccessToken: "x", ExpiresAt: time.Now().Add(365*24*time.Hour).Unix()}}
+	ts := fixedTokenSource{tok: &Token{AccessToken: "x", ExpiresAt: time.Now().Add(365 * 24 * time.Hour).Unix()}}
 	c := NewWithTokenSource(ts)
 	c.h.RetryMax = 0
 
@@ -90,3 +90,52 @@ func TestGetRecentActivities_HTTPError(t *testing.T) {
 	}
 }
 
+func TestUserTokenSource(t *testing.T) {
+	// Test with valid token
+	token := &Token{
+		AccessToken:  "test-access-token",
+		RefreshToken: "test-refresh-token",
+		ExpiresAt:    time.Now().Add(time.Hour).Unix(),
+	}
+
+	ts := &UserTokenSource{Token: token}
+
+	ctx := context.Background()
+	current, err := ts.Current(ctx)
+	if err != nil {
+		t.Fatalf("Current() error: %v", err)
+	}
+	if current.AccessToken != "test-access-token" {
+		t.Fatalf("expected access token 'test-access-token', got %q", current.AccessToken)
+	}
+
+	// Test Save updates the token
+	newToken := &Token{
+		AccessToken:  "new-access-token",
+		RefreshToken: "new-refresh-token",
+		ExpiresAt:    time.Now().Add(2 * time.Hour).Unix(),
+	}
+
+	err = ts.Save(ctx, newToken)
+	if err != nil {
+		t.Fatalf("Save() error: %v", err)
+	}
+
+	current, err = ts.Current(ctx)
+	if err != nil {
+		t.Fatalf("Current() after Save error: %v", err)
+	}
+	if current.AccessToken != "new-access-token" {
+		t.Fatalf("expected updated access token 'new-access-token', got %q", current.AccessToken)
+	}
+
+	// Test with nil token
+	ts = &UserTokenSource{Token: nil}
+	_, err = ts.Current(ctx)
+	if err == nil {
+		t.Fatal("expected error with nil token")
+	}
+	if !strings.Contains(err.Error(), "no user token provided") {
+		t.Fatalf("expected 'no user token provided' error, got %q", err.Error())
+	}
+}

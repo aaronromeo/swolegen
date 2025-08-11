@@ -26,7 +26,7 @@ This backlog is ordered so each task is small, single‑purpose, and verifiable 
 - [ ] Unit test: missing required env leads to clean error.
 
 ## 3. Schema embedding & validator
-- [ ] Place `schemas/analyzer-v1.json` and `schemas/workout-v1.2.json` in repo.
+- [X] Place `schemas/analyzer-v1.json` and `schemas/workout-v1.2.json` in repo.
 - [ ] Implement `internal/schema` with:
   - `func ValidateAnalyzerJSON(b []byte) error`
   - `func ValidateWorkoutYAML(b []byte) error` (convert YAML→JSON internally).

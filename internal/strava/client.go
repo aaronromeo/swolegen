@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
-	"sync/atomic"
 	"time"
 
 	"github.com/hashicorp/go-retryablehttp"
@@ -18,41 +17,23 @@ type TokenSource interface {
 	Save(ctx context.Context, t *Token) error
 }
 
-// In-memory process-global token cache using atomic.Pointer (MVP single user).
-var memTok atomic.Pointer[Token]
-
-func SetProcessToken(t *Token) {
-	if t == nil {
-		memTok.Store(nil)
-		return
-	}
-	cp := *t // store a copy to avoid external mutation
-	memTok.Store(&cp)
+// UserTokenSource uses a user-provided token. Frontend is responsible for
+// token refresh and management. Backend only validates the provided access token.
+type UserTokenSource struct {
+	Token *Token
 }
 
-func GetProcessToken() *Token {
-	p := memTok.Load()
-	if p == nil {
-		return nil
+func (u *UserTokenSource) Current(ctx context.Context) (*Token, error) {
+	if u.Token == nil {
+		return nil, fmt.Errorf("no user token provided; OAuth handshake required")
 	}
-	cp := *p
-	return &cp
+	return u.Token, nil
 }
 
-// ProcessTokenSource returns/updates the in-memory process token only.
-type ProcessTokenSource struct{}
-
-func (ProcessTokenSource) Current(ctx context.Context) (*Token, error) {
-	t := GetProcessToken()
-	if t == nil {
-		return nil, fmt.Errorf("no process token set; run OAuth handshake first")
-	}
-	return t, nil
-}
-
-func (ProcessTokenSource) Save(ctx context.Context, t *Token) error {
+func (u *UserTokenSource) Save(ctx context.Context, t *Token) error {
+	// Update the token in memory so refreshed tokens are available
 	if t != nil {
-		SetProcessToken(t)
+		u.Token = t
 	}
 	return nil
 }
@@ -80,14 +61,13 @@ func (c *Client) GetRecentActivities(ctx context.Context, sinceDays int) ([]Acti
 	if err != nil {
 		return nil, err
 	}
-	tok, err = RefreshIfNeeded(ctx, tok)
+
+	// Build URL with sinceDays → after=unix seconds, per_page=100 (single page MVP)
+	u, err := url.Parse(activitiesURL)
 	if err != nil {
 		return nil, err
 	}
-	_ = c.source.Save(ctx, tok) // best-effort (stores refreshed token in memory)
 
-	// Build URL with sinceDays → after=unix seconds, per_page=100 (single page MVP)
-	u, _ := url.Parse(activitiesURL)
 	q := u.Query()
 	q.Set("per_page", "100")
 	if sinceDays > 0 {
@@ -98,6 +78,7 @@ func (c *Client) GetRecentActivities(ctx context.Context, sinceDays int) ([]Acti
 
 	req, _ := retryablehttp.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
 	req.Header.Set("Authorization", "Bearer "+tok.AccessToken)
+
 	resp, err := c.h.Do(req)
 	if err != nil {
 		return nil, err

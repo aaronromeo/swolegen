@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/aaronromeo/swolegen/internal/strava"
 	"github.com/gofiber/fiber/v2"
@@ -34,8 +35,6 @@ func registerStravaOAuth(app *fiber.App) {
 		if err != nil {
 			return c.Status(http.StatusInternalServerError).SendString(err.Error())
 		}
-		// Save token in process-global cache for immediate use by smoke endpoint
-		strava.SetProcessToken(tok)
 		// Return token JSON so user can persist if desired.
 		c.Set("Content-Type", "application/json")
 		enc := json.NewEncoder(c)
@@ -43,21 +42,54 @@ func registerStravaOAuth(app *fiber.App) {
 		return enc.Encode(tok)
 	})
 
-	// Smoke test endpoint: fetch recent activities via Strava client
-	app.Get("/strava/recent", func(c *fiber.Ctx) error {
+	// Fetch recent activities with optional user token (GET and POST)
+	stravaRecentHandler := func(c *fiber.Ctx) error {
 		daysStr := c.Query("days", "7")
 		days, err := strconv.Atoi(daysStr)
 		if err != nil || days < 0 {
 			days = 7
 		}
-		cl := strava.NewWithTokenSource(strava.ProcessTokenSource{})
+
+		// Check for user-provided token in Authorization header (OAuth 2.0 standard)
+		var userToken *strava.Token
+		authHeader := c.Get("Authorization")
+		if authHeader != "" && strings.HasPrefix(authHeader, "Bearer ") {
+			accessToken := strings.TrimPrefix(authHeader, "Bearer ")
+			userToken = &strava.Token{AccessToken: accessToken}
+		}
+
+		var cl *strava.Client
+		var tokenSource strava.TokenSource
+
+		if userToken != nil {
+			// Try with user-provided token
+			tokenSource = &strava.UserTokenSource{Token: userToken}
+			cl = strava.NewWithTokenSource(tokenSource)
+		} else {
+			return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+				"error":          "No user token provided; OAuth handshake required",
+				"oauth_url":      "/oauth/strava/start",
+				"message":        "Please authenticate with Strava first",
+				"requires_oauth": true,
+			})
+		}
+
 		acts, err := cl.GetRecentActivities(context.Background(), days)
 		if err != nil {
-			return c.Status(http.StatusInternalServerError).SendString(err.Error())
+			return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
+				"error":          err.Error(),
+				"oauth_url":      "/oauth/strava/start",
+				"message":        "Please authenticate with Strava first",
+				"requires_oauth": true,
+			})
 		}
-		return c.JSON(struct {
-			Count      int               `json:"count"`
-			Activities []strava.Activity `json:"activities"`
-		}{Count: len(acts), Activities: acts})
-	})
+
+		return c.JSON(fiber.Map{
+			"count":      len(acts),
+			"activities": acts,
+		})
+	}
+
+	// Register only GET - this is a data retrieval endpoint
+	app.Get("/strava/recent", stravaRecentHandler)
 }
