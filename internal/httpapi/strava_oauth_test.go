@@ -20,7 +20,12 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer func() {
+			err := resp.Body.Close()
+			if err != nil {
+				t.Fatalf("close response body error: %v", err)
+			}
+		}()
 
 		if resp.StatusCode != http.StatusUnauthorized {
 			t.Fatalf("expected status 401, got %d", resp.StatusCode)
@@ -47,7 +52,12 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer func() {
+			err := resp.Body.Close()
+			if err != nil {
+				t.Fatalf("close response body error: %v", err)
+			}
+		}()
 
 		// Should get 401 because test-token is invalid, but should indicate token issue
 		if resp.StatusCode != http.StatusUnauthorized {
@@ -75,7 +85,12 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer func() {
+			err := resp.Body.Close()
+			if err != nil {
+				t.Fatalf("close response body error: %v", err)
+			}
+		}()
 
 		// Should get 401 and suggest OAuth (no valid Bearer token found)
 		if resp.StatusCode != http.StatusUnauthorized {

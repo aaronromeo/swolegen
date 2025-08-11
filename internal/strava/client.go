@@ -76,7 +76,10 @@ func (c *Client) GetRecentActivities(ctx context.Context, sinceDays int) ([]Acti
 	}
 	u.RawQuery = q.Encode()
 
-	req, _ := retryablehttp.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
+	req, err := retryablehttp.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 	req.Header.Set("Authorization", "Bearer "+tok.AccessToken)
 
 	resp, err := c.h.Do(req)

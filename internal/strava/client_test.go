@@ -69,7 +69,11 @@ func TestGetRecentActivities_Success(t *testing.T) {
 		t.Fatalf("expected Authorization Bearer header, got %q", ft.sawAuth)
 	}
 	// sinceDays>0 should include `after` in query
-	u, _ := url.Parse(ft.lastURL)
+	u, err := url.Parse(ft.lastURL)
+	if err != nil {
+		t.Fatalf("parse URL error: %v", err)
+	}
+
 	if u.Query().Get("after") == "" {
 		t.Fatalf("expected 'after' query param in URL, got %q", ft.lastURL)
 	}
