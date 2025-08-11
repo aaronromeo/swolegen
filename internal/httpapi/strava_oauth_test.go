@@ -114,7 +114,12 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer func() {
+			err := resp.Body.Close()
+			if err != nil {
+				t.Fatalf("close response body error: %v", err)
+			}
+		}()
 
 		// Should still process (defaults to 7 days) and return OAuth error
 		if resp.StatusCode != http.StatusUnauthorized {
