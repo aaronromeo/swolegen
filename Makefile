@@ -1,6 +1,22 @@
 .PHONY: lint test fmt fmt-check vet
 
-GO ?= go
+BIN_DIR := $(shell go env GOBIN)
+ifeq ($(BIN_DIR),)
+BIN_DIR := $(shell go env GOPATH)/bin
+endif
+
+BUILD_DIR = build
+
+# Build target
+BINARY_NAME = swolegen-api
+BUILT_BINARY = $(BUILD_DIR)/$(BINARY_NAME)
+
+GOCMD ?= go
+GOBUILD = $(GOCMD) build
+GOTEST = $(GOCMD) test
+
+GOLANGCI := $(BIN_DIR)/golangci-lint
+GOLANGCI_VERSION := v1.64.8
 
 # Format all packages
 fmt:
@@ -22,14 +38,11 @@ fmt-check:
 vet:
 	@$(GO) vet ./...
 
-# Lint aggregates static checks
-lint: fmt-check vet
+lint: fmt-check vet install-golangci
+	$(GOLANGCI) run --config .golangci.yml
 
-# Run unit tests for all packages
-# Use: make test or VERBOSE=1 make test
-ifdef VERBOSE
-TEST_FLAGS=-v
-endif
+build:
+	$(GOBUILD) -o $(BUILT_BINARY) -v ./cmd/postmanpat
 
 test:
-	@$(GO) test $(TEST_FLAGS) ./...
+	$(GOTEST) -v ./... -coverprofile=./cover.out -covermode=atomic -coverpkg=./...

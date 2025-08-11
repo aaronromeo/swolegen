@@ -10,7 +10,7 @@ This backlog is ordered so each task is small, single‑purpose, and verifiable 
 ## 1. Module init & dependencies
 - [X] `go mod init github.com/aaronromeo/swolegen`
 - [X] Add deps: `github.com/gofiber/fiber/v2`, `github.com/xeipuuv/gojsonschema`, `github.com/hashicorp/go-retryablehttp`, `github.com/cespare/xxhash/v2`.
-- [ ] `make lint` and `make test` targets (optional).
+- [X] `make lint` and `make test` targets (optional).
 
 ## 2. Config & env
 - [ ] Implement minimal config loader (env only). Variables:
@@ -26,7 +26,7 @@ This backlog is ordered so each task is small, single‑purpose, and verifiable 
 - [ ] Unit test: missing required env leads to clean error.
 
 ## 3. Schema embedding & validator
-- [ ] Place `schemas/analyzer-v1.json` and `schemas/workout-v1.2.json` in repo.
+- [X] Place `schemas/analyzer-v1.json` and `schemas/workout-v1.2.json` in repo.
 - [ ] Implement `internal/schema` with:
   - `func ValidateAnalyzerJSON(b []byte) error`
   - `func ValidateWorkoutYAML(b []byte) error` (convert YAML→JSON internally).
@@ -47,10 +47,10 @@ This backlog is ordered so each task is small, single‑purpose, and verifiable 
 - [ ] Unit tests with golden files (synthetic 90‑day sample).
 
 ## 6. Strava client (personal token)
-- [ ] `internal/strava`:
+- [x] `internal/strava`:
   - `Client{http *retryablehttp.Client, token string}`
   - `GetRecentActivities(ctx, sinceDays int) ([]Activity, error)` – includes Relative Effort.
-- [ ] Unit tests: round‑trip against recorded JSON fixtures (no network).
+- [x] Unit tests: round‑trip against recorded JSON fixtures (no network).
 
 ## 7. LLM client & prompts
 - [ ] `internal/llm`:
