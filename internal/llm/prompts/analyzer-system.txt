@@ -12,3 +12,4 @@ Rules:
 - Estimate set time (work + rest) and compute an achievable target_set_count for the given duration.
 
 Output: Valid JSON adhering to the schema. No prose.
+
