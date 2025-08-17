@@ -1,4 +1,4 @@
-.PHONY: lint test fmt fmt-check vet
+.PHONY: lint test fmt fmt-check vet build
 
 BIN_DIR := $(shell go env GOBIN)
 ifeq ($(BIN_DIR),)
