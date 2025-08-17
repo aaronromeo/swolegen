@@ -16,7 +16,7 @@ GOBUILD = $(GOCMD) build
 GOTEST = $(GOCMD) test
 
 GOLANGCI := $(BIN_DIR)/golangci-lint
-GOLANGCI_VERSION := v1.64.8
+GOLANGCI_VERSION := v1.65.2
 
 # Format all packages
 fmt:
@@ -42,7 +42,7 @@ lint: fmt-check vet install-golangci
 	$(GOLANGCI) run --config .golangci.yml
 
 build:
-	$(GOBUILD) -o $(BUILT_BINARY) -v ./cmd/postmanpat
+	$(GOBUILD) -o $(BUILT_BINARY) -v ./cmd/swolegen-api
 
 test:
 	$(GOTEST) -v ./... -coverprofile=./cover.out -covermode=atomic -coverpkg=./...

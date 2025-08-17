@@ -2,7 +2,7 @@
 
 ## Overview
 
-SwoleGen is a single-session weightlifting workout generator that builds a complete, time-boxed workout in YAML format.  
+SwoleGen is a single-session weightlifting workout generator that builds a complete, time-boxed workout in YAML format.
 It consumes user rules, history, recent and upcoming cardio activity, available equipment, and optional recovery data to produce a workout the user can follow and log without editing YAML structure.
 
 The YAML output is:
@@ -140,31 +140,150 @@ A full JSON Schema for validation is defined in [`schemas/workout-v1.2.json`](sc
 
 ## Quick Start (MVP)
 
-1. **Clone repo:**
+### Run the API locally
+
+1. Clone repo
    ```bash
    git clone https://github.com/aaronromeo/swolegen.git
    cd swolegen
    ```
 
-2. **Prepare your inputs:**
-   - `instructions_url` → link to your goals/restrictions markdown.
-   - `history_url` → link to your past workout YAML.
-   - Strava data & upcoming cardio text.
-
-3. **Call the analyzer:**
+2. Create and fill your env file
    ```bash
-   openai api chat.completions.create      -m gpt-4o      -g prompts/analyzer-system.md      -u prompts/analyzer-user.md
+   cp .env.local .env
+   # Edit .env and set values, at minimum:
+   # STRAVA_CLIENT_ID=...
+   # STRAVA_CLIENT_SECRET=...
+   # STRAVA_REDIRECT_BASE_URL=http(s)://localhost:8080 (or your ngrok URL)
+   # STRAVA_SCOPES=read,activity:read_all
+   # STRAVA_STATE_SECRET=$(openssl rand -hex 32)
+   # OPENAI_API_KEY=...   # only needed for analyzer/generator flows
    ```
 
-4. **Call the generator:**
+3. (Optional) Source the .env into your shell for this terminal session
+   - POSIX-safe approach (exports all keys):
+     ```bash
+     set -a; source .env; set +a
+     ```
+   - Alternative one-liner:
+     ```bash
+     export $(grep -v '^#' .env | xargs)
+     ```
+
+4. Build the server binary
    ```bash
-   openai api chat.completions.create      -m gpt-4o      -g prompts/generator-system.md      -u prompts/generator-user.md
+   make build
+   # or: go build -o build/swolegen-api ./cmd/swolegen-api
    ```
 
-5. **Validate the output:**
+5. Run the API (defaults to :8080). To source env vars inline on the CLI, prefix the command:
+   ```bash
+   # Using values from .env inline (Bash/Zsh):
+   set -a; source .env; set +a; ./build/swolegen-api
+
+   # Or prefix only the variables you want to override:
+   ADDR=:8080 ./build/swolegen-api
+   ```
+
+6. Validate via demo UI (preferred)
+   - Open http://localhost:8080/ (or https://<NGROK_URL>/ if tunneling with ngrok)
+   - Click "Start Strava OAuth" and approve on Strava
+   - After redirect back to `/oauth/strava/callback`, copy the `access_token` from the JSON
+   - Paste it into the "Access Token" field on the demo page
+   - Set Days and click "Fetch /strava/recent" to see your recent activities
+
+   Liveness check:
+   ```bash
+   curl -sSf http://localhost:8080/healthz -I
+   ```
+
+Next: for a detailed walkthrough, see “Quick Start — Test the Strava API (Preferred)” below.
+
+### Generate via prompts (optional)
+
+3. Call the analyzer
+   ```bash
+   openai api chat.completions.create -m gpt-4o -g prompts/analyzer-system.md -u prompts/analyzer-user.md
+   ```
+
+4. Call the generator
+   ```bash
+   openai api chat.completions.create -m gpt-4o -g prompts/generator-system.md -u prompts/generator-user.md
+   ```
+
+5. Validate the output
    ```bash
    ajv validate -s schemas/workout-v1.2.json -d output.yaml
    ```
+
+### Quick Start — Test the Strava API (Preferred)
+
+Use the built-in demo UI at `/` to drive the OAuth flow and test `/strava/recent`.
+
+Prereqs:
+- ngrok installed and authenticated (for public callback)
+- Your backend running locally on http://localhost:8080
+
+1) Start ngrok on port 8080 and copy the HTTPS URL
+```bash
+ngrok http 8080
+```
+
+2) Add required Strava env vars in `.env` and restart the server
+```bash
+STRAVA_CLIENT_ID=<your_client_id>
+STRAVA_CLIENT_SECRET=<your_client_secret>
+STRAVA_REDIRECT_BASE_URL=https://<NGROK_URL>   # no trailing slash
+STRAVA_SCOPES=read,activity:read_all
+STRAVA_STATE_SECRET=$(openssl rand -hex 32)
+```
+
+3) Configure your Strava app
+- Authorization Callback Domain: your ngrok host (e.g., `xxxxx.ngrok-free.app`)
+- If asked for a redirect URI, use: `https://<NGROK_URL>/oauth/strava/callback`
+
+4) Use the demo UI
+- Open `https://<NGROK_URL>/` (or `http://localhost:8080/` if testing locally without Strava redirect)
+- Click "Start Strava OAuth" and approve
+- After redirect to `/oauth/strava/callback`, copy the `access_token` from the JSON
+- Paste it into the "Access Token" field on the demo page
+- Set Days and click "Fetch /strava/recent" to see activities
+
+CLI alternative
+```bash
+curl -v -H "Authorization: Bearer <ACCESS_TOKEN>" \
+     "https://<NGROK_URL>/strava/recent?days=7" | jq
+```
+
+Notes/Troubleshooting:
+- 401/403: re-run OAuth or check token expiry; ensure the Authorization header is present.
+- Redirect mismatch: `STRAVA_REDIRECT_BASE_URL` must match the current ngrok URL and Strava app settings.
+- Scopes: ensure `STRAVA_SCOPES` includes `read,activity:read_all`.
+- Token management: Frontend owns token storage/refresh; backend only performs OAuth handshake and validates Bearer tokens on `/strava/recent`.
+
+See also: `docs/STRAVA_OAUTH.md`.
+
+---
+
+4) Run the OAuth handshake:
+- Open in your browser: `https://<NGROK_URL>/oauth/strava/start`
+- Approve on Strava; you'll be redirected to `/oauth/strava/callback`
+- Copy the `access_token` from the JSON shown
+
+5) Verify the recent-activities endpoint with your token:
+
+```bash
+curl -v -H "Authorization: Bearer <ACCESS_TOKEN>" \
+     "https://<NGROK_URL>/strava/recent?days=7" | jq
+```
+
+Notes/Troubleshooting:
+- 401/403: redo step 4 or check token expiry; ensure Authorization header is present.
+- Redirect mismatch: ensure `STRAVA_REDIRECT_BASE_URL` matches the current ngrok URL and Strava app settings.
+- Scopes: confirm `STRAVA_SCOPES` includes `read,activity:read_all`.
+- Token management: Frontend owns token storage/refresh. Backend only handles the OAuth handshake (`/oauth/strava/start` → `/oauth/strava/callback`) and validates the Bearer token on `/strava/recent`. Do not persist tokens server-side.
+
+See also: `docs/STRAVA_OAUTH.md`.
 
 ---
 
@@ -189,14 +308,14 @@ yq -o=json eval examples/workout-v1.2.example.yaml |   ajv validate -s schemas/w
 
 ## ID Generation Rules
 
-- **workout_id**: `YYYY-MM-DD-<kebab-location>-NN`  
+- **workout_id**: `YYYY-MM-DD-<kebab-location>-NN`
   NN is a deterministic 2-digit seed from:
   - goal
   - duration
   - sorted equipment list
   - last-14d session pattern
 
-- **set_id**: `<TIER>-<SLUG>-(WU#|#)`  
+- **set_id**: `<TIER>-<SLUG>-(WU#|#)`
   - Slug is a short, uppercase identifier from the exercise name.
   - Examples: `A-RDL-1`, `B-DBIP-3`, `A-RDL-WU1`.
 
