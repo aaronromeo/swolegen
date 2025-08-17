@@ -1,4 +1,4 @@
-package schema
+package llm
 
 import (
 	"bytes"
@@ -11,7 +11,7 @@ import (
 
 func ValidateAnalyzerJSON(b []byte) error {
 	loader := gojsonschema.NewBytesLoader(b)
-	schemaLoader := gojsonschema.NewReferenceLoader("file://schemas/analyzer-v1.json")
+	schemaLoader := gojsonschema.NewReferenceLoader(AnalyzerSchema)
 	result, err := gojsonschema.Validate(schemaLoader, loader)
 	if err != nil {
 		return err
@@ -32,7 +32,7 @@ func ValidateWorkoutYAML(b []byte) error {
 		return err
 	}
 	loader := gojsonschema.NewBytesLoader(jb)
-	schemaLoader := gojsonschema.NewReferenceLoader("file://schemas/workout-v1.2.json")
+	schemaLoader := gojsonschema.NewReferenceLoader(WorkoutSchema)
 	result, err := gojsonschema.Validate(schemaLoader, loader)
 	if err != nil {
 		return err
