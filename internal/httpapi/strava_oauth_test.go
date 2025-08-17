@@ -40,7 +40,7 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer resp.Body.Close() //nolint:errcheck
 
 		if resp.StatusCode != http.StatusUnauthorized {
 			t.Fatalf("expected status 401, got %d", resp.StatusCode)
@@ -72,7 +72,7 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer resp.Body.Close() //nolint:errcheck
 
 		if os.Getenv("RUN_STRAVA_REAL") == "1" {
 			// In real mode, token is invalid, expect 401
@@ -101,7 +101,7 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer resp.Body.Close() //nolint:errcheck
 
 		if resp.StatusCode != http.StatusUnauthorized {
 			t.Fatalf("expected status 401, got %d", resp.StatusCode)
@@ -121,7 +121,7 @@ func TestStravaRecentEndpoint(t *testing.T) {
 		if err != nil {
 			t.Fatalf("app.Test error: %v", err)
 		}
-		defer resp.Body.Close()
+		defer resp.Body.Close() //nolint:errcheck
 
 		if resp.StatusCode != http.StatusUnauthorized {
 			t.Fatalf("expected status 401, got %d", resp.StatusCode)
