@@ -1,0 +1,8434 @@
+workout_name: "Strength C \u2013 Arms + Glutes + Core"
+sets:
+- description: Hip Thrust (Barbell or DB)
+  target_weight: 95 lbs
+  target_reps: 12
+  actual_weight: 120
+  actual_reps: 12
+- description: DB Bicep Curl (Alternating)
+  target_weight: "30-35 lbs/hand"
+  target_reps: 10
+  actual_weight: 30
+  actual_reps: 10
+- description: Hip Thrust (Barbell or DB)
+  target_weight: 95 lbs
+  target_reps: 12
+  actual_weight: 120
+  actual_reps: 12
+- description: DB Bicep Curl (Alternating)
+  target_weight: "30\u201335 lbs/hand"
+  target_reps: 10
+  actual_weight: 35
+  actual_reps: 10
+- description: Hip Thrust (Barbell or DB)
+  target_weight: 95 lbs
+  target_reps: 12
+  actual_weight: 120
+  actual_reps: 12
+- description: DB Bicep Curl (Alternating)
+  target_weight: "30\u201335 lbs/hand"
+  target_reps: 10
+  actual_weight: 35
+  actual_reps: 8
+- description: Lateral Raise (Strict Form)
+  target_weight: "15-20 lbs/hand"
+  target_reps: "12-15"
+  actual_weight: 15
+  actual_reps: 12
+- description: Cable Triceps Pushdown or DB Overhead Extension
+  target_weight: "35-40 lbs DB or 35 lbs cable"
+  target_reps: 12
+  actual_weight: 40
+  actual_reps: 13
+- description: Lateral Raise (Strict Form)
+  target_weight: "15-20 lbs/hand"
+  target_reps: "12-15"
+  actual_weight: 15
+  actual_reps: 12
+- description: Cable Triceps Pushdown or DB Overhead Extension
+  target_weight: "35-40 lbs DB or 35 lbs cable"
+  target_reps: 12
+  actual_weight: 45
+  actual_reps: 13
+- description: Lateral Raise (Strict Form)
+  target_weight: "15-20 lbs/hand"
+  target_reps: "12-15"
+  actual_weight: 15
+  actual_reps: 9
+- description: Cable Triceps Pushdown or DB Overhead Extension
+  target_weight: "35\u201340 lbs DB or 35 lbs cable"
+  target_reps: 12
+  actual_weight: 45
+  actual_reps: 12
+- description: Single-Leg Glute Bridge (Feet on Bench)
+  target_weight: Bodyweight or light KB
+  target_reps: 8
+  actual_weight: bodyweight
+  actual_reps: 8
+- description: Russian Twist (KB or DB)
+  target_weight: "20-25 lbs"
+  target_reps: 12/side
+  actual_weight: 25
+  actual_reps: 12
+- description: Single-Leg Glute Bridge (Feet on Bench)
+  target_weight: Bodyweight or light KB
+  target_reps: 8
+  actual_weight: bodyweight
+  actual_reps: 8
+- description: Russian Twist (KB or DB)
+  target_weight: "20-25 lbs"
+  target_reps: 12/side
+  actual_weight: 25
+  actual_reps: 13
+- description: Face Pulls
+  target_weight: "30-37.5 lbs cable"
+  target_reps: 20
+  actual_weight: 36.25
+  actual_reps: 20
+- description: Forearm Plank Hold
+  target_weight: Bodyweight
+  target_reps: 60s
+  actual_weight: bodyweight
+  actual_reps: 60
+- description: Face Pulls
+  target_weight: "30-37.5 lbs cable"
+  target_reps: 20
+  actual_weight: 36.25
+  actual_reps: 20
+- description: Forearm Plank Hold
+  target_weight: Bodyweight
+  target_reps: 60s
+  actual_weight: bodyweight
+  actual_reps: 41
+
+---
+workout_date: '2025-08-06'
+workout_name: "Strength B - Posterior Chain + Pull"
+sets:
+- description: RDL (Barbell)
+  target_weight: 185 lbs
+  target_reps: 8
+  actual_weight: 135
+  actual_reps: 8
+- description: Pull-Up (Bodyweight)
+  target_weight: Bodyweight
+  target_reps: "6-10"
+  actual_weight: bodyweight
+  actual_reps: 10
+- description: RDL (Barbell)
+  target_weight: 225 lbs
+  target_reps: 8
+  actual_weight: 225
+  actual_reps: 8
+- description: Pull-Up (Bodyweight)
+  target_weight: Bodyweight
+  target_reps: "6-10"
+  actual_weight: Bodyweight
+  actual_reps: 10
+- description: RDL (Barbell)
+  target_weight: "245-255 lbs"
+  target_reps: 6
+  actual_weight: 245
+  actual_reps: 6
+- description: Pull-Up (Bodyweight)
+  target_weight: Bodyweight
+  target_reps: "6-10"
+  actual_weight: Bodyweight
+  actual_reps: 6
+- description: Hip Thrust (Barbell)
+  target_weight: "95-115 lbs"
+  target_reps: 10
+  actual_weight: 145
+  actual_reps: 10
+- description: Chest-Supported DB Row
+  target_weight: 65 lbs/hand
+  target_reps: 10
+  actual_weight: 65
+  actual_reps: 10
+- description: Hip Thrust (Barbell)
+  target_weight: "95-115 lbs"
+  target_reps: 10
+  actual_weight: 145
+  actual_reps: 8
+- description: Chest-Supported DB Row
+  target_weight: 65 lbs/hand
+  target_reps: 10
+  actual_weight: 65
+  actual_reps: 10
+- description: Hip Thrust (Barbell)
+  target_weight: "95-115 lbs"
+  target_reps: 10
+  actual_weight: 110
+  actual_reps: 10
+- description: Chest-Supported DB Row
+  target_weight: 65 lbs/hand
+  target_reps: 10
+  actual_weight: 65
+  actual_reps: 8
+- description: Single-Leg DB RDL
+  target_weight: 35 lbs/hand
+  target_reps: "8-10/side"
+  actual_weight: 35
+  actual_reps: 8
+- description: Cable/Band Row (Tempo)
+  target_weight: "40-50 lbs"
+  target_reps: 12
+  actual_weight: 50
+  actual_reps: 12
+- description: Single-Leg DB RDL
+  target_weight: 35 lbs/hand
+  target_reps: "8-10/side"
+  actual_weight: 35
+  actual_reps: 8
+- description: Cable/Band Row (Tempo)
+  target_weight: "40-50 lbs"
+  target_reps: 12
+  actual_weight: 50
+  actual_reps: 12
+- description: Hammer Curl
+  target_weight: "30-35 lbs/hand"
+  target_reps: 10
+  actual_weight: 30
+  actual_reps: 10
+- description: Rear Delt Fly (Cable or DB)
+  target_weight: "15-20 lbs"
+  target_reps: 15
+  actual_weight: 20
+  actual_reps: 10
+- description: Hammer Curl
+  target_weight: "30-35 lbs/hand"
+  target_reps: 10
+  actual_weight: null
+  actual_reps: null
+- description: Rear Delt Fly (Cable or DB)
+  target_weight: "15-20 lbs"
+  target_reps: 15
+  actual_weight: null
+  actual_reps: null
+
+---
+workout_date: 2025-08-04
+workout_name: Strength A – Push + Core
+sets:
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 10
+
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 27.5
+    actual_reps: 12
+
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 10
+
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 27.5
+    actual_reps: 12
+
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 10
+
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 27.5
+    actual_reps: 12
+
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 9
+
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 7
+
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 5
+
+  - description: Front-Foot Elevated Split Squat (per leg)
+    target_weight: 35 lbs
+    target_reps: 8
+    actual_weight: 35
+    actual_reps: 8
+
+  - description: Pallof Press (per side)
+    target_weight: 20-27.5 lbs
+    target_reps: 12
+    actual_weight: 20
+    actual_reps: 12
+
+  - description: Front-Foot Elevated Split Squat (per leg)
+    target_weight: 35 lbs
+    target_reps: 8
+    actual_weight: 35
+    actual_reps: null
+
+  - description: Pallof Press (per side)
+    target_weight: 20-27.5 lbs
+    target_reps: 12
+    actual_weight: 20
+    actual_reps: 12
+
+  - description: Overhead DB Triceps Extension
+    target_weight: 40-50 lbs
+    target_reps: 12
+    actual_weight: 45
+    actual_reps: 12
+
+  - description: Lateral Raise (per side)
+    target_weight: 12.5-15 lbs or yellow band
+    target_reps: 15
+    actual_weight: 15
+    actual_reps: 15
+
+  - description: Overhead DB Triceps Extension
+    target_weight: 40-50 lbs
+    target_reps: 12
+    actual_weight: 45
+    actual_reps: 12
+
+  - description: Lateral Raise (per side)
+    target_weight: 12.5-15 lbs or yellow band
+    target_reps: 15
+    actual_weight: 15
+    actual_reps: 15
+
+25/07/25
+
+Workout B
+- 5 minutes backward sled pull
+	- Target 
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 245 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 265 lbs 
+		- Reps: 2
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 4
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 5
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 15
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 15
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 15
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 12
+
+25/07/18
+
+Workout A
+- 5 minutes backward sled pull
+	- Target
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+		- Weight: 90 lbs
+		- Reps: Time-based
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 25 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 275 lbs
+		- Reps: 4
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 25 lbs
+		- Reps: 5
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 255 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 25 lbs
+		- Reps: 5
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 255 lbs
+		- Reps: 4
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 8
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 75 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 75 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 7
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 90 lbs
+		- Reps: 7
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Cable Biceps Curl
+	- Target 
+		- Weight: 40 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 49 lbs
+		- Reps: 12
+- Cable Triceps Pushdown
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 51.2 lbs
+		- Reps: 12
+
+25/07/16
+
+
+Workout C
+
+- 7 minute run (before the 30 minute timer)
+- 5 minutes backward sled pull
+- Warm-Up
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+	- Band pull-aparts
+		- Target
+			- Weight: 
+			- Reps: 15
+		- Actual
+			- Weight: 
+			- Reps: 15
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Empty bar RDL
+		- Target
+			- Weight: 
+			- Reps: 8
+		- Actual
+			- Weight: 
+			- Reps: 8
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 secs
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 10
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 9
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 5
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 15 lbs
+		- Reps: 12
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 35 lbs
+		- Reps: 10
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 15 lbs
+		- Reps: 10
+- Cable Chop (low to high)
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 30 lbs
+		- Reps: 10
+- Seated Cable Curl
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 47.5 lbs
+		- Reps: 12
+- Cable Chop (low to high)
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 30 lbs
+		- Reps: 10
+-  Calf Raise
+	- Target 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 15
+	- Actual 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 15
+
+25/07/13
+
+Workout B
+- 5 minutes backward sled pull
+	- Target 
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 15
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 15
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 10
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 10
+
+
+25/07/11
+
+Workout B
+- 5 minutes backward sled pull
+	- Target 
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+
+25/07/09
+
+
+Workout C
+
+- 7 minute run (before the 30 minute timer)
+- Warm-Up
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+	- Band pull-aparts
+		- Target
+			- Weight: 
+			- Reps: 15
+		- Actual
+			- Weight: 
+			- Reps: 15
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Empty bar RDL
+		- Target
+			- Weight: 
+			- Reps: 8
+		- Actual
+			- Weight: 
+			- Reps: 8
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 secs
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 10
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 15 lbs
+		- Reps: 12
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 35 lbs
+		- Reps: 10
+
+25/07/07
+
+Workout A
+- 5 minutes backward sled pull
+	- Target
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+		- Weight: 90 lbs
+		- Reps: Time-based
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 20 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 245 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 20 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 245 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 20 lbs
+		- Reps: 4
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 75 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 75 lbs
+		- Reps: 5
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 115 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 115 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Cable Biceps Curl
+	- Target 
+		- Weight: 40 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 40 lbs
+		- Reps: 12
+- Cable Triceps Pushdown
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 45 lbs
+		- Reps: 12
+
+
+25/07/04
+
+Workout B
+- 5 minutes backward sled pull
+	- Target 
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 3
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 4
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 225 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 5
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 10
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 5
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 10
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+
+25/07/02
+
+
+Workout C
+
+- 7 minute run (before the 30 minute timer)
+- Warm-Up
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+	- Band pull-aparts
+		- Target
+			- Weight: 
+			- Reps: 15
+		- Actual
+			- Weight: 
+			- Reps: 15
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Empty bar RDL
+		- Target
+			- Weight: 
+			- Reps: 8
+		- Actual
+			- Weight: 
+			- Reps: 8
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 secs
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 205 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 9
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 4
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 15 lbs
+		- Reps: 10
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 35 lbs
+		- Reps: 10
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 15 lbs
+		- Reps: 8
+- Cable Chop (low to high)
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 30 lbs
+		- Reps: 6
+- Seated Cable Curl
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 47.5 lbs
+		- Reps: 10
+- Cable Chop (low to high)
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 32.5 lbs
+		- Reps: 8
+-  Calf Raise
+	- Target 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 15
+	- Actual 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 10
+
+25/06/30
+
+Workout A
+- 5 minutes backward sled pull
+	- Target
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+		- Weight: 90 lbs
+		- Reps: Time-based
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 20 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 235 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 235 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 20 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 235 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 4
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 115 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+
+25/06/27
+
+Workout B
+- 5 minutes rowing
+	- Target 
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 3
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 10
+- Conventional Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 2
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 10
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Alternating Bench Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Notes
+	- Only had 30 minutes for a workout
+	- The sled was in use
+
+25/06/25
+
+
+Workout C
+
+- 25 minute walk
+- Warm-Up
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+	- Band pull-aparts
+		- Target
+			- Weight: 
+			- Reps: 15
+		- Actual
+			- Weight: 
+			- Reps: 15
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Empty bar RDL
+		- Target
+			- Weight: 
+			- Reps: 8
+		- Actual
+			- Weight: 
+			- Reps: 8
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 secs
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 3
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 17.5 lbs
+		- Reps: 8
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 32.5 lbs
+		- Reps: 10
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 12.5 lbs
+		- Reps: 12
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 32.5 lbs
+		- Reps: 10
+- Seated Cable Curl
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 47.5 lbs
+		- Reps: 12
+-  Calf Raise
+	- Target 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 15
+	- Actual 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 15
+
+25/06/23
+
+Workout A
+- 5 minutes backward sled pull
+	- Target
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+		- Weight: 90 lbs
+		- Reps: Time-based
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 70 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 115 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Cable Biceps Curl
+	- Target 
+		- Weight: 40 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 40 lbs
+		- Reps: 12
+- Cable Triceps Pushdown
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 45 lbs
+		- Reps: 12
+
+25/06/20
+
+
+Workout B
+
+- 5 minutes backward sled pull
+	- Target 
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+- Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- DB Floor Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Floor Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Floor Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 15
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 15
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 
+
+25/06/18
+
+
+Workout C
+
+- 7 minute run (before the 30 minute timer)
+- Warm-Up
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 21.5
+			- Reps: 12
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+	- Band pull-aparts
+		- Target
+			- Weight: 
+			- Reps: 15
+		- Actual
+			- Weight: 
+			- Reps: 15
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Empty bar RDL
+		- Target
+			- Weight: 
+			- Reps: 8
+		- Actual
+			- Weight: 
+			- Reps: 8
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 135 lbs incline bench
+		- Reps: 9
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 135 lbs incline bench
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 135 lbs incline bench
+		- Reps: 5
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 12.5 lbs
+		- Reps: 12
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 27.5 lbs
+		- Reps: 10
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 17.5 lbs
+		- Reps: 7
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 32.5 lbs
+		- Reps: 10
+- Seated Cable Curl
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 42.5 lbs
+		- Reps: 12
+-  Calf Raise
+	- Target 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 15
+	- Actual 
+		- Weight: Bodyweight or 1 x 50 lbs
+		- Reps: 1
+25/06/16
+Workout A
+- 5 minutes backward sled pull
+	- Target
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+		- Weight: 90 lbs
+		- Reps: Time-based
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Cable Biceps Curl
+	- Target 
+		- Weight: 40 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 40 lbs
+		- Reps: 12
+- Cable Triceps Pushdown
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 45 lbs
+		- Reps: 12
+
+25/06/11
+
+Workout C
+- 7 minute run (before the 30 minute timer)
+- Warm-Up
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 21.5
+			- Reps: 12
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+	- Band pull-aparts
+		- Target
+			- Weight: 
+			- Reps: 15
+		- Actual
+			- Weight: 
+			- Reps: 15
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 22.5
+			- Reps: 12
+	- Empty bar RDL
+		- Target
+			- Weight: 
+			- Reps: 8
+		- Actual
+			- Weight: 
+			- Reps: 8
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 8
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 55 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: x
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: x
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 15 lbs
+		- Reps: 
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 30 lbs
+		- Reps: 10
+- Cable Lateral Raise
+	- Target 
+		- Weight: 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 15.5 lbs
+		- Reps: 12 / 8
+- Glute Kickback
+	- Target 
+		- Weight: 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 30 lbs
+		- Reps: 10
+- Seated Cable Curl
+	- Target 
+		- Weight: 45 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 45 lbs
+		- Reps: 12
+
+25/06/09
+
+Workout B
+- 5 minutes backward sled pull
+	- Target 
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+- Hex Bar Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Hex Bar Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- Hex Bar Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 5
+- Straight Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 8
+- Hex Bar Deadlift
+	- Target 
+		-  Weight: 235 lbs
+		- Reps: 5
+	-  Actual 
+		- Weight: 235 lbs 
+		- Reps: 3
+- Bent Leg Raise/Core
+	- Target 
+		- Weight: Bodyweight
+		- Reps: 12
+	-  Actual 
+		- Weight: Bodyweight
+		- Reps: 12
+- DB Floor Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 60 lbs
+		- Reps:8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Floor Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- DB Floor Press
+	- Target 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+	-  Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 17.5 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Bulgarian Split Squat
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Lateral Raise
+	- Target 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 12
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 
+- Band Pull-Aparts (elbow bent)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 
+- Band Pull-Aparts (straight arms)
+	- Target 
+		- Weight: Band
+		- Reps: 15
+	- Actual 
+		- Weight: Band
+		- Reps: 
+
+25/06/06
+
+Workout A
+- 5 minutes backward sled pull
+	- Target
+		- Weight: 90 lbs
+		- Reps: Time-based
+	- Actual 
+		- Weight: 90 lbs
+		- Reps: Time-based
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Hex Bar Squat
+	- Target 
+		- Weight: 225 lbs
+		- Reps: 5
+	- Actual 
+		- Weight: 225 lbs
+		- Reps: 5
+- Weighted Pull-Up
+	- Target 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: Bodyweight + 10 lbs
+		- Reps: 6
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 8
+- Flat DB Bench Press
+	- Target 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 2 x 65 lbs
+		- Reps: 6
+- Chest-Supported Row
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 60 lbs
+		- Reps: 6
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- DB Glute Bridge
+	- Target 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 1 x 90 lbs
+		- Reps: 10
+- Single-Leg RDL
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+
+25/06/05
+
+Workout C (30 minutes)
+- Warm-Up
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 21.5
+			- Reps: 12
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+	- Band pull-aparts
+		- Target
+			- Weight: 
+			- Reps: 15
+		- Actual
+			- Weight: 
+			- Reps: 15
+	- Cable face pulls
+		- Target
+			- Weight: 25
+			- Reps: 12
+		- Actual
+			- Weight: 25
+			- Reps: 12
+	- Split squats
+		- Target
+			- Weight: 
+			- Reps: 6 per leg
+		- Actual
+			- Weight: 
+			- Reps: 6 per leg
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Barbell Romanian Deadlift
+	- Target 
+		- Weight: 185 lbs
+		- Reps: 6
+	- Actual 
+		- Weight: 185 lbs
+		  Reps: 6
+- Standing Weighted Plank
+	- Target 
+		- Weight: Bodyweight + 25 lbs plate or band
+		- Reps: 30 sec
+	- Actual 
+		- Weight: Bodyweight + 25 lbs plate or band
+		  Reps: 30 sec
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+- Incline DB Press
+	- Target 
+		- Weight: 2 x 55 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 55 lbs
+		- Reps: 7
+- DB Row
+	- Target 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 1 x 65 lbs
+		- Reps: 8
+
+25/05/30
+
+Source (Workout 2)
+- 5 minutes of reverse sled pulls (45 lbs)
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 4
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+		- 
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 135
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 40 lbs 
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight: 0
+		- Duration: 40
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 40
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25 lbs
+		- Reps: 12
+- Notes
+	- 
+
+25/05/15
+
+Source (Workout 1)
+- 5 minutes rowing
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 7
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight:  225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 7
+- Hex squats
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 4
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 7
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35
+		- Reps: 12
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 35
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30l bs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 10
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 45lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs 
+		- Reps: 5
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 9
+- Standing Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Standing tricep Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Note
+	- Still fighting a cold 
+
+
+25/05/09
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Dead lift (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Dead lift
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Dead lift
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridge
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 8
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 16.25 lbs
+		- Reps: 8
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 12.5 lbs
+		- Reps: 8
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 10
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 8
+- Notes
+
+25/05/07
+
+Source (Workout 2)
+- 5 minutes of rowing
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 40 lbs 
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+
+25/05/02
+
+Source (Workout 1)
+- 5 minutes backwards sled pulls (90 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight:  235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual
+		- Weight: 2 x 65
+		- Reps: 8
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 45lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs 
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 9
+- Standing Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Standing tricep Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 9
+- Note
+	- 
+
+25/04/29
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 4
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 5
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 6
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridge
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15.75 lbs
+		- Reps: 7
+- Hamstring Curls (Stability ball)
+	- Target the 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 12.5 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 12.5 lbs
+		- Reps: 10
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Notes
+	- 
+
+25/04/25
+
+Source (Workout 2)
+- 7 minutes of rowing
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs 
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Leg Extensions
+	- Target 
+		- Weight: 90 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 90 lbs
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 90
+		- Reps: 12
+	- Actual 
+		- Weight: 45
+		- Reps: 2 x 11
+- Leg Extensions
+	- Target 
+		- Weight: 90 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 90
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 90
+		- Reps: 12
+	- Actual 
+		- Weight: 45
+		- Reps: 7
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight: 0
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25 lbs
+		- Reps: 
+- Notes
+	- 
+
+25/04/21
+
+Source (Workout 1)
+- 5 minutes backwards sled pulls (90 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight:  235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 45lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs 
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 12
+- Standing Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Standing tricep Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 7
+- Note
+	- 
+
+25/04/18
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 7
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 7
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 7
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridge
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 10
+- Hamstring Curls (Stability ball)
+	- Target the 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 10
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 10
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 55 lbs
+		- Reps: 8
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 6
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 55 lbs
+		- Reps: 6
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 4
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 55 lbs
+		- Reps: 6
+- Notes
+	- 
+
+25/04/14
+
+Source (Workout 2)
+- 5 minutes backwards sled pulls (90 lbs)
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 6
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 5
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs 
+		- Reps: 2 x 5
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 3
+- Leg Extensions
+	- Target 
+		- Weight: 80 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 80 lbs
+		- Reps: 
+- Leg Curls
+	- Target 
+		- Weight: 80
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 
+- Leg Extensions
+	- Target 
+		- Weight: 80 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 80
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25 lbs
+		- Reps: 
+- Notes
+	- Go up in curl and possibly extension
+
+25/04/11
+
+Source (Workout 1)
+- 5 minutes backwards sled pulls (90 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight:  225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 6
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 4
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 10
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 45lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40 lbs 
+		- Reps: 7
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 9
+- Standing Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Standing tricep Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Note
+	- Still fighting a cold 
+	- Protecting right shoulder
+
+25/04/04
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridge
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 5
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 11
+- Notes
+	- Under the weather, recovering from the flu
+
+25/03/27
+
+Source (Workout 2)
+- 5 minutes backwards sled pulls (90 lbs)
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 7
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs 
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 4
+- Leg Extensions
+	- Target 
+		- Weight: 80 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 80 lbs
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 80
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Leg Extensions
+	- Target 
+		- Weight: 80 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 80
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 34 seconds 
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25 lbs
+		- Reps: 12
+- Notes
+
+25/03/21
+
+Source (Workout 1)
+- 5 minutes backwards sled pulls (90 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight:  235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 7
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 45lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs 
+		- Reps: 6
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 10
+- Standing Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 10
+- Standing tricep Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Note
+	- Wobbly 3 set of single leg deadlifts
+
+25/03/17
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridge
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 9
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 9
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 7
+- Notes
+	- Out of time
+	- 
+
+25/03/14
+
+Source (Workout 2)
+- 5 minutes backwards sled pulls (90 lbs)
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs 
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Leg Extensions
+	- Target 
+		- Weight: 80 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 80 lbs
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 80
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Leg Extensions
+	- Target 
+		- Weight: 80 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 80
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50 seconds
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25 lbs
+		- Reps: 12
+- Notes
+
+25/03/12
+
+Source (Workout 1)
+- 5 minutes backwards sled pulls (90 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight:  235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 235
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 65
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 65
+		- Reps: 5
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 30lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30lbs
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 45lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 5
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs 
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 
+- Standing Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 10
+- Standing tricep Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 9
+- Note
+	-  
+
+25/03/09
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 60
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridge
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 9
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 7
+- Notes
+	- 55 minutes. 
+	- 2:30 pm workout
+
+25/03/06
+
+Source (Workout 2)
+- 5 minutes backwards sled pulls (90 lbs)
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 7
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs 
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 50
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 26 seconds
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25 lbs
+		- Reps: 12
+- Leg Extensions
+	- Target 
+		- Weight: 70 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 70 lbs
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Leg Extensions
+	- Target 
+		- Weight: 70 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 80
+		- Reps: 12
+- Notes
+	- 
+
+25/03/03
+
+Source (Workout 1)
+- 5 minutes backwards sled pulls (90 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 60
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight:  235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 60
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 235
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 60
+		- Reps: 6
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 25lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 25lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs
+		- Reps: 10
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 45 lbs 
+		- Reps: 6
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 10
+- Raised-leg Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 10
+- Standing tricep Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Note
+	-  Go up in weight for dumbbell deads and flys
+
+25/03/01
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 7
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 70
+		- Reps: 8
+	- Actual 
+		- Weight: 55
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 70
+		- Reps: 8
+	- Actual 
+		- Weight: 55
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 70
+		- Reps: 8
+	- Actual 
+		- Weight: 55
+		- Reps: 8
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridge
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 35lbs KB
+		- Reps: 6
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 45 lbs
+		- Reps: 6
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 10
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 35 lbs KB
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs Kab
+		- Reps: 10
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 35 lbs KB
+		- Reps: 12
+- Notes
+	- Had to stop after 43 minutes. Ran out of time. 
+	- Continued workout at home later in the day
+
+25/02/20
+
+Source (Workout 2)
+- 5 minutes backwards sled pulls (90 lbs)
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 35lbs 
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 50 seconds
+	- Actual 
+		- Weight:
+		- Duration: 26 seconds
+- Russian Twists
+	- Target 
+		- Weight:  25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 25 lbs
+		- Reps: 12
+- Leg Extensions
+	- Target 
+		- Weight: 70 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 70 lbs
+		- Reps: 
+- Leg Curls
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 
+- Leg Extensions
+	- Target 
+		- Weight: 70 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 70
+		- Reps: 
+- Leg Curls
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 
+- Notes
+	- Leg extension and leg curl machines were being used
+
+25/02/24
+
+Source (Workout 1)
+- 5 minutes backwards sled pulls (90 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 245
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 55
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight:  245
+		- Reps: 5
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 55
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 5
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 2 x 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 2 x 55
+		- Reps: 8
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 12
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 25lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 25lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25lbs
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40lbs
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 40lbs 
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+- Raised-leg Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+- Raised-leg Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Note
+	- Couldn't find a 20 lbs dumbbell
+	- Deadlifts leaning to the left
+
+25/02/21
+
+Source (Workout 3)
+- 5 minutes sled pull at 90 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 70
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 70
+		- Reps: 8
+	- Actual 
+		- Weight: 50
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 70
+		- Reps: 8
+	- Actual 
+		- Weight: 50
+		- Reps: 6
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 60
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 60
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 60
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 65
+		- Reps: 12
+	- Actual 
+		- Weight: 60
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 10
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Cable Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 8
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 10
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 6
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 11
+- Notes
+	- Long workout
+	- Right shoulder a little muscular pain on the second tricep set
+
+25/02/20
+
+Source (Workout 2)
+- 5 minutes backwards sled pulls (90 lbs)
+- Front Squats
+	- Target 
+		- Weight: 135
+		- Reps: 6
+	- Actual 
+		- Weight: 135
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 155
+		- Reps: 6
+	- Actual 
+		- Weight: 155
+		- Reps: 5
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 2 x 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 45 seconds
+	- Actual 
+		- Weight:
+		- Duration: 45 seconds
+- Russian Twists
+	- Target 
+		- Weight:  20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 20 lbs
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 45 seconds
+	- Actual 
+		- Weight:
+		- Duration: 45 seconds
+- Russian Twists
+	- Target 
+		- Weight:  20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 20 lbs
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 45 seconds
+	- Actual 
+		- Weight:
+		- Duration: 45 seconds
+- Russian Twists
+	- Target 
+		- Weight:  20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 20 lbs
+		- Reps: 12 
+- Leg Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 70 lbs
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight:  35
+		- Reps: 12
+	- Actual 
+		- Weight: 50
+		- Reps: 12
+- Leg Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 70
+		- Reps: 12
+- Leg Curls
+	- Target 
+		- Weight:  35
+		- Reps: 12
+	- Actual 
+		- Weight: 65
+		- Reps: 12
+- Notes
+	- 
+
+25/02/14
+
+Source
+- 7 minutes backwards sled pulls (70 lbs)
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 135
+		- Reps: 6
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight:  225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 135
+		- Reps: 8
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Incline Dumbbell Press
+	- Target 
+		- Weight: 55
+		- Reps: 8
+	- Actual (incline barbell press)
+		- Weight: 135
+		- Reps: 7
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 12
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight:  
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 10
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 8
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35@lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 
+		- Reps: ⁸
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Raised-leg Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 30 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Raised-leg Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 
+- Notes
+	- Left leg dead lift - balance weak
+
+25/02/10
+
+Source
+- 7 (6) minutes sled pull at 70 lbs 
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 85
+		- Reps: 8
+	- Actual 
+		- Weight: 85
+		- Reps: 6
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 85
+		- Reps: 8
+	- Actual 
+		- Weight: 75
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 85
+		- Reps: 8
+	- Actual 
+		- Weight: 75
+		- Reps: 6
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 7
+- Glute Bridges
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 5
+- Glute Bridges
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 5
+- Glute Bridges
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 10
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 8
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 15 lbs
+		- Reps: 10
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 8
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 10
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 0
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 0
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 0
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 25 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25 lbs
+		- Reps: 0
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 50 lbs
+		- Reps: 0
+- Notes
+	- Out of time
+
+25/02/03
+
+Source
+- 7 minutes reverse elliptical 
+- Front Squats
+	- Target 
+		- Weight: 90
+		- Reps: 10
+	- Actual 
+		- Weight: 135
+		- Reps: 6
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 90
+		- Reps: 10
+	- Actual 
+		- Weight: 155
+		- Reps: 5
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 0
+		- Reps: 10
+- Front Squats
+	- Target 
+		- Weight: 90
+		- Reps: 10
+	- Actual 
+		- Weight: 155
+		- Reps: 5
+- Pull-Ups
+	- Target 
+		- Weight: 0
+		- Reps: 10
+	- Actual 
+		- Weight: 
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 2 x 6
+- Arnold Press
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Dumbbell Step-Ups
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 2 x 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Arnold Press
+	- Target 
+		- Weight: 2 x 30lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30 lbs
+		- Reps: 8
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 45 seconds
+	- Actual 
+		- Weight:
+		- Duration: 
+- Russian Twists
+	- Target 
+		- Weight:  20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 20 lbs
+		- Reps: 20
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 45 seconds
+	- Actual 
+		- Weight:
+		- Duration: 45 seconds
+- Russian Twists
+	- Target 
+		- Weight:  20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 20 lbs
+		- Reps: 12
+- Plank Holds
+	- Target 
+		- Weight: 0
+		- Duration: 45 seconds
+	- Actual 
+		- Weight:
+		- Duration: 45 seconds
+- Russian Twists
+	- Target 
+		- Weight:  20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 20 lbs
+		- Reps: 12 
+- Leg Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Leg Curls
+	- Target 
+		- Weight:  35
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Leg Extensions
+	- Target 
+		- Weight: 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Leg Curls
+	- Target 
+		- Weight:  35
+		- Reps: 12
+	- Actual 
+		- Weight: 
+		- Reps: 
+- Notes
+	- Single-Leg Romanian Deadlifts were difficult from a balancing perspective
+
+25/02/02
+
+- Bird/Dog
+	- Target per side
+		- Reps: 6
+	- Actual 
+		- Reps: 6
+- Side Plank
+	- Target per side
+		- Reps: 30s
+	- Actual 
+		- Reps: 30s
+- Glute Bridge
+	- Target 
+		- Reps: 10
+	- Actual 
+		- Reps: 10
+- Goblet Squat
+	- Target 
+		- Weight:  60 lbs
+		- Reps: 10
+	- Actual 
+		- Weight:  0 lbs
+		- Reps: 10
+- Dead Bug
+	- Target 
+		- Reps: 5/side
+	- Actual 
+		- Reps: 5
+- Bird/Dog
+	- Target per side
+		- Reps: 6
+	- Actual 
+		- Reps: 6
+- Side Plank
+	- Target per side
+		- Reps: 30s
+	- Actual 
+		- Reps: 30s
+- Glute Bridge
+	- Target 
+		- Reps: 10
+	- Actual 
+		- Reps: 10
+- Goblet Squat
+	- Target 
+		- Weight:  60 lbs
+		- Reps: 10
+	- Actual 
+		- Weight:  0 lbs
+		- Reps: 10
+- Dead Bug
+	- Target 
+		- Reps: 5/side
+	- Actual 
+		- Reps: 5
+- Bird/Dog
+	- Target per side
+		- Reps: 6
+	- Actual 
+		- Reps: 6
+- Side Plank
+	- Target per side
+		- Reps: 30s
+	- Actual 
+		- Reps: 30s
+- Glute Bridge
+	- Target 
+		- Reps: 10
+	- Actual 
+		- Reps: 10
+- Goblet Squat
+	- Target 
+		- Weight:  60 lbs
+		- Reps: 10
+	- Actual 
+		- Weight:  0 lbs
+		- Reps: 10
+- Dead Bug
+	- Target 
+		- Reps: 5/side
+	- Actual 
+		- Reps: 5
+
+25/01/31
+
+Source
+- 7 minutes reverse elliptical 
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 225
+		- Reps: 6
+- Flat Dumbbell Press
+	- Target 
+		- Weight: 55
+		- Reps: 8
+	- Actual 
+		- Weight: 50
+		- Reps: 10
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 225 
+		- Reps: 6
+- Flat Dumbbell Press
+	- Target 
+		- Weight: 55
+		- Reps: 8
+	- Actual 
+		- Weight: 50
+		- Reps: 10
+- Deadlifts
+	- Target 
+		- Weight: 225
+		- Reps: 6
+	- Actual 
+		- Weight: 225 
+		- Reps: 6 
+- Bench Press
+	- Target 
+		- Weight: 55
+		- Reps: 8
+	- Actual 
+		- Weight: 135
+		- Reps: 10
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 8
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 6
+- Single-Leg Romanian Deadlifts
+	- Target 
+		- Weight: 2 x 20lbs
+		- Reps: 8
+	- Actual 
+		- Weight:  2 x 25
+		- Reps: 8
+- Rear Delt Dumbbell Flyes
+	- Target 
+		- Weight:  2 x 20lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 25
+		- Reps: 10
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 12
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 30
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Seated Dumbbell Shoulder Press
+	- Target 
+		- Weight: 2 x 35lbs
+		- Reps: 8
+	- Actual 
+		- Weight: 2 x 35
+		- Reps: 8
+- Bodyweight Side Lunges
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 40 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35
+		- Reps: 8
+- Raised-leg Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Hammer Curls
+	- Target 
+		- Weight: 2 x 40 lbs
+		- Reps: 10
+	- Actual 
+		- Weight: 2 x 35
+		- Reps: 6
+- Raised-leg Bench Dips
+	- Target 
+		- Weight:  0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Notes
+	- Single-Leg Romanian Deadlifts were difficult from a balancing perspective
+
+25/01/25
+
+- Pull-Ups
+	- Target
+		- Reps: 8
+	- Actual
+		- Reps: 8
+- Kettlebell Goblet Squats
+	- Target
+		- Weight: 60 lbs
+		- Reps: 10
+	- Actual
+		- Weight: 60 lbs
+		- Reps: 10
+- Single-Arm Kettlebell Press
+	- Target
+		- Weight: 35 lbs
+		- Reps: 8
+	- Actual
+		- Weight: 35 lbs
+		- Reps: 8
+- Kettlebell Row
+	- Target
+		- Weight: 60 lbs
+		- Reps: 10
+	- Actual
+		- Weight: 60 lbs
+		- Reps: 10
+- Glute Bridges
+	- Target
+		- Weight: 35 lbs
+		- Reps: 12
+	- Actual
+		- Weight: 35 lbs
+		- Reps: 12
+- Pull-Ups
+	- Target
+		- Reps: 8
+	- Actual
+		- Reps: 8
+- Kettlebell Goblet Squats
+	- Target
+		- Weight: 60 lbs
+		- Reps: 10
+	- Actual
+		- Weight: 60 lbs
+		- Reps: 10
+- Single-Arm Kettlebell Press
+	- Target
+		- Weight: 35 lbs
+		- Reps: 8
+	- Actual
+		- Weight: 35 lbs
+		- Reps: 8
+- Kettlebell Row
+	- Target
+		- Weight: 60 lbs
+		- Reps: 10
+	- Actual
+		- Weight: 60 lbs
+		- Reps: 10
+- Glute Bridges
+	- Target
+		- Weight: 35 lbs
+		- Reps: 12
+	- Actual
+		- Weight: 35 lbs
+		- Reps: 12
+
+25/01/02
+
+Source
+- Bird/Dog
+	- Target per side
+		- Reps: 6
+	- Actual 
+		- Reps: 6
+- Side Plank
+	- Target per side
+		- Reps: 20s
+	- Actual 
+		- Reps: 30s
+- Glute Bridge
+	- Target 
+		- Reps: 10
+	- Actual 
+		- Reps: 10
+- Goblet Squat
+	- Target 
+		- Weight:  60 lbs
+		- Reps: 10
+	- Actual 
+		- Weight:  60 lbs
+		- Reps: 10
+- Dead Bug
+	- Target 
+		- Reps: 4/side
+	- Actual 
+		- Reps: 5/side
+- 20 minutes of yoga
+
+
+
+
+25/01/02
+
+Source
+- 7 minutes sled pull at 70 lbs
+- Hex squats (225)
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 85
+		- Reps: 8
+	- Actual 
+		- Weight: 85
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 8
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 85
+		- Reps: 8
+	- Actual 
+		- Weight: 75
+		- Reps: 8
+- Hex squats
+	- Target 
+		- Weight: 225
+		- Reps: 8
+	- Actual 
+		- Weight: 225
+		- Reps: 5
+- Bent-Over Dumbbell Rows
+	- Target 
+		- Weight: 85
+		- Reps: 8
+	- Actual 
+		- Weight: 75
+		- Reps: 6
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 8
+- Glute Bridges
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 4
+- Glute Bridges
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bench Press
+	- Target 
+		- Weight: 65
+		- Reps: 8
+	- Actual 
+		- Weight: 65
+		- Reps: 5
+- Glute Bridges
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 11
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Lateral Raises
+	- Target 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 20 lbs
+		- Reps: 12
+- Hamstring Curls (Stability ball)
+	- Target 
+		- Weight: 0
+		- Reps: 12
+	- Actual 
+		- Weight: 0
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 8
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 2 x 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 50 lbs
+		- Reps: 12
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 7
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 2 x 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 50 lbs
+		- Reps: 9
+- Dumbbell Bicep Curl
+	- Target 
+		- Weight: 2 x 35 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 35 lbs
+		- Reps: 6
+- Overhead Dumbbell Tricep Extensions
+	- Target 
+		- Weight: 2 x 50 lbs
+		- Reps: 12
+	- Actual 
+		- Weight: 2 x 50 lbs
+		- Reps: 6
