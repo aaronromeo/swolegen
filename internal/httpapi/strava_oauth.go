@@ -11,6 +11,14 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+type stravaClient interface {
+	GetRecentActivities(ctx context.Context, sinceDays int) ([]strava.Activity, error)
+}
+
+// newStravaClient is a factory for creating Strava clients. Tests may override this
+// to inject a client with a stubbed implementation.
+var newStravaClient = func(ts strava.TokenSource) stravaClient { return strava.NewWithTokenSource(ts) }
+
 // OAuth endpoints for Strava (MVP single user).
 
 func registerStravaOAuth(app *fiber.App) {
@@ -58,13 +66,13 @@ func registerStravaOAuth(app *fiber.App) {
 			userToken = &strava.Token{AccessToken: accessToken}
 		}
 
-		var cl *strava.Client
+		var cl stravaClient
 		var tokenSource strava.TokenSource
 
 		if userToken != nil {
 			// Try with user-provided token
 			tokenSource = &strava.UserTokenSource{Token: userToken}
-			cl = strava.NewWithTokenSource(tokenSource)
+			cl = newStravaClient(tokenSource)
 		} else {
 			return c.Status(http.StatusUnauthorized).JSON(fiber.Map{
 				"error":          "No user token provided; OAuth handshake required",

@@ -33,11 +33,11 @@ This backlog is ordered so each task is small, single‑purpose, and verifiable 
 - [ ] Unit tests using `examples/*` fixtures (positive + negative cases).
 
 ## 4. ID + slug package
-- [ ] `internal/id`:
+- [X] `internal/id`:
   - `Slug(exerciseName string) string` → `A–Z0–9–`, uppercased, max 12 chars.
   - `WorkoutID(date, location string, seedInput []byte) string` → `YYYY-MM-DD-<kebab-location>-NN` where `NN` is `xxhash(seedInput)%100` formatted `02d`.
   - `SetID(tier, slug string, n int, warmup bool) string` → e.g., `A-RDL-WU1`, `A-RDL-1`.
-- [ ] Unit tests for determinism and formatting.
+- [X] Unit tests for determinism and formatting.
 
 ## 5. History parsing (public URLs)
 - [ ] `internal/history`:
