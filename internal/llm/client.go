@@ -233,9 +233,9 @@ func fetchToTmp(ctx context.Context, url, prefix string) (string, string, error)
 		return "", content, err
 	}
 	defer func() {
-		_ = f.Close() //nolint:errcheck
+		closeQuiet(f)
 		if os.Getenv("LLM_DEBUG") == "" {
-			_ = os.Remove(f.Name()) //nolint:errcheck
+			_ = os.Remove(f.Name())
 		}
 	}()
 	if _, err := f.WriteString(content); err != nil {
@@ -262,7 +262,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		defer func() { _ = f.Close() }()
+		defer closeQuiet(f)
 		lr := &io.LimitedReader{R: f, N: int64(capBytes)}
 		b, err := io.ReadAll(lr)
 		if err != nil {
@@ -276,7 +276,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		defer func() { _ = f.Close() }()
+		defer closeQuiet(f)
 		lr := &io.LimitedReader{R: f, N: int64(capBytes)}
 		b, err := io.ReadAll(lr)
 		if err != nil {
@@ -292,7 +292,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer func() { _ = resp.Body.Close() }()
+	defer closeQuiet(resp.Body)
 	if resp.StatusCode >= 300 {
 		return "", fmt.Errorf("GET %s: %d", url, resp.StatusCode)
 	}
@@ -313,6 +313,11 @@ func maxFetchBytes() int {
 		}
 	}
 	return def
+}
+
+// closeQuiet closes a Closer and returns nothing; used to satisfy errcheck in defers.
+func closeQuiet(c io.Closer) {
+	_ = c.Close()
 }
 
 // indentForBlock indents each line by two spaces for YAML literal blocks.
