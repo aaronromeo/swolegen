@@ -59,6 +59,8 @@ This backlog is ordered so each task is small, single‑purpose, and verifiable 
   - Uses prompts from `/prompts` folder (read at runtime).
   - JSON mode for analyzer, plain text for generator.
   - Retries: up to `LLM_RETRIES` on validation failure with repair prompt.
+- [ ] Wire an LLM provider (stub for tests, real provider behind an interface), with env/config support.
+- [ ] Add unit tests (table-driven) covering serialization, defaulting (units=lbs), and prompt construction.
 - [ ] Unit tests: mock HTTP to LLM; validate schema pass/fail paths.
 
 ## 8. Workout domain & timeboxing

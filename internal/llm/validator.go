@@ -11,7 +11,7 @@ import (
 
 func ValidateAnalyzerJSON(b []byte) error {
 	loader := gojsonschema.NewBytesLoader(b)
-	schemaLoader := gojsonschema.NewReferenceLoader(AnalyzerSchema)
+	schemaLoader := gojsonschema.NewStringLoader(AnalyzerSchema)
 	result, err := gojsonschema.Validate(schemaLoader, loader)
 	if err != nil {
 		return err

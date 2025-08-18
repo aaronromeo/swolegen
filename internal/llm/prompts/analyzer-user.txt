@@ -1,6 +1,8 @@
 Inputs:
-- instructions_url: %s
-- history_url: %s
+- instructions_text: |
+%s
+- history_text: |
+%s
 - strava_recent: %s
 - upcoming_cardio_text: %q
 - recovery_signals: {"sleep_score": %s, "body_battery": %s}

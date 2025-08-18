@@ -1,0 +1,15 @@
+Your last output did not validate against the Analyzer v1 JSON Schema.
+
+Errors:
+%s
+
+Constraints:
+- Do not change fields that already validate unless necessary to fix the errors.
+- Do not introduce new keys.
+- Output JSON ONLY (no surrounding backticks, no prose), as a single JSON object that conforms to the schema.
+
+Schema for validation:
+%s
+
+Re-emit the corrected JSON now.
+
