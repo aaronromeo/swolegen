@@ -33,8 +33,10 @@
       <button id="btn-recent">Fetch /strava/recent</button>
     </div>
 
-    <h3>Response</h3>
-    <pre id="out"><code></code></pre>
+    <div class="row">
+      <label>Strava Recent</label><br />
+      <textarea id="stravaRecent" cols="40" rows="5" value="" readonly></textarea>
+    </div>
 
     <hr />
 
@@ -81,6 +83,10 @@
     <div class="row">
       <button id="btn-analyze">Analyze</button>
     </div>
+    <hr />
+
+    <h3>Response</h3>
+    <pre id="out"><code></code></pre>
 
     <script src="./app.js"></script>
   </body>

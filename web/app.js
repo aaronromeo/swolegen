@@ -4,6 +4,7 @@
   const btnAnalyze = document.getElementById('btn-analyze');
   const accessTokenEl = document.getElementById('accessToken');
   const daysEl = document.getElementById('days');
+  const stravaRecentEl = document.getElementById('stravaRecent');
   const outEl = document.getElementById('out');
 
   const instructionsUrlEl = document.getElementById('instructionsUrl');
@@ -41,18 +42,20 @@
   if (historyUrl) {
     historyUrlEl.value = historyUrl;
   }
-  
-  const equipmentInventory = localStorage.getItem('equipmentInventory');
-  if (equipmentInventory) {
-    try {
-      const inv = JSON.parse(equipmentInventory);
-      if (inv && Array.isArray(inv)) {
-        inv.forEach(key => {
-          const cb = document.getElementById(`eq_${key}`);
-          if (cb) cb.checked = true;
-        });
-      }
-    } catch (e) {}
+  // Restore and persist cardio text
+  const savedCardio = localStorage.getItem('cardioText');
+  if (savedCardio !== null) {
+    cardioEl.value = savedCardio;
+  }
+  cardioEl.addEventListener('input', () => {
+    localStorage.setItem('cardioText', cardioEl.value);
+  });
+
+
+
+  function setStravaRecent(data) {
+    lastStravaRecent = data;
+    stravaRecentEl.value = JSON.stringify(data, null, 2);
   }
 
   function setOutput(obj) {
@@ -92,10 +95,32 @@
     for (const raw of lines) {
       const line = raw.replace(/\t/g, '  ');
       if (!inProfiles) {
+      // After rendering all checkboxes, restore saved selection and attach persistence
+      requestAnimationFrame(() => {
+        try {
+          const saved = localStorage.getItem('equipmentInventory');
+          if (saved) {
+            const inv = JSON.parse(saved);
+            if (inv && Array.isArray(inv)) {
+              inv.forEach(key => {
+                const cb = document.getElementById(`eq_${key}`);
+                if (cb) cb.checked = true;
+              });
+            }
+          }
+        } catch (e) {}
+        equipContainer.addEventListener('change', () => {
+          const checked = Array.from(equipContainer.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+          localStorage.setItem('equipmentInventory', JSON.stringify(checked));
+        });
+      });
+
         if (line.trim().startsWith('equipment_inventory_profiles:')) {
           inProfiles = true;
         }
         continue;
+
+
       }
       const t = line.trim();
       if (t === '' || t.startsWith('#')) continue;
@@ -138,6 +163,7 @@
         const checked = Array.from(document.querySelectorAll('#equipContainer input[type="checkbox"]:checked')).map(cb => cb.value);
         localStorage.setItem('equipmentInventory', JSON.stringify(checked));
         lastStravaRecent = data.activities || [];
+        setStravaRecent(lastStravaRecent);
       }
     } catch (err) {
       setOutput({ error: String(err) });
