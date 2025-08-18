@@ -38,59 +38,75 @@ func NewOpenAIProviderFromEnv() (*OpenAIProvider, error) {
 func (p *OpenAIProvider) Complete(ctx context.Context, systemPrompt string, userPrompt string) (string, error) {
 	// Use the Responses endpoint via openai-go. Construct a generic payload.
 	// We concatenate system + user as the "input" per our API design.
-	params := map[string]any{
-		"model": p.Model,
-		"input": systemPrompt + "\n\n" + userPrompt,
+
+	var schemaObj map[string]any
+	if err := json.Unmarshal([]byte(AnalyzerSchema), &schemaObj); err != nil {
+		return "", fmt.Errorf("invalid analyzer schema json: %w", err)
 	}
-	var result map[string]any
-	if err := p.Client.Post(ctx, "/responses", params, &result); err != nil {
+	schemaParam := openai.ResponseFormatJSONSchemaJSONSchemaParam{
+		Name:        "analyzer_plan",
+		Description: openai.String("Workout analyzer plan"),
+		Schema:      schemaObj, // must be an object, not a string
+		Strict:      openai.Bool(true),
+	}
+
+	chat, err := p.Client.Chat.Completions.New(ctx, openai.ChatCompletionNewParams{
+		Messages: []openai.ChatCompletionMessageParamUnion{
+			openai.UserMessage(userPrompt),
+			openai.SystemMessage(systemPrompt),
+		}, ResponseFormat: openai.ChatCompletionNewParamsResponseFormatUnion{
+			OfJSONSchema: &openai.ResponseFormatJSONSchemaParam{
+				JSONSchema: schemaParam,
+			},
+		},
+		// only certain models can perform structured outputs
+		Model: openai.ChatModelGPT4o2024_08_06,
+	})
+	if err != nil {
 		return "", err
 	}
-	// Prefer the convenience field if present
-	if s, ok := result["output_text"].(string); ok && s != "" {
-		return s, nil
-	}
-	// Otherwise, dig into output[*].content[*].text{,value}
-	if out, ok := result["output"].([]any); ok {
-		var bld strings.Builder
-		for _, item := range out {
-			m, ok := item.(map[string]any)
-			if !ok {
-				continue
+
+	// Extract assistant message content as a plain string
+	var s string
+	if len(chat.Choices) > 0 {
+		contentAny := any(chat.Choices[0].Message.Content)
+		switch v := contentAny.(type) {
+		case string:
+			s = v
+		case *string:
+			if v != nil {
+				s = *v
 			}
-			content, ok := m["content"].([]any)
-			if !ok {
-				continue
-			}
-			for _, c := range content {
-				cm, ok := c.(map[string]any)
-				if !ok {
-					continue
-				}
-				// type might be "output_text" or "text"
-				if t, _ := cm["type"].(string); t == "output_text" || t == "text" || t == "message" {
-					if s, ok := cm["text"].(string); ok {
-						bld.WriteString(s)
-						bld.WriteString("\n")
-						continue
-					}
-					if tm, ok := cm["text"].(map[string]any); ok {
-						if v, ok := tm["value"].(string); ok {
-							bld.WriteString(v)
-							bld.WriteString("\n")
+		default:
+			// Fallback: marshal the message and try to pull text fields
+			var m map[string]any
+			if b, err := json.Marshal(chat.Choices[0].Message); err == nil {
+				if err2 := json.Unmarshal(b, &m); err2 == nil {
+					if sc, ok := m["content"].(string); ok {
+						s = sc
+					} else if arr, ok := m["content"].([]any); ok {
+						var bld strings.Builder
+						for _, it := range arr {
+							if mm, ok := it.(map[string]any); ok {
+								if txt, ok := mm["text"].(string); ok {
+									bld.WriteString(txt)
+								}
+								if inner, ok2 := mm["text"].(map[string]any); ok2 {
+									if val, ok3 := inner["value"].(string); ok3 {
+										bld.WriteString(val)
+									}
+								}
+							}
 						}
+						s = bld.String()
 					}
 				}
 			}
 		}
-		if s := strings.TrimSpace(bld.String()); s != "" {
-			return s, nil
-		}
 	}
-	// Fallback: stringify the whole response if specific field missing.
-	raw, err := json.Marshal(result)
-	if err != nil {
-		return "", fmt.Errorf("openai: unexpected response shape and marshal failed: %w", err)
+	s = strings.TrimSpace(s)
+	if s == "" {
+		return "", fmt.Errorf("no message content")
 	}
-	return string(raw), nil
+	return s, nil
 }

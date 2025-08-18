@@ -169,15 +169,15 @@ func (c *Client) AnalyzeWithDebug(ctx context.Context, in AnalyzerInputs) (Analy
 
 	user := fmt.Sprintf(AnalyzerUser,
 		instructionsBlock, historyBlock, stravaJSON, in.UpcomingCardioText,
-		sleep, bb, string(invJSON), date, in.Location, units, in.DurationMinutes, AnalyzerSchema,
+		sleep, bb, string(invJSON), date, in.Location, units, in.DurationMinutes,
 	)
 
-	fmt.Printf("USER:\n%s\n\n", user)
+	userJSON, _ := json.Marshal(user)
 
 	var traces []CompletionTrace
 	// initial completion
-	out, err := c.p.Complete(ctx, AnalyzerSystem, user)
-	traces = append(traces, CompletionTrace{Phase: "initial", System: AnalyzerSystem, User: user, Raw: out})
+	out, err := c.p.Complete(ctx, AnalyzerSystem, string(userJSON))
+	traces = append(traces, CompletionTrace{Phase: "initial", System: AnalyzerSystem, User: string(userJSON), Raw: out})
 	if err != nil {
 		return AnalyzerPlan{}, traces, err
 	}
