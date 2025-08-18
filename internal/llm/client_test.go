@@ -55,7 +55,11 @@ func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 	if err := os.Setenv("LLM_RETRIES", "2"); err != nil {
 		t.Fatalf("Setenv: %v", err)
 	}
-	t.Cleanup(func() { _ = os.Unsetenv("LLM_RETRIES") })
+	t.Cleanup(func() {
+		if err := os.Unsetenv("LLM_RETRIES"); err != nil {
+			t.Fatalf("Unsetenv: %v", err)
+		}
+	})
 	in := AnalyzerInputs{Location: "gym", EquipmentInventory: []string{"barbell"}, DurationMinutes: 45, Units: "lbs"}
 	got, err := cli.Analyze(context.Background(), in)
 	if err != nil {
@@ -92,7 +96,11 @@ func TestFetchText_CapsSize(t *testing.T) {
 	if err := os.Setenv("LLM_MAX_FETCH_BYTES", "1024"); err != nil {
 		t.Fatalf("Setenv: %v", err)
 	}
-	defer func() { _ = os.Unsetenv("LLM_MAX_FETCH_BYTES") }()
+	defer func() {
+		if err := os.Unsetenv("LLM_MAX_FETCH_BYTES"); err != nil {
+			t.Fatalf("Unsetenv: %v", err)
+		}
+	}()
 	got, err := fetchText(context.Background(), ts.URL)
 	if err != nil {
 		t.Fatalf("fetchText: %v", err)
@@ -108,7 +116,11 @@ func TestFetchToTmp_CreatesAndOptionallyRemoves(t *testing.T) {
 	if err != nil {
 		t.Fatalf("tmp: %v", err)
 	}
-	defer func() { _ = os.Remove(f.Name()) }()
+	defer func() {
+		if err := os.Remove(f.Name()); err != nil {
+			t.Fatalf("remove: %v", err)
+		}
+	}()
 	if _, err := f.WriteString("hello world"); err != nil {
 		t.Fatalf("write: %v", err)
 	}

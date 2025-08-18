@@ -235,7 +235,7 @@ func fetchToTmp(ctx context.Context, url, prefix string) (string, string, error)
 	defer func() {
 		closeQuiet(f)
 		if os.Getenv("LLM_DEBUG") == "" {
-			_ = os.Remove(f.Name())
+			removeQuiet(f.Name())
 		}
 	}()
 	if _, err := f.WriteString(content); err != nil {
@@ -318,6 +318,11 @@ func maxFetchBytes() int {
 // closeQuiet closes a Closer and returns nothing; used to satisfy errcheck in defers.
 func closeQuiet(c io.Closer) {
 	_ = c.Close()
+}
+
+// removeQuiet removes a file path ignoring the error; used in defers to satisfy errcheck.
+func removeQuiet(name string) {
+	_ = os.Remove(name)
 }
 
 // indentForBlock indents each line by two spaces for YAML literal blocks.
