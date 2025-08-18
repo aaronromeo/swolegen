@@ -14,6 +14,7 @@ BUILT_BINARY = $(BUILD_DIR)/$(BINARY_NAME)
 GOCMD ?= go
 GOBUILD = $(GOCMD) build
 GOTEST = $(GOCMD) test
+GOVET = $(GOCMD) vet
 
 GOLANGCI := $(BIN_DIR)/golangci-lint
 GOLANGCI_VERSION := v1.65.2
@@ -36,7 +37,7 @@ fmt-check:
 
 # Run go vet for static analysis
 vet:
-	@$(GO) vet ./...
+	@$(GOVET) ./...
 
 lint: fmt-check vet install-golangci
 	$(GOLANGCI) run --config .golangci.yml

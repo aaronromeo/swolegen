@@ -2,7 +2,6 @@ package llm
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"net/http"
 	"net/http/httptest"
@@ -11,32 +10,34 @@ import (
 	"testing"
 )
 
-type fakeProvider struct { reply string; err error }
+type fakeProvider struct {
+	reply string
+	err   error
+}
+
 func (f fakeProvider) Complete(ctx context.Context, systemPrompt, userPrompt string) (string, error) {
 	return f.reply, f.err
 }
 
-func mustJSON(t *testing.T, v any) string {
-	b, err := json.Marshal(v)
-	if err != nil { t.Fatalf("marshal: %v", err) }
-	return string(b)
-}
-
 func TestAnalyze_Success(t *testing.T) {
 	plan := AnalyzerPlan{
-		Meta: AnalyzerMeta{Date: "2023-10-01", Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy"},
-		Session: AnalyzerSession{Type: "strength", Tiers: []string{"A"}, CutOrder: []string{"A"}},
+		Meta:          AnalyzerMeta{Date: "2023-10-01", Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy"},
+		Session:       AnalyzerSession{Type: "strength", Tiers: []string{"A"}, CutOrder: []string{"A"}},
 		FatiguePolicy: AnalyzerFatiguePolicy{RIRShift: 1, LoadCapPct: 0.95, Reason: "ok"},
-		TimeBudget: AnalyzerTimeBudget{SetSecondsEstimate: 120, TargetSetCount: 20},
-		ExercisePlan: []ExercisePlanItem{{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 2, WorkingSets: 4, Targets: ExerciseTargets{RepRange: "6-8", RIR: 2}}},
+		TimeBudget:    AnalyzerTimeBudget{SetSecondsEstimate: 120, TargetSetCount: 20},
+		ExercisePlan:  []ExercisePlanItem{{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 2, WorkingSets: 4, Targets: ExerciseTargets{RepRange: "6-8", RIR: 2}}},
 	}
 	okJSON, _ := plan.ToJSON()
 	cli := NewWithProvider(fakeProvider{reply: string(okJSON)})
 
 	in := AnalyzerInputs{InstructionsURL: "", HistoryURL: "", Location: "gym", EquipmentInventory: []string{"barbell"}, DurationMinutes: 45, Units: "lbs"}
 	got, err := cli.Analyze(context.Background(), in)
-	if err != nil { t.Fatalf("Analyze error: %v", err) }
-	if got.Meta.Location != "gym" || len(got.ExercisePlan) == 0 { t.Fatalf("unexpected plan: %+v", got) }
+	if err != nil {
+		t.Fatalf("Analyze error: %v", err)
+	}
+	if got.Meta.Location != "gym" || len(got.ExercisePlan) == 0 {
+		t.Fatalf("unexpected plan: %+v", got)
+	}
 }
 
 func TestAnalyze_RepairAfterInvalid(t *testing.T) {
@@ -46,23 +47,34 @@ func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 	p := &sequenceProvider{replies: []string{bad, string(okJSON)}}
 	cli := NewWithProvider(p)
 	os.Setenv("LLM_RETRIES", "2")
-	t.Cleanup(func(){ os.Unsetenv("LLM_RETRIES") })
+	t.Cleanup(func() { os.Unsetenv("LLM_RETRIES") })
 	in := AnalyzerInputs{Location: "gym", EquipmentInventory: []string{"barbell"}, DurationMinutes: 45, Units: "lbs"}
 	got, err := cli.Analyze(context.Background(), in)
-	if err != nil { t.Fatalf("Analyze error after repair: %v", err) }
-	if got.Meta.Location != "gym" { t.Fatalf("unexpected plan: %+v", got) }
+	if err != nil {
+		t.Fatalf("Analyze error after repair: %v", err)
+	}
+	if got.Meta.Location != "gym" {
+		t.Fatalf("unexpected plan: %+v", got)
+	}
 }
 
-type sequenceProvider struct{ replies []string; i int }
+type sequenceProvider struct {
+	replies []string
+	i       int
+}
+
 func (s *sequenceProvider) Complete(ctx context.Context, systemPrompt, userPrompt string) (string, error) {
-	if s.i >= len(s.replies) { return "", errors.New("no more replies") }
-	r := s.replies[s.i]; s.i++
+	if s.i >= len(s.replies) {
+		return "", errors.New("no more replies")
+	}
+	r := s.replies[s.i]
+	s.i++
 	return r, nil
 }
 
 func TestFetchText_CapsSize(t *testing.T) {
 	// Serve a large response and ensure we cap reads
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
 		w.Write([]byte(strings.Repeat("x", 200000)))
 	}))
@@ -70,20 +82,30 @@ func TestFetchText_CapsSize(t *testing.T) {
 	os.Setenv("LLM_MAX_FETCH_BYTES", "1024")
 	defer os.Unsetenv("LLM_MAX_FETCH_BYTES")
 	got, err := fetchText(context.Background(), ts.URL)
-	if err != nil { t.Fatalf("fetchText: %v", err) }
-	if len(got) != 1024 { t.Fatalf("expected 1024 bytes, got %d", len(got)) }
+	if err != nil {
+		t.Fatalf("fetchText: %v", err)
+	}
+	if len(got) != 1024 {
+		t.Fatalf("expected 1024 bytes, got %d", len(got))
+	}
 }
 
 func TestFetchToTmp_CreatesAndOptionallyRemoves(t *testing.T) {
 	// Use a file URL
 	f, err := os.CreateTemp("", "swolegen-test-*.txt")
-	if err != nil { t.Fatalf("tmp: %v", err) }
+	if err != nil {
+		t.Fatalf("tmp: %v", err)
+	}
 	defer os.Remove(f.Name())
 	f.WriteString("hello world")
 	f.Close()
 	p, content, err := fetchToTmp(context.Background(), "file://"+f.Name(), "instructions")
-	if err != nil { t.Fatalf("fetchToTmp: %v", err) }
-	if content != "hello world" { t.Fatalf("content mismatch: %q", content) }
+	if err != nil {
+		t.Fatalf("fetchToTmp: %v", err)
+	}
+	if content != "hello world" {
+		t.Fatalf("content mismatch: %q", content)
+	}
 	if _, statErr := os.Stat(p); statErr == nil {
 		// should be removed unless LLM_DEBUG set
 		if os.Getenv("LLM_DEBUG") == "" {
@@ -93,4 +115,3 @@ func TestFetchToTmp_CreatesAndOptionallyRemoves(t *testing.T) {
 		}
 	}
 }
-

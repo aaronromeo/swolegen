@@ -155,24 +155,32 @@ func (c *Client) AnalyzeWithDebug(ctx context.Context, in AnalyzerInputs) (Analy
 	if in.GarminBodyBattery != nil {
 		bb = fmt.Sprintf("%d", *in.GarminBodyBattery)
 	}
-	invJSON, _ := json.Marshal(in.EquipmentInventory)
+	invJSON, err := json.Marshal(in.EquipmentInventory)
+	if err != nil {
+		return AnalyzerPlan{}, nil, fmt.Errorf("marshal equipment_inventory: %w", err)
+	}
 
-	instructionsText, _ := fetchText(ctx, in.InstructionsURL)
-	historyText, _ := fetchText(ctx, in.HistoryURL)
+	instructionsText, err := fetchText(ctx, in.InstructionsURL)
+	if err != nil {
+		return AnalyzerPlan{}, nil, fmt.Errorf("fetch instructions: %w", err)
+	}
+	historyText, err := fetchText(ctx, in.HistoryURL)
+	if err != nil {
+		return AnalyzerPlan{}, nil, fmt.Errorf("fetch history: %w", err)
+	}
 	// indent multi-line blocks for YAML literal style
 	instructionsBlock := indentForBlock(instructionsText)
 	historyBlock := indentForBlock(historyText)
-
-	// fmt.Printf("INSTRUCTIONS:\n%s\n\n", instructionsText)
-	// fmt.Printf("HISTORY:\n%s\n\n", historyText)
-	// fmt.Printf("EQUIPMENT:\n%s\n\n", invJSON)
 
 	user := fmt.Sprintf(AnalyzerUser,
 		instructionsBlock, historyBlock, stravaJSON, in.UpcomingCardioText,
 		sleep, bb, string(invJSON), date, in.Location, units, in.DurationMinutes,
 	)
 
-	userJSON, _ := json.Marshal(user)
+	userJSON, err := json.Marshal(user)
+	if err != nil {
+		return AnalyzerPlan{}, nil, fmt.Errorf("marshal user prompt: %w", err)
+	}
 
 	var traces []CompletionTrace
 	// initial completion
@@ -245,6 +253,11 @@ func fetchText(ctx context.Context, url string) (string, error) {
 	// Local files support (file:// or relative path)
 	if strings.HasPrefix(url, "file://") {
 		p := strings.TrimPrefix(url, "file://")
+		if strings.HasPrefix(url, "file://") {
+			if pp, ok := strings.CutPrefix(url, "file://"); ok {
+				p = pp
+			}
+		}
 		f, err := os.Open(p)
 		if err != nil {
 			return "", err
