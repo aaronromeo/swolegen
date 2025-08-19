@@ -315,14 +315,24 @@ func maxFetchBytes() int {
 	return def
 }
 
-// closeQuiet closes a Closer and returns nothing; used to satisfy errcheck in defers.
+// closeQuiet closes a Closer and swallows any error (for best-effort cleanup in defers).
 func closeQuiet(c io.Closer) {
-	_ = c.Close()
+	if c == nil {
+		return
+	}
+	if err := c.Close(); err != nil {
+		// intentionally ignore; best-effort cleanup
+	}
 }
 
-// removeQuiet removes a file path ignoring the error; used in defers to satisfy errcheck.
+// removeQuiet removes a file path and swallows any error (for best-effort cleanup in defers).
 func removeQuiet(name string) {
-	_ = os.Remove(name)
+	if name == "" {
+		return
+	}
+	if err := os.Remove(name); err != nil {
+		// intentionally ignore; best-effort cleanup
+	}
 }
 
 // indentForBlock indents each line by two spaces for YAML literal blocks.
