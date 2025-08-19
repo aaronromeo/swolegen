@@ -1,5 +1,3 @@
-.PHONY: lint test fmt fmt-check vet build
-
 BIN_DIR := $(shell go env GOBIN)
 ifeq ($(BIN_DIR),)
 BIN_DIR := $(shell go env GOPATH)/bin
@@ -20,10 +18,21 @@ GOLANGCI := $(BIN_DIR)/golangci-lint
 GOLANGCI_VERSION := v1.65.2
 
 # Format all packages
+.PHONY: fmt
 fmt:
 	@$(GO) fmt ./...
 
+.PHONY: install-golangci
+install-golangci:
+	@if [ -x "$(GOLANGCI)" ]; then \
+		echo "golangci-lint found at $(GOLANGCI)"; \
+	else \
+		echo "Installing golangci-lint $(GOLANGCI_VERSION) ..."; \
+		curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(BIN_DIR) $(GOLANGCI_VERSION); \
+		"$(GOLANGCI)" version; \
+	fi
 # Check formatting without modifying files; fails if any files need formatting
+.PHONY: fmt-check
 fmt-check:
 	@echo "Checking formatting..."
 	@files="$$(gofmt -l .)"; \
@@ -36,14 +45,18 @@ fmt-check:
 	fi
 
 # Run go vet for static analysis
+.PHONY: vet
 vet:
 	@$(GOVET) ./...
 
+.PHONY: lint
 lint: fmt-check vet install-golangci
 	$(GOLANGCI) run --config .golangci.yml
 
+.PHONY: build
 build:
 	$(GOBUILD) -o $(BUILT_BINARY) -v ./cmd/swolegen-api
 
+.PHONY: test
 test:
 	$(GOTEST) -v ./... -coverprofile=./cover.out -covermode=atomic -coverpkg=./...

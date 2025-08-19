@@ -320,9 +320,7 @@ func closeQuiet(c io.Closer) {
 	if c == nil {
 		return
 	}
-	if err := c.Close(); err != nil {
-		// intentionally ignore; best-effort cleanup
-	}
+	c.Close() //nolint:errcheck
 }
 
 // removeQuiet removes a file path and swallows any error (for best-effort cleanup in defers).
@@ -330,9 +328,7 @@ func removeQuiet(name string) {
 	if name == "" {
 		return
 	}
-	if err := os.Remove(name); err != nil {
-		// intentionally ignore; best-effort cleanup
-	}
+	os.Remove(name) //nolint:errcheck
 }
 
 // indentForBlock indents each line by two spaces for YAML literal blocks.
