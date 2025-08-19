@@ -51,8 +51,6 @@
     localStorage.setItem('cardioText', cardioEl.value);
   });
 
-
-
   function setStravaRecent(data) {
     lastStravaRecent = data;
     stravaRecentEl.value = JSON.stringify(data, null, 2);
@@ -131,7 +129,6 @@
     }
     return result;
   }
-
 
   btnOAuth.addEventListener('click', () => {
     window.location.href = '/oauth/strava/start';

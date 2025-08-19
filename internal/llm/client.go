@@ -107,14 +107,6 @@ type Client struct {
 	p Provider
 }
 
-// CompletionTrace captures the prompts sent to the LLM and the raw response.
-type CompletionTrace struct {
-	Phase  string `json:"phase"`
-	System string `json:"system"`
-	User   string `json:"user"`
-	Raw    string `json:"raw"`
-}
-
 func New() *Client                       { return &Client{} } // deprecated: prefer NewWithProvider or NewDefault
 func NewWithProvider(p Provider) *Client { return &Client{p: p} }
 func NewDefault() (*Client, error) {
@@ -127,14 +119,8 @@ func NewDefault() (*Client, error) {
 
 // Analyze assembles prompts, calls the provider, and parses the plan.
 func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, error) {
-	plan, _, err := c.AnalyzeWithDebug(ctx, in)
-	return plan, err
-}
-
-// AnalyzeWithDebug returns the AnalyzerPlan and a trace of requests/responses for debugging.
-func (c *Client) AnalyzeWithDebug(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, []CompletionTrace, error) {
 	if c.p == nil {
-		return AnalyzerPlan{}, nil, errors.New("llm provider not configured")
+		return AnalyzerPlan{}, errors.New("llm provider not configured")
 	}
 	units := in.Units
 	if strings.TrimSpace(units) == "" {
@@ -157,16 +143,16 @@ func (c *Client) AnalyzeWithDebug(ctx context.Context, in AnalyzerInputs) (Analy
 	}
 	invJSON, err := json.Marshal(in.EquipmentInventory)
 	if err != nil {
-		return AnalyzerPlan{}, nil, fmt.Errorf("marshal equipment_inventory: %w", err)
+		return AnalyzerPlan{}, fmt.Errorf("marshal equipment_inventory: %w", err)
 	}
 
 	instructionsText, err := fetchText(ctx, in.InstructionsURL)
 	if err != nil {
-		return AnalyzerPlan{}, nil, fmt.Errorf("fetch instructions: %w", err)
+		return AnalyzerPlan{}, fmt.Errorf("fetch instructions: %w", err)
 	}
 	historyText, err := fetchText(ctx, in.HistoryURL)
 	if err != nil {
-		return AnalyzerPlan{}, nil, fmt.Errorf("fetch history: %w", err)
+		return AnalyzerPlan{}, fmt.Errorf("fetch history: %w", err)
 	}
 	// indent multi-line blocks for YAML literal style
 	instructionsBlock := indentForBlock(instructionsText)
@@ -179,19 +165,17 @@ func (c *Client) AnalyzeWithDebug(ctx context.Context, in AnalyzerInputs) (Analy
 
 	userJSON, err := json.Marshal(user)
 	if err != nil {
-		return AnalyzerPlan{}, nil, fmt.Errorf("marshal user prompt: %w", err)
+		return AnalyzerPlan{}, fmt.Errorf("marshal user prompt: %w", err)
 	}
 
-	var traces []CompletionTrace
 	// initial completion
 	out, err := c.p.Complete(ctx, AnalyzerSystem, string(userJSON))
-	traces = append(traces, CompletionTrace{Phase: "initial", System: AnalyzerSystem, User: string(userJSON), Raw: out})
 	if err != nil {
-		return AnalyzerPlan{}, traces, err
+		return AnalyzerPlan{}, err
 	}
 	plan, err := AnalyzerPlanFromJSON([]byte(out))
 	if err == nil {
-		return plan, traces, nil
+		return plan, nil
 	}
 
 	// Retry loop using repair prompt if validation/parsing fails
@@ -205,18 +189,17 @@ func (c *Client) AnalyzeWithDebug(ctx context.Context, in AnalyzerInputs) (Analy
 	for i := 0; i < retries; i++ {
 		repairUser := fmt.Sprintf(RepairAnalyzer, lastErr.Error(), AnalyzerSchema)
 		out2, err2 := c.p.Complete(ctx, AnalyzerSystem, repairUser)
-		traces = append(traces, CompletionTrace{Phase: fmt.Sprintf("repair-%d", i+1), System: AnalyzerSystem, User: repairUser, Raw: out2})
 		if err2 != nil {
 			lastErr = err2
 			continue
 		}
 
 		if plan2, errParse := AnalyzerPlanFromJSON([]byte(out2)); errParse == nil {
-			return plan2, traces, nil
+			return plan2, nil
 		}
 		lastErr = fmt.Errorf("failed to parse analyzer plan: %w", err)
 	}
-	return AnalyzerPlan{}, traces, lastErr
+	return AnalyzerPlan{}, lastErr
 }
 
 // fetchText downloads the content at a URL and returns it as a string.
