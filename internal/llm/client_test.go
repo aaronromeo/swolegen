@@ -8,6 +8,8 @@ import (
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/aaronromeo/swolegen/internal/llm/provider"
 )
 
 type fakeProvider struct {
@@ -15,9 +17,11 @@ type fakeProvider struct {
 	err   error
 }
 
-func (f fakeProvider) Complete(ctx context.Context, prf ProviderResponseFormat) (string, error) {
+func (f fakeProvider) Complete(ctx context.Context, prf provider.ProviderResponseFormat) (string, error) {
 	return f.reply, f.err
 }
+
+func (f fakeProvider) Validate() error { return nil }
 
 func TestAnalyze_Success(t *testing.T) {
 	plan := AnalyzerPlan{
@@ -31,7 +35,10 @@ func TestAnalyze_Success(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ToJSON: %v", err)
 	}
-	cli := NewWithProvider(fakeProvider{reply: string(okJSON)})
+	cli, err := New(WithProvider(fakeProvider{reply: string(okJSON)}))
+	if err != nil {
+		t.Fatalf("New Provider Error: %v", err)
+	}
 
 	in := AnalyzerInputs{InstructionsURL: "", HistoryURL: "", Location: "gym", EquipmentInventory: []string{"barbell"}, DurationMinutes: 45, Units: "lbs"}
 	got, err := cli.Analyze(context.Background(), in)
@@ -51,7 +58,11 @@ func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 		t.Fatalf("ToJSON: %v", err)
 	}
 	p := &sequenceProvider{replies: []string{bad, string(okJSON)}}
-	cli := NewWithProvider(p)
+	cli, err := New(WithProvider(p))
+	if err != nil {
+		t.Fatalf("New Provider Error: %v", err)
+	}
+
 	if err := os.Setenv("LLM_RETRIES", "2"); err != nil {
 		t.Fatalf("Setenv: %v", err)
 	}
@@ -75,7 +86,7 @@ type sequenceProvider struct {
 	i       int
 }
 
-func (s *sequenceProvider) Complete(ctx context.Context, prf ProviderResponseFormat) (string, error) {
+func (s *sequenceProvider) Complete(ctx context.Context, prf provider.ProviderResponseFormat) (string, error) {
 	if s.i >= len(s.replies) {
 		return "", errors.New("no more replies")
 	}
@@ -83,6 +94,8 @@ func (s *sequenceProvider) Complete(ctx context.Context, prf ProviderResponseFor
 	s.i++
 	return r, nil
 }
+
+func (s *sequenceProvider) Validate() error { return nil }
 
 func TestFetchText_CapsSize(t *testing.T) {
 	// Serve a large response and ensure we cap reads

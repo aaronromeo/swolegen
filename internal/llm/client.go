@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aaronromeo/swolegen/internal/llm/provider"
 	yaml "gopkg.in/yaml.v3"
 )
 
@@ -106,29 +107,52 @@ func AnalyzerPlanFromJSON(b []byte) (AnalyzerPlan, error) {
 }
 
 type Client struct {
-	p Provider
+	provider provider.Provider
+	retries  int
+	debug    bool
 }
 
-func NewWithProvider(p Provider) *Client { return &Client{p: p} }
-func NewDefault() (*Client, error) {
-	p, err := NewOpenAIProvider(
-		WithAPIKey(os.Getenv("OPENAI_API_KEY")),
-		WithModel(os.Getenv("LLM_MODEL_ANALYZER")),
-	)
-	if err != nil {
+type LLMClientOption func(*Client)
+
+func WithProvider(p provider.Provider) LLMClientOption {
+	return func(c *Client) {
+		c.provider = p
+	}
+}
+
+func WithRetries(n int) LLMClientOption {
+	return func(c *Client) {
+		c.retries = n
+	}
+}
+
+func WithDebug() LLMClientOption {
+	return func(c *Client) {
+		c.debug = true
+	}
+}
+
+func New(opts ...LLMClientOption) (*Client, error) {
+	c := &Client{}
+	for _, opt := range opts {
+		opt(c)
+	}
+
+	if err := c.provider.Validate(); err != nil {
 		return nil, err
 	}
-	if err := p.Validate(); err != nil {
-		return nil, err
-	}
-	return &Client{p: p}, nil
+	return c, nil
 }
 
 // Analyze assembles prompts, calls the provider, and parses the plan.
 func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, error) {
-	if c.p == nil {
+	if c.provider == nil {
 		return AnalyzerPlan{}, errors.New("llm provider not configured")
 	}
+	if c.provider.Validate() != nil {
+		return AnalyzerPlan{}, errors.New("llm provider invalid")
+	}
+
 	units := in.Units
 	if strings.TrimSpace(units) == "" {
 		units = "lbs"
@@ -176,9 +200,9 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 	}
 
 	// initial completion
-	out, err := c.p.Complete(ctx, ProviderResponseFormat{
-		Name:         ResponseFormatAnalyzerPlan,
-		Description:  ResponseFormatAnalyzerPlanDescription,
+	out, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+		Name:         provider.ResponseFormatAnalyzerPlan,
+		Description:  provider.ResponseFormatAnalyzerPlanDescription,
 		Schema:       AnalyzerSchema,
 		SystemPrompt: AnalyzerSystem,
 		UserPrompt:   string(userJSON),
@@ -201,9 +225,9 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 	lastErr := fmt.Errorf("failed to parse analyzer plan: %w", err)
 	for i := 0; i < retries; i++ {
 		repairUser := fmt.Sprintf(RepairAnalyzer, lastErr.Error(), AnalyzerSchema)
-		out2, err2 := c.p.Complete(ctx, ProviderResponseFormat{
-			Name:         ResponseFormatAnalyzerPlan,
-			Description:  ResponseFormatAnalyzerPlanDescription,
+		out2, err2 := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+			Name:         provider.ResponseFormatAnalyzerPlan,
+			Description:  provider.ResponseFormatAnalyzerPlanDescription,
 			Schema:       AnalyzerSchema,
 			SystemPrompt: AnalyzerSystem,
 			UserPrompt:   repairUser,
@@ -340,8 +364,11 @@ func jsonToYAML(b []byte) ([]byte, error) {
 }
 
 func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error) {
-	if c.p == nil {
+	if c.provider == nil {
 		return nil, errors.New("llm provider not configured")
+	}
+	if c.provider.Validate() != nil {
+		return nil, errors.New("llm provider invalid")
 	}
 
 	// Convert plan to JSON for the prompt
@@ -354,9 +381,9 @@ func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error
 	user := fmt.Sprintf(GeneratorUser, string(planJSON))
 
 	// Initial completion (expects YAML output)
-	out, err := c.p.Complete(ctx, ProviderResponseFormat{
-		Name:         ResponseFormatGeneratorOutput,
-		Description:  ResponseFormatGeneratorOutputDescription,
+	out, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+		Name:         provider.ResponseFormatGeneratorOutput,
+		Description:  provider.ResponseFormatGeneratorOutputDescription,
 		Schema:       WorkoutSchema,
 		SystemPrompt: GeneratorSystem,
 		UserPrompt:   user,
@@ -381,9 +408,9 @@ func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error
 	lastErr := fmt.Errorf("failed to validate workout yaml: %w", err)
 	for i := 0; i < retries; i++ {
 		repairUser := fmt.Sprintf(RepairGenerator, lastErr.Error())
-		planOutput, err2 := c.p.Complete(ctx, ProviderResponseFormat{
-			Name:         ResponseFormatGeneratorOutput,
-			Description:  ResponseFormatGeneratorOutputDescription,
+		planOutput, err2 := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+			Name:         provider.ResponseFormatGeneratorOutput,
+			Description:  provider.ResponseFormatGeneratorOutputDescription,
 			Schema:       WorkoutSchema,
 			SystemPrompt: GeneratorSystem,
 			UserPrompt:   repairUser,
