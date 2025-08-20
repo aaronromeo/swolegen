@@ -3,7 +3,7 @@
   "$id": "https://swolegen.app/schemas/workout-v1.2.json",
   "title": "SwoleGen Workout v1.2",
   "type": "object",
-  "required": ["version", "workout_id", "date", "location", "units", "duration_minutes", "goal", "cut_order", "sets"],
+  "required": ["version", "workout_id", "date", "location", "units", "duration_minutes", "goal", "cut_order", "sets", "notes_to_user", "post_workout"],
   "additionalProperties": false,
   "properties": {
     "version": { "type": "number", "const": 1.2 },
@@ -23,7 +23,6 @@
     "cut_order": {
       "type": "array",
       "minItems": 1,
-      "uniqueItems": true,
       "items": { "type": "string", "enum": ["A", "B", "C", "W"] }
     },
     "sets": {

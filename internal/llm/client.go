@@ -11,6 +11,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	yaml "gopkg.in/yaml.v3"
 )
 
 // AnalyzerInputs is the input payload for the Analyzer prompt/LLM.
@@ -107,11 +109,16 @@ type Client struct {
 	p Provider
 }
 
-func New() *Client                       { return &Client{} } // deprecated: prefer NewWithProvider or NewDefault
 func NewWithProvider(p Provider) *Client { return &Client{p: p} }
 func NewDefault() (*Client, error) {
-	p, err := NewOpenAIProviderFromEnv()
+	p, err := NewOpenAIProvider(
+		WithAPIKey(os.Getenv("OPENAI_API_KEY")),
+		WithModel(os.Getenv("LLM_MODEL_ANALYZER")),
+	)
 	if err != nil {
+		return nil, err
+	}
+	if err := p.Validate(); err != nil {
 		return nil, err
 	}
 	return &Client{p: p}, nil
@@ -169,7 +176,13 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 	}
 
 	// initial completion
-	out, err := c.p.Complete(ctx, AnalyzerSystem, string(userJSON))
+	out, err := c.p.Complete(ctx, ProviderResponseFormat{
+		Name:         ResponseFormatAnalyzerPlan,
+		Description:  ResponseFormatAnalyzerPlanDescription,
+		Schema:       AnalyzerSchema,
+		SystemPrompt: AnalyzerSystem,
+		UserPrompt:   string(userJSON),
+	})
 	if err != nil {
 		return AnalyzerPlan{}, err
 	}
@@ -188,7 +201,13 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 	lastErr := fmt.Errorf("failed to parse analyzer plan: %w", err)
 	for i := 0; i < retries; i++ {
 		repairUser := fmt.Sprintf(RepairAnalyzer, lastErr.Error(), AnalyzerSchema)
-		out2, err2 := c.p.Complete(ctx, AnalyzerSystem, repairUser)
+		out2, err2 := c.p.Complete(ctx, ProviderResponseFormat{
+			Name:         ResponseFormatAnalyzerPlan,
+			Description:  ResponseFormatAnalyzerPlanDescription,
+			Schema:       AnalyzerSchema,
+			SystemPrompt: AnalyzerSystem,
+			UserPrompt:   repairUser,
+		})
 		if err2 != nil {
 			lastErr = err2
 			continue
@@ -216,9 +235,9 @@ func fetchToTmp(ctx context.Context, url, prefix string) (string, string, error)
 		return "", content, err
 	}
 	defer func() {
-		closeQuiet(f)
+		f.Close() //nolint:errcheck
 		if os.Getenv("LLM_DEBUG") == "" {
-			removeQuiet(f.Name())
+			os.Remove(f.Name()) //nolint:errcheck
 		}
 	}()
 	if _, err := f.WriteString(content); err != nil {
@@ -245,7 +264,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		defer closeQuiet(f)
+		defer f.Close() //nolint:errcheck
 		lr := &io.LimitedReader{R: f, N: int64(capBytes)}
 		b, err := io.ReadAll(lr)
 		if err != nil {
@@ -259,7 +278,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		defer closeQuiet(f)
+		defer f.Close() //nolint:errcheck
 		lr := &io.LimitedReader{R: f, N: int64(capBytes)}
 		b, err := io.ReadAll(lr)
 		if err != nil {
@@ -275,7 +294,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer closeQuiet(resp.Body)
+	defer resp.Body.Close() //nolint:errcheck
 	if resp.StatusCode >= 300 {
 		return "", fmt.Errorf("GET %s: %d", url, resp.StatusCode)
 	}
@@ -298,22 +317,6 @@ func maxFetchBytes() int {
 	return def
 }
 
-// closeQuiet closes a Closer and swallows any error (for best-effort cleanup in defers).
-func closeQuiet(c io.Closer) {
-	if c == nil {
-		return
-	}
-	c.Close() //nolint:errcheck
-}
-
-// removeQuiet removes a file path and swallows any error (for best-effort cleanup in defers).
-func removeQuiet(name string) {
-	if name == "" {
-		return
-	}
-	os.Remove(name) //nolint:errcheck
-}
-
 // indentForBlock indents each line by two spaces for YAML literal blocks.
 func indentForBlock(s string) string {
 	if s == "" {
@@ -323,9 +326,78 @@ func indentForBlock(s string) string {
 	for i := range lines {
 		lines[i] = "  " + lines[i]
 	}
+
 	return strings.Join(lines, "\n")
 }
 
+// jsonToYAML converts a JSON string to YAML bytes for display/validation.
+func jsonToYAML(b []byte) ([]byte, error) {
+	var v any
+	if err := json.Unmarshal(b, &v); err != nil {
+		return nil, err
+	}
+	return yaml.Marshal(v)
+}
+
 func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error) {
-	return nil, errors.New("not implemented")
+	if c.p == nil {
+		return nil, errors.New("llm provider not configured")
+	}
+
+	// Convert plan to JSON for the prompt
+	planJSON, err := plan.ToJSON()
+	if err != nil {
+		return nil, fmt.Errorf("marshal analyzer plan: %w", err)
+	}
+
+	// Build user prompt with the plan
+	user := fmt.Sprintf(GeneratorUser, string(planJSON))
+
+	// Initial completion (expects YAML output)
+	out, err := c.p.Complete(ctx, ProviderResponseFormat{
+		Name:         ResponseFormatGeneratorOutput,
+		Description:  ResponseFormatGeneratorOutputDescription,
+		Schema:       WorkoutSchema,
+		SystemPrompt: GeneratorSystem,
+		UserPrompt:   user,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	// Validate against workout schema
+	outBytes := []byte(out)
+	if err := ValidateWorkoutYAML(outBytes); err != nil {
+		return outBytes, err
+	}
+
+	// Retry loop using repair prompt if validation fails
+	retries := 0
+	if v := os.Getenv("LLM_RETRIES"); v != "" {
+		if n, convErr := strconv.Atoi(v); convErr == nil && n >= 0 {
+			retries = n
+		}
+	}
+	lastErr := fmt.Errorf("failed to validate workout yaml: %w", err)
+	for i := 0; i < retries; i++ {
+		repairUser := fmt.Sprintf(RepairGenerator, lastErr.Error())
+		planOutput, err2 := c.p.Complete(ctx, ProviderResponseFormat{
+			Name:         ResponseFormatGeneratorOutput,
+			Description:  ResponseFormatGeneratorOutputDescription,
+			Schema:       WorkoutSchema,
+			SystemPrompt: GeneratorSystem,
+			UserPrompt:   repairUser,
+		})
+
+		if err2 != nil {
+			lastErr = err2
+			continue
+		}
+		planOutputBytes := []byte(planOutput)
+		if err3 := ValidateWorkoutYAML(planOutputBytes); err3 != nil {
+			return nil, fmt.Errorf("failed to validate workout yaml: %w", err3)
+		}
+		return planOutputBytes, nil
+	}
+	return nil, lastErr
 }

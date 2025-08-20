@@ -32,7 +32,7 @@ func ValidateWorkoutYAML(b []byte) error {
 		return err
 	}
 	loader := gojsonschema.NewBytesLoader(jb)
-	schemaLoader := gojsonschema.NewReferenceLoader(WorkoutSchema)
+	schemaLoader := gojsonschema.NewStringLoader(WorkoutSchema)
 	result, err := gojsonschema.Validate(schemaLoader, loader)
 	if err != nil {
 		return err

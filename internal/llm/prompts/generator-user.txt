@@ -1,7 +1,6 @@
-Analyzer JSON:
-<<paste the analyzer JSON output here (validated)>>
-
-Workout Schema (for validation):
-<<embed the Workout v1.2 JSON Schema here>>
+Analyzer JSON:: |
+    ---BEGIN_ANALYZER_JSON---
+    %s
+    ---END_ANALYZER_JSON---
 
 Now output ONLY the YAML document for this session, conforming to the schema.

@@ -2,10 +2,13 @@
   const btnOAuth = document.getElementById('btn-oauth');
   const btnRecent = document.getElementById('btn-recent');
   const btnAnalyze = document.getElementById('btn-analyze');
+  const btnGenerate = document.getElementById('btn-generate');
   const accessTokenEl = document.getElementById('accessToken');
   const daysEl = document.getElementById('days');
   const stravaRecentEl = document.getElementById('stravaRecent');
   const outEl = document.getElementById('out');
+  const yamlOutEl = document.getElementById('yamlOut');
+  const btnCopyYaml = document.getElementById('btn-copy-yaml');
 
   const instructionsUrlEl = document.getElementById('instructionsUrl');
   const historyUrlEl = document.getElementById('historyUrl');
@@ -21,6 +24,7 @@
 
   // Cache latest Strava recent response for Analyzer
   let lastStravaRecent = null;
+  let lastAnalyze = null; // cache the AnalyzerPlan for Generate
 
   // Load token from localStorage if present
   const straveToken = localStorage.getItem('strava_token');
@@ -204,9 +208,43 @@
         body: JSON.stringify(body)
       });
       const data = await resp.json();
+      lastAnalyze = (resp.status === 200) ? data : null;
       setOutput({ status: resp.status, data });
     } catch (err) {
       setOutput({ error: String(err) });
+    }
+  });
+
+  btnGenerate.addEventListener('click', async () => {
+    if (!lastAnalyze) {
+      setOutput({ error: 'Run Analyze first; no plan cached.' });
+      return;
+    }
+    setOutput({status: 'loading /llm/generate...'});
+    yamlOutEl.value = '';
+    try {
+      const resp = await fetch('/llm/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lastAnalyze)
+      });
+      const data = await resp.json();
+      setOutput({ status: resp.status, data });
+      if (resp.status === 200 && typeof data === 'string') {
+        yamlOutEl.value = atob(data);
+      }
+    } catch (err) {
+      setOutput({ error: String(err) });
+    }
+  });
+
+  btnCopyYaml.addEventListener('click', async () => {
+    if (!yamlOutEl.value) return;
+    try {
+      await navigator.clipboard.writeText(yamlOutEl.value);
+      // optional: show quick copied feedback
+    } catch (e) {
+      console.warn('Clipboard copy failed:', e);
     }
   });
 })();

@@ -15,7 +15,7 @@ type fakeProvider struct {
 	err   error
 }
 
-func (f fakeProvider) Complete(ctx context.Context, systemPrompt, userPrompt string) (string, error) {
+func (f fakeProvider) Complete(ctx context.Context, prf ProviderResponseFormat) (string, error) {
 	return f.reply, f.err
 }
 
@@ -75,7 +75,7 @@ type sequenceProvider struct {
 	i       int
 }
 
-func (s *sequenceProvider) Complete(ctx context.Context, systemPrompt, userPrompt string) (string, error) {
+func (s *sequenceProvider) Complete(ctx context.Context, prf ProviderResponseFormat) (string, error) {
 	if s.i >= len(s.replies) {
 		return "", errors.New("no more replies")
 	}

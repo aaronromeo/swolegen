@@ -25,6 +25,26 @@ func registerLLM(app *fiber.App) {
 		if err != nil {
 			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
 		}
+
+		return c.JSON(plan)
+	})
+
+	app.Post("/llm/generate", func(c *fiber.Ctx) error {
+		var in llm.AnalyzerPlan
+		if err := json.Unmarshal(c.Body(), &in); err != nil {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "invalid json: " + err.Error()})
+		}
+
+		cli, err := llm.NewDefault()
+		if err != nil {
+			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+		}
+
+		plan, err := cli.Generate(context.Background(), in)
+		if err != nil {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
+		}
+
 		return c.JSON(plan)
 	})
 }
