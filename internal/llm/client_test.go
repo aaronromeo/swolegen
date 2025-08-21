@@ -58,19 +58,14 @@ func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 		t.Fatalf("ToJSON: %v", err)
 	}
 	p := &sequenceProvider{replies: []string{bad, string(okJSON)}}
-	cli, err := New(WithProvider(p))
+	cli, err := New(
+		WithProvider(p),
+		WithRetries(2),
+	)
 	if err != nil {
 		t.Fatalf("New Provider Error: %v", err)
 	}
 
-	if err := os.Setenv("LLM_RETRIES", "2"); err != nil {
-		t.Fatalf("Setenv: %v", err)
-	}
-	t.Cleanup(func() {
-		if err := os.Unsetenv("LLM_RETRIES"); err != nil {
-			t.Fatalf("Unsetenv: %v", err)
-		}
-	})
 	in := AnalyzerInputs{Location: "gym", EquipmentInventory: []string{"barbell"}, DurationMinutes: 45, Units: "lbs"}
 	got, err := cli.Analyze(context.Background(), in)
 	if err != nil {
@@ -106,15 +101,7 @@ func TestFetchText_CapsSize(t *testing.T) {
 		}
 	}))
 	defer ts.Close()
-	if err := os.Setenv("LLM_MAX_FETCH_BYTES", "1024"); err != nil {
-		t.Fatalf("Setenv: %v", err)
-	}
-	defer func() {
-		if err := os.Unsetenv("LLM_MAX_FETCH_BYTES"); err != nil {
-			t.Fatalf("Unsetenv: %v", err)
-		}
-	}()
-	got, err := fetchText(context.Background(), ts.URL)
+	got, err := fetchText(context.Background(), ts.URL, 1024)
 	if err != nil {
 		t.Fatalf("fetchText: %v", err)
 	}
@@ -140,7 +127,7 @@ func TestFetchToTmp_CreatesAndOptionallyRemoves(t *testing.T) {
 	if err := f.Close(); err != nil {
 		t.Fatalf("close: %v", err)
 	}
-	p, content, err := fetchToTmp(context.Background(), "file://"+f.Name(), "instructions")
+	p, content, err := fetchToTmp(context.Background(), "file://"+f.Name(), "instructions", 65536)
 	if err != nil {
 		t.Fatalf("fetchToTmp: %v", err)
 	}
@@ -148,11 +135,8 @@ func TestFetchToTmp_CreatesAndOptionallyRemoves(t *testing.T) {
 		t.Fatalf("content mismatch: %q", content)
 	}
 	if _, statErr := os.Stat(p); statErr == nil {
-		// should be removed unless LLM_DEBUG set
-		if os.Getenv("LLM_DEBUG") == "" {
-			if _, err2 := os.Stat(p); err2 == nil {
-				t.Fatalf("expected tmp file to be removed: %s", p)
-			}
+		if _, err2 := os.Stat(p); err2 == nil {
+			t.Fatalf("expected tmp file to be removed: %s", p)
 		}
 	}
 }

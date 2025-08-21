@@ -6,14 +6,18 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
-	yaml "gopkg.in/yaml.v3"
+)
+
+const (
+	defaultRetries       = 3
+	defaultMaxFetchBytes = 65536
 )
 
 // AnalyzerInputs is the input payload for the Analyzer prompt/LLM.
@@ -107,9 +111,10 @@ func AnalyzerPlanFromJSON(b []byte) (AnalyzerPlan, error) {
 }
 
 type Client struct {
-	provider provider.Provider
-	retries  int
-	debug    bool
+	provider      provider.Provider
+	retries       int
+	maxFetchBytes int
+	logger        *slog.Logger
 }
 
 type LLMClientOption func(*Client)
@@ -120,20 +125,29 @@ func WithProvider(p provider.Provider) LLMClientOption {
 	}
 }
 
+func WithLogger(logger *slog.Logger) LLMClientOption {
+	return func(c *Client) {
+		c.logger = logger
+	}
+}
+
 func WithRetries(n int) LLMClientOption {
 	return func(c *Client) {
 		c.retries = n
 	}
 }
 
-func WithDebug() LLMClientOption {
+func WithMaxFetchBytes(n int) LLMClientOption {
 	return func(c *Client) {
-		c.debug = true
+		c.maxFetchBytes = n
 	}
 }
 
 func New(opts ...LLMClientOption) (*Client, error) {
-	c := &Client{}
+	c := &Client{
+		retries:       defaultRetries,
+		maxFetchBytes: defaultMaxFetchBytes,
+	}
 	for _, opt := range opts {
 		opt(c)
 	}
@@ -177,14 +191,18 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 		return AnalyzerPlan{}, fmt.Errorf("marshal equipment_inventory: %w", err)
 	}
 
-	instructionsText, err := fetchText(ctx, in.InstructionsURL)
+	instructionsText, err := fetchText(ctx, in.InstructionsURL, c.maxFetchBytes)
 	if err != nil {
 		return AnalyzerPlan{}, fmt.Errorf("fetch instructions: %w", err)
 	}
-	historyText, err := fetchText(ctx, in.HistoryURL)
+	c.logger.Debug("analyzer plan", "instructions", instructionsText)
+
+	historyText, err := fetchText(ctx, in.HistoryURL, c.maxFetchBytes)
 	if err != nil {
 		return AnalyzerPlan{}, fmt.Errorf("fetch history: %w", err)
 	}
+	c.logger.Debug("analyzer plan", "history", historyText)
+
 	// indent multi-line blocks for YAML literal style
 	instructionsBlock := indentForBlock(instructionsText)
 	historyBlock := indentForBlock(historyText)
@@ -212,18 +230,13 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 	}
 	plan, err := AnalyzerPlanFromJSON([]byte(out))
 	if err == nil {
+		c.logger.Debug("analyzer plan", "plan", plan)
 		return plan, nil
 	}
 
 	// Retry loop using repair prompt if validation/parsing fails
-	retries := 0
-	if v := os.Getenv("LLM_RETRIES"); v != "" {
-		if n, convErr := strconv.Atoi(v); convErr == nil && n >= 0 {
-			retries = n
-		}
-	}
 	lastErr := fmt.Errorf("failed to parse analyzer plan: %w", err)
-	for i := 0; i < retries; i++ {
+	for i := 0; i < c.retries; i++ {
 		repairUser := fmt.Sprintf(RepairAnalyzer, lastErr.Error(), AnalyzerSchema)
 		out2, err2 := c.provider.Complete(ctx, provider.ProviderResponseFormat{
 			Name:         provider.ResponseFormatAnalyzerPlan,
@@ -238,6 +251,7 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 		}
 
 		if plan2, errParse := AnalyzerPlanFromJSON([]byte(out2)); errParse == nil {
+			c.logger.Debug("analyzer plan", "plan", plan2)
 			return plan2, nil
 		}
 		lastErr = fmt.Errorf("failed to parse analyzer plan: %w", err)
@@ -249,8 +263,8 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 // It supports http(s) and file URLs; for empty or invalid URLs, returns empty string.
 
 // fetchToTmp downloads text and writes it to a temp file. Returns path and content.
-func fetchToTmp(ctx context.Context, url, prefix string) (string, string, error) {
-	content, err := fetchText(ctx, url)
+func fetchToTmp(ctx context.Context, url, prefix string, maxFetchBytes int) (string, string, error) {
+	content, err := fetchText(ctx, url, maxFetchBytes)
 	if err != nil {
 		return "", "", err
 	}
@@ -259,10 +273,8 @@ func fetchToTmp(ctx context.Context, url, prefix string) (string, string, error)
 		return "", content, err
 	}
 	defer func() {
-		f.Close() //nolint:errcheck
-		if os.Getenv("LLM_DEBUG") == "" {
-			os.Remove(f.Name()) //nolint:errcheck
-		}
+		f.Close()           //nolint:errcheck
+		os.Remove(f.Name()) //nolint:errcheck
 	}()
 	if _, err := f.WriteString(content); err != nil {
 		return f.Name(), content, err
@@ -270,12 +282,11 @@ func fetchToTmp(ctx context.Context, url, prefix string) (string, string, error)
 	return f.Name(), content, nil
 }
 
-func fetchText(ctx context.Context, url string) (string, error) {
+func fetchText(ctx context.Context, url string, maxFetchBytes int) (string, error) {
 	url = strings.TrimSpace(url)
 	if url == "" {
 		return "", nil
 	}
-	capBytes := maxFetchBytes()
 	// Local files support (file:// or relative path)
 	if strings.HasPrefix(url, "file://") {
 		p := strings.TrimPrefix(url, "file://")
@@ -289,7 +300,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 			return "", err
 		}
 		defer f.Close() //nolint:errcheck
-		lr := &io.LimitedReader{R: f, N: int64(capBytes)}
+		lr := &io.LimitedReader{R: f, N: int64(maxFetchBytes)}
 		b, err := io.ReadAll(lr)
 		if err != nil {
 			return "", err
@@ -303,7 +314,7 @@ func fetchText(ctx context.Context, url string) (string, error) {
 			return "", err
 		}
 		defer f.Close() //nolint:errcheck
-		lr := &io.LimitedReader{R: f, N: int64(capBytes)}
+		lr := &io.LimitedReader{R: f, N: int64(maxFetchBytes)}
 		b, err := io.ReadAll(lr)
 		if err != nil {
 			return "", err
@@ -322,23 +333,12 @@ func fetchText(ctx context.Context, url string) (string, error) {
 	if resp.StatusCode >= 300 {
 		return "", fmt.Errorf("GET %s: %d", url, resp.StatusCode)
 	}
-	lr := &io.LimitedReader{R: resp.Body, N: int64(capBytes)}
+	lr := &io.LimitedReader{R: resp.Body, N: int64(maxFetchBytes)}
 	b, err := io.ReadAll(lr)
 	if err != nil {
 		return "", err
 	}
 	return string(b), nil
-}
-
-func maxFetchBytes() int {
-	// Default to 64KB; configurable via LLM_MAX_FETCH_BYTES
-	const def = 64 * 1024
-	if v := os.Getenv("LLM_MAX_FETCH_BYTES"); v != "" {
-		if n, err := strconv.Atoi(v); err == nil && n > 0 {
-			return n
-		}
-	}
-	return def
 }
 
 // indentForBlock indents each line by two spaces for YAML literal blocks.
@@ -352,15 +352,6 @@ func indentForBlock(s string) string {
 	}
 
 	return strings.Join(lines, "\n")
-}
-
-// jsonToYAML converts a JSON string to YAML bytes for display/validation.
-func jsonToYAML(b []byte) ([]byte, error) {
-	var v any
-	if err := json.Unmarshal(b, &v); err != nil {
-		return nil, err
-	}
-	return yaml.Marshal(v)
 }
 
 func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error) {
@@ -395,18 +386,13 @@ func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error
 	// Validate against workout schema
 	outBytes := []byte(out)
 	if err := ValidateWorkoutYAML(outBytes); err != nil {
+		c.logger.Debug("workout yaml", "yaml", outBytes)
 		return outBytes, err
 	}
 
 	// Retry loop using repair prompt if validation fails
-	retries := 0
-	if v := os.Getenv("LLM_RETRIES"); v != "" {
-		if n, convErr := strconv.Atoi(v); convErr == nil && n >= 0 {
-			retries = n
-		}
-	}
 	lastErr := fmt.Errorf("failed to validate workout yaml: %w", err)
-	for i := 0; i < retries; i++ {
+	for i := 0; i < c.retries; i++ {
 		repairUser := fmt.Sprintf(RepairGenerator, lastErr.Error())
 		planOutput, err2 := c.provider.Complete(ctx, provider.ProviderResponseFormat{
 			Name:         provider.ResponseFormatGeneratorOutput,
@@ -424,6 +410,7 @@ func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error
 		if err3 := ValidateWorkoutYAML(planOutputBytes); err3 != nil {
 			return nil, fmt.Errorf("failed to validate workout yaml: %w", err3)
 		}
+		c.logger.Debug("workout yaml", "yaml", planOutputBytes)
 		return planOutputBytes, nil
 	}
 	return nil, lastErr

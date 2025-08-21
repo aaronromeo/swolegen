@@ -8,8 +8,4 @@ Constraints:
 - Do not introduce new keys.
 - Output YAML ONLY, fully replacing the previous document, and conforming to the schema.
 
-Schema for validation:
-%s
-
 Re-emit the corrected YAML now.
-

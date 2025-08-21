@@ -2,6 +2,7 @@ package provider
 
 import (
 	"context"
+	"log/slog"
 
 	"github.com/openai/openai-go/v2"
 )
@@ -26,6 +27,7 @@ type OpenAIProvider struct {
 	model  string
 
 	Client openai.Client
+	logger *slog.Logger
 }
 
 type OpenAIProviderOption func(*OpenAIProvider)
@@ -39,6 +41,12 @@ func WithAPIKey(apiKey string) OpenAIProviderOption {
 func WithModel(model string) OpenAIProviderOption {
 	return func(p *OpenAIProvider) {
 		p.model = model
+	}
+}
+
+func WithLogger(logger *slog.Logger) OpenAIProviderOption {
+	return func(p *OpenAIProvider) {
+		p.logger = logger
 	}
 }
 
