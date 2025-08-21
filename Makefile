@@ -42,7 +42,7 @@ install-go-jsonschema:
 	else \
 		echo "Installing go-jsonschema $(GOJSONSCHEMA_VERSION) ..."; \
 		go install github.com/atombender/go-jsonschema@$(GOJSONSCHEMA_VERSION); \
-		"$(GOJSONSCHEMA)" version; \
+		[ -x "$(GOJSONSCHEMA)" ] && echo "Installed go-jsonschema at $(GOJSONSCHEMA)" || (echo "Install failed"; exit 1); \
 	fi
 
 # Check formatting without modifying files; fails if any files need formatting

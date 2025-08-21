@@ -9,7 +9,6 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.0
 	github.com/hashicorp/go-retryablehttp v0.7.7
 	github.com/openai/openai-go/v2 v2.0.2
-	github.com/xeipuuv/gojsonschema v1.2.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -29,7 +28,5 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
-	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 )
