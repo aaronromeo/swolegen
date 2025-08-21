@@ -73,6 +73,10 @@ generate: install-go-jsonschema
 	--schema-output=https://swolegen.app/schemas/analyzer-v1.json=internal/llm/schemas/analyzer.go \
 	internal/llm/schemas/analyzer-v1.json
 
+	$(GOJSONSCHEMA) --schema-package=https://swolegen.app/schemas/workout-v1.2.json=github.com/aaronromeo/swolegen/internal/llm/schemas \
+	--schema-output=https://swolegen.app/schemas/workout-v1.2.json=internal/llm/schemas/workout.go \
+	internal/llm/schemas/workout-v1.2.json
+
 .PHONY: build
 build:
 	$(GOBUILD) -o $(BUILT_BINARY) -v ./cmd/swolegen-api

@@ -37,6 +37,8 @@ func (p *OpenAIProvider) Complete(ctx context.Context, prf ProviderResponseForma
 		Model: openai.ChatModel(p.model),
 	}
 
+	p.logger.Debug("llm request", "params", params)
+
 	var schemaObj map[string]any
 	if err := json.Unmarshal([]byte(prf.Schema), &schemaObj); err == nil {
 		params.ResponseFormat = openai.ChatCompletionNewParamsResponseFormatUnion{

@@ -14,6 +14,7 @@ import (
 
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
 	"github.com/aaronromeo/swolegen/internal/llm/schemas"
+	"gopkg.in/yaml.v3"
 )
 
 const (
@@ -345,7 +346,7 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 	user := fmt.Sprintf(GeneratorUser, string(planJSON))
 
 	// Initial completion (expects YAML output)
-	out, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+	workoutOutput, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
 		Name:         provider.ResponseFormatGeneratorOutput,
 		Description:  provider.ResponseFormatGeneratorOutputDescription,
 		Schema:       WorkoutSchema,
@@ -357,17 +358,17 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 	}
 
 	// Validate against workout schema
-	outBytes := []byte(out)
-	if err := ValidateWorkoutYAML(outBytes); err != nil {
-		c.logger.Debug("workout yaml", "yaml", outBytes)
-		return outBytes, err
+	wv := &schemas.WorkoutV12Json{}
+	c.logger.Debug("workout json", "json", workoutOutput)
+	if wv, err = ValidateWorkoutJSON([]byte(workoutOutput)); err == nil {
+		return yaml.Marshal(wv)
 	}
 
 	// Retry loop using repair prompt if validation fails
 	lastErr := fmt.Errorf("failed to validate workout yaml: %w", err)
 	for i := 0; i < c.retries; i++ {
 		repairUser := fmt.Sprintf(RepairGenerator, lastErr.Error())
-		planOutput, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+		workoutOutput, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
 			Name:         provider.ResponseFormatGeneratorOutput,
 			Description:  provider.ResponseFormatGeneratorOutputDescription,
 			Schema:       WorkoutSchema,
@@ -379,12 +380,12 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 			lastErr = err
 			continue
 		}
-		planOutputBytes := []byte(planOutput)
-		if err3 := ValidateWorkoutYAML(planOutputBytes); err3 != nil {
-			return nil, fmt.Errorf("failed to validate workout yaml: %w", err3)
+		wv := &schemas.WorkoutV12Json{}
+		c.logger.Debug("workout json", "json", workoutOutput)
+		if wv, err = ValidateWorkoutJSON([]byte(workoutOutput)); err != nil {
+			return nil, fmt.Errorf("failed to validate workout yaml: %w", err)
 		}
-		c.logger.Debug("workout yaml", "yaml", planOutputBytes)
-		return planOutputBytes, nil
+		return yaml.Marshal(wv)
 	}
 	return nil, lastErr
 }

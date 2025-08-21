@@ -3,4 +3,4 @@ Analyzer JSON:: |
     %s
     ---END_ANALYZER_JSON---
 
-Now output ONLY the YAML document for this session, conforming to the schema.
+Now output ONLY the JSON document for this session, conforming to the schema.

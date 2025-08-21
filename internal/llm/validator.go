@@ -1,53 +1,24 @@
 package llm
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 
-	"github.com/xeipuuv/gojsonschema"
-	"gopkg.in/yaml.v3"
+	"github.com/aaronromeo/swolegen/internal/llm/schemas"
 )
 
-func ValidateAnalyzerJSON(b []byte) error {
-	loader := gojsonschema.NewBytesLoader(b)
-	schemaLoader := gojsonschema.NewStringLoader(AnalyzerSchema)
-	result, err := gojsonschema.Validate(schemaLoader, loader)
-	if err != nil {
-		return err
+func ValidateAnalyzerJSON(b []byte) (*schemas.AnalyzerV1Json, error) {
+	avj := schemas.AnalyzerV1Json{}
+	if err := json.Unmarshal(b, &avj); err != nil {
+		return nil, fmt.Errorf("json parse: %w", err)
 	}
-	if !result.Valid() {
-		return fmt.Errorf("analyzer json invalid: %s", collect(result.Errors()))
-	}
-	return nil
+	return &avj, nil
 }
 
-func ValidateWorkoutYAML(b []byte) error {
-	var v any
-	if err := yaml.Unmarshal(b, &v); err != nil {
-		return fmt.Errorf("yaml parse: %w", err)
+func ValidateWorkoutJSON(b []byte) (*schemas.WorkoutV12Json, error) {
+	wv := schemas.WorkoutV12Json{}
+	if err := json.Unmarshal(b, &wv); err != nil {
+		return nil, fmt.Errorf("json parse: %w", err)
 	}
-	jb, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-	loader := gojsonschema.NewBytesLoader(jb)
-	schemaLoader := gojsonschema.NewStringLoader(WorkoutSchema)
-	result, err := gojsonschema.Validate(schemaLoader, loader)
-	if err != nil {
-		return err
-	}
-	if !result.Valid() {
-		return fmt.Errorf("workout yaml invalid: %s", collect(result.Errors()))
-	}
-	return nil
-}
-
-func collect(errs []gojsonschema.ResultError) string {
-	var buf bytes.Buffer
-	for _, e := range errs {
-		buf.WriteString(e.String())
-		buf.WriteByte(';')
-	}
-	return buf.String()
+	return &wv, nil
 }
