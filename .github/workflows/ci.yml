@@ -29,7 +29,16 @@ jobs:
         skip-cache: true
         only-new-issues: false
         args: --out-format=colored-line-number --timeout=5m --config=.golangci.yml
-  
+    
+    - name: Generate porcelain check
+      run: |
+        make generate
+        FILES_MODIFIED="$(git status --porcelain)"
+        if [[ -n "$FILES_MODIFIED" ]]; then
+            echo "The following files were modified or added during the generate process:"
+            echo "$FILES_MODIFIED"
+            exit 1
+        fi    
   test:
     name: Run Tests
     runs-on: ubuntu-latest

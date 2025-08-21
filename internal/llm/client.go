@@ -358,9 +358,8 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 	}
 
 	// Validate against workout schema
-	wv := &schemas.WorkoutV12Json{}
 	c.logger.Debug("workout json", "json", workoutOutput)
-	if wv, err = ValidateWorkoutJSON([]byte(workoutOutput)); err == nil {
+	if wv, err := ValidateWorkoutJSON([]byte(workoutOutput)); err == nil {
 		return yaml.Marshal(wv)
 	}
 
@@ -380,7 +379,7 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 			lastErr = err
 			continue
 		}
-		wv := &schemas.WorkoutV12Json{}
+		var wv *schemas.WorkoutV12Json
 		c.logger.Debug("workout json", "json", workoutOutput)
 		if wv, err = ValidateWorkoutJSON([]byte(workoutOutput)); err != nil {
 			return nil, fmt.Errorf("failed to validate workout yaml: %w", err)
