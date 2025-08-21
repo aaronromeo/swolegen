@@ -3,6 +3,7 @@ module github.com/aaronromeo/swolegen
 go 1.23.0
 
 require (
+	github.com/atombender/go-jsonschema v0.20.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/cespare/xxhash/v2 v2.2.0
 	github.com/gofiber/fiber/v2 v2.52.0

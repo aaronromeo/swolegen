@@ -2,14 +2,19 @@ package llm
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
+	"log/slog"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
+	"github.com/aaronromeo/swolegen/internal/llm/schemas"
+	"github.com/atombender/go-jsonschema/pkg/types"
 )
 
 type fakeProvider struct {
@@ -24,18 +29,52 @@ func (f fakeProvider) Complete(ctx context.Context, prf provider.ProviderRespons
 func (f fakeProvider) Validate() error { return nil }
 
 func TestAnalyze_Success(t *testing.T) {
-	plan := AnalyzerPlan{
-		Meta:          AnalyzerMeta{Date: "2023-10-01", Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy"},
-		Session:       AnalyzerSession{Type: "strength", Tiers: []string{"A"}, CutOrder: []string{"A"}},
-		FatiguePolicy: AnalyzerFatiguePolicy{RIRShift: 1, LoadCapPct: 0.95, Reason: "ok"},
-		TimeBudget:    AnalyzerTimeBudget{SetSecondsEstimate: 120, TargetSetCount: 20},
-		ExercisePlan:  []ExercisePlanItem{{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 2, WorkingSets: 4, Targets: ExerciseTargets{RepRange: "6-8", RIR: 2}}},
+	plan := schemas.AnalyzerV1Json{
+		Meta: schemas.AnalyzerV1JsonMeta{
+			Date: types.SerializableDate{Time: time.Date(2023, 10, 01, 0, 0, 0, 0, time.UTC)}, Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy",
+		},
+		Session: schemas.AnalyzerV1JsonSession{
+			Type: "strength", Tiers: []schemas.AnalyzerV1JsonSessionTiersElem{"A"}, CutOrder: []schemas.AnalyzerV1JsonSessionCutOrderElem{"A"},
+		},
+		FatiguePolicy: schemas.AnalyzerV1JsonFatiguePolicy{RirShift: 1, LoadCapPct: 0.9, Reason: ""},
+		InstructionsContext: schemas.AnalyzerV1JsonInstructionsContext{
+			PrimaryGoals:        []string{"hypertrophy"},
+			ExecutionPrinciples: []string{"controlled_tempo"},
+			ConstructionRules: schemas.AnalyzerV1JsonInstructionsContextConstructionRules{
+				Format:                  "supersets",
+				PriorityOrder:           []schemas.AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem{"big_compound"},
+				RestBetweenSupersetsSec: nil,
+			},
+			Constraints: schemas.AnalyzerV1JsonInstructionsContextConstraints{
+				Avoid:               []string{},
+				Encourage:           []string{},
+				PreferSingleStation: nil,
+			},
+		},
+		TimeBudget: schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		ExercisePlan: []schemas.AnalyzerV1JsonExercisePlanElem{
+			{
+				Tier:        "A",
+				Exercise:    "Bench Press",
+				Equipment:   "barbell",
+				Superset:    nil,
+				Warmups:     1,
+				WorkingSets: 3,
+				Targets: func() schemas.AnalyzerV1JsonExercisePlanElemTargets {
+					r := 2
+					return schemas.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &r, TargetLoad: nil, LoadCap: nil}
+				}(),
+			},
+		},
 	}
-	okJSON, err := plan.ToJSON()
+	okJSON, err := json.Marshal(&plan)
 	if err != nil {
 		t.Fatalf("ToJSON: %v", err)
 	}
-	cli, err := New(WithProvider(fakeProvider{reply: string(okJSON)}))
+	cli, err := New(
+		WithProvider(fakeProvider{reply: string(okJSON)}),
+		WithLogger(slog.Default()),
+	)
 	if err != nil {
 		t.Fatalf("New Provider Error: %v", err)
 	}
@@ -52,8 +91,37 @@ func TestAnalyze_Success(t *testing.T) {
 
 func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 	bad := `{"not_valid": true}`
-	plan := AnalyzerPlan{Meta: AnalyzerMeta{Date: "2023-10-01", Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy"}, Session: AnalyzerSession{Type: "strength", Tiers: []string{"A"}, CutOrder: []string{"A"}}, FatiguePolicy: AnalyzerFatiguePolicy{RIRShift: 1, LoadCapPct: 0.9, Reason: ""}, TimeBudget: AnalyzerTimeBudget{SetSecondsEstimate: 100, TargetSetCount: 12}, ExercisePlan: []ExercisePlanItem{{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 1, WorkingSets: 3, Targets: ExerciseTargets{RepRange: "6-8", RIR: 2}}}}
-	okJSON, err := plan.ToJSON()
+	bpRir := 2
+	plan := schemas.AnalyzerV1Json{
+		Meta: schemas.AnalyzerV1JsonMeta{
+			Date: types.SerializableDate{Time: time.Date(2023, 10, 01, 0, 0, 0, 0, time.UTC)}, Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy",
+		},
+		Session: schemas.AnalyzerV1JsonSession{
+			Type: "strength", Tiers: []schemas.AnalyzerV1JsonSessionTiersElem{"A"}, CutOrder: []schemas.AnalyzerV1JsonSessionCutOrderElem{"A"},
+		},
+		FatiguePolicy: schemas.AnalyzerV1JsonFatiguePolicy{
+			RirShift: 1, LoadCapPct: 0.9, Reason: "",
+		},
+		InstructionsContext: schemas.AnalyzerV1JsonInstructionsContext{
+			PrimaryGoals:        []string{"hypertrophy"},
+			ExecutionPrinciples: []string{"controlled_tempo"},
+			ConstructionRules: schemas.AnalyzerV1JsonInstructionsContextConstructionRules{
+				Format:                  "supersets",
+				PriorityOrder:           []schemas.AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem{"big_compound"},
+				RestBetweenSupersetsSec: nil,
+			},
+			Constraints: schemas.AnalyzerV1JsonInstructionsContextConstraints{
+				Avoid:               []string{},
+				Encourage:           []string{},
+				PreferSingleStation: nil,
+			},
+		},
+		TimeBudget: schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		ExercisePlan: []schemas.AnalyzerV1JsonExercisePlanElem{
+			{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 1, WorkingSets: 3, Targets: schemas.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &bpRir}},
+		},
+	}
+	okJSON, err := json.Marshal(&plan)
 	if err != nil {
 		t.Fatalf("ToJSON: %v", err)
 	}
@@ -61,6 +129,7 @@ func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 	cli, err := New(
 		WithProvider(p),
 		WithRetries(2),
+		WithLogger(slog.Default()),
 	)
 	if err != nil {
 		t.Fatalf("New Provider Error: %v", err)

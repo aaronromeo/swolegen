@@ -9,6 +9,7 @@ import (
 	"github.com/aaronromeo/swolegen/internal/config"
 	"github.com/aaronromeo/swolegen/internal/llm"
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
+	"github.com/aaronromeo/swolegen/internal/llm/schemas"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -33,7 +34,7 @@ func registerLLM(app *fiber.App, cfg *config.Config, logger *slog.Logger) {
 	})
 
 	app.Post("/llm/generate", func(c *fiber.Ctx) error {
-		var in llm.AnalyzerPlan
+		var in schemas.AnalyzerV1Json
 		if err := json.Unmarshal(c.Body(), &in); err != nil {
 			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "invalid json: " + err.Error()})
 		}

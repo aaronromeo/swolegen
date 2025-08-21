@@ -17,6 +17,9 @@ GOVET = $(GOCMD) vet
 GOLANGCI := $(BIN_DIR)/golangci-lint
 GOLANGCI_VERSION := v1.65.2
 
+GOJSONSCHEMA := $(BIN_DIR)/go-jsonschema
+GOJSONSCHEMA_VERSION := v0.20.0
+
 # Format all packages
 .PHONY: fmt
 fmt:
@@ -31,6 +34,17 @@ install-golangci:
 		curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(BIN_DIR) $(GOLANGCI_VERSION); \
 		"$(GOLANGCI)" version; \
 	fi
+
+.PHONY: install-go-jsonschema
+install-go-jsonschema:
+	@if [ -x "$(GOJSONSCHEMA)" ]; then \
+		echo "go-jsonschema found at $(GOJSONSCHEMA)"; \
+	else \
+		echo "Installing go-jsonschema $(GOJSONSCHEMA_VERSION) ..."; \
+		go install github.com/atombender/go-jsonschema@$(GOJSONSCHEMA_VERSION); \
+		"$(GOJSONSCHEMA)" version; \
+	fi
+
 # Check formatting without modifying files; fails if any files need formatting
 .PHONY: fmt-check
 fmt-check:
@@ -52,6 +66,12 @@ vet:
 .PHONY: lint
 lint: fmt-check vet install-golangci
 	$(GOLANGCI) run --config .golangci.yml
+
+.PHONY: generate
+generate: install-go-jsonschema
+	$(GOJSONSCHEMA) --schema-package=https://swolegen.app/schemas/analyzer-v1.json=github.com/aaronromeo/swolegen/internal/llm/schemas \
+	--schema-output=https://swolegen.app/schemas/analyzer-v1.json=internal/llm/schemas/analyzer.go \
+	internal/llm/schemas/analyzer-v1.json
 
 .PHONY: build
 build:

@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
+	"github.com/aaronromeo/swolegen/internal/llm/schemas"
 )
 
 const (
@@ -46,69 +47,18 @@ type AnalyzerInputs struct {
 	GarminBodyBattery *int `json:"garmin_body_battery,omitempty"`
 }
 
-// AnalyzerPlan mirrors schemas/analyzer-v1.json.
-type AnalyzerPlan struct {
-	Meta          AnalyzerMeta          `json:"meta"`
-	Session       AnalyzerSession       `json:"session"`
-	FatiguePolicy AnalyzerFatiguePolicy `json:"fatigue_policy"`
-	TimeBudget    AnalyzerTimeBudget    `json:"time_budget"`
-	ExercisePlan  []ExercisePlanItem    `json:"exercise_plan"`
-}
+// // ToJSON marshals the plan to JSON bytes.
+// func (p AnalyzerPlan) ToJSON() ([]byte, error) { return json.Marshal(p) }
 
-type AnalyzerMeta struct {
-	Date            string `json:"date"`
-	Location        string `json:"location"`
-	Units           string `json:"units"`
-	DurationMinutes int    `json:"duration_minutes"`
-	Goal            string `json:"goal"`
-}
-
-type AnalyzerSession struct {
-	Type     string   `json:"type"`
-	Tiers    []string `json:"tiers"`
-	CutOrder []string `json:"cut_order"`
-}
-
-type AnalyzerFatiguePolicy struct {
-	RIRShift   int     `json:"rir_shift"`
-	LoadCapPct float64 `json:"load_cap_pct"`
-	Reason     string  `json:"reason"`
-}
-
-type AnalyzerTimeBudget struct {
-	SetSecondsEstimate int `json:"set_seconds_estimate"`
-	TargetSetCount     int `json:"target_set_count"`
-}
-
-type ExerciseTargets struct {
-	RepRange   string   `json:"rep_range"`
-	RIR        int      `json:"rir"`
-	TargetLoad *float64 `json:"target_load"`
-	LoadCap    *float64 `json:"load_cap"`
-}
-
-type ExercisePlanItem struct {
-	Tier        string          `json:"tier"`
-	Exercise    string          `json:"exercise"`
-	Equipment   string          `json:"equipment"`
-	Superset    *string         `json:"superset"`
-	Warmups     int             `json:"warmups"`
-	WorkingSets int             `json:"working_sets"`
-	Targets     ExerciseTargets `json:"targets"`
-}
-
-// ToJSON marshals the plan to JSON bytes.
-func (p AnalyzerPlan) ToJSON() ([]byte, error) { return json.Marshal(p) }
-
-// AnalyzerPlanFromJSON unmarshals bytes into a plan instance and validates it
-// against the Analyzer v1 JSON Schema.
-func AnalyzerPlanFromJSON(b []byte) (AnalyzerPlan, error) {
-	if err := ValidateAnalyzerJSON(b); err != nil {
-		return AnalyzerPlan{}, err
-	}
-	var p AnalyzerPlan
-	return p, json.Unmarshal(b, &p)
-}
+// // AnalyzerPlanFromJSON unmarshals bytes into a plan instance and validates it
+// // against the Analyzer v1 JSON Schema.
+// func AnalyzerPlanFromJSON(b []byte) (AnalyzerPlan, error) {
+// 	if err := ValidateAnalyzerJSON(b); err != nil {
+// 		return AnalyzerPlan{}, err
+// 	}
+// 	var p AnalyzerPlan
+// 	return p, json.Unmarshal(b, &p)
+// }
 
 type Client struct {
 	provider      provider.Provider
@@ -158,13 +108,32 @@ func New(opts ...LLMClientOption) (*Client, error) {
 	return c, nil
 }
 
-// Analyze assembles prompts, calls the provider, and parses the plan.
-func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, error) {
+func (c *Client) Validate() error {
 	if c.provider == nil {
-		return AnalyzerPlan{}, errors.New("llm provider not configured")
+		return errors.New("llm provider not configured")
 	}
-	if c.provider.Validate() != nil {
-		return AnalyzerPlan{}, errors.New("llm provider invalid")
+	if err := c.provider.Validate(); err != nil {
+		return err
+	}
+	if c.retries < 0 {
+		return errors.New("llm retries must be non-negative")
+	}
+	if c.maxFetchBytes <= 0 {
+		return errors.New("llm max fetch bytes must be positive")
+	}
+	if c.logger == nil {
+		return errors.New("llm logger not configured")
+	}
+	return nil
+}
+
+// Analyze assembles prompts, calls the provider, and parses the plan.
+func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (schemas.AnalyzerV1Json, error) {
+	if c.provider == nil {
+		return schemas.AnalyzerV1Json{}, errors.New("llm provider not configured")
+	}
+	if err := c.Validate(); err != nil {
+		return schemas.AnalyzerV1Json{}, err
 	}
 
 	units := in.Units
@@ -188,18 +157,18 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 	}
 	invJSON, err := json.Marshal(in.EquipmentInventory)
 	if err != nil {
-		return AnalyzerPlan{}, fmt.Errorf("marshal equipment_inventory: %w", err)
+		return schemas.AnalyzerV1Json{}, fmt.Errorf("marshal equipment_inventory: %w", err)
 	}
 
 	instructionsText, err := fetchText(ctx, in.InstructionsURL, c.maxFetchBytes)
 	if err != nil {
-		return AnalyzerPlan{}, fmt.Errorf("fetch instructions: %w", err)
+		return schemas.AnalyzerV1Json{}, fmt.Errorf("fetch instructions: %w", err)
 	}
 	c.logger.Debug("analyzer plan", "instructions", instructionsText)
 
 	historyText, err := fetchText(ctx, in.HistoryURL, c.maxFetchBytes)
 	if err != nil {
-		return AnalyzerPlan{}, fmt.Errorf("fetch history: %w", err)
+		return schemas.AnalyzerV1Json{}, fmt.Errorf("fetch history: %w", err)
 	}
 	c.logger.Debug("analyzer plan", "history", historyText)
 
@@ -214,7 +183,7 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 
 	userJSON, err := json.Marshal(user)
 	if err != nil {
-		return AnalyzerPlan{}, fmt.Errorf("marshal user prompt: %w", err)
+		return schemas.AnalyzerV1Json{}, fmt.Errorf("marshal user prompt: %w", err)
 	}
 
 	// initial completion
@@ -226,9 +195,11 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 		UserPrompt:   string(userJSON),
 	})
 	if err != nil {
-		return AnalyzerPlan{}, err
+		return schemas.AnalyzerV1Json{}, err
 	}
-	plan, err := AnalyzerPlanFromJSON([]byte(out))
+
+	plan := schemas.AnalyzerV1Json{}
+	err = plan.UnmarshalJSON([]byte(out))
 	if err == nil {
 		c.logger.Debug("analyzer plan", "plan", plan)
 		return plan, nil
@@ -238,25 +209,27 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (AnalyzerPlan, 
 	lastErr := fmt.Errorf("failed to parse analyzer plan: %w", err)
 	for i := 0; i < c.retries; i++ {
 		repairUser := fmt.Sprintf(RepairAnalyzer, lastErr.Error(), AnalyzerSchema)
-		out2, err2 := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+		out, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
 			Name:         provider.ResponseFormatAnalyzerPlan,
 			Description:  provider.ResponseFormatAnalyzerPlanDescription,
 			Schema:       AnalyzerSchema,
 			SystemPrompt: AnalyzerSystem,
 			UserPrompt:   repairUser,
 		})
-		if err2 != nil {
-			lastErr = err2
+		if err != nil {
+			lastErr = err
 			continue
 		}
 
-		if plan2, errParse := AnalyzerPlanFromJSON([]byte(out2)); errParse == nil {
-			c.logger.Debug("analyzer plan", "plan", plan2)
-			return plan2, nil
+		plan := schemas.AnalyzerV1Json{}
+		err = plan.UnmarshalJSON([]byte(out))
+		if err == nil {
+			c.logger.Debug("analyzer plan", "plan", plan)
+			return plan, nil
 		}
 		lastErr = fmt.Errorf("failed to parse analyzer plan: %w", err)
 	}
-	return AnalyzerPlan{}, lastErr
+	return schemas.AnalyzerV1Json{}, lastErr
 }
 
 // fetchText downloads the content at a URL and returns it as a string.
@@ -354,16 +327,16 @@ func indentForBlock(s string) string {
 	return strings.Join(lines, "\n")
 }
 
-func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error) {
+func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]byte, error) {
 	if c.provider == nil {
 		return nil, errors.New("llm provider not configured")
 	}
-	if c.provider.Validate() != nil {
-		return nil, errors.New("llm provider invalid")
+	if err := c.Validate(); err != nil {
+		return nil, err
 	}
 
 	// Convert plan to JSON for the prompt
-	planJSON, err := plan.ToJSON()
+	planJSON, err := json.Marshal(&plan)
 	if err != nil {
 		return nil, fmt.Errorf("marshal analyzer plan: %w", err)
 	}
@@ -394,7 +367,7 @@ func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error
 	lastErr := fmt.Errorf("failed to validate workout yaml: %w", err)
 	for i := 0; i < c.retries; i++ {
 		repairUser := fmt.Sprintf(RepairGenerator, lastErr.Error())
-		planOutput, err2 := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+		planOutput, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
 			Name:         provider.ResponseFormatGeneratorOutput,
 			Description:  provider.ResponseFormatGeneratorOutputDescription,
 			Schema:       WorkoutSchema,
@@ -402,8 +375,8 @@ func (c *Client) Generate(ctx context.Context, plan AnalyzerPlan) ([]byte, error
 			UserPrompt:   repairUser,
 		})
 
-		if err2 != nil {
-			lastErr = err2
+		if err != nil {
+			lastErr = err
 			continue
 		}
 		planOutputBytes := []byte(planOutput)
