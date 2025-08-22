@@ -2,51 +2,113 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://swolegen.app/schemas/analyzer-v1.json",
   "title": "SwoleGen Analyzer Plan (v1)",
+  "description": "Structured plan produced by the Analyzer for a single workout session: metadata, session shape, fatigue policy, time budget, available equipment, ordered exercise templates, and distilled instruction context.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "meta",
     "session",
     "fatigue_policy",
+    "relevant_exercises",
+    "gap_fill_policy",
     "time_budget",
     "exercise_plan",
+    "available_equipment",
     "instructions_context"
   ],
   "properties": {
     "meta": {
       "type": "object",
+      "description": "Session metadata used for naming and unit selection.",
       "additionalProperties": false,
       "required": [
         "date",
         "location",
         "units",
         "duration_minutes",
-        "goal"
+        "goal",
+        "superset_policy",
+        "superset_preferences"
       ],
       "properties": {
         "date": {
           "type": "string",
-          "format": "date"
+          "format": "date",
+          "description": "Session date in YYYY-MM-DD."
         },
         "location": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "Free-form location (e.g., 'home', 'gym:golds', 'hotel:hyatt')."
         },
         "units": {
           "type": "string",
           "enum": [
             "lbs",
             "kg"
-          ]
+          ],
+          "description": "Weight units used for target_load in this plan."
         },
         "duration_minutes": {
           "type": "integer",
+          "description": "Total planned session time including warm-ups and rest (minutes).",
           "minimum": 10,
           "maximum": 180
         },
         "goal": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "Primary user goal for this session (free text)."
+        },
+        "superset_policy": {
+          "type": "string",
+          "enum": [
+            "none",
+            "pairs_ok",
+            "giant_sets_ok",
+            "auto_when_time_limited"
+          ],
+          "default": "pairs_ok",
+          "description": "Whether the generator should form supersets and how aggressively."
+        },
+        "superset_preferences": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "avoid_heavy_compounds",
+            "avoid_hr_spike_pairings",
+            "avoid_same_implement_conflicts",
+            "prefer_non_competing",
+            "target_superset_count"
+          ],
+          "properties": {
+            "target_superset_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 6,
+              "description": "Soft target; generator can deviate for time/equipment."
+            },
+            "prefer_non_competing": {
+              "type": "boolean",
+              "default": true,
+              "description": "Favor push+pull or hinge+core pairings over same-muscle pairings."
+            },
+            "avoid_heavy_compounds": {
+              "type": "boolean",
+              "default": false,
+              "description": "Do not superset Tier A barbell compounds."
+            },
+            "avoid_same_implement_conflicts": {
+              "type": "boolean",
+              "default": false,
+              "description": "Avoid pairings that require the same rack/cable at once."
+            },
+            "avoid_hr_spike_pairings": {
+              "type": "boolean",
+              "default": false,
+              "description": "Skip metabolic pairings if cardio is scheduled soon."
+            }
+          }
         }
       }
     },
@@ -54,13 +116,50 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "warmup_policy",
         "type",
         "tiers",
         "cut_order"
       ],
       "properties": {
+        "warmup_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "How to warm up before Tier A (and optionally others). Defaults applied if omitted.",
+          "required": [
+            "include_general",
+            "general_minutes",
+            "include_specific",
+            "specific_ramp_sets"
+          ],
+          "properties": {
+            "include_general": {
+              "type": "boolean",
+              "default": true,
+              "description": "5–8 min light cardio/mobility."
+            },
+            "general_minutes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 15,
+              "default": 5
+            },
+            "include_specific": {
+              "type": "boolean",
+              "default": true,
+              "description": "Progressive ramp sets before first Tier A compound."
+            },
+            "specific_ramp_sets": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5,
+              "default": 2
+            }
+          }
+        },
         "type": {
           "type": "string",
+          "description": "Primary identity of today’s session. This drives exercise pools and defaults (rep ranges, rest, emphasis).",
           "enum": [
             "hypertrophy",
             "strength",
@@ -72,11 +171,20 @@
             "push",
             "pull",
             "full_body",
+            "posterior_chain",
+            "glutes_core",
+            "arms_core",
+            "upper_push",
+            "upper_pull",
+            "lower_quad",
+            "lower_hinge",
+            "conditioning_emphasis",
             "custom"
           ]
         },
         "tiers": {
           "type": "array",
+          "description": "Work tiers included for this session, highest priority first. Tier A = must-do, Tier B = nice-to-have, Tier C = stretch goals.",
           "minItems": 1,
           "items": {
             "type": "string",
@@ -89,11 +197,11 @@
         },
         "cut_order": {
           "type": "array",
+          "description": "If time runs short, drop tiers in this order; first listed is cut first (least protected). Should be a permutation of the tiers present.",
           "minItems": 1,
           "items": {
             "type": "string",
             "enum": [
-              "A",
               "B",
               "C"
             ]
@@ -104,6 +212,7 @@
     "fatigue_policy": {
       "type": "object",
       "additionalProperties": false,
+      "description": "Session-level adjustments applied when recovery is poor or recent training load is high. The analyzer computes this to make the workout more conservative by altering RIR targets, capping top-set loads, or trimming volume. The generator must honor these values when producing the set plan.",
       "required": [
         "rir_shift",
         "load_cap_pct",
@@ -111,17 +220,137 @@
       ],
       "properties": {
         "rir_shift": {
+          "description": "Integer increase in the target Reps-in-Reserve (RIR) for all sets. Example: 1 means add one extra rep in reserve compared to normal, making the workout easier. Range 0–2.",
           "type": "integer",
-          "minimum": -2,
-          "maximum": 3
+          "minimum": 0,
+          "maximum": 2
         },
         "load_cap_pct": {
+          "description": "Fractional cap on target load relative to the user’s recent best at the same rep range. Example: 0.95 means cap weights at 95% of recent best. Valid range 0.85–1.0.",
           "type": "number",
-          "minimum": 0.5,
-          "maximum": 1.1
+          "minimum": 0.85,
+          "maximum": 1.0
         },
         "reason": {
+          "description": "Short human-readable explanation of why the fatigue policy was applied (e.g., 'High 7-day Relative Effort, low sleep score'). Max length 160 characters.",
           "type": "string"
+        }
+      }
+    },
+    "relevant_exercises": {
+      "type": "array",
+      "additionalProperties": false,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "push_horizontal",
+                "push_vertical",
+                "pull_horizontal",
+                "pull_vertical",
+                "squat_knee",
+                "hinge_hip",
+                "brace",
+                "rotation",
+                "carry",
+                "arm_accessory",
+                "shoulder_accessory",
+                "conditioning"
+              ]
+            }
+          },
+          "tier_hint": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "recent_best": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "rep_bracket": {
+                "type": "string"
+              },
+              "load_lbs": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "rep_bracket",
+              "load_lbs"
+            ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "slug",
+          "pattern",
+          "tier_hint",
+          "recent_best",
+          "notes"
+        ]
+      }
+    },
+    "gap_fill_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allow_unseen_movements",
+        "target_patterns",
+        "min_sets_per_selected_pattern"
+      ],
+      "description": "Rules for adding movements that are underrepresented in history relative to goals.",
+      "properties": {
+        "allow_unseen_movements": {
+          "type": "boolean",
+          "default": true,
+          "description": "Permit generator to introduce movements absent from history when aligned with goals and not banned."
+        },
+        "target_patterns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "push_horizontal",
+              "push_vertical",
+              "pull_horizontal",
+              "pull_vertical",
+              "squat_knee",
+              "hinge_hip",
+              "brace",
+              "rotation",
+              "carry",
+              "arm_accessory",
+              "shoulder_accessory"
+            ]
+          },
+          "description": "Patterns to ensure are present today if feasible."
+        },
+        "min_sets_per_selected_pattern": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6,
+          "default": 2
         }
       }
     },
@@ -158,14 +387,16 @@
           "tier",
           "exercise",
           "equipment",
-          "superset",
           "warmups",
           "working_sets",
+          "pattern",
+          "implement_pref",
           "targets"
         ],
         "properties": {
           "tier": {
             "type": "string",
+            "description": "Work tiers included for this session, highest priority first. Tier A = must-do, Tier B = nice-to-have, Tier C = stretch goals.",
             "enum": [
               "A",
               "B",
@@ -174,27 +405,59 @@
           },
           "exercise": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "Human-readable exercise name (e.g., 'Barbell Bench Press', 'DB Row')."
           },
           "equipment": {
             "type": "string",
-            "minLength": 1
-          },
-          "superset": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "minLength": 1,
+            "description": "Canonical equipment key, e.g., 'barbell', 'db_set_5_100', 'cable_station'."
           },
           "warmups": {
             "type": "integer",
-            "minimum": 0,
+            "minimum": 1,
             "maximum": 5
           },
           "working_sets": {
             "type": "integer",
             "minimum": 1,
             "maximum": 10
+          },
+          "pattern": {
+            "type": "array",
+            "description": "Canonical movement pattern classification for this exercise. Used by the generator to preserve training intent during substitutions when specific implements are unavailable. Examples: push_horizontal (bench press, band press), push_vertical (OHP, landmine press), pull_horizontal (row, band row), pull_vertical (pulldown, pull-up), squat_knee (back squat, split squat), hinge_hip (RDL, hip thrust), brace (plank, rollout), rotation (cable rotation, Russian twist), carry (farmer’s carry, suitcase carry). This ensures substitutions remain biomechanically and physiologically equivalent.",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "examples": [
+                "push_horizontal",
+                "push_vertical",
+                "pull_horizontal",
+                "pull_vertical",
+                "squat_knee",
+                "hinge_hip",
+                "brace",
+                "rotation",
+                "carry"
+              ]
+            }
+          },
+          "implement_pref": {
+            "type": "array",
+            "description": "Ordered list of preferred implements for performing this exercise pattern, from most to least ideal. Guides the generator in choosing substitutes when the top choice is not available in the current equipment inventory. Example: [\"barbell\", \"dumbbell\", \"cable\", \"band\", \"bodyweight\"] for a horizontal push pattern. The generator should select the first available implement in this list and note any substitution in the workout log.",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "examples": [
+                "barbell",
+                "dumbbell",
+                "cable",
+                "band",
+                "bodyweight"
+              ]
+            }
           },
           "targets": {
             "type": "object",
@@ -223,6 +486,13 @@
                   "number",
                   "string",
                   "null"
+                ],
+                "description": "Numeric load in meta.units, or a canonical string for non-numeric loads.",
+                "examples": [
+                  185,
+                  "BW",
+                  "machine_stack",
+                  "band"
                 ]
               },
               "load_cap": {
@@ -236,8 +506,25 @@
         }
       }
     },
+    "available_equipment": {
+      "type": "array",
+      "description": "Canonical equipment keys available at the selected location.",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "examples": [
+          "barbell",
+          "db_set_5_100",
+          "cable_station",
+          "pullup_bar",
+          "kettlebell_set"
+        ]
+      }
+    },
     "instructions_context": {
       "type": "object",
+      "description": "Constraints and heuristics distilled from user instructions/history; drives selection, ordering, and execution rules.",
       "additionalProperties": false,
       "required": [
         "primary_goals",
@@ -248,6 +535,7 @@
       "properties": {
         "primary_goals": {
           "type": "array",
+          "description": "Ordered user goals; earlier items take precedence.",
           "items": {
             "type": "string"
           },
@@ -255,6 +543,7 @@
         },
         "construction_rules": {
           "type": "object",
+          "description": "How to assemble the session (format, priorities, and rest policies). Earlier priority_order items are filled first; later ones may be dropped under time constraints.",
           "additionalProperties": false,
           "required": [
             "format",
@@ -276,11 +565,26 @@
               "items": {
                 "type": "string",
                 "enum": [
+                  "warmup_activation",
                   "big_compound",
+                  "secondary_compound",
                   "hypertrophy_compound",
+                  "accessory_push",
+                  "accessory_pull",
+                  "posterior_chain",
+                  "single_leg_unilateral",
+                  "shoulder_accessory",
+                  "arm_accessory",
                   "core_stability",
+                  "rotational_core",
+                  "anti_extension_core",
+                  "anti_lateral_core",
                   "isolation_finishers",
-                  "conditioning"
+                  "conditioning",
+                  "grip_forearm",
+                  "prehab_rehab",
+                  "mobility_flexibility",
+                  "metabolic_finishers"
                 ]
               }
             },
@@ -289,6 +593,7 @@
                 "integer",
                 "null"
               ],
+              "description": "Target rest between paired/clustered sets; null if not applicable for chosen format.",
               "minimum": 0,
               "maximum": 300
             }
@@ -296,6 +601,7 @@
         },
         "constraints": {
           "type": "object",
+          "description": "Hard/soft constraints to avoid or emphasize; prefer_single_station is a strong preference (try to minimize station changes).",
           "additionalProperties": false,
           "required": [
             "avoid",
@@ -305,12 +611,14 @@
           "properties": {
             "avoid": {
               "type": "array",
+              "description": "Movements or patterns to avoid (e.g., 'deep knee flexion').",
               "items": {
                 "type": "string"
               }
             },
             "encourage": {
               "type": "array",
+              "description": "Movements or patterns to emphasize (e.g., 'horizontal pull').",
               "items": {
                 "type": "string"
               }
@@ -319,7 +627,8 @@
               "type": [
                 "boolean",
                 "null"
-              ]
+              ],
+              "description": "If true, strongly prefer plans that minimize moving between stations; null = no preference."
             }
           }
         },

@@ -10,6 +10,15 @@ Rules:
 - Choose only exercises that match available equipment. Provide substitution-friendly choices where possible (DB alt for barbell).
 - Use double progression as the progression model. Target loads come from history; if none, choose conservative defaults.
 - Estimate set time (work + rest) and compute an achievable target_set_count for the given duration.
+- Cut order semantics: In session.cut_order, the first element is cut first if time runs short; the last element is most protected.
+- Fatigue policy: Clamp rir_shift between 0–2 and load_cap_pct between 0.85–1.0. Apply rir_shift to all sets’ RIR and enforce load_cap_pct as a hard ceiling on target loads.
+- Warm-ups: Populate session.warmup_policy using defaults (5–8 min general; 2–3 ramp sets) unless instructions override.
+- Equipment keys: Use canonical keys already present in available_equipment (do not synthesize new keys).
+- Time budget: Fill both time_budget.target_set_count and time_budget.estimated_minutes_total (no custom fields).
+- No superset IDs per exercise: Provide policy only (meta.superset_policy, meta.superset_preferences); the Generator will form pairs.
+- Equipment keys are canonical, unprefixed (e.g., barbell, db_set_5_100, cable_station). Do not invent new keys.
+- Patterns: When multiple patterns are listed, the first is canonical for substitution; the rest are hints only.
+- For every `pattern` array, do not repeat tokens. The first token is canonical for substitutions; others are hints.”
 
 Output: Valid JSON adhering to the schema. No prose.
 

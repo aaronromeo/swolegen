@@ -101,7 +101,7 @@ type Set struct {
 	TargetReps interface{} `json:"target_reps" yaml:"target_reps" mapstructure:"target_reps"`
 
 	// TargetWeight corresponds to the JSON schema field "target_weight".
-	TargetWeight *float64 `json:"target_weight" yaml:"target_weight" mapstructure:"target_weight"`
+	TargetWeight interface{} `json:"target_weight" yaml:"target_weight" mapstructure:"target_weight"`
 
 	// Tier corresponds to the JSON schema field "tier".
 	Tier SetTier `json:"tier" yaml:"tier" mapstructure:"tier"`
@@ -237,6 +237,9 @@ type WorkoutV12Json struct {
 	// Date corresponds to the JSON schema field "date".
 	Date types.SerializableDate `json:"date" yaml:"date" mapstructure:"date"`
 
+	// Description corresponds to the JSON schema field "description".
+	Description string `json:"description" yaml:"description" mapstructure:"description"`
+
 	// DurationMinutes corresponds to the JSON schema field "duration_minutes".
 	DurationMinutes int `json:"duration_minutes" yaml:"duration_minutes" mapstructure:"duration_minutes"`
 
@@ -255,6 +258,9 @@ type WorkoutV12Json struct {
 	// Sets corresponds to the JSON schema field "sets".
 	Sets []Set `json:"sets" yaml:"sets" mapstructure:"sets"`
 
+	// Title corresponds to the JSON schema field "title".
+	Title string `json:"title" yaml:"title" mapstructure:"title"`
+
 	// Units corresponds to the JSON schema field "units".
 	Units WorkoutV12JsonUnits `json:"units" yaml:"units" mapstructure:"units"`
 
@@ -267,16 +273,12 @@ type WorkoutV12Json struct {
 
 type WorkoutV12JsonCutOrderElem string
 
-const WorkoutV12JsonCutOrderElemA WorkoutV12JsonCutOrderElem = "A"
 const WorkoutV12JsonCutOrderElemB WorkoutV12JsonCutOrderElem = "B"
 const WorkoutV12JsonCutOrderElemC WorkoutV12JsonCutOrderElem = "C"
-const WorkoutV12JsonCutOrderElemW WorkoutV12JsonCutOrderElem = "W"
 
 var enumValues_WorkoutV12JsonCutOrderElem = []interface{}{
-	"A",
 	"B",
 	"C",
-	"W",
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
@@ -302,12 +304,10 @@ func (j *WorkoutV12JsonCutOrderElem) UnmarshalJSON(value []byte) error {
 type WorkoutV12JsonUnits string
 
 const WorkoutV12JsonUnitsKg WorkoutV12JsonUnits = "kg"
-const WorkoutV12JsonUnitsLb WorkoutV12JsonUnits = "lb"
 const WorkoutV12JsonUnitsLbs WorkoutV12JsonUnits = "lbs"
 
 var enumValues_WorkoutV12JsonUnits = []interface{}{
 	"lbs",
-	"lb",
 	"kg",
 }
 
@@ -343,6 +343,9 @@ func (j *WorkoutV12Json) UnmarshalJSON(value []byte) error {
 	if _, ok := raw["date"]; raw != nil && !ok {
 		return fmt.Errorf("field date in WorkoutV12Json: required")
 	}
+	if _, ok := raw["description"]; raw != nil && !ok {
+		return fmt.Errorf("field description in WorkoutV12Json: required")
+	}
 	if _, ok := raw["duration_minutes"]; raw != nil && !ok {
 		return fmt.Errorf("field duration_minutes in WorkoutV12Json: required")
 	}
@@ -361,6 +364,9 @@ func (j *WorkoutV12Json) UnmarshalJSON(value []byte) error {
 	if _, ok := raw["sets"]; raw != nil && !ok {
 		return fmt.Errorf("field sets in WorkoutV12Json: required")
 	}
+	if _, ok := raw["title"]; raw != nil && !ok {
+		return fmt.Errorf("field title in WorkoutV12Json: required")
+	}
 	if _, ok := raw["units"]; raw != nil && !ok {
 		return fmt.Errorf("field units in WorkoutV12Json: required")
 	}
@@ -378,6 +384,12 @@ func (j *WorkoutV12Json) UnmarshalJSON(value []byte) error {
 	if plain.CutOrder != nil && len(plain.CutOrder) < 1 {
 		return fmt.Errorf("field %s length: must be >= %d", "cut_order", 1)
 	}
+	if len(plain.Description) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "description", 1)
+	}
+	if len(plain.Description) > 2000 {
+		return fmt.Errorf("field %s length: must be <= %d", "description", 2000)
+	}
 	if 180 < plain.DurationMinutes {
 		return fmt.Errorf("field %s: must be <= %v", "duration_minutes", 180)
 	}
@@ -392,6 +404,12 @@ func (j *WorkoutV12Json) UnmarshalJSON(value []byte) error {
 	}
 	if plain.Sets != nil && len(plain.Sets) < 1 {
 		return fmt.Errorf("field %s length: must be >= %d", "sets", 1)
+	}
+	if len(plain.Title) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "title", 1)
+	}
+	if len(plain.Title) > 200 {
+		return fmt.Errorf("field %s length: must be <= %d", "title", 200)
 	}
 	if matched, _ := regexp.MatchString(`^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+-[0-9]{2}$`, string(plain.WorkoutId)); !matched {
 		return fmt.Errorf("field %s pattern match: must match %s", "WorkoutId", `^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+-[0-9]{2}$`)

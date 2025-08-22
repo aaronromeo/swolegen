@@ -5,10 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"log/slog"
-	"net/http"
-	"os"
 	"strings"
 	"time"
 
@@ -187,145 +184,47 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (schemas.Analyz
 		return schemas.AnalyzerV1Json{}, fmt.Errorf("marshal user prompt: %w", err)
 	}
 
+	errs := []error{}
+	plan := schemas.AnalyzerV1Json{}
+
 	// initial completion
-	out, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+	prf := provider.ProviderResponseFormat{
 		Name:         provider.ResponseFormatAnalyzerPlan,
 		Description:  provider.ResponseFormatAnalyzerPlanDescription,
 		Schema:       AnalyzerSchema,
 		SystemPrompt: AnalyzerSystem,
 		UserPrompt:   string(userJSON),
-	})
-	if err != nil {
-		return schemas.AnalyzerV1Json{}, err
 	}
 
-	plan := schemas.AnalyzerV1Json{}
-	err = plan.UnmarshalJSON([]byte(out))
-	if err == nil {
-		c.logger.Debug("analyzer plan", "plan", plan)
-		return plan, nil
-	}
-
-	// Retry loop using repair prompt if validation/parsing fails
-	lastErr := fmt.Errorf("failed to parse analyzer plan: %w", err)
 	for i := 0; i < c.retries; i++ {
-		repairUser := fmt.Sprintf(RepairAnalyzer, lastErr.Error(), AnalyzerSchema)
-		out, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+		llmOut, err := c.provider.Complete(ctx, prf)
+
+		if err != nil {
+			c.logger.Error("analyzer plan", "error", err)
+			errs = append(errs, err)
+			goto retryCase
+		}
+
+		if err = plan.UnmarshalJSON([]byte(llmOut)); err != nil {
+			err = fmt.Errorf("failed to parse analyzer plan: %w", err)
+			c.logger.Error("analyzer plan", "error", err)
+			errs = append(errs, err)
+			goto retryCase
+		}
+
+		return plan, nil
+
+	retryCase:
+		repairUser := fmt.Sprintf(RepairAnalyzer, errors.Join(errs...).Error(), string(userJSON))
+		prf = provider.ProviderResponseFormat{
 			Name:         provider.ResponseFormatAnalyzerPlan,
 			Description:  provider.ResponseFormatAnalyzerPlanDescription,
 			Schema:       AnalyzerSchema,
 			SystemPrompt: AnalyzerSystem,
 			UserPrompt:   repairUser,
-		})
-		if err != nil {
-			lastErr = err
-			continue
 		}
-
-		plan := schemas.AnalyzerV1Json{}
-		err = plan.UnmarshalJSON([]byte(out))
-		if err == nil {
-			c.logger.Debug("analyzer plan", "plan", plan)
-			return plan, nil
-		}
-		lastErr = fmt.Errorf("failed to parse analyzer plan: %w", err)
 	}
-	return schemas.AnalyzerV1Json{}, lastErr
-}
-
-// fetchText downloads the content at a URL and returns it as a string.
-// It supports http(s) and file URLs; for empty or invalid URLs, returns empty string.
-
-// fetchToTmp downloads text and writes it to a temp file. Returns path and content.
-func fetchToTmp(ctx context.Context, url, prefix string, maxFetchBytes int) (string, string, error) {
-	content, err := fetchText(ctx, url, maxFetchBytes)
-	if err != nil {
-		return "", "", err
-	}
-	f, err := os.CreateTemp("", "swolegen-"+prefix+"-*.txt")
-	if err != nil {
-		return "", content, err
-	}
-	defer func() {
-		f.Close()           //nolint:errcheck
-		os.Remove(f.Name()) //nolint:errcheck
-	}()
-	if _, err := f.WriteString(content); err != nil {
-		return f.Name(), content, err
-	}
-	return f.Name(), content, nil
-}
-
-func fetchText(ctx context.Context, url string, maxFetchBytes int) (string, error) {
-	url = strings.TrimSpace(url)
-	if url == "" {
-		return "", nil
-	}
-	// Local files support (file:// or relative path)
-	if strings.HasPrefix(url, "file://") {
-		p := strings.TrimPrefix(url, "file://")
-		if strings.HasPrefix(url, "file://") {
-			if pp, ok := strings.CutPrefix(url, "file://"); ok {
-				p = pp
-			}
-		}
-		f, err := os.Open(p)
-		if err != nil {
-			return "", err
-		}
-		defer f.Close() //nolint:errcheck
-		lr := &io.LimitedReader{R: f, N: int64(maxFetchBytes)}
-		b, err := io.ReadAll(lr)
-		if err != nil {
-			return "", err
-		}
-		return string(b), nil
-	}
-	if !strings.HasPrefix(url, "http://") && !strings.HasPrefix(url, "https://") {
-		// treat as local path
-		f, err := os.Open(url)
-		if err != nil {
-			return "", err
-		}
-		defer f.Close() //nolint:errcheck
-		lr := &io.LimitedReader{R: f, N: int64(maxFetchBytes)}
-		b, err := io.ReadAll(lr)
-		if err != nil {
-			return "", err
-		}
-		return string(b), nil
-	}
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
-	if err != nil {
-		return "", err
-	}
-	resp, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close() //nolint:errcheck
-	if resp.StatusCode >= 300 {
-		return "", fmt.Errorf("GET %s: %d", url, resp.StatusCode)
-	}
-	lr := &io.LimitedReader{R: resp.Body, N: int64(maxFetchBytes)}
-	b, err := io.ReadAll(lr)
-	if err != nil {
-		return "", err
-	}
-	return string(b), nil
-}
-
-// indentForBlock indents each line by two spaces for YAML literal blocks.
-func indentForBlock(s string) string {
-	if s == "" {
-		return ""
-	}
-	lines := strings.Split(s, "\n")
-	for i := range lines {
-		lines[i] = "  " + lines[i]
-	}
-
-	return strings.Join(lines, "\n")
+	return schemas.AnalyzerV1Json{}, errors.Join(errs...)
 }
 
 func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]byte, error) {
@@ -343,48 +242,45 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 	}
 
 	// Build user prompt with the plan
-	user := fmt.Sprintf(GeneratorUser, string(planJSON))
+	userJSON := fmt.Sprintf(GeneratorUser, string(planJSON))
 
-	// Initial completion (expects YAML output)
-	workoutOutput, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+	errs := []error{}
+	workout := &schemas.WorkoutV12Json{}
+
+	prf := provider.ProviderResponseFormat{
 		Name:         provider.ResponseFormatGeneratorOutput,
 		Description:  provider.ResponseFormatGeneratorOutputDescription,
 		Schema:       WorkoutSchema,
 		SystemPrompt: GeneratorSystem,
-		UserPrompt:   user,
-	})
-	if err != nil {
-		return nil, err
+		UserPrompt:   userJSON,
 	}
-
-	// Validate against workout schema
-	c.logger.Debug("workout json", "json", workoutOutput)
-	if wv, err := ValidateWorkoutJSON([]byte(workoutOutput)); err == nil {
-		return yaml.Marshal(wv)
-	}
-
-	// Retry loop using repair prompt if validation fails
-	lastErr := fmt.Errorf("failed to validate workout yaml: %w", err)
 	for i := 0; i < c.retries; i++ {
-		repairUser := fmt.Sprintf(RepairGenerator, lastErr.Error())
-		workoutOutput, err := c.provider.Complete(ctx, provider.ProviderResponseFormat{
+		llmOut, err := c.provider.Complete(ctx, prf)
+
+		if err != nil {
+			c.logger.Error("workout json", "error", err)
+			errs = append(errs, err)
+			goto retryCase
+		}
+
+		if err = workout.UnmarshalJSON([]byte(llmOut)); err != nil {
+			err = fmt.Errorf("failed to parse workout json: %w", err)
+			c.logger.Error("workout json", "error", err)
+			errs = append(errs, err)
+			goto retryCase
+		}
+
+		return yaml.Marshal(workout)
+
+	retryCase:
+		repairUser := fmt.Sprintf(RepairGenerator, errors.Join(errs...).Error(), string(userJSON))
+		prf = provider.ProviderResponseFormat{
 			Name:         provider.ResponseFormatGeneratorOutput,
 			Description:  provider.ResponseFormatGeneratorOutputDescription,
 			Schema:       WorkoutSchema,
 			SystemPrompt: GeneratorSystem,
 			UserPrompt:   repairUser,
-		})
-
-		if err != nil {
-			lastErr = err
-			continue
 		}
-		var wv *schemas.WorkoutV12Json
-		c.logger.Debug("workout json", "json", workoutOutput)
-		if wv, err = ValidateWorkoutJSON([]byte(workoutOutput)); err != nil {
-			return nil, fmt.Errorf("failed to validate workout yaml: %w", err)
-		}
-		return yaml.Marshal(wv)
 	}
-	return nil, lastErr
+	return nil, errors.Join(errs...)
 }

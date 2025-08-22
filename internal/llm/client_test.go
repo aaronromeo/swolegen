@@ -32,6 +32,8 @@ func TestAnalyze_Success(t *testing.T) {
 	plan := schemas.AnalyzerV1Json{
 		Meta: schemas.AnalyzerV1JsonMeta{
 			Date: types.SerializableDate{Time: time.Date(2023, 10, 01, 0, 0, 0, 0, time.UTC)}, Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy",
+			SupersetPolicy:      "pairs_ok",
+			SupersetPreferences: schemas.AnalyzerV1JsonMetaSupersetPreferences{},
 		},
 		Session: schemas.AnalyzerV1JsonSession{
 			Type: "strength", Tiers: []schemas.AnalyzerV1JsonSessionTiersElem{"A"}, CutOrder: []schemas.AnalyzerV1JsonSessionCutOrderElem{"A"},
@@ -51,13 +53,13 @@ func TestAnalyze_Success(t *testing.T) {
 				PreferSingleStation: nil,
 			},
 		},
-		TimeBudget: schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		TimeBudget:         schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		AvailableEquipment: []string{"barbell"},
 		ExercisePlan: []schemas.AnalyzerV1JsonExercisePlanElem{
 			{
 				Tier:        "A",
 				Exercise:    "Bench Press",
 				Equipment:   "barbell",
-				Superset:    nil,
 				Warmups:     1,
 				WorkingSets: 3,
 				Targets: func() schemas.AnalyzerV1JsonExercisePlanElemTargets {
@@ -95,6 +97,8 @@ func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 	plan := schemas.AnalyzerV1Json{
 		Meta: schemas.AnalyzerV1JsonMeta{
 			Date: types.SerializableDate{Time: time.Date(2023, 10, 01, 0, 0, 0, 0, time.UTC)}, Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy",
+			SupersetPolicy:      "pairs_ok",
+			SupersetPreferences: schemas.AnalyzerV1JsonMetaSupersetPreferences{},
 		},
 		Session: schemas.AnalyzerV1JsonSession{
 			Type: "strength", Tiers: []schemas.AnalyzerV1JsonSessionTiersElem{"A"}, CutOrder: []schemas.AnalyzerV1JsonSessionCutOrderElem{"A"},
@@ -116,9 +120,10 @@ func TestAnalyze_RepairAfterInvalid(t *testing.T) {
 				PreferSingleStation: nil,
 			},
 		},
-		TimeBudget: schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		TimeBudget:         schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		AvailableEquipment: []string{"barbell"},
 		ExercisePlan: []schemas.AnalyzerV1JsonExercisePlanElem{
-			{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 1, WorkingSets: 3, Targets: schemas.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &bpRir}},
+			{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 1, WorkingSets: 3, Targets: schemas.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &bpRir, TargetLoad: nil, LoadCap: nil}},
 		},
 	}
 	okJSON, err := json.Marshal(&plan)

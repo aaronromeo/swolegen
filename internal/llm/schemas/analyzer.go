@@ -7,19 +7,35 @@ import "fmt"
 import "github.com/atombender/go-jsonschema/pkg/types"
 import "reflect"
 
+// Structured plan produced by the Analyzer for a single workout session: metadata,
+// session shape, fatigue policy, time budget, available equipment, ordered
+// exercise templates, and distilled instruction context.
 type AnalyzerV1Json struct {
+	// Canonical equipment keys available at the selected location.
+	AvailableEquipment []string `json:"available_equipment" yaml:"available_equipment" mapstructure:"available_equipment"`
+
 	// ExercisePlan corresponds to the JSON schema field "exercise_plan".
 	ExercisePlan []AnalyzerV1JsonExercisePlanElem `json:"exercise_plan" yaml:"exercise_plan" mapstructure:"exercise_plan"`
 
-	// FatiguePolicy corresponds to the JSON schema field "fatigue_policy".
+	// Session-level adjustments applied when recovery is poor or recent training load
+	// is high. The analyzer computes this to make the workout more conservative by
+	// altering RIR targets, capping top-set loads, or trimming volume. The generator
+	// must honor these values when producing the set plan.
 	FatiguePolicy AnalyzerV1JsonFatiguePolicy `json:"fatigue_policy" yaml:"fatigue_policy" mapstructure:"fatigue_policy"`
 
-	// InstructionsContext corresponds to the JSON schema field
-	// "instructions_context".
+	// Rules for adding movements that are underrepresented in history relative to
+	// goals.
+	GapFillPolicy AnalyzerV1JsonGapFillPolicy `json:"gap_fill_policy" yaml:"gap_fill_policy" mapstructure:"gap_fill_policy"`
+
+	// Constraints and heuristics distilled from user instructions/history; drives
+	// selection, ordering, and execution rules.
 	InstructionsContext AnalyzerV1JsonInstructionsContext `json:"instructions_context" yaml:"instructions_context" mapstructure:"instructions_context"`
 
-	// Meta corresponds to the JSON schema field "meta".
+	// Session metadata used for naming and unit selection.
 	Meta AnalyzerV1JsonMeta `json:"meta" yaml:"meta" mapstructure:"meta"`
+
+	// RelevantExercises corresponds to the JSON schema field "relevant_exercises".
+	RelevantExercises []AnalyzerV1JsonRelevantExercisesElem `json:"relevant_exercises" yaml:"relevant_exercises" mapstructure:"relevant_exercises"`
 
 	// Session corresponds to the JSON schema field "session".
 	Session AnalyzerV1JsonSession `json:"session" yaml:"session" mapstructure:"session"`
@@ -29,19 +45,35 @@ type AnalyzerV1Json struct {
 }
 
 type AnalyzerV1JsonExercisePlanElem struct {
-	// Equipment corresponds to the JSON schema field "equipment".
+	// Canonical equipment key, e.g., 'barbell', 'db_set_5_100', 'cable_station'.
 	Equipment string `json:"equipment" yaml:"equipment" mapstructure:"equipment"`
 
-	// Exercise corresponds to the JSON schema field "exercise".
+	// Human-readable exercise name (e.g., 'Barbell Bench Press', 'DB Row').
 	Exercise string `json:"exercise" yaml:"exercise" mapstructure:"exercise"`
 
-	// Superset corresponds to the JSON schema field "superset".
-	Superset *string `json:"superset" yaml:"superset" mapstructure:"superset"`
+	// Ordered list of preferred implements for performing this exercise pattern, from
+	// most to least ideal. Guides the generator in choosing substitutes when the top
+	// choice is not available in the current equipment inventory. Example:
+	// ["barbell", "dumbbell", "cable", "band", "bodyweight"] for a horizontal push
+	// pattern. The generator should select the first available implement in this list
+	// and note any substitution in the workout log.
+	ImplementPref []string `json:"implement_pref" yaml:"implement_pref" mapstructure:"implement_pref"`
+
+	// Canonical movement pattern classification for this exercise. Used by the
+	// generator to preserve training intent during substitutions when specific
+	// implements are unavailable. Examples: push_horizontal (bench press, band
+	// press), push_vertical (OHP, landmine press), pull_horizontal (row, band row),
+	// pull_vertical (pulldown, pull-up), squat_knee (back squat, split squat),
+	// hinge_hip (RDL, hip thrust), brace (plank, rollout), rotation (cable rotation,
+	// Russian twist), carry (farmer’s carry, suitcase carry). This ensures
+	// substitutions remain biomechanically and physiologically equivalent.
+	Pattern []string `json:"pattern" yaml:"pattern" mapstructure:"pattern"`
 
 	// Targets corresponds to the JSON schema field "targets".
 	Targets AnalyzerV1JsonExercisePlanElemTargets `json:"targets" yaml:"targets" mapstructure:"targets"`
 
-	// Tier corresponds to the JSON schema field "tier".
+	// Work tiers included for this session, highest priority first. Tier A = must-do,
+	// Tier B = nice-to-have, Tier C = stretch goals.
 	Tier AnalyzerV1JsonExercisePlanElemTier `json:"tier" yaml:"tier" mapstructure:"tier"`
 
 	// Warmups corresponds to the JSON schema field "warmups".
@@ -61,7 +93,7 @@ type AnalyzerV1JsonExercisePlanElemTargets struct {
 	// Rir corresponds to the JSON schema field "rir".
 	Rir *int `json:"rir" yaml:"rir" mapstructure:"rir"`
 
-	// TargetLoad corresponds to the JSON schema field "target_load".
+	// Numeric load in meta.units, or a canonical string for non-numeric loads.
 	TargetLoad interface{} `json:"target_load" yaml:"target_load" mapstructure:"target_load"`
 }
 
@@ -145,8 +177,11 @@ func (j *AnalyzerV1JsonExercisePlanElem) UnmarshalJSON(value []byte) error {
 	if _, ok := raw["exercise"]; raw != nil && !ok {
 		return fmt.Errorf("field exercise in AnalyzerV1JsonExercisePlanElem: required")
 	}
-	if _, ok := raw["superset"]; raw != nil && !ok {
-		return fmt.Errorf("field superset in AnalyzerV1JsonExercisePlanElem: required")
+	if _, ok := raw["implement_pref"]; raw != nil && !ok {
+		return fmt.Errorf("field implement_pref in AnalyzerV1JsonExercisePlanElem: required")
+	}
+	if _, ok := raw["pattern"]; raw != nil && !ok {
+		return fmt.Errorf("field pattern in AnalyzerV1JsonExercisePlanElem: required")
 	}
 	if _, ok := raw["targets"]; raw != nil && !ok {
 		return fmt.Errorf("field targets in AnalyzerV1JsonExercisePlanElem: required")
@@ -171,11 +206,17 @@ func (j *AnalyzerV1JsonExercisePlanElem) UnmarshalJSON(value []byte) error {
 	if len(plain.Exercise) < 1 {
 		return fmt.Errorf("field %s length: must be >= %d", "exercise", 1)
 	}
+	if plain.ImplementPref != nil && len(plain.ImplementPref) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "implement_pref", 1)
+	}
+	if plain.Pattern != nil && len(plain.Pattern) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "pattern", 1)
+	}
 	if 5 < plain.Warmups {
 		return fmt.Errorf("field %s: must be <= %v", "warmups", 5)
 	}
-	if 0 > plain.Warmups {
-		return fmt.Errorf("field %s: must be >= %v", "warmups", 0)
+	if 1 > plain.Warmups {
+		return fmt.Errorf("field %s: must be >= %v", "warmups", 1)
 	}
 	if 10 < plain.WorkingSets {
 		return fmt.Errorf("field %s: must be <= %v", "working_sets", 10)
@@ -187,14 +228,23 @@ func (j *AnalyzerV1JsonExercisePlanElem) UnmarshalJSON(value []byte) error {
 	return nil
 }
 
+// Session-level adjustments applied when recovery is poor or recent training load
+// is high. The analyzer computes this to make the workout more conservative by
+// altering RIR targets, capping top-set loads, or trimming volume. The generator
+// must honor these values when producing the set plan.
 type AnalyzerV1JsonFatiguePolicy struct {
-	// LoadCapPct corresponds to the JSON schema field "load_cap_pct".
+	// Fractional cap on target load relative to the user’s recent best at the same
+	// rep range. Example: 0.95 means cap weights at 95% of recent best. Valid range
+	// 0.85–1.0.
 	LoadCapPct float64 `json:"load_cap_pct" yaml:"load_cap_pct" mapstructure:"load_cap_pct"`
 
-	// Reason corresponds to the JSON schema field "reason".
+	// Short human-readable explanation of why the fatigue policy was applied (e.g.,
+	// 'High 7-day Relative Effort, low sleep score'). Max length 160 characters.
 	Reason string `json:"reason" yaml:"reason" mapstructure:"reason"`
 
-	// RirShift corresponds to the JSON schema field "rir_shift".
+	// Integer increase in the target Reps-in-Reserve (RIR) for all sets. Example: 1
+	// means add one extra rep in reserve compared to normal, making the workout
+	// easier. Range 0–2.
 	RirShift int `json:"rir_shift" yaml:"rir_shift" mapstructure:"rir_shift"`
 }
 
@@ -218,46 +268,146 @@ func (j *AnalyzerV1JsonFatiguePolicy) UnmarshalJSON(value []byte) error {
 	if err := json.Unmarshal(value, &plain); err != nil {
 		return err
 	}
-	if 1.1 < plain.LoadCapPct {
-		return fmt.Errorf("field %s: must be <= %v", "load_cap_pct", 1.1)
+	if 1 < plain.LoadCapPct {
+		return fmt.Errorf("field %s: must be <= %v", "load_cap_pct", 1)
 	}
-	if 0.5 > plain.LoadCapPct {
-		return fmt.Errorf("field %s: must be >= %v", "load_cap_pct", 0.5)
+	if 0.85 > plain.LoadCapPct {
+		return fmt.Errorf("field %s: must be >= %v", "load_cap_pct", 0.85)
 	}
-	if 3 < plain.RirShift {
-		return fmt.Errorf("field %s: must be <= %v", "rir_shift", 3)
+	if 2 < plain.RirShift {
+		return fmt.Errorf("field %s: must be <= %v", "rir_shift", 2)
 	}
-	if -2 > plain.RirShift {
-		return fmt.Errorf("field %s: must be >= %v", "rir_shift", -2)
+	if 0 > plain.RirShift {
+		return fmt.Errorf("field %s: must be >= %v", "rir_shift", 0)
 	}
 	*j = AnalyzerV1JsonFatiguePolicy(plain)
 	return nil
 }
 
+// Rules for adding movements that are underrepresented in history relative to
+// goals.
+type AnalyzerV1JsonGapFillPolicy struct {
+	// Permit generator to introduce movements absent from history when aligned with
+	// goals and not banned.
+	AllowUnseenMovements bool `json:"allow_unseen_movements" yaml:"allow_unseen_movements" mapstructure:"allow_unseen_movements"`
+
+	// MinSetsPerSelectedPattern corresponds to the JSON schema field
+	// "min_sets_per_selected_pattern".
+	MinSetsPerSelectedPattern int `json:"min_sets_per_selected_pattern" yaml:"min_sets_per_selected_pattern" mapstructure:"min_sets_per_selected_pattern"`
+
+	// Patterns to ensure are present today if feasible.
+	TargetPatterns []AnalyzerV1JsonGapFillPolicyTargetPatternsElem `json:"target_patterns" yaml:"target_patterns" mapstructure:"target_patterns"`
+}
+
+type AnalyzerV1JsonGapFillPolicyTargetPatternsElem string
+
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemArmAccessory AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "arm_accessory"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemBrace AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "brace"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemCarry AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "carry"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemHingeHip AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "hinge_hip"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemPullHorizontal AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "pull_horizontal"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemPullVertical AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "pull_vertical"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemPushHorizontal AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "push_horizontal"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemPushVertical AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "push_vertical"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemRotation AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "rotation"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemShoulderAccessory AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "shoulder_accessory"
+const AnalyzerV1JsonGapFillPolicyTargetPatternsElemSquatKnee AnalyzerV1JsonGapFillPolicyTargetPatternsElem = "squat_knee"
+
+var enumValues_AnalyzerV1JsonGapFillPolicyTargetPatternsElem = []interface{}{
+	"push_horizontal",
+	"push_vertical",
+	"pull_horizontal",
+	"pull_vertical",
+	"squat_knee",
+	"hinge_hip",
+	"brace",
+	"rotation",
+	"carry",
+	"arm_accessory",
+	"shoulder_accessory",
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonGapFillPolicyTargetPatternsElem) UnmarshalJSON(value []byte) error {
+	var v string
+	if err := json.Unmarshal(value, &v); err != nil {
+		return err
+	}
+	var ok bool
+	for _, expected := range enumValues_AnalyzerV1JsonGapFillPolicyTargetPatternsElem {
+		if reflect.DeepEqual(v, expected) {
+			ok = true
+			break
+		}
+	}
+	if !ok {
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_AnalyzerV1JsonGapFillPolicyTargetPatternsElem, v)
+	}
+	*j = AnalyzerV1JsonGapFillPolicyTargetPatternsElem(v)
+	return nil
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonGapFillPolicy) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["target_patterns"]; raw != nil && !ok {
+		return fmt.Errorf("field target_patterns in AnalyzerV1JsonGapFillPolicy: required")
+	}
+	type Plain AnalyzerV1JsonGapFillPolicy
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	if v, ok := raw["allow_unseen_movements"]; !ok || v == nil {
+		plain.AllowUnseenMovements = true
+	}
+	if v, ok := raw["min_sets_per_selected_pattern"]; !ok || v == nil {
+		plain.MinSetsPerSelectedPattern = 2.0
+	}
+	if 6 < plain.MinSetsPerSelectedPattern {
+		return fmt.Errorf("field %s: must be <= %v", "min_sets_per_selected_pattern", 6)
+	}
+	if 1 > plain.MinSetsPerSelectedPattern {
+		return fmt.Errorf("field %s: must be >= %v", "min_sets_per_selected_pattern", 1)
+	}
+	*j = AnalyzerV1JsonGapFillPolicy(plain)
+	return nil
+}
+
+// Constraints and heuristics distilled from user instructions/history; drives
+// selection, ordering, and execution rules.
 type AnalyzerV1JsonInstructionsContext struct {
-	// Constraints corresponds to the JSON schema field "constraints".
+	// Hard/soft constraints to avoid or emphasize; prefer_single_station is a strong
+	// preference (try to minimize station changes).
 	Constraints AnalyzerV1JsonInstructionsContextConstraints `json:"constraints" yaml:"constraints" mapstructure:"constraints"`
 
-	// ConstructionRules corresponds to the JSON schema field "construction_rules".
+	// How to assemble the session (format, priorities, and rest policies). Earlier
+	// priority_order items are filled first; later ones may be dropped under time
+	// constraints.
 	ConstructionRules AnalyzerV1JsonInstructionsContextConstructionRules `json:"construction_rules" yaml:"construction_rules" mapstructure:"construction_rules"`
 
 	// ExecutionPrinciples corresponds to the JSON schema field
 	// "execution_principles".
 	ExecutionPrinciples []string `json:"execution_principles" yaml:"execution_principles" mapstructure:"execution_principles"`
 
-	// PrimaryGoals corresponds to the JSON schema field "primary_goals".
+	// Ordered user goals; earlier items take precedence.
 	PrimaryGoals []string `json:"primary_goals" yaml:"primary_goals" mapstructure:"primary_goals"`
 }
 
+// Hard/soft constraints to avoid or emphasize; prefer_single_station is a strong
+// preference (try to minimize station changes).
 type AnalyzerV1JsonInstructionsContextConstraints struct {
-	// Avoid corresponds to the JSON schema field "avoid".
+	// Movements or patterns to avoid (e.g., 'deep knee flexion').
 	Avoid []string `json:"avoid" yaml:"avoid" mapstructure:"avoid"`
 
-	// Encourage corresponds to the JSON schema field "encourage".
+	// Movements or patterns to emphasize (e.g., 'horizontal pull').
 	Encourage []string `json:"encourage" yaml:"encourage" mapstructure:"encourage"`
 
-	// PreferSingleStation corresponds to the JSON schema field
-	// "prefer_single_station".
+	// If true, strongly prefer plans that minimize moving between stations; null = no
+	// preference.
 	PreferSingleStation *bool `json:"prefer_single_station" yaml:"prefer_single_station" mapstructure:"prefer_single_station"`
 }
 
@@ -285,6 +435,9 @@ func (j *AnalyzerV1JsonInstructionsContextConstraints) UnmarshalJSON(value []byt
 	return nil
 }
 
+// How to assemble the session (format, priorities, and rest policies). Earlier
+// priority_order items are filled first; later ones may be dropped under time
+// constraints.
 type AnalyzerV1JsonInstructionsContextConstructionRules struct {
 	// Format corresponds to the JSON schema field "format".
 	Format AnalyzerV1JsonInstructionsContextConstructionRulesFormat `json:"format" yaml:"format" mapstructure:"format"`
@@ -292,8 +445,8 @@ type AnalyzerV1JsonInstructionsContextConstructionRules struct {
 	// PriorityOrder corresponds to the JSON schema field "priority_order".
 	PriorityOrder []AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem `json:"priority_order" yaml:"priority_order" mapstructure:"priority_order"`
 
-	// RestBetweenSupersetsSec corresponds to the JSON schema field
-	// "rest_between_supersets_sec".
+	// Target rest between paired/clustered sets; null if not applicable for chosen
+	// format.
 	RestBetweenSupersetsSec *int `json:"rest_between_supersets_sec" yaml:"rest_between_supersets_sec" mapstructure:"rest_between_supersets_sec"`
 }
 
@@ -331,18 +484,48 @@ func (j *AnalyzerV1JsonInstructionsContextConstructionRulesFormat) UnmarshalJSON
 
 type AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem string
 
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemAccessoryPull AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "accessory_pull"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemAccessoryPush AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "accessory_push"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemAntiExtensionCore AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "anti_extension_core"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemAntiLateralCore AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "anti_lateral_core"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemArmAccessory AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "arm_accessory"
 const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemBigCompound AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "big_compound"
 const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemConditioning AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "conditioning"
 const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemCoreStability AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "core_stability"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemGripForearm AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "grip_forearm"
 const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemHypertrophyCompound AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "hypertrophy_compound"
 const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemIsolationFinishers AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "isolation_finishers"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemMetabolicFinishers AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "metabolic_finishers"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemMobilityFlexibility AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "mobility_flexibility"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemPosteriorChain AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "posterior_chain"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemPrehabRehab AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "prehab_rehab"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemRotationalCore AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "rotational_core"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemSecondaryCompound AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "secondary_compound"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemShoulderAccessory AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "shoulder_accessory"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemSingleLegUnilateral AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "single_leg_unilateral"
+const AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElemWarmupActivation AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = "warmup_activation"
 
 var enumValues_AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem = []interface{}{
+	"warmup_activation",
 	"big_compound",
+	"secondary_compound",
 	"hypertrophy_compound",
+	"accessory_push",
+	"accessory_pull",
+	"posterior_chain",
+	"single_leg_unilateral",
+	"shoulder_accessory",
+	"arm_accessory",
 	"core_stability",
+	"rotational_core",
+	"anti_extension_core",
+	"anti_lateral_core",
 	"isolation_finishers",
 	"conditioning",
+	"grip_forearm",
+	"prehab_rehab",
+	"mobility_flexibility",
+	"metabolic_finishers",
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
@@ -431,21 +614,116 @@ func (j *AnalyzerV1JsonInstructionsContext) UnmarshalJSON(value []byte) error {
 	return nil
 }
 
+// Session metadata used for naming and unit selection.
 type AnalyzerV1JsonMeta struct {
-	// Date corresponds to the JSON schema field "date".
+	// Session date in YYYY-MM-DD.
 	Date types.SerializableDate `json:"date" yaml:"date" mapstructure:"date"`
 
-	// DurationMinutes corresponds to the JSON schema field "duration_minutes".
+	// Total planned session time including warm-ups and rest (minutes).
 	DurationMinutes int `json:"duration_minutes" yaml:"duration_minutes" mapstructure:"duration_minutes"`
 
-	// Goal corresponds to the JSON schema field "goal".
+	// Primary user goal for this session (free text).
 	Goal string `json:"goal" yaml:"goal" mapstructure:"goal"`
 
-	// Location corresponds to the JSON schema field "location".
+	// Free-form location (e.g., 'home', 'gym:golds', 'hotel:hyatt').
 	Location string `json:"location" yaml:"location" mapstructure:"location"`
 
-	// Units corresponds to the JSON schema field "units".
+	// Whether the generator should form supersets and how aggressively.
+	SupersetPolicy AnalyzerV1JsonMetaSupersetPolicy `json:"superset_policy" yaml:"superset_policy" mapstructure:"superset_policy"`
+
+	// SupersetPreferences corresponds to the JSON schema field
+	// "superset_preferences".
+	SupersetPreferences AnalyzerV1JsonMetaSupersetPreferences `json:"superset_preferences" yaml:"superset_preferences" mapstructure:"superset_preferences"`
+
+	// Weight units used for target_load in this plan.
 	Units AnalyzerV1JsonMetaUnits `json:"units" yaml:"units" mapstructure:"units"`
+}
+
+type AnalyzerV1JsonMetaSupersetPolicy string
+
+const AnalyzerV1JsonMetaSupersetPolicyAutoWhenTimeLimited AnalyzerV1JsonMetaSupersetPolicy = "auto_when_time_limited"
+const AnalyzerV1JsonMetaSupersetPolicyGiantSetsOk AnalyzerV1JsonMetaSupersetPolicy = "giant_sets_ok"
+const AnalyzerV1JsonMetaSupersetPolicyNone AnalyzerV1JsonMetaSupersetPolicy = "none"
+const AnalyzerV1JsonMetaSupersetPolicyPairsOk AnalyzerV1JsonMetaSupersetPolicy = "pairs_ok"
+
+var enumValues_AnalyzerV1JsonMetaSupersetPolicy = []interface{}{
+	"none",
+	"pairs_ok",
+	"giant_sets_ok",
+	"auto_when_time_limited",
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonMetaSupersetPolicy) UnmarshalJSON(value []byte) error {
+	var v string
+	if err := json.Unmarshal(value, &v); err != nil {
+		return err
+	}
+	var ok bool
+	for _, expected := range enumValues_AnalyzerV1JsonMetaSupersetPolicy {
+		if reflect.DeepEqual(v, expected) {
+			ok = true
+			break
+		}
+	}
+	if !ok {
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_AnalyzerV1JsonMetaSupersetPolicy, v)
+	}
+	*j = AnalyzerV1JsonMetaSupersetPolicy(v)
+	return nil
+}
+
+type AnalyzerV1JsonMetaSupersetPreferences struct {
+	// Do not superset Tier A barbell compounds.
+	AvoidHeavyCompounds bool `json:"avoid_heavy_compounds" yaml:"avoid_heavy_compounds" mapstructure:"avoid_heavy_compounds"`
+
+	// Skip metabolic pairings if cardio is scheduled soon.
+	AvoidHrSpikePairings bool `json:"avoid_hr_spike_pairings" yaml:"avoid_hr_spike_pairings" mapstructure:"avoid_hr_spike_pairings"`
+
+	// Avoid pairings that require the same rack/cable at once.
+	AvoidSameImplementConflicts bool `json:"avoid_same_implement_conflicts" yaml:"avoid_same_implement_conflicts" mapstructure:"avoid_same_implement_conflicts"`
+
+	// Favor push+pull or hinge+core pairings over same-muscle pairings.
+	PreferNonCompeting bool `json:"prefer_non_competing" yaml:"prefer_non_competing" mapstructure:"prefer_non_competing"`
+
+	// Soft target; generator can deviate for time/equipment.
+	TargetSupersetCount int `json:"target_superset_count" yaml:"target_superset_count" mapstructure:"target_superset_count"`
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonMetaSupersetPreferences) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["target_superset_count"]; raw != nil && !ok {
+		return fmt.Errorf("field target_superset_count in AnalyzerV1JsonMetaSupersetPreferences: required")
+	}
+	type Plain AnalyzerV1JsonMetaSupersetPreferences
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	if v, ok := raw["avoid_heavy_compounds"]; !ok || v == nil {
+		plain.AvoidHeavyCompounds = false
+	}
+	if v, ok := raw["avoid_hr_spike_pairings"]; !ok || v == nil {
+		plain.AvoidHrSpikePairings = false
+	}
+	if v, ok := raw["avoid_same_implement_conflicts"]; !ok || v == nil {
+		plain.AvoidSameImplementConflicts = false
+	}
+	if v, ok := raw["prefer_non_competing"]; !ok || v == nil {
+		plain.PreferNonCompeting = true
+	}
+	if 6 < plain.TargetSupersetCount {
+		return fmt.Errorf("field %s: must be <= %v", "target_superset_count", 6)
+	}
+	if 0 > plain.TargetSupersetCount {
+		return fmt.Errorf("field %s: must be >= %v", "target_superset_count", 0)
+	}
+	*j = AnalyzerV1JsonMetaSupersetPreferences(plain)
+	return nil
 }
 
 type AnalyzerV1JsonMetaUnits string
@@ -496,6 +774,9 @@ func (j *AnalyzerV1JsonMeta) UnmarshalJSON(value []byte) error {
 	if _, ok := raw["location"]; raw != nil && !ok {
 		return fmt.Errorf("field location in AnalyzerV1JsonMeta: required")
 	}
+	if _, ok := raw["superset_preferences"]; raw != nil && !ok {
+		return fmt.Errorf("field superset_preferences in AnalyzerV1JsonMeta: required")
+	}
 	if _, ok := raw["units"]; raw != nil && !ok {
 		return fmt.Errorf("field units in AnalyzerV1JsonMeta: required")
 	}
@@ -516,29 +797,198 @@ func (j *AnalyzerV1JsonMeta) UnmarshalJSON(value []byte) error {
 	if len(plain.Location) < 1 {
 		return fmt.Errorf("field %s length: must be >= %d", "location", 1)
 	}
+	if v, ok := raw["superset_policy"]; !ok || v == nil {
+		plain.SupersetPolicy = "pairs_ok"
+	}
 	*j = AnalyzerV1JsonMeta(plain)
 	return nil
 }
 
+type AnalyzerV1JsonRelevantExercisesElem struct {
+	// Notes corresponds to the JSON schema field "notes".
+	Notes *string `json:"notes" yaml:"notes" mapstructure:"notes"`
+
+	// Pattern corresponds to the JSON schema field "pattern".
+	Pattern []AnalyzerV1JsonRelevantExercisesElemPatternElem `json:"pattern" yaml:"pattern" mapstructure:"pattern"`
+
+	// RecentBest corresponds to the JSON schema field "recent_best".
+	RecentBest *AnalyzerV1JsonRelevantExercisesElemRecentBest `json:"recent_best" yaml:"recent_best" mapstructure:"recent_best"`
+
+	// Slug corresponds to the JSON schema field "slug".
+	Slug string `json:"slug" yaml:"slug" mapstructure:"slug"`
+
+	// TierHint corresponds to the JSON schema field "tier_hint".
+	TierHint AnalyzerV1JsonRelevantExercisesElemTierHint `json:"tier_hint" yaml:"tier_hint" mapstructure:"tier_hint"`
+}
+
+type AnalyzerV1JsonRelevantExercisesElemPatternElem string
+
+const AnalyzerV1JsonRelevantExercisesElemPatternElemArmAccessory AnalyzerV1JsonRelevantExercisesElemPatternElem = "arm_accessory"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemBrace AnalyzerV1JsonRelevantExercisesElemPatternElem = "brace"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemCarry AnalyzerV1JsonRelevantExercisesElemPatternElem = "carry"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemConditioning AnalyzerV1JsonRelevantExercisesElemPatternElem = "conditioning"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemHingeHip AnalyzerV1JsonRelevantExercisesElemPatternElem = "hinge_hip"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemPullHorizontal AnalyzerV1JsonRelevantExercisesElemPatternElem = "pull_horizontal"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemPullVertical AnalyzerV1JsonRelevantExercisesElemPatternElem = "pull_vertical"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemPushHorizontal AnalyzerV1JsonRelevantExercisesElemPatternElem = "push_horizontal"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemPushVertical AnalyzerV1JsonRelevantExercisesElemPatternElem = "push_vertical"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemRotation AnalyzerV1JsonRelevantExercisesElemPatternElem = "rotation"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemShoulderAccessory AnalyzerV1JsonRelevantExercisesElemPatternElem = "shoulder_accessory"
+const AnalyzerV1JsonRelevantExercisesElemPatternElemSquatKnee AnalyzerV1JsonRelevantExercisesElemPatternElem = "squat_knee"
+
+var enumValues_AnalyzerV1JsonRelevantExercisesElemPatternElem = []interface{}{
+	"push_horizontal",
+	"push_vertical",
+	"pull_horizontal",
+	"pull_vertical",
+	"squat_knee",
+	"hinge_hip",
+	"brace",
+	"rotation",
+	"carry",
+	"arm_accessory",
+	"shoulder_accessory",
+	"conditioning",
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonRelevantExercisesElemPatternElem) UnmarshalJSON(value []byte) error {
+	var v string
+	if err := json.Unmarshal(value, &v); err != nil {
+		return err
+	}
+	var ok bool
+	for _, expected := range enumValues_AnalyzerV1JsonRelevantExercisesElemPatternElem {
+		if reflect.DeepEqual(v, expected) {
+			ok = true
+			break
+		}
+	}
+	if !ok {
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_AnalyzerV1JsonRelevantExercisesElemPatternElem, v)
+	}
+	*j = AnalyzerV1JsonRelevantExercisesElemPatternElem(v)
+	return nil
+}
+
+type AnalyzerV1JsonRelevantExercisesElemRecentBest struct {
+	// LoadLbs corresponds to the JSON schema field "load_lbs".
+	LoadLbs float64 `json:"load_lbs" yaml:"load_lbs" mapstructure:"load_lbs"`
+
+	// RepBracket corresponds to the JSON schema field "rep_bracket".
+	RepBracket string `json:"rep_bracket" yaml:"rep_bracket" mapstructure:"rep_bracket"`
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonRelevantExercisesElemRecentBest) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["load_lbs"]; raw != nil && !ok {
+		return fmt.Errorf("field load_lbs in AnalyzerV1JsonRelevantExercisesElemRecentBest: required")
+	}
+	if _, ok := raw["rep_bracket"]; raw != nil && !ok {
+		return fmt.Errorf("field rep_bracket in AnalyzerV1JsonRelevantExercisesElemRecentBest: required")
+	}
+	type Plain AnalyzerV1JsonRelevantExercisesElemRecentBest
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	*j = AnalyzerV1JsonRelevantExercisesElemRecentBest(plain)
+	return nil
+}
+
+type AnalyzerV1JsonRelevantExercisesElemTierHint string
+
+const AnalyzerV1JsonRelevantExercisesElemTierHintA AnalyzerV1JsonRelevantExercisesElemTierHint = "A"
+const AnalyzerV1JsonRelevantExercisesElemTierHintB AnalyzerV1JsonRelevantExercisesElemTierHint = "B"
+const AnalyzerV1JsonRelevantExercisesElemTierHintC AnalyzerV1JsonRelevantExercisesElemTierHint = "C"
+
+var enumValues_AnalyzerV1JsonRelevantExercisesElemTierHint = []interface{}{
+	"A",
+	"B",
+	"C",
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonRelevantExercisesElemTierHint) UnmarshalJSON(value []byte) error {
+	var v string
+	if err := json.Unmarshal(value, &v); err != nil {
+		return err
+	}
+	var ok bool
+	for _, expected := range enumValues_AnalyzerV1JsonRelevantExercisesElemTierHint {
+		if reflect.DeepEqual(v, expected) {
+			ok = true
+			break
+		}
+	}
+	if !ok {
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_AnalyzerV1JsonRelevantExercisesElemTierHint, v)
+	}
+	*j = AnalyzerV1JsonRelevantExercisesElemTierHint(v)
+	return nil
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonRelevantExercisesElem) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["notes"]; raw != nil && !ok {
+		return fmt.Errorf("field notes in AnalyzerV1JsonRelevantExercisesElem: required")
+	}
+	if _, ok := raw["pattern"]; raw != nil && !ok {
+		return fmt.Errorf("field pattern in AnalyzerV1JsonRelevantExercisesElem: required")
+	}
+	if _, ok := raw["recent_best"]; raw != nil && !ok {
+		return fmt.Errorf("field recent_best in AnalyzerV1JsonRelevantExercisesElem: required")
+	}
+	if _, ok := raw["slug"]; raw != nil && !ok {
+		return fmt.Errorf("field slug in AnalyzerV1JsonRelevantExercisesElem: required")
+	}
+	if _, ok := raw["tier_hint"]; raw != nil && !ok {
+		return fmt.Errorf("field tier_hint in AnalyzerV1JsonRelevantExercisesElem: required")
+	}
+	type Plain AnalyzerV1JsonRelevantExercisesElem
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	if plain.Pattern != nil && len(plain.Pattern) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "pattern", 1)
+	}
+	*j = AnalyzerV1JsonRelevantExercisesElem(plain)
+	return nil
+}
+
 type AnalyzerV1JsonSession struct {
-	// CutOrder corresponds to the JSON schema field "cut_order".
+	// If time runs short, drop tiers in this order; first listed is cut first (least
+	// protected). Should be a permutation of the tiers present.
 	CutOrder []AnalyzerV1JsonSessionCutOrderElem `json:"cut_order" yaml:"cut_order" mapstructure:"cut_order"`
 
-	// Tiers corresponds to the JSON schema field "tiers".
+	// Work tiers included for this session, highest priority first. Tier A = must-do,
+	// Tier B = nice-to-have, Tier C = stretch goals.
 	Tiers []AnalyzerV1JsonSessionTiersElem `json:"tiers" yaml:"tiers" mapstructure:"tiers"`
 
-	// Type corresponds to the JSON schema field "type".
+	// Primary identity of today’s session. This drives exercise pools and defaults
+	// (rep ranges, rest, emphasis).
 	Type AnalyzerV1JsonSessionType `json:"type" yaml:"type" mapstructure:"type"`
+
+	// How to warm up before Tier A (and optionally others). Defaults applied if
+	// omitted.
+	WarmupPolicy AnalyzerV1JsonSessionWarmupPolicy `json:"warmup_policy" yaml:"warmup_policy" mapstructure:"warmup_policy"`
 }
 
 type AnalyzerV1JsonSessionCutOrderElem string
 
-const AnalyzerV1JsonSessionCutOrderElemA AnalyzerV1JsonSessionCutOrderElem = "A"
 const AnalyzerV1JsonSessionCutOrderElemB AnalyzerV1JsonSessionCutOrderElem = "B"
 const AnalyzerV1JsonSessionCutOrderElemC AnalyzerV1JsonSessionCutOrderElem = "C"
 
 var enumValues_AnalyzerV1JsonSessionCutOrderElem = []interface{}{
-	"A",
 	"B",
 	"C",
 }
@@ -597,17 +1047,25 @@ func (j *AnalyzerV1JsonSessionTiersElem) UnmarshalJSON(value []byte) error {
 
 type AnalyzerV1JsonSessionType string
 
+const AnalyzerV1JsonSessionTypeArmsCore AnalyzerV1JsonSessionType = "arms_core"
+const AnalyzerV1JsonSessionTypeConditioningEmphasis AnalyzerV1JsonSessionType = "conditioning_emphasis"
 const AnalyzerV1JsonSessionTypeCustom AnalyzerV1JsonSessionType = "custom"
 const AnalyzerV1JsonSessionTypeFatLoss AnalyzerV1JsonSessionType = "fat_loss"
 const AnalyzerV1JsonSessionTypeFullBody AnalyzerV1JsonSessionType = "full_body"
+const AnalyzerV1JsonSessionTypeGlutesCore AnalyzerV1JsonSessionType = "glutes_core"
 const AnalyzerV1JsonSessionTypeHypertrophy AnalyzerV1JsonSessionType = "hypertrophy"
 const AnalyzerV1JsonSessionTypeLower AnalyzerV1JsonSessionType = "lower"
+const AnalyzerV1JsonSessionTypeLowerHinge AnalyzerV1JsonSessionType = "lower_hinge"
+const AnalyzerV1JsonSessionTypeLowerQuad AnalyzerV1JsonSessionType = "lower_quad"
 const AnalyzerV1JsonSessionTypeMaintenance AnalyzerV1JsonSessionType = "maintenance"
+const AnalyzerV1JsonSessionTypePosteriorChain AnalyzerV1JsonSessionType = "posterior_chain"
 const AnalyzerV1JsonSessionTypePower AnalyzerV1JsonSessionType = "power"
 const AnalyzerV1JsonSessionTypePull AnalyzerV1JsonSessionType = "pull"
 const AnalyzerV1JsonSessionTypePush AnalyzerV1JsonSessionType = "push"
 const AnalyzerV1JsonSessionTypeStrength AnalyzerV1JsonSessionType = "strength"
 const AnalyzerV1JsonSessionTypeUpper AnalyzerV1JsonSessionType = "upper"
+const AnalyzerV1JsonSessionTypeUpperPull AnalyzerV1JsonSessionType = "upper_pull"
+const AnalyzerV1JsonSessionTypeUpperPush AnalyzerV1JsonSessionType = "upper_push"
 
 var enumValues_AnalyzerV1JsonSessionType = []interface{}{
 	"hypertrophy",
@@ -620,6 +1078,14 @@ var enumValues_AnalyzerV1JsonSessionType = []interface{}{
 	"push",
 	"pull",
 	"full_body",
+	"posterior_chain",
+	"glutes_core",
+	"arms_core",
+	"upper_push",
+	"upper_pull",
+	"lower_quad",
+	"lower_hinge",
+	"conditioning_emphasis",
 	"custom",
 }
 
@@ -643,6 +1109,61 @@ func (j *AnalyzerV1JsonSessionType) UnmarshalJSON(value []byte) error {
 	return nil
 }
 
+// How to warm up before Tier A (and optionally others). Defaults applied if
+// omitted.
+type AnalyzerV1JsonSessionWarmupPolicy struct {
+	// GeneralMinutes corresponds to the JSON schema field "general_minutes".
+	GeneralMinutes int `json:"general_minutes" yaml:"general_minutes" mapstructure:"general_minutes"`
+
+	// 5–8 min light cardio/mobility.
+	IncludeGeneral bool `json:"include_general" yaml:"include_general" mapstructure:"include_general"`
+
+	// Progressive ramp sets before first Tier A compound.
+	IncludeSpecific bool `json:"include_specific" yaml:"include_specific" mapstructure:"include_specific"`
+
+	// SpecificRampSets corresponds to the JSON schema field "specific_ramp_sets".
+	SpecificRampSets int `json:"specific_ramp_sets" yaml:"specific_ramp_sets" mapstructure:"specific_ramp_sets"`
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *AnalyzerV1JsonSessionWarmupPolicy) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	type Plain AnalyzerV1JsonSessionWarmupPolicy
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	if v, ok := raw["general_minutes"]; !ok || v == nil {
+		plain.GeneralMinutes = 5.0
+	}
+	if 15 < plain.GeneralMinutes {
+		return fmt.Errorf("field %s: must be <= %v", "general_minutes", 15)
+	}
+	if 0 > plain.GeneralMinutes {
+		return fmt.Errorf("field %s: must be >= %v", "general_minutes", 0)
+	}
+	if v, ok := raw["include_general"]; !ok || v == nil {
+		plain.IncludeGeneral = true
+	}
+	if v, ok := raw["include_specific"]; !ok || v == nil {
+		plain.IncludeSpecific = true
+	}
+	if v, ok := raw["specific_ramp_sets"]; !ok || v == nil {
+		plain.SpecificRampSets = 2.0
+	}
+	if 5 < plain.SpecificRampSets {
+		return fmt.Errorf("field %s: must be <= %v", "specific_ramp_sets", 5)
+	}
+	if 0 > plain.SpecificRampSets {
+		return fmt.Errorf("field %s: must be >= %v", "specific_ramp_sets", 0)
+	}
+	*j = AnalyzerV1JsonSessionWarmupPolicy(plain)
+	return nil
+}
+
 // UnmarshalJSON implements json.Unmarshaler.
 func (j *AnalyzerV1JsonSession) UnmarshalJSON(value []byte) error {
 	var raw map[string]interface{}
@@ -657,6 +1178,9 @@ func (j *AnalyzerV1JsonSession) UnmarshalJSON(value []byte) error {
 	}
 	if _, ok := raw["type"]; raw != nil && !ok {
 		return fmt.Errorf("field type in AnalyzerV1JsonSession: required")
+	}
+	if _, ok := raw["warmup_policy"]; raw != nil && !ok {
+		return fmt.Errorf("field warmup_policy in AnalyzerV1JsonSession: required")
 	}
 	type Plain AnalyzerV1JsonSession
 	var plain Plain
@@ -721,17 +1245,26 @@ func (j *AnalyzerV1Json) UnmarshalJSON(value []byte) error {
 	if err := json.Unmarshal(value, &raw); err != nil {
 		return err
 	}
+	if _, ok := raw["available_equipment"]; raw != nil && !ok {
+		return fmt.Errorf("field available_equipment in AnalyzerV1Json: required")
+	}
 	if _, ok := raw["exercise_plan"]; raw != nil && !ok {
 		return fmt.Errorf("field exercise_plan in AnalyzerV1Json: required")
 	}
 	if _, ok := raw["fatigue_policy"]; raw != nil && !ok {
 		return fmt.Errorf("field fatigue_policy in AnalyzerV1Json: required")
 	}
+	if _, ok := raw["gap_fill_policy"]; raw != nil && !ok {
+		return fmt.Errorf("field gap_fill_policy in AnalyzerV1Json: required")
+	}
 	if _, ok := raw["instructions_context"]; raw != nil && !ok {
 		return fmt.Errorf("field instructions_context in AnalyzerV1Json: required")
 	}
 	if _, ok := raw["meta"]; raw != nil && !ok {
 		return fmt.Errorf("field meta in AnalyzerV1Json: required")
+	}
+	if _, ok := raw["relevant_exercises"]; raw != nil && !ok {
+		return fmt.Errorf("field relevant_exercises in AnalyzerV1Json: required")
 	}
 	if _, ok := raw["session"]; raw != nil && !ok {
 		return fmt.Errorf("field session in AnalyzerV1Json: required")
@@ -743,6 +1276,9 @@ func (j *AnalyzerV1Json) UnmarshalJSON(value []byte) error {
 	var plain Plain
 	if err := json.Unmarshal(value, &plain); err != nil {
 		return err
+	}
+	if plain.AvailableEquipment != nil && len(plain.AvailableEquipment) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "available_equipment", 1)
 	}
 	if plain.ExercisePlan != nil && len(plain.ExercisePlan) < 1 {
 		return fmt.Errorf("field %s length: must be >= %d", "exercise_plan", 1)
