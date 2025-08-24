@@ -1,0 +1,29 @@
+Inputs:
+- instructions_text: |
+    ---BEGIN_INSTRUCTIONS---
+    %s
+    ---END_INSTRUCTIONS---
+- history_text: |
+    ---BEGIN_HISTORY---
+    %s
+    ---END_HISTORY---
+- strava_recent: %s
+- upcoming_cardio_text: %q
+- recovery_signals:
+    sleep_score: %s
+    body_battery: %s
+- equipment_inventory: %s
+- meta:
+    session_date: %q
+    location: %q
+    units: %q
+    duration_minutes: %d
+
+Constraints:
+- Two-week anti-repeat logic unless last workout ≥7 days ago (then reset).
+- Only use available equipment.
+- Rep ranges for compounds typically 6–10 or 6–8; accessories 10–20.
+- RIR default 1–3 unless fatigue_policy increases it.
+
+Now produce ONLY the JSON object that conforms to the schema.
+

@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/aaronromeo/swolegen/internal/config"
 	"github.com/aaronromeo/swolegen/internal/strava"
 	"github.com/gofiber/fiber/v2"
 )
@@ -21,7 +22,7 @@ var newStravaClient = func(ts strava.TokenSource) stravaClient { return strava.N
 
 // OAuth endpoints for Strava (MVP single user).
 
-func registerStravaOAuth(app *fiber.App) {
+func registerStravaOAuth(app *fiber.App, _ *config.Config) {
 	app.Get("/oauth/strava/start", func(c *fiber.Ctx) error {
 		u, err := strava.AuthorizeURL()
 		if err != nil {

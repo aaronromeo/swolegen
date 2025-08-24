@@ -1,6 +1,7 @@
-Your last output did not validate against the schema. Here are the errors:
+Your last YAML did not validate against the Workout v1.2 JSON Schema.
 
-<<insert concise list of JSON Schema validation errors>>
+Errors:
+%s
 
 Constraints:
 - Do not change fields that already validate unless necessary to fix the errors.

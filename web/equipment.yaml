@@ -1,0 +1,50 @@
+equipment_inventory_profiles:
+  # Free Weights
+  eq_dumbbells_set_5-50: "Dumbbell Set: 5–50 lbs"
+  eq_dumbbells_set_55-100: "Dumbbell Set: 55–100 lbs"
+  eq_kettlebells_set_5-35: "Kettlebells: 5–35 lbs"
+  eq_kettlebells_set_40-70: "Kettlebells: 40–70 lbs"
+
+  # Bars & Plates
+  eq_olympic_barbell_mens_20kg: "Olympic Barbell – 20kg (Men's)"
+  eq_olympic_barbell_womens_15kg: "Olympic Barbell – 15kg (Women's)"
+  eq_weight_plates_standard: "Standard Iron Plates (2.5–45 lbs)"
+  eq_weight_plates_bumper: "Bumper Plates"
+  eq_weight_plates_micro: "Micro Plates (0.5–2.5 lbs/kg)"
+
+  # Benches & Platforms
+  eq_flat_bench: "Flat Bench"
+  eq_adjustable_bench: "Adjustable Bench"
+  eq_hip_thrust_bench_or_pad: "Hip Thrust Bench/Pad"
+  eq_step_platform: "Step Platform / Box"
+  eq_plyo_box: "Plyo Box"
+
+  # Racks & Machines
+  eq_power_rack: "Power Rack"
+  eq_squat_stand: "Squat Stand"
+  eq_smith_machine: "Smith Machine"
+  eq_cable_machine_single_stack: "Cable Machine (Single Stack)"
+  eq_cable_machine_dual_stack: "Cable Machine (Dual Stack)"
+  eq_lat_pulldown: "Lat Pulldown Machine"
+  eq_seated_row: "Seated Row Machine"
+
+  # Attachments & Bands
+  eq_cable_attachments_basic: "Cable Attachments (Rope, Bar, Single Handles)"
+  eq_cable_attachments_full: "Cable Attachments (Extended Set)"
+  eq_bands_light_medium: "Resistance Bands (Light/Medium)"
+  eq_bands_full: "Resistance Bands (Full Range)"
+
+  # Bodyweight Stations
+  eq_pullup_bar: "Pull-Up Bar"
+  eq_assisted_pullup: "Assisted Pull-Up Station"
+  eq_dip_bars: "Dip Bars"
+  eq_mat_area: "Mat Area"
+
+  # Cardio
+  eq_treadmill: "Treadmill"
+  eq_stationary_bike: "Stationary Bike"
+  eq_air_bike: "Assault / Air Bike"
+  eq_elliptical: "Elliptical"
+  eq_rower: "Rowing Machine"
+  eq_stair_climber: "Stair Climber"
+  eq_sled_and_turf: "Sled & Turf"

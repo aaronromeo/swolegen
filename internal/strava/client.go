@@ -50,10 +50,11 @@ func NewWithTokenSource(ts TokenSource) *Client {
 }
 
 type Activity struct {
-	Name   string  `json:"name"`
-	Type   string  `json:"type"`
-	Start  string  `json:"start_date"`
-	Effort float64 `json:"suffer_score"` // Strava may return numbers with decimals
+	Name        string        `json:"name"`
+	Type        string        `json:"type"`
+	Start       string        `json:"start_date"`
+	ElapsedTime time.Duration `json:"elapsed_time"`
+	Effort      float64       `json:"suffer_score"` // Strava may return numbers with decimals
 }
 
 func (c *Client) GetRecentActivities(ctx context.Context, sinceDays int) ([]Activity, error) {
@@ -87,7 +88,7 @@ func (c *Client) GetRecentActivities(ctx context.Context, sinceDays int) ([]Acti
 		return nil, err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode >= 300 {
+	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("strava status %d", resp.StatusCode)
 	}
 	var out []Activity

@@ -1,0 +1,623 @@
+---
+workout_date: 2025-08-04
+workout_name: Strength A – Push + Core
+sets:
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 10
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 27.5
+    actual_reps: 12
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 10
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 27.5
+    actual_reps: 12
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 10
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 27.5
+    actual_reps: 12
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 9
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 7
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 5
+  - description: Front-Foot Elevated Split Squat (per leg)
+    target_weight: 35 lbs
+    target_reps: 8
+    actual_weight: 35
+    actual_reps: 8
+  - description: Pallof Press (per side)
+    target_weight: 20-27.5 lbs
+    target_reps: 12
+    actual_weight: 20
+    actual_reps: 12
+  - description: Front-Foot Elevated Split Squat (per leg)
+    target_weight: 35 lbs
+    target_reps: 8
+    actual_weight: 35
+    actual_reps: null
+  - description: Pallof Press (per side)
+    target_weight: 20-27.5 lbs
+    target_reps: 12
+    actual_weight: 20
+    actual_reps: 12
+  - description: Overhead DB Triceps Extension
+    target_weight: 40-50 lbs
+    target_reps: 12
+    actual_weight: 45
+    actual_reps: 12
+  - description: Lateral Raise (per side)
+    target_weight: 12.5-15 lbs or yellow band
+    target_reps: 15
+    actual_weight: 15
+    actual_reps: 15
+  - description: Overhead DB Triceps Extension
+    target_weight: 40-50 lbs
+    target_reps: 12
+    actual_weight: 45
+    actual_reps: 12
+  - description: Lateral Raise (per side)
+    target_weight: 12.5-15 lbs or yellow band
+    target_reps: 15
+    actual_weight: 15
+    actual_reps: 15
+---
+workout_date: '2025-08-06'
+workout_name: "Strength B - Posterior Chain + Pull"
+sets:
+- description: RDL (Barbell)
+  target_weight: 185 lbs
+  target_reps: 8
+  actual_weight: 135
+  actual_reps: 8
+- description: Pull-Up (Bodyweight)
+  target_weight: Bodyweight
+  target_reps: "6-10"
+  actual_weight: bodyweight
+  actual_reps: 10
+- description: RDL (Barbell)
+  target_weight: 225 lbs
+  target_reps: 8
+  actual_weight: 225
+  actual_reps: 8
+- description: Pull-Up (Bodyweight)
+  target_weight: Bodyweight
+  target_reps: "6-10"
+  actual_weight: Bodyweight
+  actual_reps: 10
+- description: RDL (Barbell)
+  target_weight: "245-255 lbs"
+  target_reps: 6
+  actual_weight: 245
+  actual_reps: 6
+- description: Pull-Up (Bodyweight)
+  target_weight: Bodyweight
+  target_reps: "6-10"
+  actual_weight: Bodyweight
+  actual_reps: 6
+- description: Hip Thrust (Barbell)
+  target_weight: "95-115 lbs"
+  target_reps: 10
+  actual_weight: 145
+  actual_reps: 10
+- description: Chest-Supported DB Row
+  target_weight: 65 lbs/hand
+  target_reps: 10
+  actual_weight: 65
+  actual_reps: 10
+- description: Hip Thrust (Barbell)
+  target_weight: "95-115 lbs"
+  target_reps: 10
+  actual_weight: 145
+  actual_reps: 8
+- description: Chest-Supported DB Row
+  target_weight: 65 lbs/hand
+  target_reps: 10
+  actual_weight: 65
+  actual_reps: 10
+- description: Hip Thrust (Barbell)
+  target_weight: "95-115 lbs"
+  target_reps: 10
+  actual_weight: 110
+  actual_reps: 10
+- description: Chest-Supported DB Row
+  target_weight: 65 lbs/hand
+  target_reps: 10
+  actual_weight: 65
+  actual_reps: 8
+- description: Single-Leg DB RDL
+  target_weight: 35 lbs/hand
+  target_reps: "8-10/side"
+  actual_weight: 35
+  actual_reps: 8
+- description: Cable/Band Row (Tempo)
+  target_weight: "40-50 lbs"
+  target_reps: 12
+  actual_weight: 50
+  actual_reps: 12
+- description: Single-Leg DB RDL
+  target_weight: 35 lbs/hand
+  target_reps: "8-10/side"
+  actual_weight: 35
+  actual_reps: 8
+- description: Cable/Band Row (Tempo)
+  target_weight: "40-50 lbs"
+  target_reps: 12
+  actual_weight: 50
+  actual_reps: 12
+- description: Hammer Curl
+  target_weight: "30-35 lbs/hand"
+  target_reps: 10
+  actual_weight: 30
+  actual_reps: 10
+- description: Rear Delt Fly (Cable or DB)
+  target_weight: "15-20 lbs"
+  target_reps: 15
+  actual_weight: 20
+  actual_reps: 10
+- description: Hammer Curl
+  target_weight: "30-35 lbs/hand"
+  target_reps: 10
+  actual_weight: null
+  actual_reps: null
+- description: Rear Delt Fly (Cable or DB)
+  target_weight: "15-20 lbs"
+  target_reps: 15
+  actual_weight: null
+  actual_reps: null
+---  
+workout_date: '2025-08-09'
+workout_name: "Strength C \u2013 Arms + Glutes + Core"
+sets:
+- description: Hip Thrust (Barbell or DB)
+  target_weight: 95 lbs
+  target_reps: 12
+  actual_weight: 120
+  actual_reps: 12
+- description: DB Bicep Curl (Alternating)
+  target_weight: "30-35 lbs/hand"
+  target_reps: 10
+  actual_weight: 30
+  actual_reps: 10
+- description: Hip Thrust (Barbell or DB)
+  target_weight: 95 lbs
+  target_reps: 12
+  actual_weight: 120
+  actual_reps: 12
+- description: DB Bicep Curl (Alternating)
+  target_weight: "30\u201335 lbs/hand"
+  target_reps: 10
+  actual_weight: 35
+  actual_reps: 10
+- description: Hip Thrust (Barbell or DB)
+  target_weight: 95 lbs
+  target_reps: 12
+  actual_weight: 120
+  actual_reps: 12
+- description: DB Bicep Curl (Alternating)
+  target_weight: "30\u201335 lbs/hand"
+  target_reps: 10
+  actual_weight: 35
+  actual_reps: 8
+- description: Lateral Raise (Strict Form)
+  target_weight: "15-20 lbs/hand"
+  target_reps: "12-15"
+  actual_weight: 15
+  actual_reps: 12
+- description: Cable Triceps Pushdown or DB Overhead Extension
+  target_weight: "35-40 lbs DB or 35 lbs cable"
+  target_reps: 12
+  actual_weight: 40
+  actual_reps: 13
+- description: Lateral Raise (Strict Form)
+  target_weight: "15-20 lbs/hand"
+  target_reps: "12-15"
+  actual_weight: 15
+  actual_reps: 12
+- description: Cable Triceps Pushdown or DB Overhead Extension
+  target_weight: "35-40 lbs DB or 35 lbs cable"
+  target_reps: 12
+  actual_weight: 45
+  actual_reps: 13
+- description: Lateral Raise (Strict Form)
+  target_weight: "15-20 lbs/hand"
+  target_reps: "12-15"
+  actual_weight: 15
+  actual_reps: 9
+- description: Cable Triceps Pushdown or DB Overhead Extension
+  target_weight: "35\u201340 lbs DB or 35 lbs cable"
+  target_reps: 12
+  actual_weight: 45
+  actual_reps: 12
+- description: Single-Leg Glute Bridge (Feet on Bench)
+  target_weight: Bodyweight or light KB
+  target_reps: 8
+  actual_weight: bodyweight
+  actual_reps: 8
+- description: Russian Twist (KB or DB)
+  target_weight: "20-25 lbs"
+  target_reps: 12/side
+  actual_weight: 25
+  actual_reps: 12
+- description: Single-Leg Glute Bridge (Feet on Bench)
+  target_weight: Bodyweight or light KB
+  target_reps: 8
+  actual_weight: bodyweight
+  actual_reps: 8
+- description: Russian Twist (KB or DB)
+  target_weight: "20-25 lbs"
+  target_reps: 12/side
+  actual_weight: 25
+  actual_reps: 13
+- description: Face Pulls
+  target_weight: "30-37.5 lbs cable"
+  target_reps: 20
+  actual_weight: 36.25
+  actual_reps: 20
+- description: Forearm Plank Hold
+  target_weight: Bodyweight
+  target_reps: 60s
+  actual_weight: bodyweight
+  actual_reps: 60
+- description: Face Pulls
+  target_weight: "30-37.5 lbs cable"
+  target_reps: 20
+  actual_weight: 36.25
+  actual_reps: 20
+- description: Forearm Plank Hold
+  target_weight: Bodyweight
+  target_reps: 60s
+  actual_weight: bodyweight
+  actual_reps: 41
+workout_date: 2025-08-12
+workout_name: Strength A – Push + Core (Modified for Equipment Flow)
+sets:
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 10
+  - description: DB Side Plank Row (per side)
+    target_weight: 30-35 lbs
+    target_reps: 8-10
+    actual_weight: 35
+    actual_reps: 10
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 8
+  - description: DB Side Plank Row (per side)
+    target_weight: 30-35 lbs
+    target_reps: 8-10
+    actual_weight: 35
+    actual_reps: 10
+  - description: Incline DB Press
+    target_weight: 50-55 lbs
+    target_reps: 8-10
+    actual_weight: 55
+    actual_reps: 6
+  - description: DB Side Plank Row (per side)
+    target_weight: 30-35 lbs
+    target_reps: 8-10
+    actual_weight: 35
+    actual_reps: 7
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 7
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 8
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 7
+  - description: Goblet Step-Up (per leg)
+    target_weight: 50-60 lbs
+    target_reps: 8
+    actual_weight: 55
+    actual_reps: 7
+  - description: Arnold Press
+    target_weight: 35-40 lbs
+    target_reps: 10
+    actual_weight: 40
+    actual_reps: 5
+  - description: Pallof Press (per side)
+    target_weight: 20-27.5 lbs
+    target_reps: 12
+    actual_weight: 26.875
+    actual_reps: 12
+  - description: Overhead DB Triceps Extension or Cable Rope Extension
+    target_weight: 40-50 lbs DB or 35 lbs cable
+    target_reps: 12
+    actual_weight: 51.25
+    actual_reps: 12
+  - description: Pallof Press (per side)
+    target_weight: 20-27.5 lbs
+    target_reps: 12
+    actual_weight: 26.875
+    actual_reps: 12
+  - description: Overhead DB Triceps Extension or Cable Rope Extension
+    target_weight: 40-50 lbs DB or 35 lbs cable
+    target_reps: 12
+    actual_weight: 51.25
+    actual_reps: 11
+  - description: Lateral Raise
+    target_weight: 12.5-15 lbs or yellow band
+    target_reps: 15
+    actual_weight: 13.75
+    actual_reps: 12
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 28.75
+    actual_reps: 12
+  - description: Lateral Raise
+    target_weight: 12.5-15 lbs or yellow band
+    target_reps: 15
+    actual_weight: 13.75
+    actual_reps: 12
+  - description: Cable/Band Rotation (per side)
+    target_weight: 25-30 lbs
+    target_reps: 12
+    actual_weight: 28.75
+    actual_reps: 12
+---
+workout_date: 2025-08-13
+workout_name: Strength B – Posterior Chain + Pull
+sets:
+  - description: RDL (Barbell)
+    target_weight: 185 lbs
+    target_reps: 8
+    actual_weight: 185
+    actual_reps: 8
+  - description: Pull-Up (Bodyweight)
+    target_weight: Bodyweight
+    target_reps: 6-10
+    actual_weight: bodyweight
+    actual_reps: 8
+  - description: RDL (Barbell)
+    target_weight: 225 lbs
+    target_reps: 8
+    actual_weight: 225
+    actual_reps: 8
+  - description: Pull-Up (Bodyweight)
+    target_weight: Bodyweight
+    target_reps: 6-10
+    actual_weight: bodyweight
+    actual_reps: 8
+  - description: RDL (Barbell)
+    target_weight: 245-255 lbs
+    target_reps: 6
+    actual_weight: 245
+    actual_reps: 6
+  - description: Pull-Up (Bodyweight)
+    target_weight: Bodyweight
+    target_reps: 6-10
+    actual_weight: Bodyweight
+    actual_reps: 6
+  - description: Hip Thrust (Barbell)
+    target_weight: 115-145 lbs
+    target_reps: 10
+    actual_weight: 130
+    actual_reps: 10
+  - description: Chest-Supported DB Row
+    target_weight: 65 lbs/hand
+    target_reps: 10
+    actual_weight: 65
+    actual_reps: 10
+  - description: Hip Thrust (Barbell)
+    target_weight: 115-145 lbs
+    target_reps: 10
+    actual_weight: 130
+    actual_reps: 10
+  - description: Chest-Supported DB Row
+    target_weight: 65 lbs/hand
+    target_reps: 10
+    actual_weight: 65
+    actual_reps: 10
+  - description: Hip Thrust (Barbell)
+    target_weight: 110-145 lbs
+    target_reps: 10
+    actual_weight: 130
+    actual_reps: 10
+  - description: Chest-Supported DB Row
+    target_weight: 65 lbs/hand
+    target_reps: 10
+    actual_weight: 65
+    actual_reps: 8
+  - description: Single-Leg DB RDL
+    target_weight: 35 lbs/hand
+    target_reps: 8-10/side
+    actual_weight: 35
+    actual_reps: 10
+  - description: Cable/Band Row (Tempo)
+    target_weight: 40-50 lbs
+    target_reps: 12
+    actual_weight: 49
+    actual_reps: 12
+  - description: Single-Leg DB RDL
+    target_weight: 35 lbs/hand
+    target_reps: 8-10/side
+    actual_weight: 35
+    actual_reps: 8
+  - description: Cable/Band Row (Tempo)
+    target_weight: 40-50 lbs
+    target_reps: 12
+    actual_weight: 100
+    actual_reps: 12
+  - description: Hammer Curl
+    target_weight: 30-35 lbs/hand
+    target_reps: 10
+    actual_weight: 35
+    actual_reps: 10
+  - description: Rear Delt Fly (Cable or DB)
+    target_weight: 15-20 lbs
+    target_reps: 15
+    actual_weight: 19.25
+    actual_reps: 12
+  - description: Hammer Curl
+    target_weight: 30-35 lbs/hand
+    target_reps: 10
+    actual_weight: 35
+    actual_reps: 8
+  - description: Rear Delt Fly (Cable or DB)
+    target_weight: 15-20 lbs
+    target_reps: 15
+    actual_weight: 17.5
+    actual_reps: 12
+---
+workout_date: 2025-08-15
+workout_name: Strength C – Armsdt + Glutes + Core
+sets:
+  - description: Hip Thrust (Barbell or DB)
+    target_weight: 95-120 lbs
+    target_reps: 12
+    actual_weight: 115
+    actual_reps: 12
+  - description: DB Bicep Curl (Alternating)
+    target_weight: 30-35 lbs/hand
+    target_reps: 10
+    actual_weight: 35
+    actual_reps: 9
+  - description: Hip Thrust (Barbell or DB)
+    target_weight: 95-120 lbs
+    target_reps: 12
+    actual_weight: 115
+    actual_reps: 12
+  - description: DB Bicep Curl (Alternating)
+    target_weight: 30-35 lbs/hand
+    target_reps: 10
+    actual_weight: 35
+    actual_reps: 6
+  - description: Hip Thrust (Barbell or DB)
+    target_weight: 95-120 lbs
+    target_reps: 12
+    actual_weight: 115
+    actual_reps: 12
+  - description: DB Bicep Curl (Alternating)
+    target_weight: 30-35 lbs/hand
+    target_reps: 10
+    actual_weight: 35
+    actual_reps: 8
+  - description: Lateral Raise (Strict Form)
+    target_weight: 15-20 lbs/hand
+    target_reps: 12-15
+    actual_weight: 16.25
+    actual_reps: 12
+  - description: Cable Triceps Pushdown or DB Overhead Extension
+    target_weight: 35-45 lbs DB or cable
+    target_reps: 12
+    actual_weight: 32.5
+    actual_reps: 10
+  - description: Lateral Raise (Strict Form)
+    target_weight: 15-20 lbs/hand
+    target_reps: 12-15
+    actual_weight: 16.25
+    actual_reps: 10
+  - description: Cable Triceps Pushdown or DB Overhead Extension
+    target_weight: 35-45 lbs DB or cable
+    target_reps: 12
+    actual_weight: 36.25 x 2
+    actual_reps: 6
+  - description: Lateral Raise (Strict Form)
+    target_weight: 15-20 lbs/hand
+    target_reps: 12-15
+    actual_weight: 16.25
+    actual_reps: 
+  - description: Cable Triceps Pushdown or DB Overhead Extension
+    target_weight: 35-45 lbs DB or cable
+    target_reps: 12
+    actual_weight: 32.5
+    actual_reps: 8
+  - description: Single-Leg Glute Bridge (Feet on Bench)
+    target_weight: Bodyweight or light KB
+    target_reps: 8
+    actual_weight: bodyweight
+    actual_reps: 8
+  - description: Russian Twist (KB or DB)
+    target_weight: 20-25 lbs
+    target_reps: 12/side
+    actual_weight: 25
+    actual_reps: 12
+  - description: Single-Leg Glute Bridge (Feet on Bench)
+    target_weight: Bodyweight or light KB
+    target_reps: 8
+    actual_weight: bodyweight
+    actual_reps: 8
+  - description: Russian Twist (KB or DB)
+    target_weight: 20-25 lbs
+    target_reps: 12/side
+    actual_weight: 25
+    actual_reps: 12
+  - description: Face Pulls
+    target_weight: 30-37.5 lbs cable
+    target_reps: 20
+    actual_weight: 37.5
+    actual_reps: 20
+  - description: Forearm Plank Hold
+    target_weight: Bodyweight
+    target_reps: 60s
+    actual_weight: Bodyweight
+    actual_reps: 60
+  - description: Face Pulls
+    target_weight: 30-37.5 lbs cable
+    target_reps: 20
+    actual_weight: 37.5
+    actual_reps: null
+  - description: Forearm Plank Hold
+    target_weight: Bodyweight
+    target_reps: 60s
+    actual_weight: Bodyweight
+    actual_reps: 20s

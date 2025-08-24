@@ -8,6 +8,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/aaronromeo/swolegen/internal/config"
 	"github.com/aaronromeo/swolegen/internal/strava"
 	"github.com/gofiber/fiber/v2"
 )
@@ -32,7 +33,7 @@ func TestStravaRecentEndpoint(t *testing.T) {
 	}
 	t.Cleanup(func() { newStravaClient = savedFactory })
 
-	registerStravaOAuth(app)
+	registerStravaOAuth(app, &config.Config{})
 
 	t.Run("no token provided - should suggest OAuth", func(t *testing.T) {
 		req := httptest.NewRequest("GET", "/strava/recent", nil)

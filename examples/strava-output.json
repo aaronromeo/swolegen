@@ -1,0 +1,38 @@
+{
+  "status": 200,
+  "data": {
+    "activities": [
+      {
+        "name": "Lunch Weight Training",
+        "type": "WeightTraining",
+        "start_date": "2025-08-12T15:36:29Z",
+        "suffer_score": 21
+      },
+      {
+        "name": "Evening Weight Training",
+        "type": "WeightTraining",
+        "start_date": "2025-08-14T00:34:28Z",
+        "suffer_score": 16
+      },
+      {
+        "name": "Morning Run",
+        "type": "Run",
+        "start_date": "2025-08-14T13:15:48Z",
+        "suffer_score": 86
+      },
+      {
+        "name": "Evening Weight Training",
+        "type": "WeightTraining",
+        "start_date": "2025-08-15T22:18:56Z",
+        "suffer_score": 14
+      },
+      {
+        "name": "Morning Run",
+        "type": "Run",
+        "start_date": "2025-08-16T13:17:34Z",
+        "suffer_score": 158
+      }
+    ],
+    "count": 5
+  }
+}

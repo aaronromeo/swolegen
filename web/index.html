@@ -33,8 +33,69 @@
       <button id="btn-recent">Fetch /strava/recent</button>
     </div>
 
+    <div class="row">
+      <label>Strava Recent</label><br />
+      <textarea id="stravaRecent" cols="40" rows="5" value="" readonly></textarea>
+    </div>
+
+    <hr />
+
+    <h2>Analyzer</h2>
+    <div class="row">
+      <label>Instructions URL</label><br />
+      <input id="instructionsUrl" type="text" size="80" value="/docs/instructions-demo.md" />
+    </div>
+    <div class="row">
+      <label>History URL</label><br />
+      <input id="historyUrl" type="text" size="80" value="/docs/history-demo.json" />
+    </div>
+    <div class="row">
+      <label>Location</label><br />
+      <input id="location" type="text" value="home" />
+    </div>
+    <div class="row">
+      <label>Equipment Inventory</label><br />
+      <div id="equipContainer">Loading equipment...</div>
+    </div>
+    <div class="row">
+      <label>Duration (minutes)</label><br />
+      <input id="duration" type="number" value="45" min="10" />
+    </div>
+    <div class="row">
+      <label>Units</label><br />
+      <select id="units">
+        <option value="lbs" selected>lbs</option>
+        <option value="kg">kg</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>Upcoming cardio (free text)</label><br />
+      <input id="cardio" type="text" size="80" placeholder="e.g., Tue 30m run, Wed easy bike" />
+    </div>
+    <div class="row">
+      <label>Garmin Sleep Score (0–100, optional)</label><br />
+      <input id="garminSleep" type="number" min="0" max="100" />
+    </div>
+    <div class="row">
+      <label>Garmin Body Battery (0–100, optional)</label><br />
+      <input id="garminBattery" type="number" min="0" max="100" />
+    </div>
+    <div class="row">
+      <button id="btn-analyze">Analyze</button>
+      <button id="btn-generate" style="margin-left:8px;">Generate</button>
+    </div>
+    <hr />
+
     <h3>Response</h3>
     <pre id="out"><code></code></pre>
+
+    <h3>Generated YAML</h3>
+    <div class="row">
+      <button id="btn-copy-yaml">Copy</button>
+    </div>
+    <div class="row">
+      <textarea id="yamlOut" cols="80" rows="18" spellcheck="false" style="font-family: Menlo, Consolas, monospace;"></textarea>
+    </div>
 
     <script src="./app.js"></script>
   </body>

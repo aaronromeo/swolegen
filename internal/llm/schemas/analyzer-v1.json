@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://swolegen.app/schemas/analyzer-v1.json",
+  "title": "SwoleGen Analyzer Plan (v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "session",
+    "fatigue_policy",
+    "time_budget",
+    "exercise_plan",
+    "instructions_context"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "location",
+        "units",
+        "duration_minutes",
+        "goal"
+      ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "units": {
+          "type": "string",
+          "enum": [
+            "lbs",
+            "kg"
+          ]
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 180
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "tiers",
+        "cut_order"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hypertrophy",
+            "strength",
+            "power",
+            "maintenance",
+            "fat_loss",
+            "upper",
+            "lower",
+            "push",
+            "pull",
+            "full_body",
+            "custom"
+          ]
+        },
+        "tiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          }
+        },
+        "cut_order": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          }
+        }
+      }
+    },
+    "fatigue_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rir_shift",
+        "load_cap_pct",
+        "reason"
+      ],
+      "properties": {
+        "rir_shift": {
+          "type": "integer",
+          "minimum": -2,
+          "maximum": 3
+        },
+        "load_cap_pct": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 1.1
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "time_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_set_count",
+        "estimated_minutes_total"
+      ],
+      "properties": {
+        "target_set_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "estimated_minutes_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 10,
+          "maximum": 180
+        }
+      }
+    },
+    "exercise_plan": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tier",
+          "exercise",
+          "equipment",
+          "superset",
+          "warmups",
+          "working_sets",
+          "targets"
+        ],
+        "properties": {
+          "tier": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "exercise": {
+            "type": "string",
+            "minLength": 1
+          },
+          "equipment": {
+            "type": "string",
+            "minLength": 1
+          },
+          "superset": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "warmups": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "working_sets": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "targets": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "rep_range",
+              "rir",
+              "target_load",
+              "load_cap"
+            ],
+            "properties": {
+              "rep_range": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rir": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 4
+              },
+              "target_load": {
+                "type": [
+                  "number",
+                  "string",
+                  "null"
+                ]
+              },
+              "load_cap": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "instructions_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_goals",
+        "construction_rules",
+        "constraints",
+        "execution_principles"
+      ],
+      "properties": {
+        "primary_goals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "construction_rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "format",
+            "priority_order",
+            "rest_between_supersets_sec"
+          ],
+          "properties": {
+            "format": {
+              "type": "string",
+              "enum": [
+                "supersets",
+                "giant_sets",
+                "straight_sets"
+              ]
+            },
+            "priority_order": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "big_compound",
+                  "hypertrophy_compound",
+                  "core_stability",
+                  "isolation_finishers",
+                  "conditioning"
+                ]
+              }
+            },
+            "rest_between_supersets_sec": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 300
+            }
+          }
+        },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "avoid",
+            "encourage",
+            "prefer_single_station"
+          ],
+          "properties": {
+            "avoid": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "encourage": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "prefer_single_station": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        },
+        "execution_principles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

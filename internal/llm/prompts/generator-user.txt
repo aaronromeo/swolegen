@@ -1,0 +1,6 @@
+Analyzer JSON:: |
+    ---BEGIN_ANALYZER_JSON---
+    %s
+    ---END_ANALYZER_JSON---
+
+Now output ONLY the JSON document for this session, conforming to the schema.
