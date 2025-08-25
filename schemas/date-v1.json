@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://swolegen.app/schemas/date-v1.json",
+    "title": "SwoleGen Date Format (v1)",
+    "type": "string",
+    "format": "date",
+    "description": "date in YYYY-MM-DD."
+}

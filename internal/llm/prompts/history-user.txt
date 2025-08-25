@@ -1,0 +1,22 @@
+Inputs:
+- today: %q (utc date of the request)
+- history_text: |
+    ---BEGIN_HISTORY---
+    %s
+    ---END_HISTORY---
+
+Guidance:
+- Parse all entries within the last 30 days from today.
+- History sources may be YAML, bulleted text, pasted app logs, or mixed prose.
+- Expand acronyms and normalize exercise names to canonical slugs per the system instructions.
+- Apply defaulting rules:
+    - If only one reps value is provided, treat it as both target and actual.
+    - If only one load is provided, treat it as both target and actual.
+- Convert kilograms to pounds for numeric loads (load_lbs), rounding as appropriate.
+- Consolidate duplicates across sessions to determine each exercise’s recent_best.
+- Equipment:
+    - Use only canonical keys in exercise.equipment; if needed, include "eq_other" and list the free-text items in exercise.equipment_other.
+    - Always include both exercise.equipment_other and exercise.equipment_notes; set them to null when unused.
+- Return only the History v1 JSON that validates against the provided schema.
+
+Now produce ONLY the JSON object that conforms to the schema.

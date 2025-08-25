@@ -1,0 +1,18 @@
+Your last output did not validate against the History v1 JSON Schema.
+
+Errors:
+    ---BEGIN_ERRORS---
+    %s
+    ---END_ERRORS---
+
+Constraints:
+- Do not change fields that already validate unless necessary to fix the errors.
+- Do not introduce new keys.
+- Output JSON ONLY (no surrounding backticks, no prose), as a single JSON object that conforms to the schema.
+
+Re-emit the corrected JSON now.
+
+Previous User Prompt
+    ---BEGIN_PREVIOUS_USER_PROMPT---
+    %s
+    ---END_PREVIOUS_USER_PROMPT---

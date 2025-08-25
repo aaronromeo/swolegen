@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://swolegen.app/schemas/history-v1.json",
+    "title": "SwoleGen Workout History (v1)",
+    "description": "Structured history of a user’s workouts based on data provided.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "exercises"
+    ],
+    "properties": {
+        "exercises": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 90,
+            "items": {
+                "$ref": "./exercise-v1.json"
+            }
+        }
+    }
+}

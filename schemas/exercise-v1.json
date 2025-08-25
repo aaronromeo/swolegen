@@ -1,0 +1,200 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://swolegen.app/schemas/exercise-v1.json",
+    "title": "SwoleGen Exercise (v1)",
+    "description": "Structured exercise reference.",
+    "type": "array",
+    "additionalProperties": false,
+    "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "slug": {
+                "type": "string",
+                "description": "Canonical exercise slug, kebab-case (e.g., \"barbell-bench-press\")."
+            },
+            "equipment": {
+                "type": "array",
+                "description": "Canonical equipment keys. If any required item is not listed, include \"eq_other\" and list free-text names in equipment_other; set equipment_other to null otherwise. Some exercises require a barbell and plates (like deadlifts), list both in equipment.",
+                "minItems": 1,
+                "maxItems": 10,
+                "items": {
+                    "type": "string",
+                    "enum": [
+                        "eq_bodyweight",
+                        "eq_dumbbells_set_5-50",
+                        "eq_dumbbells_set_55-100",
+                        "eq_kettlebells_set_5-35",
+                        "eq_kettlebells_set_40-70",
+                        "eq_barbell",
+                        "eq_olympic_barbell_mens_20kg",
+                        "eq_olympic_barbell_womens_15kg",
+                        "eq_weight_plates_standard",
+                        "eq_weight_plates_bumper",
+                        "eq_weight_plates_micro",
+                        "eq_flat_bench",
+                        "eq_adjustable_bench",
+                        "eq_hip_thrust_bench_or_pad",
+                        "eq_step_platform",
+                        "eq_plyo_box",
+                        "eq_power_rack",
+                        "eq_squat_stand",
+                        "eq_smith_machine",
+                        "eq_cable_machine_single_stack",
+                        "eq_cable_machine_dual_stack",
+                        "eq_lat_pulldown",
+                        "eq_seated_row",
+                        "eq_cable_attachments_basic",
+                        "eq_cable_attachments_full",
+                        "eq_bands_light_medium",
+                        "eq_bands_full",
+                        "eq_pullup_bar",
+                        "eq_assisted_pullup",
+                        "eq_dip_bars",
+                        "eq_mat_area",
+                        "eq_treadmill",
+                        "eq_stationary_bike",
+                        "eq_air_bike",
+                        "eq_elliptical",
+                        "eq_rower",
+                        "eq_stair_climber",
+                        "eq_sled_and_turf",
+                        "eq_other"
+                    ]
+                }
+            },
+            "equipment_other": {
+                "type": ["array", "null"],
+                "description": "Free-text equipment when using eq_other. Set to null otherwise. Note that Bodyweight exercises should not use eq_other, rather use eq_bodyweight.",
+                "items": { "type": "string", "minLength": 1 }
+            },
+            "equipment_notes": {
+                "type": ["string", "null"],
+                "maxLength": 200,
+                "description": "Short notes about equipment constraints or specifics."
+            },
+            "pattern": {
+                "type": "array",
+                "description": "Movement pattern classification(s) for this exercise.",
+                "minItems": 1,
+                "maxItems": 10,
+                "items": {
+                    "type": "string",
+                    "enum": [
+                        "push_horizontal",
+                        "push_vertical",
+                        "pull_horizontal",
+                        "pull_vertical",
+                        "squat_knee",
+                        "hinge_hip",
+                        "brace",
+                        "rotation",
+                        "carry",
+                        "arm_accessory",
+                        "shoulder_accessory",
+                        "leg_accessory",
+                        "isolation_biceps",
+                        "isolation_triceps",
+                        "isolation_delts",
+                        "isolation_quads",
+                        "isolation_hamstrings",
+                        "isolation_calves",
+                        "core_anti_extension",
+                        "core_anti_rotation",
+                        "core_rotation",
+                        "core_flexion",
+                        "conditioning"
+                    ]
+                }
+            },
+            "tier_hint": {
+                "type": "string",
+                "description": "Priority tier: A = must-do, B = nice-to-have, C = stretch goals.",
+                "enum": [
+                    "A",
+                    "B",
+                    "C"
+                ]
+            },
+            "recent_best": {
+                "type": [
+                    "object",
+                    "null"
+                ],
+                "description": "Most recent best performance for this exercise; null if unknown.",
+                "additionalProperties": false,
+                "properties": {
+                    "rep_bracket": {
+                        "type": "string",
+                        "description": "Rep range or count (e.g., \"8-10\" or \"10\")."
+                    },
+                    "resistance": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "mode": {
+                                "type": "string",
+                                "enum": [
+                                    "lbs",
+                                    "duration",
+                                    "bodyweight"
+                                ],
+                                "description": "Discriminator: choose exactly one mode and set the corresponding field. Do not include unused fields."
+                            },
+                            "lbs": {
+                                "type": [
+                                    "number",
+                                    "null"
+                                ],
+                                "minimum": 1,
+                                "description": "Additional load in pounds; required when mode=lbs. Set to null otherwise."
+                            },
+                            "bodyweight": {
+                                "type": [
+                                    "boolean",
+                                    "null"
+                                ],
+                                "description": "Set to true when mode=bodyweight. Set to null otherwise."
+                            },
+                            "durationSec": {
+                                "type": [
+                                    "number",
+                                    "null"
+                                ],
+                                "minimum": 1,
+                                "description": "Duration in seconds; required when mode=duration. Set to null otherwise."
+                            }
+                        },
+                        "required": [
+                            "mode",
+                            "lbs",
+                            "bodyweight",
+                            "durationSec"
+                        ]
+                    }
+                },
+                "required": [
+                    "rep_bracket",
+                    "resistance"
+                ]
+            },
+            "notes": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "description": "Free-form notes about the exercise; set to null if none."
+            }
+        },
+        "required": [
+            "slug",
+            "pattern",
+            "equipment",
+            "equipment_other",
+            "equipment_notes",
+            "tier_hint",
+            "recent_best",
+            "notes"
+        ]
+    }
+}

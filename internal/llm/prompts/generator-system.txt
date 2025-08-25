@@ -24,6 +24,24 @@ Hard requirements:
 - Nulls: If any Analyzer field is unknown, prefer explicit null (do not fabricate values).
 - Equipment keys: expect canonical, unprefixed keys from the Analyzer. Use only keys present in available_equipment
 - **For substitutions, preserve the Analyzer’s first pattern token; treat additional tokens as hints.
+- Respect history gating: Do not include exercises whose primary pattern is in `history_summary.patterns_to_avoid_today`. Prefer `next_priority_patterns` for Tier A/B selection. If substitutions are needed for equipment, keep the same pattern_target.
+- Superset mandate: Form supersets when superset_policy is not "none". Use `superset_preferences.target_superset_count` as a soft target. Pair non-competing patterns (e.g., push + pull, hinge + core). Avoid pairing heavy Tier A barbell compounds if `avoid_heavy_compounds` is true.
+- Implementation details: Assign a superset label like S1, S2, ... to every set in the pair/giant set.
+- Implementation details: Interleave the order numbers for paired sets (A1,B1,A2,B2 ...) or group them consecutively with the same superset id.
+- Implementation details: Keep total rest per pair (e.g., rest after the 2nd exercise), not per single set.
+- Implementation details: When timeboxed, drop entire supersets from lowest tier first (respect cut_order), not half of a pair.
+- Example pairing rules (concrete):
+  - push_horizontal <-> pull_horizontal
+  - push_vertical <-> pull_vertical
+  - hinge_hip <-> brace or anti_lateral_core
+  - squat_knee <-> rotation or brace
+  - shoulder_accessory <-> arm_accessory
+- Repair guard: If you cannot form the target number of supersets due to equipment or history gating, state reason in notes_to_user and form as many as feasible.
+- Superset mandate: If superset_policy is not "none", form supersets. Aim for superset_preferences.target_superset_count. Use non-competing pairs (push↔pull, hinge↔core, squat↔rotation). Avoid pairing heavy Tier-A barbell compounds if avoid_heavy_compounds is true.
+- Tagging & ordering: Assign a label S1, S2, … to every set in a pair/giant set via sets[].superset. Keep both exercises in the same tier. Either interleave (A1,B1,A2,B2…) or group consecutively; in both cases, the shared superset label must match.
+- Rest semantics: Apply rest_s after completing the pair (i.e., after the second exercise), unless Analyzer/notes specify otherwise.
+- Cut behavior: When timeboxing, drop entire supersets in cut_order sequence (first listed = cut first). Do not leave half a pair in the plan.
+- Substitution: If equipment conflicts prevent a pairing, substitute implements within the same pattern; if still infeasible, convert that pair to singletons and set superset: null, noting the reason in notes_to_user.
 
 When to substitute:
 - Required equipment missing or occupied

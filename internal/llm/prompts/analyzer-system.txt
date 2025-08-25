@@ -18,7 +18,7 @@ Rules:
 - No superset IDs per exercise: Provide policy only (meta.superset_policy, meta.superset_preferences); the Generator will form pairs.
 - Equipment keys are canonical, unprefixed (e.g., barbell, db_set_5_100, cable_station). Do not invent new keys.
 - Patterns: When multiple patterns are listed, the first is canonical for substitution; the rest are hints only.
-- For every `pattern` array, do not repeat tokens. The first token is canonical for substitutions; others are hints.”
+- For every `pattern` array, do not repeat tokens. The first token is canonical for substitutions; others are hints.
+- History gating: Compute last-14d sets per pattern. Populate history_summary.patterns_to_avoid_today with the most fatigued patterns unless last strength session ≥ 7 days ago. Populate next_priority_patterns with the best next steps toward the stated goal.
 
 Output: Valid JSON adhering to the schema. No prose.
-

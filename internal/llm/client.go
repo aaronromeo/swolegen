@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aaronromeo/swolegen/internal/llm/generated"
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
-	"github.com/aaronromeo/swolegen/internal/llm/schemas"
 	"gopkg.in/yaml.v3"
 )
 
@@ -45,18 +45,10 @@ type AnalyzerInputs struct {
 	GarminBodyBattery *int `json:"garmin_body_battery,omitempty"`
 }
 
-// // ToJSON marshals the plan to JSON bytes.
-// func (p AnalyzerPlan) ToJSON() ([]byte, error) { return json.Marshal(p) }
-
-// // AnalyzerPlanFromJSON unmarshals bytes into a plan instance and validates it
-// // against the Analyzer v1 JSON Schema.
-// func AnalyzerPlanFromJSON(b []byte) (AnalyzerPlan, error) {
-// 	if err := ValidateAnalyzerJSON(b); err != nil {
-// 		return AnalyzerPlan{}, err
-// 	}
-// 	var p AnalyzerPlan
-// 	return p, json.Unmarshal(b, &p)
-// }
+type HistoryInputs struct {
+	// history_url – set-level history (load × reps × RIR/RPE, time/date, exercise name).
+	HistoryURL string `json:"history_url"`
+}
 
 type Client struct {
 	provider      provider.Provider
@@ -125,13 +117,83 @@ func (c *Client) Validate() error {
 	return nil
 }
 
-// Analyze assembles prompts, calls the provider, and parses the plan.
-func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (schemas.AnalyzerV1Json, error) {
+func (c *Client) IngestHistory(ctx context.Context, in HistoryInputs) (generated.HistoryV1Json, error) {
 	if c.provider == nil {
-		return schemas.AnalyzerV1Json{}, errors.New("llm provider not configured")
+		return generated.HistoryV1Json{}, errors.New("llm provider not configured")
 	}
 	if err := c.Validate(); err != nil {
-		return schemas.AnalyzerV1Json{}, err
+		return generated.HistoryV1Json{}, err
+	}
+
+	historyText, err := fetchText(ctx, in.HistoryURL, c.maxFetchBytes)
+	if err != nil {
+		return generated.HistoryV1Json{}, fmt.Errorf("fetch history: %w", err)
+	}
+	c.logger.Debug("ingest history", "history", historyText)
+
+	// indent multi-line blocks for YAML literal style
+	historyBlock := indentForBlock(historyText)
+
+	user := fmt.Sprintf(HistoryUser, time.Now().Format("2006-01-30"), historyBlock)
+
+	userJSON, err := json.Marshal(user)
+	if err != nil {
+		return generated.HistoryV1Json{}, fmt.Errorf("marshal user prompt: %w", err)
+	}
+
+	errs := []error{}
+	history := generated.HistoryV1Json{}
+
+	// initial completion
+	prf := provider.ProviderResponseFormat{
+		Name:         provider.ResponseFormatHistoryPlan,
+		Description:  provider.ResponseFormatHistoryPlanDescription,
+		Schema:       HistorySchema,
+		SystemPrompt: HistorySystem,
+		UserPrompt:   string(userJSON),
+	}
+
+	for i := 0; i < c.retries; i++ {
+		llmOut, err := c.provider.Complete(ctx, prf)
+
+		if err != nil {
+			c.logger.Error("ingest history", "error", err)
+			errs = append(errs, err)
+			goto retryCase
+		}
+
+		c.logger.Debug("ingest history", "llm_out", llmOut)
+
+		if err = json.Unmarshal([]byte(llmOut), &history); err != nil {
+			err = fmt.Errorf("failed to parse ingest history: %w", err)
+			c.logger.Error("ingest history", "error", err)
+			errs = append(errs, err)
+			goto retryCase
+		}
+
+		c.logger.Debug("ingest history", "history", history)
+		return history, nil
+
+	retryCase:
+		repairUser := fmt.Sprintf(RepairHistory, errors.Join(errs...).Error(), string(userJSON))
+		prf = provider.ProviderResponseFormat{
+			Name:         provider.ResponseFormatHistoryPlan,
+			Description:  provider.ResponseFormatHistoryPlanDescription,
+			Schema:       HistorySchema,
+			SystemPrompt: HistorySystem,
+			UserPrompt:   repairUser,
+		}
+	}
+	return generated.HistoryV1Json{}, errors.Join(errs...)
+}
+
+// Analyze assembles prompts, calls the provider, and parses the plan.
+func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (generated.AnalyzerV1Json, error) {
+	if c.provider == nil {
+		return generated.AnalyzerV1Json{}, errors.New("llm provider not configured")
+	}
+	if err := c.Validate(); err != nil {
+		return generated.AnalyzerV1Json{}, err
 	}
 
 	units := in.Units
@@ -155,18 +217,18 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (schemas.Analyz
 	}
 	invJSON, err := json.Marshal(in.EquipmentInventory)
 	if err != nil {
-		return schemas.AnalyzerV1Json{}, fmt.Errorf("marshal equipment_inventory: %w", err)
+		return generated.AnalyzerV1Json{}, fmt.Errorf("marshal equipment_inventory: %w", err)
 	}
 
 	instructionsText, err := fetchText(ctx, in.InstructionsURL, c.maxFetchBytes)
 	if err != nil {
-		return schemas.AnalyzerV1Json{}, fmt.Errorf("fetch instructions: %w", err)
+		return generated.AnalyzerV1Json{}, fmt.Errorf("fetch instructions: %w", err)
 	}
 	c.logger.Debug("analyzer plan", "instructions", instructionsText)
 
 	historyText, err := fetchText(ctx, in.HistoryURL, c.maxFetchBytes)
 	if err != nil {
-		return schemas.AnalyzerV1Json{}, fmt.Errorf("fetch history: %w", err)
+		return generated.AnalyzerV1Json{}, fmt.Errorf("fetch history: %w", err)
 	}
 	c.logger.Debug("analyzer plan", "history", historyText)
 
@@ -181,11 +243,11 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (schemas.Analyz
 
 	userJSON, err := json.Marshal(user)
 	if err != nil {
-		return schemas.AnalyzerV1Json{}, fmt.Errorf("marshal user prompt: %w", err)
+		return generated.AnalyzerV1Json{}, fmt.Errorf("marshal user prompt: %w", err)
 	}
 
 	errs := []error{}
-	plan := schemas.AnalyzerV1Json{}
+	plan := generated.AnalyzerV1Json{}
 
 	// initial completion
 	prf := provider.ProviderResponseFormat{
@@ -205,13 +267,14 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (schemas.Analyz
 			goto retryCase
 		}
 
-		if err = plan.UnmarshalJSON([]byte(llmOut)); err != nil {
+		if err = json.Unmarshal([]byte(llmOut), &plan); err != nil {
 			err = fmt.Errorf("failed to parse analyzer plan: %w", err)
 			c.logger.Error("analyzer plan", "error", err)
 			errs = append(errs, err)
 			goto retryCase
 		}
 
+		c.logger.Debug("analyzer plan", "plan", plan)
 		return plan, nil
 
 	retryCase:
@@ -224,10 +287,10 @@ func (c *Client) Analyze(ctx context.Context, in AnalyzerInputs) (schemas.Analyz
 			UserPrompt:   repairUser,
 		}
 	}
-	return schemas.AnalyzerV1Json{}, errors.Join(errs...)
+	return generated.AnalyzerV1Json{}, errors.Join(errs...)
 }
 
-func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]byte, error) {
+func (c *Client) Generate(ctx context.Context, plan generated.AnalyzerV1Json) ([]byte, error) {
 	if c.provider == nil {
 		return nil, errors.New("llm provider not configured")
 	}
@@ -245,7 +308,7 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 	userJSON := fmt.Sprintf(GeneratorUser, string(planJSON))
 
 	errs := []error{}
-	workout := &schemas.WorkoutV12Json{}
+	workout := &generated.WorkoutV12Json{}
 
 	prf := provider.ProviderResponseFormat{
 		Name:         provider.ResponseFormatGeneratorOutput,
@@ -263,12 +326,20 @@ func (c *Client) Generate(ctx context.Context, plan schemas.AnalyzerV1Json) ([]b
 			goto retryCase
 		}
 
-		if err = workout.UnmarshalJSON([]byte(llmOut)); err != nil {
+		if err = json.Unmarshal([]byte(llmOut), workout); err != nil {
 			err = fmt.Errorf("failed to parse workout json: %w", err)
 			c.logger.Error("workout json", "error", err)
 			errs = append(errs, err)
 			goto retryCase
 		}
+
+		// // Semantic validation beyond schema
+		// if err = ValidateWorkoutSemantics(&plan, workout); err != nil {
+		// 	err = fmt.Errorf("workout semantic validation: %w", err)
+		// 	c.logger.Error("workout semantics", "error", err)
+		// 	errs = append(errs, err)
+		// 	goto retryCase
+		// }
 
 		return yaml.Marshal(workout)
 

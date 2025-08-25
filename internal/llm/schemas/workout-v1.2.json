@@ -18,55 +18,16 @@
     "notes_to_user",
     "post_workout"
   ],
-  "additionalProperties": false,
   "properties": {
-    "version": {
-      "type": "number",
-      "const": 1.2
-    },
-    "workout_id": {
-      "type": "string",
-      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+-[0-9]{2}$"
-    },
     "title": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 200
+      "maxLength": 200,
+      "minLength": 1
     },
     "description": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 2000
-    },
-    "date": {
-      "type": "string",
-      "format": "date"
-    },
-    "location": {
-      "type": "string",
+      "maxLength": 2000,
       "minLength": 1
-    },
-    "units": {
-      "type": "string",
-      "enum": [
-        "lbs",
-        "kg"
-      ]
-    },
-    "duration_minutes": {
-      "type": "integer",
-      "minimum": 10,
-      "maximum": 180
-    },
-    "goal": {
-      "type": "string",
-      "minLength": 1
-    },
-    "notes_to_user": {
-      "type": [
-        "string",
-        "null"
-      ]
     },
     "cut_order": {
       "type": "array",
@@ -79,6 +40,32 @@
         ]
       }
     },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "duration_minutes": {
+      "type": "integer",
+      "maximum": 180,
+      "minimum": 10
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location": {
+      "type": "string",
+      "minLength": 1
+    },
+    "notes_to_user": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "post_workout": {
+      "$ref": "#/$defs/post_workout"
+    },
     "sets": {
       "type": "array",
       "minItems": 1,
@@ -86,14 +73,27 @@
         "$ref": "#/$defs/set"
       }
     },
-    "post_workout": {
-      "$ref": "#/$defs/post_workout"
+    "units": {
+      "type": "string",
+      "enum": [
+        "lbs",
+        "kg"
+      ]
+    },
+    "version": {
+      "type": "number",
+      "const": 1.2
+    },
+    "workout_id": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}-[a-z0-9-]+-[0-9]{2}$"
     }
   },
+  "additionalProperties": false,
   "$defs": {
-    "nullableString": {
+    "nullableInteger": {
       "type": [
-        "string",
+        "integer",
         "null"
       ]
     },
@@ -103,11 +103,44 @@
         "null"
       ]
     },
-    "nullableInteger": {
+    "nullableString": {
       "type": [
-        "integer",
+        "string",
         "null"
       ]
+    },
+    "post_workout": {
+      "type": "object",
+      "required": [
+        "perceived_difficulty",
+        "completion_time_minutes",
+        "notes"
+      ],
+      "properties": {
+        "completion_time_minutes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 300,
+          "minimum": 1
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "perceived_difficulty": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 10,
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
     },
     "set": {
       "type": "object",
@@ -127,23 +160,51 @@
         "actual_reps",
         "notes"
       ],
-      "additionalProperties": false,
       "properties": {
         "id": {
           "type": "string",
           "pattern": "^(W|A|B|C)-[A-Z0-9-]+-(WU[0-9]+|[0-9]+)$"
         },
-        "tier": {
+        "actual_reps": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "actual_weight": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "equipment": {
           "type": "string",
-          "enum": [
-            "W",
-            "A",
-            "B",
-            "C"
-          ]
+          "minLength": 1
+        },
+        "exercise": {
+          "type": "string",
+          "minLength": 1
         },
         "must": {
           "type": "boolean"
+        },
+        "notes": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rest_s": {
+          "type": "integer",
+          "maximum": 600,
+          "minimum": 0
+        },
+        "rir": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 4,
+          "minimum": 0
         },
         "superset": {
           "type": [
@@ -151,18 +212,6 @@
             "null"
           ],
           "pattern": "^[A-Z][0-9]+$"
-        },
-        "order": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "exercise": {
-          "type": "string",
-          "minLength": 1
-        },
-        "equipment": {
-          "type": "string",
-          "minLength": 1
         },
         "target_reps": {
           "type": [
@@ -179,66 +228,17 @@
             "null"
           ]
         },
-        "rir": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 0,
-          "maximum": 4
-        },
-        "rest_s": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 600
-        },
-        "actual_weight": {
-          "$ref": "#/$defs/nullableNumber"
-        },
-        "actual_reps": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 0
-        },
-        "notes": {
-          "$ref": "#/$defs/nullableString"
-        }
-      }
-    },
-    "post_workout": {
-      "type": "object",
-      "required": [
-        "perceived_difficulty",
-        "completion_time_minutes",
-        "notes"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "perceived_difficulty": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 1,
-          "maximum": 10
-        },
-        "completion_time_minutes": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 1,
-          "maximum": 300
-        },
-        "notes": {
-          "type": [
-            "string",
-            "null"
+        "tier": {
+          "type": "string",
+          "enum": [
+            "W",
+            "A",
+            "B",
+            "C"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     }
   }
 }

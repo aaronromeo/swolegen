@@ -40,14 +40,24 @@
 
     <hr />
 
+    <h2>History Ingestion</h2>
+    <div class="row">
+      <label>History URL</label><br />
+      <input id="historyUrl" type="text" size="80" value="/docs/history-demo.json" />
+    </div>
+    <div class="row">
+      <button id="btn-history">Ingest History</button>
+    </div>
+    <div class="row">
+      <textarea id="historyOut" cols="80" rows="18" spellcheck="false" style="font-family: Menlo, Consolas, monospace;"></textarea>
+    </div>
+
+    <hr />
+
     <h2>Analyzer</h2>
     <div class="row">
       <label>Instructions URL</label><br />
       <input id="instructionsUrl" type="text" size="80" value="/docs/instructions-demo.md" />
-    </div>
-    <div class="row">
-      <label>History URL</label><br />
-      <input id="historyUrl" type="text" size="80" value="/docs/history-demo.json" />
     </div>
     <div class="row">
       <label>Location</label><br />

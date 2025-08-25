@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aaronromeo/swolegen/internal/llm/generated"
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
-	"github.com/aaronromeo/swolegen/internal/llm/schemas"
 	"github.com/atombender/go-jsonschema/pkg/types"
 )
 
@@ -29,42 +29,44 @@ func (f fakeProvider) Complete(ctx context.Context, prf provider.ProviderRespons
 func (f fakeProvider) Validate() error { return nil }
 
 func TestAnalyze_Success(t *testing.T) {
-	plan := schemas.AnalyzerV1Json{
-		Meta: schemas.AnalyzerV1JsonMeta{
+	minSetsPerSelectedPattern := 2
+	plan := generated.AnalyzerV1Json{
+		Meta: generated.AnalyzerV1JsonMeta{
 			Date: types.SerializableDate{Time: time.Date(2023, 10, 01, 0, 0, 0, 0, time.UTC)}, Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy",
 			SupersetPolicy:      "pairs_ok",
-			SupersetPreferences: schemas.AnalyzerV1JsonMetaSupersetPreferences{},
+			SupersetPreferences: generated.AnalyzerV1JsonMetaSupersetPreferences{},
 		},
-		Session: schemas.AnalyzerV1JsonSession{
-			Type: "strength", Tiers: []schemas.AnalyzerV1JsonSessionTiersElem{"A"}, CutOrder: []schemas.AnalyzerV1JsonSessionCutOrderElem{"A"},
+		Session: generated.AnalyzerV1JsonSession{
+			Type: "strength", Tiers: []generated.AnalyzerV1JsonSessionTiersElem{"A", "B"}, CutOrder: []generated.AnalyzerV1JsonSessionCutOrderElem{"B"},
 		},
-		FatiguePolicy: schemas.AnalyzerV1JsonFatiguePolicy{RirShift: 1, LoadCapPct: 0.9, Reason: ""},
-		InstructionsContext: schemas.AnalyzerV1JsonInstructionsContext{
+		GapFillPolicy: generated.AnalyzerV1JsonGapFillPolicy{MinSetsPerSelectedPattern: &minSetsPerSelectedPattern, TargetPatterns: []string{"push_horizontal"}},
+		FatiguePolicy: generated.AnalyzerV1JsonFatiguePolicy{RirShift: 1, LoadCapPct: 0.9, Reason: ""},
+		InstructionsContext: generated.AnalyzerV1JsonInstructionsContext{
 			PrimaryGoals:        []string{"hypertrophy"},
 			ExecutionPrinciples: []string{"controlled_tempo"},
-			ConstructionRules: schemas.AnalyzerV1JsonInstructionsContextConstructionRules{
+			ConstructionRules: generated.AnalyzerV1JsonInstructionsContextConstructionRules{
 				Format:                  "supersets",
-				PriorityOrder:           []schemas.AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem{"big_compound"},
+				PriorityOrder:           []generated.AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem{"big_compound"},
 				RestBetweenSupersetsSec: nil,
 			},
-			Constraints: schemas.AnalyzerV1JsonInstructionsContextConstraints{
+			Constraints: generated.AnalyzerV1JsonInstructionsContextConstraints{
 				Avoid:               []string{},
 				Encourage:           []string{},
 				PreferSingleStation: nil,
 			},
 		},
-		TimeBudget:         schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		TimeBudget:         generated.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
 		AvailableEquipment: []string{"barbell"},
-		ExercisePlan: []schemas.AnalyzerV1JsonExercisePlanElem{
+		ExercisePlan: []generated.AnalyzerV1JsonExercisePlanElem{
 			{
 				Tier:        "A",
 				Exercise:    "Bench Press",
 				Equipment:   "barbell",
 				Warmups:     1,
 				WorkingSets: 3,
-				Targets: func() schemas.AnalyzerV1JsonExercisePlanElemTargets {
+				Targets: func() generated.AnalyzerV1JsonExercisePlanElemTargets {
 					r := 2
-					return schemas.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &r, TargetLoad: nil, LoadCap: nil}
+					return generated.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &r, TargetLoad: nil, LoadCap: nil}
 				}(),
 			},
 		},
@@ -92,38 +94,41 @@ func TestAnalyze_Success(t *testing.T) {
 }
 
 func TestAnalyze_RepairAfterInvalid(t *testing.T) {
+	minSetsPerSelectedPattern := 2
 	bad := `{"not_valid": true}`
 	bpRir := 2
-	plan := schemas.AnalyzerV1Json{
-		Meta: schemas.AnalyzerV1JsonMeta{
+	plan := generated.AnalyzerV1Json{
+		Meta: generated.AnalyzerV1JsonMeta{
 			Date: types.SerializableDate{Time: time.Date(2023, 10, 01, 0, 0, 0, 0, time.UTC)}, Location: "gym", Units: "lbs", DurationMinutes: 45, Goal: "hypertrophy",
 			SupersetPolicy:      "pairs_ok",
-			SupersetPreferences: schemas.AnalyzerV1JsonMetaSupersetPreferences{},
+			SupersetPreferences: generated.AnalyzerV1JsonMetaSupersetPreferences{},
 		},
-		Session: schemas.AnalyzerV1JsonSession{
-			Type: "strength", Tiers: []schemas.AnalyzerV1JsonSessionTiersElem{"A"}, CutOrder: []schemas.AnalyzerV1JsonSessionCutOrderElem{"A"},
+		Session: generated.AnalyzerV1JsonSession{
+			Type: "strength", Tiers: []generated.AnalyzerV1JsonSessionTiersElem{"A", "B"}, CutOrder: []generated.AnalyzerV1JsonSessionCutOrderElem{"B"},
 		},
-		FatiguePolicy: schemas.AnalyzerV1JsonFatiguePolicy{
+		GapFillPolicy: generated.AnalyzerV1JsonGapFillPolicy{MinSetsPerSelectedPattern: &minSetsPerSelectedPattern, TargetPatterns: []string{"push_horizontal"}},
+
+		FatiguePolicy: generated.AnalyzerV1JsonFatiguePolicy{
 			RirShift: 1, LoadCapPct: 0.9, Reason: "",
 		},
-		InstructionsContext: schemas.AnalyzerV1JsonInstructionsContext{
+		InstructionsContext: generated.AnalyzerV1JsonInstructionsContext{
 			PrimaryGoals:        []string{"hypertrophy"},
 			ExecutionPrinciples: []string{"controlled_tempo"},
-			ConstructionRules: schemas.AnalyzerV1JsonInstructionsContextConstructionRules{
+			ConstructionRules: generated.AnalyzerV1JsonInstructionsContextConstructionRules{
 				Format:                  "supersets",
-				PriorityOrder:           []schemas.AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem{"big_compound"},
+				PriorityOrder:           []generated.AnalyzerV1JsonInstructionsContextConstructionRulesPriorityOrderElem{"big_compound"},
 				RestBetweenSupersetsSec: nil,
 			},
-			Constraints: schemas.AnalyzerV1JsonInstructionsContextConstraints{
+			Constraints: generated.AnalyzerV1JsonInstructionsContextConstraints{
 				Avoid:               []string{},
 				Encourage:           []string{},
 				PreferSingleStation: nil,
 			},
 		},
-		TimeBudget:         schemas.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
+		TimeBudget:         generated.AnalyzerV1JsonTimeBudget{EstimatedMinutesTotal: nil, TargetSetCount: 12},
 		AvailableEquipment: []string{"barbell"},
-		ExercisePlan: []schemas.AnalyzerV1JsonExercisePlanElem{
-			{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 1, WorkingSets: 3, Targets: schemas.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &bpRir, TargetLoad: nil, LoadCap: nil}},
+		ExercisePlan: []generated.AnalyzerV1JsonExercisePlanElem{
+			{Tier: "A", Exercise: "Bench Press", Equipment: "barbell", Warmups: 1, WorkingSets: 3, Targets: generated.AnalyzerV1JsonExercisePlanElemTargets{RepRange: "6-8", Rir: &bpRir, TargetLoad: nil, LoadCap: nil}},
 		},
 	}
 	okJSON, err := json.Marshal(&plan)

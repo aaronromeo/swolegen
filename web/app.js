@@ -1,12 +1,14 @@
 (function(){
   const btnOAuth = document.getElementById('btn-oauth');
   const btnRecent = document.getElementById('btn-recent');
+  const btnHistory = document.getElementById('btn-history');
   const btnAnalyze = document.getElementById('btn-analyze');
   const btnGenerate = document.getElementById('btn-generate');
   const accessTokenEl = document.getElementById('accessToken');
   const daysEl = document.getElementById('days');
   const stravaRecentEl = document.getElementById('stravaRecent');
   const outEl = document.getElementById('out');
+  const historyOutEl = document.getElementById('historyOut');
   const yamlOutEl = document.getElementById('yamlOut');
   const btnCopyYaml = document.getElementById('btn-copy-yaml');
 
@@ -171,9 +173,30 @@
     }
   });
 
-  btnAnalyze.addEventListener('click', async () => {
-    console.log('btnAnalyze clicked');
+  btnHistory.addEventListener('click', async () => {
+    setOutput({status: 'loading /llm/history...'});
 
+    const body = {
+      history_url: (historyUrlEl.value || '').trim(),
+    };
+
+    historyOutEl.value = '';
+    try {
+      const resp = await fetch('/llm/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await resp.json();
+      history = (resp.status === 200) ? data : null;
+      historyOutEl.value = JSON.stringify(data, null, 2);
+      setOutput({ status: resp.status, data });
+    } catch (err) {
+      setOutput({ error: String(err) });
+    }
+  });
+
+  btnAnalyze.addEventListener('click', async () => {
     setOutput({status: 'loading /llm/analyze...'});
 
     // collect checked equipment keys
