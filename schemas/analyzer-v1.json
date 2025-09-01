@@ -9,7 +9,7 @@
     "meta",
     "session",
     "fatigue_policy",
-    "relevant_exercises",
+    "relevant_set",
     "gap_fill_policy",
     "time_budget",
     "exercise_plan",
@@ -238,8 +238,8 @@
         }
       }
     },
-    "relevant_exercises": {
-      "$ref": "./exercise-v1.json"
+    "relevant_set": {
+      "$ref": "./set-v1.json"
     },
     "gap_fill_policy": {
       "type": "object",

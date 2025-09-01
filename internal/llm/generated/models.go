@@ -36,8 +36,8 @@ type AnalyzerV1Json struct {
 	// Session metadata used for naming and unit selection.
 	Meta AnalyzerV1JsonMeta `json:"meta" yaml:"meta" mapstructure:"meta"`
 
-	// RelevantExercises corresponds to the JSON schema field "relevant_exercises".
-	RelevantExercises ExerciseV1 `json:"relevant_exercises" yaml:"relevant_exercises" mapstructure:"relevant_exercises"`
+	// RelevantSet corresponds to the JSON schema field "relevant_set".
+	RelevantSet SetV1 `json:"relevant_set" yaml:"relevant_set" mapstructure:"relevant_set"`
 
 	// Session corresponds to the JSON schema field "session".
 	Session AnalyzerV1JsonSession `json:"session" yaml:"session" mapstructure:"session"`
@@ -1127,8 +1127,8 @@ func (j *AnalyzerV1Json) UnmarshalJSON(value []byte) error {
 	if _, ok := raw["meta"]; raw != nil && !ok {
 		return fmt.Errorf("field meta in AnalyzerV1Json: required")
 	}
-	if _, ok := raw["relevant_exercises"]; raw != nil && !ok {
-		return fmt.Errorf("field relevant_exercises in AnalyzerV1Json: required")
+	if _, ok := raw["relevant_set"]; raw != nil && !ok {
+		return fmt.Errorf("field relevant_set in AnalyzerV1Json: required")
 	}
 	if _, ok := raw["session"]; raw != nil && !ok {
 		return fmt.Errorf("field session in AnalyzerV1Json: required")
@@ -1154,90 +1154,304 @@ func (j *AnalyzerV1Json) UnmarshalJSON(value []byte) error {
 // date in YYYY-MM-DD.
 type DateV1 types.SerializableDate
 
-// Structured exercise reference.
-type ExerciseV1 []struct {
+// Structured history of a user’s workouts based on data provided.
+type HistoryV1Json struct {
+	// Comprehensive array of every set of every exercise in every workout that the
+	// user has performed in the past 30 days, ordered by recency (most recent first).
+	MostRecentSets []HistoryV1JsonMostRecentSetsElem `json:"most_recent_sets" yaml:"most_recent_sets" mapstructure:"most_recent_sets"`
+
+	// Array of objects representing the user's most recent best effort sets within
+	// the last 30 days. Each entry contains a set object and its
+	// estimated_workout_date. Entries should appear at most once, ordered by recency
+	// (most recent first). Must contain between 1 and 90 entries. Use this to bias
+	// selection and progression toward movements with fresh performance signals.
+	RecentBestSets30D []HistoryV1JsonRecentBestSets30DElem `json:"recent_best_sets_30d" yaml:"recent_best_sets_30d" mapstructure:"recent_best_sets_30d"`
+}
+
+type HistoryV1JsonMostRecentSetsElem struct {
+	// Sets corresponds to the JSON schema field "sets".
+	Sets []SetV1 `json:"sets" yaml:"sets" mapstructure:"sets"`
+
+	// Workout date in YYYY-MM-DD.
+	WorkoutDate types.SerializableDate `json:"workout_date" yaml:"workout_date" mapstructure:"workout_date"`
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *HistoryV1JsonMostRecentSetsElem) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["sets"]; raw != nil && !ok {
+		return fmt.Errorf("field sets in HistoryV1JsonMostRecentSetsElem: required")
+	}
+	if _, ok := raw["workout_date"]; raw != nil && !ok {
+		return fmt.Errorf("field workout_date in HistoryV1JsonMostRecentSetsElem: required")
+	}
+	type Plain HistoryV1JsonMostRecentSetsElem
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	if plain.Sets != nil && len(plain.Sets) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "sets", 1)
+	}
+	*j = HistoryV1JsonMostRecentSetsElem(plain)
+	return nil
+}
+
+type HistoryV1JsonRecentBestSets30DElem struct {
+	// Estimated workout date in YYYY-MM-DD.
+	EstimatedWorkoutDate types.SerializableDate `json:"estimated_workout_date" yaml:"estimated_workout_date" mapstructure:"estimated_workout_date"`
+
+	// Set corresponds to the JSON schema field "set".
+	Set SetV1 `json:"set" yaml:"set" mapstructure:"set"`
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *HistoryV1JsonRecentBestSets30DElem) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["estimated_workout_date"]; raw != nil && !ok {
+		return fmt.Errorf("field estimated_workout_date in HistoryV1JsonRecentBestSets30DElem: required")
+	}
+	if _, ok := raw["set"]; raw != nil && !ok {
+		return fmt.Errorf("field set in HistoryV1JsonRecentBestSets30DElem: required")
+	}
+	type Plain HistoryV1JsonRecentBestSets30DElem
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	*j = HistoryV1JsonRecentBestSets30DElem(plain)
+	return nil
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *HistoryV1Json) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["most_recent_sets"]; raw != nil && !ok {
+		return fmt.Errorf("field most_recent_sets in HistoryV1Json: required")
+	}
+	if _, ok := raw["recent_best_sets_30d"]; raw != nil && !ok {
+		return fmt.Errorf("field recent_best_sets_30d in HistoryV1Json: required")
+	}
+	type Plain HistoryV1Json
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	if len(plain.MostRecentSets) > 3 {
+		return fmt.Errorf("field %s length: must be <= %d", "most_recent_sets", 3)
+	}
+	if plain.RecentBestSets30D != nil && len(plain.RecentBestSets30D) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "recent_best_sets_30d", 1)
+	}
+	if len(plain.RecentBestSets30D) > 90 {
+		return fmt.Errorf("field %s length: must be <= %d", "recent_best_sets_30d", 90)
+	}
+	*j = HistoryV1Json(plain)
+	return nil
+}
+
+// Structured set reference.
+type SetV1 struct {
+	// The actual completed set for this exercise; null if unknown.
+	Accomplished *SetV1Accomplished `json:"accomplished" yaml:"accomplished" mapstructure:"accomplished"`
+
 	// Canonical equipment keys. If any required item is not listed, include
 	// "eq_other" and list free-text names in equipment_other; set equipment_other to
-	// null otherwise.
-	Equipment []ExerciseV1ElemEquipmentElem `json:"equipment" yaml:"equipment" mapstructure:"equipment"`
+	// null otherwise. Some exercises require a barbell and plates (like deadlifts),
+	// list both in equipment.
+	Equipment []SetV1EquipmentElem `json:"equipment" yaml:"equipment" mapstructure:"equipment"`
 
 	// Short notes about equipment constraints or specifics.
 	EquipmentNotes *string `json:"equipment_notes" yaml:"equipment_notes" mapstructure:"equipment_notes"`
 
-	// Free-text equipment when using eq_other. Set to null otherwise. Note that
-	// Bodyweight exercises should not use eq_other, rather use eq_bodyweight.
+	// Free-text equipment required when using eq_other. Set to null otherwise. Note
+	// that Bodyweight is not a valid value here, rather use eq_bodyweight.
 	EquipmentOther []string `json:"equipment_other" yaml:"equipment_other" mapstructure:"equipment_other"`
 
 	// Free-form notes about the exercise; set to null if none.
 	Notes *string `json:"notes" yaml:"notes" mapstructure:"notes"`
 
-	// Movement pattern classification(s) for this exercise.
-	Pattern []ExerciseV1ElemPatternElem `json:"pattern" yaml:"pattern" mapstructure:"pattern"`
-
-	// Most recent best performance for this exercise; null if unknown.
-	RecentBest *ExerciseV1ElemRecentBest `json:"recent_best" yaml:"recent_best" mapstructure:"recent_best"`
+	// The Fundamental Movement pattern classification(s) for this exercise.
+	Pattern []SetV1PatternElem `json:"pattern" yaml:"pattern" mapstructure:"pattern"`
 
 	// Canonical exercise slug, kebab-case (e.g., "barbell-bench-press").
 	Slug string `json:"slug" yaml:"slug" mapstructure:"slug"`
 
 	// Priority tier: A = must-do, B = nice-to-have, C = stretch goals.
-	TierHint ExerciseV1ElemTierHint `json:"tier_hint" yaml:"tier_hint" mapstructure:"tier_hint"`
+	TierHint SetV1TierHint `json:"tier_hint" yaml:"tier_hint" mapstructure:"tier_hint"`
 }
 
-type ExerciseV1ElemEquipmentElem string
+// The actual completed set for this exercise; null if unknown.
+type SetV1Accomplished struct {
+	// Rep range or count (e.g., "8-10" or "10").
+	RepBracket string `json:"rep_bracket" yaml:"rep_bracket" mapstructure:"rep_bracket"`
 
-const ExerciseV1ElemEquipmentElemEqAdjustableBench ExerciseV1ElemEquipmentElem = "eq_adjustable_bench"
-const ExerciseV1ElemEquipmentElemEqAirBike ExerciseV1ElemEquipmentElem = "eq_air_bike"
-const ExerciseV1ElemEquipmentElemEqAssistedPullup ExerciseV1ElemEquipmentElem = "eq_assisted_pullup"
-const ExerciseV1ElemEquipmentElemEqBandsFull ExerciseV1ElemEquipmentElem = "eq_bands_full"
-const ExerciseV1ElemEquipmentElemEqBandsLightMedium ExerciseV1ElemEquipmentElem = "eq_bands_light_medium"
-const ExerciseV1ElemEquipmentElemEqBarbell ExerciseV1ElemEquipmentElem = "eq_barbell"
-const ExerciseV1ElemEquipmentElemEqBodyweight ExerciseV1ElemEquipmentElem = "eq_bodyweight"
-const ExerciseV1ElemEquipmentElemEqCableAttachmentsBasic ExerciseV1ElemEquipmentElem = "eq_cable_attachments_basic"
-const ExerciseV1ElemEquipmentElemEqCableAttachmentsFull ExerciseV1ElemEquipmentElem = "eq_cable_attachments_full"
-const ExerciseV1ElemEquipmentElemEqCableMachineDualStack ExerciseV1ElemEquipmentElem = "eq_cable_machine_dual_stack"
-const ExerciseV1ElemEquipmentElemEqCableMachineSingleStack ExerciseV1ElemEquipmentElem = "eq_cable_machine_single_stack"
-const ExerciseV1ElemEquipmentElemEqDipBars ExerciseV1ElemEquipmentElem = "eq_dip_bars"
-const ExerciseV1ElemEquipmentElemEqDumbbellsSet550 ExerciseV1ElemEquipmentElem = "eq_dumbbells_set_5-50"
-const ExerciseV1ElemEquipmentElemEqDumbbellsSet55100 ExerciseV1ElemEquipmentElem = "eq_dumbbells_set_55-100"
-const ExerciseV1ElemEquipmentElemEqElliptical ExerciseV1ElemEquipmentElem = "eq_elliptical"
-const ExerciseV1ElemEquipmentElemEqFlatBench ExerciseV1ElemEquipmentElem = "eq_flat_bench"
-const ExerciseV1ElemEquipmentElemEqHipThrustBenchOrPad ExerciseV1ElemEquipmentElem = "eq_hip_thrust_bench_or_pad"
-const ExerciseV1ElemEquipmentElemEqKettlebellsSet4070 ExerciseV1ElemEquipmentElem = "eq_kettlebells_set_40-70"
-const ExerciseV1ElemEquipmentElemEqKettlebellsSet535 ExerciseV1ElemEquipmentElem = "eq_kettlebells_set_5-35"
-const ExerciseV1ElemEquipmentElemEqLatPulldown ExerciseV1ElemEquipmentElem = "eq_lat_pulldown"
-const ExerciseV1ElemEquipmentElemEqMatArea ExerciseV1ElemEquipmentElem = "eq_mat_area"
-const ExerciseV1ElemEquipmentElemEqOlympicBarbellMens20Kg ExerciseV1ElemEquipmentElem = "eq_olympic_barbell_mens_20kg"
-const ExerciseV1ElemEquipmentElemEqOlympicBarbellWomens15Kg ExerciseV1ElemEquipmentElem = "eq_olympic_barbell_womens_15kg"
-const ExerciseV1ElemEquipmentElemEqOther ExerciseV1ElemEquipmentElem = "eq_other"
-const ExerciseV1ElemEquipmentElemEqPlyoBox ExerciseV1ElemEquipmentElem = "eq_plyo_box"
-const ExerciseV1ElemEquipmentElemEqPowerRack ExerciseV1ElemEquipmentElem = "eq_power_rack"
-const ExerciseV1ElemEquipmentElemEqPullupBar ExerciseV1ElemEquipmentElem = "eq_pullup_bar"
-const ExerciseV1ElemEquipmentElemEqRower ExerciseV1ElemEquipmentElem = "eq_rower"
-const ExerciseV1ElemEquipmentElemEqSeatedRow ExerciseV1ElemEquipmentElem = "eq_seated_row"
-const ExerciseV1ElemEquipmentElemEqSledAndTurf ExerciseV1ElemEquipmentElem = "eq_sled_and_turf"
-const ExerciseV1ElemEquipmentElemEqSmithMachine ExerciseV1ElemEquipmentElem = "eq_smith_machine"
-const ExerciseV1ElemEquipmentElemEqSquatStand ExerciseV1ElemEquipmentElem = "eq_squat_stand"
-const ExerciseV1ElemEquipmentElemEqStairClimber ExerciseV1ElemEquipmentElem = "eq_stair_climber"
-const ExerciseV1ElemEquipmentElemEqStationaryBike ExerciseV1ElemEquipmentElem = "eq_stationary_bike"
-const ExerciseV1ElemEquipmentElemEqStepPlatform ExerciseV1ElemEquipmentElem = "eq_step_platform"
-const ExerciseV1ElemEquipmentElemEqTreadmill ExerciseV1ElemEquipmentElem = "eq_treadmill"
-const ExerciseV1ElemEquipmentElemEqWeightPlatesBumper ExerciseV1ElemEquipmentElem = "eq_weight_plates_bumper"
-const ExerciseV1ElemEquipmentElemEqWeightPlatesMicro ExerciseV1ElemEquipmentElem = "eq_weight_plates_micro"
-const ExerciseV1ElemEquipmentElemEqWeightPlatesStandard ExerciseV1ElemEquipmentElem = "eq_weight_plates_standard"
+	// Resistance corresponds to the JSON schema field "resistance".
+	Resistance SetV1AccomplishedResistance `json:"resistance" yaml:"resistance" mapstructure:"resistance"`
+}
 
-var enumValues_ExerciseV1ElemEquipmentElem = []interface{}{
+type SetV1AccomplishedResistance struct {
+	// Set to true when mode=bodyweight. Set to null otherwise.
+	Bodyweight *bool `json:"bodyweight" yaml:"bodyweight" mapstructure:"bodyweight"`
+
+	// Duration in seconds; required when mode=duration. Set to null otherwise.
+	DurationSec *float64 `json:"durationSec" yaml:"durationSec" mapstructure:"durationSec"`
+
+	// Additional load in pounds; required when mode=lbs. Set to null otherwise.
+	Lbs *float64 `json:"lbs" yaml:"lbs" mapstructure:"lbs"`
+
+	// Discriminator: choose exactly one mode and set the corresponding field. Do not
+	// include unused fields.
+	Mode SetV1AccomplishedResistanceMode `json:"mode" yaml:"mode" mapstructure:"mode"`
+}
+
+type SetV1AccomplishedResistanceMode string
+
+const SetV1AccomplishedResistanceModeBodyweight SetV1AccomplishedResistanceMode = "bodyweight"
+const SetV1AccomplishedResistanceModeDuration SetV1AccomplishedResistanceMode = "duration"
+const SetV1AccomplishedResistanceModeLbs SetV1AccomplishedResistanceMode = "lbs"
+
+var enumValues_SetV1AccomplishedResistanceMode = []interface{}{
+	"lbs",
+	"duration",
+	"bodyweight",
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *SetV1AccomplishedResistanceMode) UnmarshalJSON(value []byte) error {
+	var v string
+	if err := json.Unmarshal(value, &v); err != nil {
+		return err
+	}
+	var ok bool
+	for _, expected := range enumValues_SetV1AccomplishedResistanceMode {
+		if reflect.DeepEqual(v, expected) {
+			ok = true
+			break
+		}
+	}
+	if !ok {
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_SetV1AccomplishedResistanceMode, v)
+	}
+	*j = SetV1AccomplishedResistanceMode(v)
+	return nil
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *SetV1AccomplishedResistance) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["bodyweight"]; raw != nil && !ok {
+		return fmt.Errorf("field bodyweight in SetV1AccomplishedResistance: required")
+	}
+	if _, ok := raw["durationSec"]; raw != nil && !ok {
+		return fmt.Errorf("field durationSec in SetV1AccomplishedResistance: required")
+	}
+	if _, ok := raw["lbs"]; raw != nil && !ok {
+		return fmt.Errorf("field lbs in SetV1AccomplishedResistance: required")
+	}
+	if _, ok := raw["mode"]; raw != nil && !ok {
+		return fmt.Errorf("field mode in SetV1AccomplishedResistance: required")
+	}
+	type Plain SetV1AccomplishedResistance
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	if plain.DurationSec != nil && 1 > *plain.DurationSec {
+		return fmt.Errorf("field %s: must be >= %v", "durationSec", 1)
+	}
+	if plain.Lbs != nil && 1 > *plain.Lbs {
+		return fmt.Errorf("field %s: must be >= %v", "lbs", 1)
+	}
+	*j = SetV1AccomplishedResistance(plain)
+	return nil
+}
+
+// UnmarshalJSON implements json.Unmarshaler.
+func (j *SetV1Accomplished) UnmarshalJSON(value []byte) error {
+	var raw map[string]interface{}
+	if err := json.Unmarshal(value, &raw); err != nil {
+		return err
+	}
+	if _, ok := raw["rep_bracket"]; raw != nil && !ok {
+		return fmt.Errorf("field rep_bracket in SetV1Accomplished: required")
+	}
+	if _, ok := raw["resistance"]; raw != nil && !ok {
+		return fmt.Errorf("field resistance in SetV1Accomplished: required")
+	}
+	type Plain SetV1Accomplished
+	var plain Plain
+	if err := json.Unmarshal(value, &plain); err != nil {
+		return err
+	}
+	*j = SetV1Accomplished(plain)
+	return nil
+}
+
+type SetV1EquipmentElem string
+
+const SetV1EquipmentElemEqAdjustableBench SetV1EquipmentElem = "eq_adjustable_bench"
+const SetV1EquipmentElemEqAirBike SetV1EquipmentElem = "eq_air_bike"
+const SetV1EquipmentElemEqAssistedPullup SetV1EquipmentElem = "eq_assisted_pullup"
+const SetV1EquipmentElemEqBandsFull SetV1EquipmentElem = "eq_bands_full"
+const SetV1EquipmentElemEqBandsLightMedium SetV1EquipmentElem = "eq_bands_light_medium"
+const SetV1EquipmentElemEqBarbell45Lbs SetV1EquipmentElem = "eq_barbell_45lbs"
+const SetV1EquipmentElemEqBodyweight SetV1EquipmentElem = "eq_bodyweight"
+const SetV1EquipmentElemEqCableAttachmentsBasic SetV1EquipmentElem = "eq_cable_attachments_basic"
+const SetV1EquipmentElemEqCableAttachmentsFull SetV1EquipmentElem = "eq_cable_attachments_full"
+const SetV1EquipmentElemEqCableMachineDualStack SetV1EquipmentElem = "eq_cable_machine_dual_stack"
+const SetV1EquipmentElemEqCableMachineSingleStack SetV1EquipmentElem = "eq_cable_machine_single_stack"
+const SetV1EquipmentElemEqDipBars SetV1EquipmentElem = "eq_dip_bars"
+const SetV1EquipmentElemEqDumbbellsSet550Lbs SetV1EquipmentElem = "eq_dumbbells_set_5-50lbs"
+const SetV1EquipmentElemEqDumbbellsSet55100Lbs SetV1EquipmentElem = "eq_dumbbells_set_55-100lbs"
+const SetV1EquipmentElemEqElliptical SetV1EquipmentElem = "eq_elliptical"
+const SetV1EquipmentElemEqFlatBench SetV1EquipmentElem = "eq_flat_bench"
+const SetV1EquipmentElemEqHipThrustBenchOrPad SetV1EquipmentElem = "eq_hip_thrust_bench_or_pad"
+const SetV1EquipmentElemEqKettlebellsSet4070Lbs SetV1EquipmentElem = "eq_kettlebells_set_40-70lbs"
+const SetV1EquipmentElemEqKettlebellsSet535Lbs SetV1EquipmentElem = "eq_kettlebells_set_5-35lbs"
+const SetV1EquipmentElemEqLatPulldown SetV1EquipmentElem = "eq_lat_pulldown"
+const SetV1EquipmentElemEqMatArea SetV1EquipmentElem = "eq_mat_area"
+const SetV1EquipmentElemEqOlympicBarbellMens20Kg SetV1EquipmentElem = "eq_olympic_barbell_mens_20kg"
+const SetV1EquipmentElemEqOlympicBarbellWomens15Kg SetV1EquipmentElem = "eq_olympic_barbell_womens_15kg"
+const SetV1EquipmentElemEqOther SetV1EquipmentElem = "eq_other"
+const SetV1EquipmentElemEqPlyoBox SetV1EquipmentElem = "eq_plyo_box"
+const SetV1EquipmentElemEqPowerRack SetV1EquipmentElem = "eq_power_rack"
+const SetV1EquipmentElemEqPullupBar SetV1EquipmentElem = "eq_pullup_bar"
+const SetV1EquipmentElemEqRower SetV1EquipmentElem = "eq_rower"
+const SetV1EquipmentElemEqSeatedRow SetV1EquipmentElem = "eq_seated_row"
+const SetV1EquipmentElemEqSledAndTurf SetV1EquipmentElem = "eq_sled_and_turf"
+const SetV1EquipmentElemEqSmithMachine SetV1EquipmentElem = "eq_smith_machine"
+const SetV1EquipmentElemEqSquatStand SetV1EquipmentElem = "eq_squat_stand"
+const SetV1EquipmentElemEqStairClimber SetV1EquipmentElem = "eq_stair_climber"
+const SetV1EquipmentElemEqStationaryBike SetV1EquipmentElem = "eq_stationary_bike"
+const SetV1EquipmentElemEqStepPlatform SetV1EquipmentElem = "eq_step_platform"
+const SetV1EquipmentElemEqTreadmill SetV1EquipmentElem = "eq_treadmill"
+const SetV1EquipmentElemEqWeightPlates2545Lbs SetV1EquipmentElem = "eq_weight_plates_25-45lbs"
+const SetV1EquipmentElemEqWeightPlates525Lbs SetV1EquipmentElem = "eq_weight_plates_5-25lbs"
+
+var enumValues_SetV1EquipmentElem = []interface{}{
 	"eq_bodyweight",
-	"eq_dumbbells_set_5-50",
-	"eq_dumbbells_set_55-100",
-	"eq_kettlebells_set_5-35",
-	"eq_kettlebells_set_40-70",
-	"eq_barbell",
+	"eq_dumbbells_set_5-50lbs",
+	"eq_dumbbells_set_55-100lbs",
+	"eq_kettlebells_set_5-35lbs",
+	"eq_kettlebells_set_40-70lbs",
+	"eq_barbell_45lbs",
 	"eq_olympic_barbell_mens_20kg",
 	"eq_olympic_barbell_womens_15kg",
-	"eq_weight_plates_standard",
-	"eq_weight_plates_bumper",
-	"eq_weight_plates_micro",
+	"eq_weight_plates_5-25lbs",
+	"eq_weight_plates_25-45lbs",
 	"eq_flat_bench",
 	"eq_adjustable_bench",
 	"eq_hip_thrust_bench_or_pad",
@@ -1269,265 +1483,147 @@ var enumValues_ExerciseV1ElemEquipmentElem = []interface{}{
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
-func (j *ExerciseV1ElemEquipmentElem) UnmarshalJSON(value []byte) error {
+func (j *SetV1EquipmentElem) UnmarshalJSON(value []byte) error {
 	var v string
 	if err := json.Unmarshal(value, &v); err != nil {
 		return err
 	}
 	var ok bool
-	for _, expected := range enumValues_ExerciseV1ElemEquipmentElem {
+	for _, expected := range enumValues_SetV1EquipmentElem {
 		if reflect.DeepEqual(v, expected) {
 			ok = true
 			break
 		}
 	}
 	if !ok {
-		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_ExerciseV1ElemEquipmentElem, v)
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_SetV1EquipmentElem, v)
 	}
-	*j = ExerciseV1ElemEquipmentElem(v)
+	*j = SetV1EquipmentElem(v)
 	return nil
 }
 
-type ExerciseV1ElemPatternElem string
+type SetV1PatternElem string
 
-const ExerciseV1ElemPatternElemArmAccessory ExerciseV1ElemPatternElem = "arm_accessory"
-const ExerciseV1ElemPatternElemBrace ExerciseV1ElemPatternElem = "brace"
-const ExerciseV1ElemPatternElemCarry ExerciseV1ElemPatternElem = "carry"
-const ExerciseV1ElemPatternElemConditioning ExerciseV1ElemPatternElem = "conditioning"
-const ExerciseV1ElemPatternElemCoreAntiExtension ExerciseV1ElemPatternElem = "core_anti_extension"
-const ExerciseV1ElemPatternElemCoreAntiRotation ExerciseV1ElemPatternElem = "core_anti_rotation"
-const ExerciseV1ElemPatternElemCoreFlexion ExerciseV1ElemPatternElem = "core_flexion"
-const ExerciseV1ElemPatternElemCoreRotation ExerciseV1ElemPatternElem = "core_rotation"
-const ExerciseV1ElemPatternElemHingeHip ExerciseV1ElemPatternElem = "hinge_hip"
-const ExerciseV1ElemPatternElemIsolationBiceps ExerciseV1ElemPatternElem = "isolation_biceps"
-const ExerciseV1ElemPatternElemIsolationCalves ExerciseV1ElemPatternElem = "isolation_calves"
-const ExerciseV1ElemPatternElemIsolationDelts ExerciseV1ElemPatternElem = "isolation_delts"
-const ExerciseV1ElemPatternElemIsolationHamstrings ExerciseV1ElemPatternElem = "isolation_hamstrings"
-const ExerciseV1ElemPatternElemIsolationQuads ExerciseV1ElemPatternElem = "isolation_quads"
-const ExerciseV1ElemPatternElemIsolationTriceps ExerciseV1ElemPatternElem = "isolation_triceps"
-const ExerciseV1ElemPatternElemLegAccessory ExerciseV1ElemPatternElem = "leg_accessory"
-const ExerciseV1ElemPatternElemPullHorizontal ExerciseV1ElemPatternElem = "pull_horizontal"
-const ExerciseV1ElemPatternElemPullVertical ExerciseV1ElemPatternElem = "pull_vertical"
-const ExerciseV1ElemPatternElemPushHorizontal ExerciseV1ElemPatternElem = "push_horizontal"
-const ExerciseV1ElemPatternElemPushVertical ExerciseV1ElemPatternElem = "push_vertical"
-const ExerciseV1ElemPatternElemRotation ExerciseV1ElemPatternElem = "rotation"
-const ExerciseV1ElemPatternElemShoulderAccessory ExerciseV1ElemPatternElem = "shoulder_accessory"
-const ExerciseV1ElemPatternElemSquatKnee ExerciseV1ElemPatternElem = "squat_knee"
+const SetV1PatternElemHinge SetV1PatternElem = "hinge"
+const SetV1PatternElemHorizontalPull SetV1PatternElem = "horizontal_pull"
+const SetV1PatternElemHorizontalPush SetV1PatternElem = "horizontal_push"
+const SetV1PatternElemRotation SetV1PatternElem = "rotation"
+const SetV1PatternElemSquat SetV1PatternElem = "squat"
+const SetV1PatternElemVerticalPull SetV1PatternElem = "vertical_pull"
+const SetV1PatternElemVerticalPush SetV1PatternElem = "vertical_push"
 
-var enumValues_ExerciseV1ElemPatternElem = []interface{}{
-	"push_horizontal",
-	"push_vertical",
-	"pull_horizontal",
-	"pull_vertical",
-	"squat_knee",
-	"hinge_hip",
-	"brace",
+var enumValues_SetV1PatternElem = []interface{}{
+	"horizontal_push",
+	"horizontal_pull",
+	"vertical_push",
+	"vertical_pull",
+	"squat",
+	"hinge",
 	"rotation",
-	"carry",
-	"arm_accessory",
-	"shoulder_accessory",
-	"leg_accessory",
-	"isolation_biceps",
-	"isolation_triceps",
-	"isolation_delts",
-	"isolation_quads",
-	"isolation_hamstrings",
-	"isolation_calves",
-	"core_anti_extension",
-	"core_anti_rotation",
-	"core_rotation",
-	"core_flexion",
-	"conditioning",
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
-func (j *ExerciseV1ElemPatternElem) UnmarshalJSON(value []byte) error {
+func (j *SetV1PatternElem) UnmarshalJSON(value []byte) error {
 	var v string
 	if err := json.Unmarshal(value, &v); err != nil {
 		return err
 	}
 	var ok bool
-	for _, expected := range enumValues_ExerciseV1ElemPatternElem {
+	for _, expected := range enumValues_SetV1PatternElem {
 		if reflect.DeepEqual(v, expected) {
 			ok = true
 			break
 		}
 	}
 	if !ok {
-		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_ExerciseV1ElemPatternElem, v)
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_SetV1PatternElem, v)
 	}
-	*j = ExerciseV1ElemPatternElem(v)
+	*j = SetV1PatternElem(v)
 	return nil
 }
 
-// Most recent best performance for this exercise; null if unknown.
-type ExerciseV1ElemRecentBest struct {
-	// Rep range or count (e.g., "8-10" or "10").
-	RepBracket string `json:"rep_bracket" yaml:"rep_bracket" mapstructure:"rep_bracket"`
+type SetV1TierHint string
 
-	// Resistance corresponds to the JSON schema field "resistance".
-	Resistance ExerciseV1ElemRecentBestResistance `json:"resistance" yaml:"resistance" mapstructure:"resistance"`
-}
+const SetV1TierHintA SetV1TierHint = "A"
+const SetV1TierHintB SetV1TierHint = "B"
+const SetV1TierHintC SetV1TierHint = "C"
 
-type ExerciseV1ElemRecentBestResistance struct {
-	// Set to true when mode=bodyweight. Set to null otherwise.
-	Bodyweight *bool `json:"bodyweight" yaml:"bodyweight" mapstructure:"bodyweight"`
-
-	// Duration in seconds; required when mode=duration. Set to null otherwise.
-	DurationSec *float64 `json:"durationSec" yaml:"durationSec" mapstructure:"durationSec"`
-
-	// Additional load in pounds; required when mode=lbs. Set to null otherwise.
-	Lbs *float64 `json:"lbs" yaml:"lbs" mapstructure:"lbs"`
-
-	// Discriminator: choose exactly one mode and set the corresponding field. Do not
-	// include unused fields.
-	Mode ExerciseV1ElemRecentBestResistanceMode `json:"mode" yaml:"mode" mapstructure:"mode"`
-}
-
-type ExerciseV1ElemRecentBestResistanceMode string
-
-const ExerciseV1ElemRecentBestResistanceModeBodyweight ExerciseV1ElemRecentBestResistanceMode = "bodyweight"
-const ExerciseV1ElemRecentBestResistanceModeDuration ExerciseV1ElemRecentBestResistanceMode = "duration"
-const ExerciseV1ElemRecentBestResistanceModeLbs ExerciseV1ElemRecentBestResistanceMode = "lbs"
-
-var enumValues_ExerciseV1ElemRecentBestResistanceMode = []interface{}{
-	"lbs",
-	"duration",
-	"bodyweight",
-}
-
-// UnmarshalJSON implements json.Unmarshaler.
-func (j *ExerciseV1ElemRecentBestResistanceMode) UnmarshalJSON(value []byte) error {
-	var v string
-	if err := json.Unmarshal(value, &v); err != nil {
-		return err
-	}
-	var ok bool
-	for _, expected := range enumValues_ExerciseV1ElemRecentBestResistanceMode {
-		if reflect.DeepEqual(v, expected) {
-			ok = true
-			break
-		}
-	}
-	if !ok {
-		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_ExerciseV1ElemRecentBestResistanceMode, v)
-	}
-	*j = ExerciseV1ElemRecentBestResistanceMode(v)
-	return nil
-}
-
-// UnmarshalJSON implements json.Unmarshaler.
-func (j *ExerciseV1ElemRecentBestResistance) UnmarshalJSON(value []byte) error {
-	var raw map[string]interface{}
-	if err := json.Unmarshal(value, &raw); err != nil {
-		return err
-	}
-	if _, ok := raw["bodyweight"]; raw != nil && !ok {
-		return fmt.Errorf("field bodyweight in ExerciseV1ElemRecentBestResistance: required")
-	}
-	if _, ok := raw["durationSec"]; raw != nil && !ok {
-		return fmt.Errorf("field durationSec in ExerciseV1ElemRecentBestResistance: required")
-	}
-	if _, ok := raw["lbs"]; raw != nil && !ok {
-		return fmt.Errorf("field lbs in ExerciseV1ElemRecentBestResistance: required")
-	}
-	if _, ok := raw["mode"]; raw != nil && !ok {
-		return fmt.Errorf("field mode in ExerciseV1ElemRecentBestResistance: required")
-	}
-	type Plain ExerciseV1ElemRecentBestResistance
-	var plain Plain
-	if err := json.Unmarshal(value, &plain); err != nil {
-		return err
-	}
-	if plain.DurationSec != nil && 1 > *plain.DurationSec {
-		return fmt.Errorf("field %s: must be >= %v", "durationSec", 1)
-	}
-	if plain.Lbs != nil && 1 > *plain.Lbs {
-		return fmt.Errorf("field %s: must be >= %v", "lbs", 1)
-	}
-	*j = ExerciseV1ElemRecentBestResistance(plain)
-	return nil
-}
-
-// UnmarshalJSON implements json.Unmarshaler.
-func (j *ExerciseV1ElemRecentBest) UnmarshalJSON(value []byte) error {
-	var raw map[string]interface{}
-	if err := json.Unmarshal(value, &raw); err != nil {
-		return err
-	}
-	if _, ok := raw["rep_bracket"]; raw != nil && !ok {
-		return fmt.Errorf("field rep_bracket in ExerciseV1ElemRecentBest: required")
-	}
-	if _, ok := raw["resistance"]; raw != nil && !ok {
-		return fmt.Errorf("field resistance in ExerciseV1ElemRecentBest: required")
-	}
-	type Plain ExerciseV1ElemRecentBest
-	var plain Plain
-	if err := json.Unmarshal(value, &plain); err != nil {
-		return err
-	}
-	*j = ExerciseV1ElemRecentBest(plain)
-	return nil
-}
-
-type ExerciseV1ElemTierHint string
-
-const ExerciseV1ElemTierHintA ExerciseV1ElemTierHint = "A"
-const ExerciseV1ElemTierHintB ExerciseV1ElemTierHint = "B"
-const ExerciseV1ElemTierHintC ExerciseV1ElemTierHint = "C"
-
-var enumValues_ExerciseV1ElemTierHint = []interface{}{
+var enumValues_SetV1TierHint = []interface{}{
 	"A",
 	"B",
 	"C",
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
-func (j *ExerciseV1ElemTierHint) UnmarshalJSON(value []byte) error {
+func (j *SetV1TierHint) UnmarshalJSON(value []byte) error {
 	var v string
 	if err := json.Unmarshal(value, &v); err != nil {
 		return err
 	}
 	var ok bool
-	for _, expected := range enumValues_ExerciseV1ElemTierHint {
+	for _, expected := range enumValues_SetV1TierHint {
 		if reflect.DeepEqual(v, expected) {
 			ok = true
 			break
 		}
 	}
 	if !ok {
-		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_ExerciseV1ElemTierHint, v)
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_SetV1TierHint, v)
 	}
-	*j = ExerciseV1ElemTierHint(v)
+	*j = SetV1TierHint(v)
 	return nil
 }
 
-// Structured history of a user’s workouts based on data provided.
-type HistoryV1Json struct {
-	// Exercises corresponds to the JSON schema field "exercises".
-	Exercises []ExerciseV1 `json:"exercises" yaml:"exercises" mapstructure:"exercises"`
-}
-
 // UnmarshalJSON implements json.Unmarshaler.
-func (j *HistoryV1Json) UnmarshalJSON(value []byte) error {
+func (j *SetV1) UnmarshalJSON(value []byte) error {
 	var raw map[string]interface{}
 	if err := json.Unmarshal(value, &raw); err != nil {
 		return err
 	}
-	if _, ok := raw["exercises"]; raw != nil && !ok {
-		return fmt.Errorf("field exercises in HistoryV1Json: required")
+	if _, ok := raw["accomplished"]; raw != nil && !ok {
+		return fmt.Errorf("field accomplished in SetV1: required")
 	}
-	type Plain HistoryV1Json
+	if _, ok := raw["equipment"]; raw != nil && !ok {
+		return fmt.Errorf("field equipment in SetV1: required")
+	}
+	if _, ok := raw["equipment_notes"]; raw != nil && !ok {
+		return fmt.Errorf("field equipment_notes in SetV1: required")
+	}
+	if _, ok := raw["equipment_other"]; raw != nil && !ok {
+		return fmt.Errorf("field equipment_other in SetV1: required")
+	}
+	if _, ok := raw["notes"]; raw != nil && !ok {
+		return fmt.Errorf("field notes in SetV1: required")
+	}
+	if _, ok := raw["pattern"]; raw != nil && !ok {
+		return fmt.Errorf("field pattern in SetV1: required")
+	}
+	if _, ok := raw["slug"]; raw != nil && !ok {
+		return fmt.Errorf("field slug in SetV1: required")
+	}
+	if _, ok := raw["tier_hint"]; raw != nil && !ok {
+		return fmt.Errorf("field tier_hint in SetV1: required")
+	}
+	type Plain SetV1
 	var plain Plain
 	if err := json.Unmarshal(value, &plain); err != nil {
 		return err
 	}
-	if plain.Exercises != nil && len(plain.Exercises) < 1 {
-		return fmt.Errorf("field %s length: must be >= %d", "exercises", 1)
+	if plain.Equipment != nil && len(plain.Equipment) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "equipment", 1)
 	}
-	if len(plain.Exercises) > 90 {
-		return fmt.Errorf("field %s length: must be <= %d", "exercises", 90)
+	if len(plain.Equipment) > 10 {
+		return fmt.Errorf("field %s length: must be <= %d", "equipment", 10)
 	}
-	*j = HistoryV1Json(plain)
+	if plain.EquipmentNotes != nil && len(*plain.EquipmentNotes) > 200 {
+		return fmt.Errorf("field %s length: must be <= %d", "equipment_notes", 200)
+	}
+	if plain.Pattern != nil && len(plain.Pattern) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "pattern", 1)
+	}
+	if len(plain.Pattern) > 2 {
+		return fmt.Errorf("field %s length: must be <= %d", "pattern", 2)
+	}
+	*j = SetV1(plain)
 	return nil
 }

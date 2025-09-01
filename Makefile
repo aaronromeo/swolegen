@@ -92,11 +92,15 @@ lint: fmt-check vet install-golangci
 
 .PHONY: normalize-schemas
 normalize-schemas: check-jq install-jsonschema
+	# Run project generator to sync equipment files and enums
+	@echo "Running equipment generator..."
+	$(GOCMD) run ./cmd/generators
+
 	rm -f $(NORMALIZED_SCHEMA_DIR)/*.json
 
-	$(JSONSCHEMA) bundle schemas/history-v1.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/history-v1.json
-	$(JSONSCHEMA) bundle schemas/analyzer-v1.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/analyzer-v1.json
-	$(JSONSCHEMA) bundle schemas/workout-v1.2.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/workout-v1.2.json
+	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema schemas/history-v1.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/history-v1.json
+	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema schemas/analyzer-v1.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/analyzer-v1.json
+	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema schemas/workout-v1.2.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/workout-v1.2.json
 
 	@for f in $(NORMALIZED_SCHEMA_DIR)/*.json; do \
 	  echo "Processing $$f"; \

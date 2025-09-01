@@ -1,0 +1,152 @@
+equipment_list:
+  - id: "eq_bodyweight"
+    description: "Bodyweight Only"
+    category: "Bodyweight"
+
+  - id: "eq_dumbbells_set_5-50lbs"
+    description: "Dumbbell Set: 5–50 lbs"
+    category: "Free Weights"
+
+  - id: "eq_dumbbells_set_55-100lbs"
+    description: "Dumbbell Set: 55–100 lbs"
+    category: "Free Weights"
+
+  - id: "eq_kettlebells_set_5-35lbs"
+    description: "Kettlebells: 5–35 lbs"
+    category: "Free Weights"
+
+  - id: "eq_kettlebells_set_40-70lbs"
+    description: "Kettlebells: 40–70 lbs"
+    category: "Free Weights"
+
+  - id: "eq_barbell_45lbs"
+    description: "Barbell – 45 lbs"
+    category: "Bars & Plates"
+
+  - id: "eq_olympic_barbell_mens_20kg"
+    description: "Olympic Barbell – 20kg (Men's)"
+    category: "Bars & Plates"
+
+  - id: "eq_olympic_barbell_womens_15kg"
+    description: "Olympic Barbell – 15kg (Women's)"
+    category: "Bars & Plates"
+
+  - id: "eq_weight_plates_5-25lbs"
+    description: "Weight Plates: 5–25 lbs"
+    category: "Bars & Plates"
+
+  - id: "eq_weight_plates_25-45lbs"
+    description: "Weight Plates: 25–45 lbs"
+    category: "Bars & Plates"
+
+  - id: "eq_flat_bench"
+    description: "Flat Bench"
+    category: "Benches & Platforms"
+
+  - id: "eq_adjustable_bench"
+    description: "Adjustable Bench"
+    category: "Benches & Platforms"
+
+  - id: "eq_hip_thrust_bench_or_pad"
+    description: "Hip Thrust Bench/Pad"
+    category: "Benches & Platforms"
+
+  - id: "eq_step_platform"
+    description: "Step Platform / Box"
+    category: "Benches & Platforms"
+
+  - id: "eq_plyo_box"
+    description: "Plyo Box"
+    category: "Benches & Platforms"
+
+  - id: "eq_power_rack"
+    description: "Power Rack"
+    category: "Racks & Machines"
+
+  - id: "eq_squat_stand"
+    description: "Squat Stand"
+    category: "Racks & Machines"
+
+  - id: "eq_smith_machine"
+    description: "Smith Machine"
+    category: "Racks & Machines"
+
+  - id: "eq_cable_machine_single_stack"
+    description: "Cable Machine (Single Stack)"
+    category: "Racks & Machines"
+
+  - id: "eq_cable_machine_dual_stack"
+    description: "Cable Machine (Dual Stack)"
+    category: "Racks & Machines"
+
+  - id: "eq_lat_pulldown"
+    description: "Lat Pulldown Machine"
+    category: "Racks & Machines"
+
+  - id: "eq_seated_row"
+    description: "Seated Row Machine"
+    category: "Racks & Machines"
+
+  - id: "eq_cable_attachments_basic"
+    description: "Cable Attachments (Rope, Bar, Single Handles)"
+    category: "Attachments & Bands"
+
+  - id: "eq_cable_attachments_full"
+    description: "Cable Attachments (Extended Set)"
+    category: "Attachments & Bands"
+
+  - id: "eq_bands_light_medium"
+    description: "Resistance Bands (Light/Medium)"
+    category: "Attachments & Bands"
+
+  - id: "eq_bands_full"
+    description: "Resistance Bands (Full Range)"
+    category: "Attachments & Bands"
+
+  - id: "eq_pullup_bar"
+    description: "Pull-Up Bar"
+    category: "Bodyweight Stations"
+
+  - id: "eq_assisted_pullup"
+    description: "Assisted Pull-Up Station"
+    category: "Bodyweight Stations"
+
+  - id: "eq_dip_bars"
+    description: "Dip Bars"
+    category: "Bodyweight Stations"
+
+  - id: "eq_mat_area"
+    description: "Mat Area"
+    category: "Bodyweight Stations"
+
+  - id: "eq_treadmill"
+    description: "Treadmill"
+    category: "Cardio"
+
+  - id: "eq_stationary_bike"
+    description: "Stationary Bike"
+    category: "Cardio"
+
+  - id: "eq_air_bike"
+    description: "Air Bike"
+    category: "Cardio"
+
+  - id: "eq_elliptical"
+    description: "Elliptical"
+    category: "Cardio"
+
+  - id: "eq_rower"
+    description: "Rowing Machine"
+    category: "Cardio"
+
+  - id: "eq_stair_climber"
+    description: "Stair Climber"
+    category: "Cardio"
+
+  - id: "eq_sled_and_turf"
+    description: "Sled & Turf"
+    category: "Cardio"
+
+  - id: "eq_other"
+    description: "Other"
+    category: "Misc"
