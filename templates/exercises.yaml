@@ -1,0 +1,3254 @@
+air-squat:
+  name: Air Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Calves
+arnold-press:
+  name: Arnold Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+    - Triceps
+assisted-chin-up:
+  name: Assisted Chin-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+assisted-dip:
+  name: Assisted Dip
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+    - Triceps
+  secondary-muscles: []
+assisted-pull-up:
+  name: Assisted Pull-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+back-extension:
+  name: Back Extension
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Hamstrings
+ball-slams:
+  name: Ball Slams
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Lats
+    - Abs
+    - Obliques
+  secondary-muscles:
+    - Glutes
+    - Front Deltoids
+band-assisted-bench-press:
+  name: Band-Assisted Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+band-external-shoulder-rotation:
+  name: Band External Shoulder Rotation
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rotator Cuff (posterior)
+  secondary-muscles: []
+band-internal-shoulder-rotation:
+  name: Band Internal Shoulder Rotation
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rotator Cuff (anterior)
+  secondary-muscles: []
+band-pull-apart:
+  name: Band Pull-Apart
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Rotator Cuff
+  secondary-muscles:
+    - Trapezius
+banded-face-pull:
+  name: Banded Face Pull
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Rotator Cuff
+  secondary-muscles:
+    - Trapezius
+    - Lateral Deltoid
+banded-hip-march:
+  name: Banded Hip March
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hip Flexor
+  secondary-muscles: []
+banded-muscle-up:
+  name: Banded Muscle-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Chest
+    - Lats
+    - Triceps
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Front Deltoid
+    - Rear Deltoids
+    - Rotator Cuffs
+banded-side-kicks:
+  name: Banded Side Kicks
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Abductors
+  secondary-muscles:
+    - Glutes
+bar-dip:
+  name: Bar Dip
+  category: Chest
+  compound: true
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+    - Triceps
+  secondary-muscles: []
+bar-hang:
+  name: Bar Hang
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+barbell-curl:
+  name: Barbell Curl
+  category: Bicep
+  compound: true
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+barbell-front-raise:
+  name: Barbell Front Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+barbell-hack-squat:
+  name: Barbell Hack Squat
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Quads
+  secondary-muscles:
+    - Glutes
+    - Adductors
+    - Lower Back
+    - Trapezius
+    - Forearm Flexors
+    - Calves
+barbell-incline-triceps-extension:
+  name: Barbell Incline Triceps Extension
+  category: Triceps
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+barbell-lunge:
+  name: Barbell Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+barbell-lying-triceps-extension:
+  name: Barbell Lying Triceps Extension
+  category: Triceps
+  compound: true
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+barbell-preacher-curl:
+  name: Barbell Preacher Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+barbell-rear-delt-row:
+  name: Barbell Rear Delt Row
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Trapezius
+  secondary-muscles:
+    - Rotator Cuff
+    - Biceps
+    - Forearm Flexors
+barbell-row:
+  name: Barbell Row
+  category: Back
+  compound: true
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Lower Back
+    - Forearm Flexors
+    - Rotator Cuff
+barbell-seated-calf-raise:
+  name: Barbell Seated Calf Raise
+  category: Calves
+  compound: false
+  primary-muscles:
+    - Calves
+  secondary-muscles: []
+barbell-shrug:
+  name: Barbell Shrug
+  category: Back
+  compound: false
+  primary-muscles:
+    - Trapezius
+  secondary-muscles:
+    - Forearm Flexors
+barbell-standing-calf-raise:
+  name: Barbell Standing Calf Raise
+  category: Calves
+  compound: false
+  primary-muscles:
+    - Calves
+  secondary-muscles: []
+barbell-standing-triceps-extension:
+  name: Barbell Standing Triceps Extension
+  category: Triceps
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+barbell-upright-row:
+  name: Barbell Upright Row
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Lateral Deltoid
+  secondary-muscles:
+    - Front Deltoid
+    - Trapezius
+    - Biceps
+barbell-walking-lunge:
+  name: Barbell Walking Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+barbell-wrist-curl:
+  name: Barbell Wrist Curl
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+barbell-wrist-curl-behind-the-back:
+  name: Barbell Wrist Curl Behind the Back
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+barbell-wrist-extension:
+  name: Barbell Wrist Extension
+  category: Forearm Extensor
+  compound: false
+  primary-muscles:
+    - Forearm Extensors
+  secondary-muscles: []
+bayesian-curl:
+  name: Bayesian Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+behind-the-neck-press:
+  name: Behind the Neck Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+    - Lateral Deltoid
+  secondary-muscles:
+    - Trapezius
+    - Triceps
+belt-squat:
+  name: Belt Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Calves
+bench-dip:
+  name: Bench Dip
+  category: Triceps
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles:
+    - Chest
+    - Front Deltoid
+bench-press:
+  name: Bench Press
+  category: Chest
+  compound: true
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+bench-press-against-band:
+  name: Bench Press Against Band
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+bicycle-crunch:
+  name: Bicycle Crunch
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+    - Hip Flexor
+block-clean:
+  name: Block Clean
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Calves
+block-snatch:
+  name: Block Snatch
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Calves
+    - Forearm Flexors
+board-press:
+  name: Board Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+body-weight-lunge:
+  name: Body Weight Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+bodyweight-curl:
+  name: Bodyweight Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+    - Lats
+  secondary-muscles:
+    - Forearm Flexors
+bodyweight-leg-curl:
+  name: Bodyweight Leg Curl
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles:
+    - Glutes
+box-jump:
+  name: Box Jump
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Calves
+box-squat:
+  name: Box Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+bulgarian-split-squat:
+  name: Bulgarian Split Squat
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+cable-chest-press:
+  name: Cable Chest Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+    - Triceps
+cable-close-grip-seated-row:
+  name: Cable Close Grip Seated Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuffs
+cable-crossover-bicep-curl:
+  name: Cable Crossover Bicep Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+cable-crunch:
+  name: Cable Crunch
+  category: Ab
+  compound: true
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+cable-curl-with-bar:
+  name: Cable Curl With Bar
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+cable-curl-with-rope:
+  name: Cable Curl With Rope
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+cable-front-raise:
+  name: Cable Front Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+cable-internal-shoulder-rotation:
+  name: Cable Internal Shoulder Rotation
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rotator Cuff (anterior)
+  secondary-muscles: []
+cable-lateral-raise:
+  name: Cable Lateral Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Lateral Deltoid
+  secondary-muscles:
+    - Front Deltoid
+cable-machine-hip-abduction:
+  name: Cable Machine Hip Abduction
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Abductors
+  secondary-muscles:
+    - Glutes
+cable-machine-hip-adduction:
+  name: Cable Machine Hip Adduction
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Adductors
+  secondary-muscles: []
+cable-pull-through:
+  name: Cable Pull Through
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Lower Back
+    - Hamstrings
+    - Adductors
+cable-rear-delt-row:
+  name: Cable Rear Delt Row
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Rotator Cuff
+  secondary-muscles:
+    - Trapezius
+    - Biceps
+cable-wide-grip-seated-row:
+  name: Cable Wide Grip Seated Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuffs
+chair-squat:
+  name: Chair Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Calves
+chest-to-bar:
+  name: Chest to Bar
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Rear Deltoids
+    - Biceps
+    - Rotator Cuff
+    - Forearm Flexors
+chin-up:
+  name: Chin-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+clamshells:
+  name: Clamshells
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Abductors
+  secondary-muscles:
+    - Glutes
+clap-push-up:
+  name: Clap Push-Up
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+clean:
+  name: Clean
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Calves
+clean-and-jerk:
+  name: Clean and Jerk
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+    - Front Deltoid
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Triceps
+    - Lateral Deltoid
+    - Calves
+close-grip-bench-press:
+  name: Close-Grip Bench Press
+  category: Chest
+  compound: true
+  primary-muscles:
+    - Triceps
+  secondary-muscles:
+    - Chest
+    - Front Deltoid
+close-grip-chin-up:
+  name: Close-Grip Chin-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+close-grip-feet-up-bench-press:
+  name: Close-Grip Feet-Up Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles:
+    - Chest
+    - Front Deltoid
+close-grip-lat-pulldown:
+  name: Close-Grip Lat Pulldown
+  category: Back
+  compound: true
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+close-grip-push-up:
+  name: Close-Grip Push-Up
+  category: Triceps
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles:
+    - Abs
+    - Chest
+    - Front Deltoid
+concentration-curl:
+  name: Concentration Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+copenhagen-plank:
+  name: Copenhagen Plank
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Adductors
+  secondary-muscles:
+    - Abductors
+    - Abs
+    - Obliques
+core-twist:
+  name: Core Twist
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+    - Abs
+  secondary-muscles: []
+cossack-squat:
+  name: Cossack Squat
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Quads
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+crossbody-cable-triceps-extension:
+  name: Crossbody Cable Triceps Extension
+  category: Triceps
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+crunch:
+  name: Crunch
+  category: Ab
+  compound: true
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+cuban-press:
+  name: Cuban Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+    - Read Deltoid
+    - Trapezius
+    - Triceps
+curtsy-lunge:
+  name: Curtsy Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+dead-bug:
+  name: Dead Bug
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+dead-bug-with-dumbbells:
+  name: Dead Bug With Dumbbells
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+deadlift:
+  name: Deadlift
+  category: Back
+  compound: true
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+death-march-with-dumbbells:
+  name: Death March with Dumbbells
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Hamstrings
+    - Lower Back
+  secondary-muscles:
+    - Adductors
+    - Forearm Flexors
+    - Trapezius
+decline-bench-press:
+  name: Decline Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Triceps
+    - Front Deltoid
+decline-push-up:
+  name: Decline Push-Up
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Abs
+deficit-deadlift:
+  name: Deficit Deadlift
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+devils-press:
+  name: Devils Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+    - Chest
+    - Quads
+    - Adductors
+  secondary-muscles:
+    - Forearm Flexors
+    - Calves
+    - Abs
+    - Trapezius
+    - Triceps
+donkey-calf-raise:
+  name: Donkey Calf Raise
+  category: Calves
+  compound: false
+  primary-muscles:
+    - Calves
+  secondary-muscles: []
+donkey-kicks:
+  name: Donkey Kicks
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+drag-curl:
+  name: Drag Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+dragon-flag:
+  name: Dragon Flag
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+    - Lats
+dumbbell-chest-fly:
+  name: Dumbbell Chest Fly
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+dumbbell-chest-press:
+  name: Dumbbell Chest Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+dumbbell-curl:
+  name: Dumbbell Curl
+  category: Bicep
+  compound: true
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+dumbbell-deadlift:
+  name: Dumbbell Deadlift
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+dumbbell-decline-chest-press:
+  name: Dumbbell Decline Chest Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+dumbbell-floor-press:
+  name: Dumbbell Floor Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+dumbbell-frog-pumps:
+  name: Dumbbell Frog Pumps
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+dumbbell-front-raise:
+  name: Dumbbell Front Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+dumbbell-horizontal-external-shoulder-rotation:
+  name: Dumbbell Horizontal External Shoulder Rotation
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rotator Cuff (posterior)
+  secondary-muscles: []
+dumbbell-horizontal-internal-shoulder-rotation:
+  name: Dumbbell Horizontal Internal Shoulder Rotation
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rotator Cuff (anterior)
+  secondary-muscles: []
+dumbbell-lateral-raise:
+  name: Dumbbell Lateral Raise
+  category: Shoulder
+  compound: true
+  primary-muscles:
+    - Lateral Deltoid
+  secondary-muscles:
+    - Front Deltoid
+dumbbell-lunge:
+  name: Dumbbell Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Forearm Flexors
+dumbbell-lying-triceps-extension:
+  name: Dumbbell Lying Triceps Extension
+  category: Triceps
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+dumbbell-preacher-curl:
+  name: Dumbbell Preacher Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+dumbbell-pullover:
+  name: Dumbbell Pullover
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Lats
+dumbbell-rear-delt-row:
+  name: Dumbbell Rear Delt Row
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Trapezius
+  secondary-muscles:
+    - Rotator Cuff
+    - Biceps
+    - Forearm Flexors
+dumbbell-romanian-deadlift:
+  name: Dumbbell Romanian Deadlift
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Hamstrings
+  secondary-muscles:
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+dumbbell-row:
+  name: Dumbbell Row
+  category: Back
+  compound: true
+  primary-muscles: []
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuff
+dumbbell-shoulder-press:
+  name: Dumbbell Shoulder Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Lateral Deltoid
+dumbbell-shrug:
+  name: Dumbbell Shrug
+  category: Back
+  compound: false
+  primary-muscles:
+    - Trapezius
+  secondary-muscles:
+    - Forearm Flexors
+dumbbell-side-bend:
+  name: Dumbbell Side Bend
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles: []
+dumbbell-squat:
+  name: Dumbbell Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+dumbbell-standing-triceps-extension:
+  name: Dumbbell Standing Triceps Extension
+  category: Triceps
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+dumbbell-walking-lunge:
+  name: Dumbbell Walking Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+dumbbell-wrist-curl:
+  name: Dumbbell Wrist Curl
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+dumbbell-wrist-extension:
+  name: Dumbbell Wrist Extension
+  category: Forearm Extensor
+  compound: false
+  primary-muscles:
+    - Forearm Extensors
+  secondary-muscles: []
+eccentric-heel-drop:
+  name: Eccentric Heel Drop
+  category: Calves
+  compound: false
+  primary-muscles:
+    - Calves
+  secondary-muscles: []
+face-pull:
+  name: Face Pull
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Rotator Cuff
+  secondary-muscles:
+    - Trapezius
+    - Lateral Deltoid
+farmers-walk:
+  name: Farmers Walk
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+    - Obliques
+    - Glutes
+    - Trapezius
+  secondary-muscles:
+    - Quads
+    - Abs
+    - Lower Back
+    - Calves
+    - Lateral Deltoids
+fat-bar-deadlift:
+  name: Fat Bar Deadlift
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Forearm Flexors
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Hamstrings
+    - Adductors
+    - Trapezius
+feet-up-bench-press:
+  name: Feet-Up Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+fire-hydrants:
+  name: Fire Hydrants
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles: []
+floor-back-extension:
+  name: Floor Back Extension
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lower Back
+  secondary-muscles: []
+floor-press:
+  name: Floor Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+frog-pumps:
+  name: Frog Pumps
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+front-hold:
+  name: Front Hold
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+front-squat:
+  name: Front Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+glute-bridge:
+  name: Glute Bridge
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Quads
+glute-ham-raise:
+  name: Glute Ham Raise
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles:
+    - Glutes
+    - Lower Back
+goblet-squat:
+  name: Goblet Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Lower Back
+    - Calves
+good-morning:
+  name: Good Morning
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Hamstrings
+  secondary-muscles:
+    - Adductors
+gorilla-row:
+  name: Gorilla Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rotator Cuff
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rear Deltoids
+gripper:
+  name: Gripper
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+hack-squat-machine:
+  name: Hack Squat Machine
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+half-air-squat:
+  name: Half Air Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Calves
+hammer-curl:
+  name: Hammer Curl
+  category: Bicep
+  compound: true
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+handstand-push-up:
+  name: Handstand Push-Up
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+    - Triceps
+hang-clean:
+  name: Hang Clean
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Calves
+hang-power-clean:
+  name: Hang Power Clean
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Adductors
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+hang-power-snatch:
+  name: Hang Power Snatch
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Adductors
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+hang-snatch:
+  name: Hang Snatch
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Calves
+hanging-knee-raise:
+  name: Hanging Knee Raise
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+hanging-leg-raise:
+  name: Hanging Leg Raise
+  category: Ab
+  compound: true
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+hanging-sit-up:
+  name: Hanging Sit-Up
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+hanging-windshield-wiper:
+  name: Hanging Windshield Wiper
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+    - Abs
+  secondary-muscles:
+    - Forearm Flexors
+heel-raise:
+  name: Heel Raise
+  category: Calves
+  compound: false
+  primary-muscles:
+    - Calves
+  secondary-muscles: []
+high-to-low-wood-chop-with-band:
+  name: High to Low Wood Chop with Band
+  category: Ab
+  compound: true
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+high-to-low-wood-chop-with-cable:
+  name: High to Low Wood Chop with Cable
+  category: Ab
+  compound: true
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+hip-abduction-against-band:
+  name: Hip Abduction Against Band
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Abductors
+  secondary-muscles:
+    - Glutes
+hip-abduction-machine:
+  name: Hip Abduction Machine
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Abductors
+  secondary-muscles:
+    - Glutes
+hip-adduction-against-band:
+  name: Hip Adduction Against Band
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Adductors
+  secondary-muscles: []
+hip-adduction-machine:
+  name: Hip Adduction Machine
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Adductors
+  secondary-muscles: []
+hip-thrust:
+  name: Hip Thrust
+  category: Glute
+  compound: true
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Adductors
+    - Quads
+hip-thrust-machine:
+  name: Hip Thrust Machine
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Adductors
+    - Quads
+hip-thrust-with-band-around-knees:
+  name: Hip Thrust With Band Around Knees
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Adductors
+    - Abductors
+    - Quads
+hollow-body-crunch:
+  name: Hollow Body Crunch
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+    - Hip Flexor
+  secondary-muscles:
+    - Obliques
+hollow-hold:
+  name: Hollow Hold
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+    - Hip Flexors
+horizontal-wood-chop-with-band:
+  name: Horizontal Wood Chop with Band
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles: []
+horizontal-wood-chop-with-cable:
+  name: Horizontal Wood Chop with Cable
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles: []
+incline-bench-press:
+  name: Incline Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+incline-dumbbell-curl:
+  name: Incline Dumbbell Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+incline-dumbbell-press:
+  name: Incline Dumbbell Press
+  category: Chest
+  compound: true
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+incline-push-up:
+  name: Incline Push-Up
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Abs
+inverted-row:
+  name: Inverted Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuff
+inverted-row-with-underhand-grip:
+  name: Inverted Row with Underhand Grip
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuff
+jackknife-sit-up:
+  name: Jackknife Sit-Up
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+    - Hip Flexors
+  secondary-muscles:
+    - Obliques
+jefferson-curl:
+  name: Jefferson Curl
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lower Back
+  secondary-muscles:
+    - Adductors
+    - Glutes
+    - Hamstrings
+    - Trapezius
+jerk:
+  name: Jerk
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+    - Trapezius
+    - Triceps
+    - Lateral Deltoid
+jumping-lunge:
+  name: Jumping Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+jumping-muscle-up:
+  name: Jumping Muscle-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Chest
+    - Lats
+    - Triceps
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Front Deltoid
+    - Rear Deltoids
+    - Rotator Cuffs
+kettlebell-clean:
+  name: Kettlebell Clean
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Adductors
+    - Obliques
+kettlebell-clean-jerk:
+  name: Kettlebell Clean & Jerk
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Front Deltoid
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+    - Triceps
+    - Lateral Deltoid
+kettlebell-clean-press:
+  name: Kettlebell Clean & Press
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Front Deltoid
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Triceps
+    - Lateral Deltoid
+    - Adductors
+    - Obliques
+kettlebell-floor-press:
+  name: Kettlebell Floor Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+kettlebell-halo:
+  name: Kettlebell Halo
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+    - Lateral Deltoid
+    - Read Deltoid
+  secondary-muscles:
+    - Trapezius
+    - Triceps
+    - Abs
+    - Obliques
+kettlebell-plank-pull-through:
+  name: Kettlebell Plank Pull Through
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+kettlebell-swing:
+  name: Kettlebell Swing
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+kettlebell-thrusters:
+  name: Kettlebell Thrusters
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Adductors
+    - Quads
+    - Front Delts
+  secondary-muscles:
+    - Hamstrings
+    - Lower Back
+    - Calves
+    - Triceps
+    - Lateral Delts
+kettlebell-windmill:
+  name: Kettlebell Windmill
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Front Deltoids
+    - Lateral Deltoids
+    - Rear Deltoids
+    - Hamstrings
+  secondary-muscles:
+    - Lower Back
+    - Abs
+    - Rotator Cuff
+    - Lats
+    - Traps
+kneeling-ab-wheel-roll-out:
+  name: Kneeling Ab Wheel Roll-Out
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+kneeling-incline-push-up:
+  name: Kneeling Incline Push-Up
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Abs
+kneeling-plank:
+  name: Kneeling Plank
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+kneeling-push-up:
+  name: Kneeling Push-Up
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Abs
+kneeling-side-plank:
+  name: Kneeling Side Plank
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+kroc-row:
+  name: Kroc Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Lower Back
+    - Forearm Flexors
+    - Rotator Cuff
+l-sit:
+  name: L-Sit
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Chest
+    - Front Deltoid
+    - Triceps
+    - Obliques
+    - Quads
+landmine-hack-squat:
+  name: Landmine Hack Squat
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+landmine-press:
+  name: Landmine Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Chest
+landmine-squat:
+  name: Landmine Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Lower Back
+    - Calves
+lat-pulldown-with-pronated-grip:
+  name: Lat Pulldown With Pronated Grip
+  category: Back
+  compound: true
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+lat-pulldown-with-supinated-grip:
+  name: Lat Pulldown With Supinated Grip
+  category: Back
+  compound: true
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+lateral-bound:
+  name: Lateral Bound
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Calves
+    - Glutes
+  secondary-muscles:
+    - Abductors
+    - Adductors
+lateral-walk-with-band:
+  name: Lateral Walk With Band
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Abductors
+  secondary-muscles:
+    - Glutes
+leg-curl-on-ball:
+  name: Leg Curl On Ball
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles:
+    - Glutes
+leg-extension:
+  name: Leg Extension
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Quads
+  secondary-muscles: []
+leg-press:
+  name: Leg Press
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Hamstrings
+lying-dumbbell-external-shoulder-rotation:
+  name: Lying Dumbbell External Shoulder Rotation
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rotator Cuff (posterior)
+  secondary-muscles: []
+lying-dumbbell-internal-shoulder-rotation:
+  name: Lying Dumbbell Internal Shoulder Rotation
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rotator Cuff (anterior)
+  secondary-muscles: []
+lying-leg-curl:
+  name: Lying Leg Curl
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles: []
+lying-leg-raise:
+  name: Lying Leg Raise
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+lying-neck-curl:
+  name: Lying Neck Curl
+  category: Neck
+  compound: false
+  primary-muscles:
+    - Neck
+  secondary-muscles: []
+lying-neck-extension:
+  name: Lying Neck Extension
+  category: Neck
+  compound: false
+  primary-muscles:
+    - Neck
+  secondary-muscles: []
+lying-windshield-wiper:
+  name: Lying Windshield Wiper
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+lying-windshield-wiper-with-bent-knees:
+  name: Lying Windshield Wiper with Bent Knees
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+machine-bicep-curl:
+  name: Machine Bicep Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+machine-chest-fly:
+  name: Machine Chest Fly
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+machine-chest-press:
+  name: Machine Chest Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+machine-crunch:
+  name: Machine Crunch
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+machine-glute-kickbacks:
+  name: Machine Glute Kickbacks
+  category: Glute
+  compound: false
+  primary-muscles: []
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+machine-lateral-raise:
+  name: Machine Lateral Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Lateral Deltoid
+  secondary-muscles:
+    - Front Deltoid
+machine-shoulder-press:
+  name: Machine Shoulder Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Lateral Deltoid
+monkey-row:
+  name: Monkey Row
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Lateral Deltoid
+  secondary-muscles:
+    - Rear Deltoid
+    - Trapezius
+    - Biceps
+mountain-climbers:
+  name: Mountain Climbers
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+muscle-up-bar:
+  name: Muscle-Up (Bar)
+  category: Back
+  compound: false
+  primary-muscles:
+    - Chest
+    - Lats
+    - Triceps
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Front Deltoid
+    - Rear Deltoids
+    - Rotator Cuffs
+muscle-up-rings:
+  name: Muscle-Up (Rings)
+  category: Back
+  compound: false
+  primary-muscles:
+    - Chest
+    - Lats
+    - Triceps
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Front Deltoid
+    - Rear Deltoids
+    - Rotator Cuffs
+neutral-close-grip-lat-pulldown:
+  name: Neutral Close-Grip Lat Pulldown
+  category: Back
+  compound: true
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+nordic-hamstring-eccentric:
+  name: Nordic Hamstring Eccentric
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles: []
+oblique-crunch:
+  name: Oblique Crunch
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+oblique-sit-up:
+  name: Oblique Sit-Up
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+one-arm-landmine-press:
+  name: One-Arm Landmine Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Chest
+one-handed-bar-hang:
+  name: One-Handed Bar Hang
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+one-handed-cable-row:
+  name: One-Handed Cable Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuffs
+one-handed-kettlebell-swing:
+  name: One-Handed Kettlebell Swing
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+    - Obliques
+one-handed-lat-pulldown:
+  name: One-Handed Lat Pulldown
+  category: Back
+  compound: true
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+one-legged-glute-bridge:
+  name: One-Legged Glute Bridge
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Adductors
+    - Abductors
+    - Quads
+one-legged-hip-thrust:
+  name: One-Legged Hip Thrust
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Adductors
+    - Abductors
+    - Quads
+one-legged-leg-extension:
+  name: One-Legged Leg Extension
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+  secondary-muscles: []
+one-legged-lying-leg-curl:
+  name: One-Legged Lying Leg Curl
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles: []
+one-legged-seated-leg-curl:
+  name: One-Legged Seated Leg Curl
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles: []
+overhead-cable-triceps-extension:
+  name: Overhead Cable Triceps Extension
+  category: Triceps
+  compound: true
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+overhead-press:
+  name: Overhead Press
+  category: Shoulder
+  compound: true
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Lateral Deltoid
+pause-deadlift:
+  name: Pause Deadlift
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+pause-squat:
+  name: Pause Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+pec-deck:
+  name: Pec Deck
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+pendlay-row:
+  name: Pendlay Row
+  category: Back
+  compound: false
+  primary-muscles: []
+  secondary-muscles:
+    - Biceps
+    - Lower Back
+    - Forearm Flexors
+    - Rotator Cuff
+pin-bench-press:
+  name: Pin Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+pin-squat:
+  name: Pin Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower back
+  secondary-muscles:
+    - Calves
+pistol-squat:
+  name: Pistol Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+  secondary-muscles:
+    - Hamstrings
+plank:
+  name: Plank
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+plank-to-push-up:
+  name: Plank to Push-Up
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Abs
+    - Chest
+    - Front Deltoids
+    - Triceps
+  secondary-muscles:
+    - Obliques
+plank-with-leg-lifts:
+  name: Plank with Leg Lifts
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+plank-with-shoulder-taps:
+  name: Plank with Shoulder Taps
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+plate-front-raise:
+  name: Plate Front Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Lateral Deltoid
+plate-pinch:
+  name: Plate Pinch
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+plate-wrist-curl:
+  name: Plate Wrist Curl
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+poliquin-raise:
+  name: Poliquin Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Lateral Deltoid
+  secondary-muscles:
+    - Front Deltoid
+poliquin-step-up:
+  name: Poliquin Step-Up
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+  secondary-muscles: []
+power-clean:
+  name: Power Clean
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Adductors
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+power-jerk:
+  name: Power Jerk
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+    - Trapezius
+    - Triceps
+    - Lateral Deltoid
+power-snatch:
+  name: Power Snatch
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Adductors
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+prisoner-get-up:
+  name: Prisoner Get Up
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+  secondary-muscles:
+    - Abs
+    - Obliques
+    - Adductors
+pull-up:
+  name: Pull-Up
+  category: Back
+  compound: true
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+pull-up-with-a-neutral-grip:
+  name: Pull-Up With a Neutral Grip
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+push-press:
+  name: Push Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+    - Trapezius
+    - Triceps
+    - Lateral Deltoid
+push-up:
+  name: Push-Up
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Abs
+push-up-against-wall:
+  name: Push-Up Against Wall
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Abs
+push-ups-with-feet-in-rings:
+  name: Push-Ups With Feet in Rings
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Abs
+rack-pull:
+  name: Rack Pull
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+renegade-row:
+  name: Renegade Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+    - Rotator Cuff
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Abs
+    - Obliques
+resistance-band-chest-fly:
+  name: Resistance Band Chest Fly
+  category: Chest
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+resistance-band-curl:
+  name: Resistance Band Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors
+resistance-band-lateral-raise:
+  name: Resistance Band Lateral Raise
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Lateral Deltoid
+  secondary-muscles:
+    - Front Deltoid
+reverse-barbell-lunge:
+  name: Reverse Barbell Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Adductors
+    - Quads
+    - Glutes
+  secondary-muscles: []
+reverse-body-weight-lunge:
+  name: Reverse Body Weight Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+reverse-cable-flyes:
+  name: Reverse Cable Flyes
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Rotator Cuff
+  secondary-muscles:
+    - Trapezius
+reverse-dumbbell-flyes:
+  name: Reverse Dumbbell Flyes
+  category: Shoulder
+  compound: true
+  primary-muscles:
+    - Rear Deltoid
+    - Rotator Cuff
+  secondary-muscles:
+    - Trapezius
+reverse-dumbbell-lunge:
+  name: Reverse Dumbbell Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Forearm Flexors
+reverse-hyperextension:
+  name: Reverse Hyperextension
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Hamstrings
+    - Lower back
+  secondary-muscles: []
+reverse-machine-fly:
+  name: Reverse Machine Fly
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Rear Deltoid
+    - Rotator Cuff
+  secondary-muscles:
+    - Trapezius
+reverse-nordic:
+  name: Reverse Nordic
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+  secondary-muscles: []
+ring-dip:
+  name: Ring Dip
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Triceps
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+ring-pull-up:
+  name: Ring Pull-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Biceps
+    - Rear Deltoids
+    - Forearm Flexors
+    - Rotator Cuffs
+ring-row:
+  name: Ring Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuff
+romanian-deadlift:
+  name: Romanian Deadlift
+  category: Glute
+  compound: true
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Hamstrings
+  secondary-muscles:
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+rowing-machine:
+  name: Rowing Machine
+  category: Cardio & Equipment
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+safety-bar-squat:
+  name: Safety Bar Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+scap-pull-up:
+  name: Scap Pull-Up
+  category: Back
+  compound: false
+  primary-muscles:
+    - Rotator Cuff
+    - Forearm Flexors
+  secondary-muscles: []
+seal-row:
+  name: Seal Row
+  category: Back
+  compound: false
+  primary-muscles: []
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuff
+seated-barbell-overhead-press:
+  name: Seated Barbell Overhead Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Lateral Deltoid
+seated-cable-chest-fly:
+  name: Seated Cable Chest Fly
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+seated-calf-raise:
+  name: Seated Calf Raise
+  category: Calves
+  compound: true
+  primary-muscles:
+    - Calves
+  secondary-muscles: []
+seated-dumbbell-shoulder-press:
+  name: Seated Dumbbell Shoulder Press
+  category: Shoulder
+  compound: true
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Lateral Deltoid
+seated-kettlebell-press:
+  name: Seated Kettlebell Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Lateral Deltoid
+seated-leg-curl:
+  name: Seated Leg Curl
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Hamstrings
+  secondary-muscles: []
+seated-machine-row:
+  name: Seated Machine Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuff
+seated-smith-machine-shoulder-press:
+  name: Seated Smith Machine Shoulder Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Lateral Deltoid
+shallow-body-weight-lunge:
+  name: Shallow Body Weight Lunge
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles:
+    - Hamstrings
+side-lunges-bodyweight:
+  name: Side Lunges (Bodyweight)
+  category: Leg
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+side-plank:
+  name: Side Plank
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Obliques
+  secondary-muscles:
+    - Abs
+single-leg-deadlift-with-kettlebell:
+  name: Single Leg Deadlift with Kettlebell
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Hamstrings
+    - Lower Back
+  secondary-muscles:
+    - Abductors
+    - Adductors
+    - Forearm Flexors
+    - Trapezius
+single-leg-romanian-deadlift:
+  name: Single Leg Romanian Deadlift
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Hamstrings
+  secondary-muscles:
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+sit-up:
+  name: Sit-Up
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+smith-machine-bench-press:
+  name: Smith Machine Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+smith-machine-bulgarian-split-squat:
+  name: Smith Machine Bulgarian Split Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+  secondary-muscles: []
+smith-machine-front-squat:
+  name: Smith Machine Front Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+smith-machine-hip-thrust:
+  name: Smith Machine Hip Thrust
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Glutes
+  secondary-muscles:
+    - Adductors
+    - Quads
+smith-machine-incline-bench-press:
+  name: Smith Machine Incline Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+smith-machine-one-handed-row:
+  name: Smith Machine One-Handed Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Forearm Flexors
+    - Rotator Cuff
+smith-machine-reverse-grip-bench-press:
+  name: Smith Machine Reverse Grip Bench Press
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+smith-machine-squat:
+  name: Smith Machine Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+snatch:
+  name: Snatch
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+  secondary-muscles:
+    - Hamstrings
+    - Trapezius
+    - Forearm Flexors
+    - Calves
+snatch-grip-behind-the-neck-press:
+  name: Snatch Grip Behind the Neck Press
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+    - Lateral Deltoid
+  secondary-muscles:
+    - Trapezius
+    - Triceps
+snatch-grip-deadlift:
+  name: Snatch Grip Deadlift
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+spider-curl:
+  name: Spider Curl
+  category: Bicep
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+split-jerk:
+  name: Split Jerk
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+    - Trapezius
+    - Triceps
+    - Lateral Deltoid
+squat:
+  name: Squat
+  category: Leg
+  compound: true
+  primary-muscles:
+    - Quads
+    - Adductors
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Calves
+squat-jerk:
+  name: Squat Jerk
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Adductors
+    - Quads
+    - Front Deltoid
+  secondary-muscles:
+    - Trapezius
+    - Triceps
+    - Lateral Deltoid
+    - Calves
+standing-cable-chest-fly:
+  name: Standing Cable Chest Fly
+  category: Chest
+  compound: true
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+standing-cable-leg-extension:
+  name: Standing Cable Leg Extension
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+  secondary-muscles: []
+standing-calf-raise:
+  name: Standing Calf Raise
+  category: Calves
+  compound: true
+  primary-muscles:
+    - Calves
+  secondary-muscles: []
+standing-glute-kickback-in-machine:
+  name: Standing Glute Kickback in Machine
+  category: Glute
+  compound: false
+  primary-muscles: []
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+standing-glute-push-down:
+  name: Standing Glute Push Down
+  category: Glute
+  compound: false
+  primary-muscles: []
+  secondary-muscles:
+    - Hamstrings
+    - Adductors
+standing-hip-abduction-against-band:
+  name: Standing Hip Abduction Against Band
+  category: Glute
+  compound: false
+  primary-muscles:
+    - Abductors
+  secondary-muscles:
+    - Glutes
+standing-hip-flexor-raise:
+  name: Standing Hip Flexor Raise
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Hip Flexor
+  secondary-muscles:
+    - Tibialis Anterior
+standing-resistance-band-chest-fly:
+  name: Standing Resistance Band Chest Fly
+  category: Chest
+  compound: false
+  primary-muscles:
+    - Chest
+  secondary-muscles:
+    - Front Deltoid
+stationary-bike:
+  name: Stationary Bike
+  category: Cardio & Equipment
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+step-up:
+  name: Step Up
+  category: Glute
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+stiff-legged-deadlift:
+  name: Stiff-Legged Deadlift
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Hamstrings
+  secondary-muscles:
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+straight-arm-lat-pulldown:
+  name: Straight Arm Lat Pulldown
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+  secondary-muscles:
+    - Rear Deltoids
+    - Rotator Cuffs
+sumo-deadlift:
+  name: Sumo Deadlift
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Quads
+    - Hamstrings
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+sumo-squat:
+  name: Sumo Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+superman-raise:
+  name: Superman Raise
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+  secondary-muscles:
+    - Hamstrings
+t-bar-row:
+  name: T-Bar Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+    - Lower Back
+    - Forearm Flexors
+    - Rotator Cuff
+tate-press:
+  name: Tate Press
+  category: Triceps
+  compound: false
+  primary-muscles: []
+  secondary-muscles:
+    - Front Delts
+    - Chest
+tibialis-raise:
+  name: Tibialis Raise
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Tibialis Anterior
+  secondary-muscles: []
+towel-pull-up:
+  name: Towel Pull-Up
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles: []
+  secondary-muscles: []
+towel-row:
+  name: Towel Row
+  category: Back
+  compound: false
+  primary-muscles:
+    - Lats
+    - Trapezius
+    - Rear Deltoids
+  secondary-muscles:
+    - Biceps
+trap-bar-deadlift-with-high-handles:
+  name: Trap Bar Deadlift With High Handles
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Quads
+  secondary-muscles:
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+trap-bar-deadlift-with-low-handles:
+  name: Trap Bar Deadlift With Low Handles
+  category: Back
+  compound: false
+  primary-muscles:
+    - Glutes
+    - Lower Back
+    - Quads
+  secondary-muscles:
+    - Adductors
+    - Trapezius
+    - Forearm Flexors
+tricep-bodyweight-extension:
+  name: Tricep Bodyweight Extension
+  category: Triceps
+  compound: false
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+tricep-pushdown-with-bar:
+  name: Tricep Pushdown With Bar
+  category: Triceps
+  compound: true
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+tricep-pushdown-with-rope:
+  name: Tricep Pushdown With Rope
+  category: Triceps
+  compound: true
+  primary-muscles:
+    - Triceps
+  secondary-muscles: []
+wall-walk:
+  name: Wall Walk
+  category: Shoulder
+  compound: false
+  primary-muscles:
+    - Front Deltoid
+  secondary-muscles:
+    - Triceps
+    - Chest
+    - Abs
+weighted-plank:
+  name: Weighted Plank
+  category: Ab
+  compound: false
+  primary-muscles:
+    - Abs
+  secondary-muscles:
+    - Obliques
+wrist-roller:
+  name: Wrist Roller
+  category: Forearm Flexors & Grip
+  compound: false
+  primary-muscles:
+    - Forearm Flexors
+  secondary-muscles: []
+zercher-squat:
+  name: Zercher Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+zombie-squat:
+  name: Zombie Squat
+  category: Leg
+  compound: false
+  primary-muscles:
+    - Quads
+    - Glutes
+    - Adductors
+    - Lower Back
+  secondary-muscles:
+    - Calves
+zottman-curl:
+  name: Zottman Curl
+  category: Bicep
+  compound: false
+  primary-muscles:
+    - Biceps
+  secondary-muscles:
+    - Forearm Flexors

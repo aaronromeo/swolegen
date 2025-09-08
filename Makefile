@@ -98,9 +98,9 @@ normalize-schemas: check-jq install-jsonschema
 
 	rm -f $(NORMALIZED_SCHEMA_DIR)/*.json
 
-	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema schemas/history-v1.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/history-v1.json
-	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema schemas/analyzer-v1.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/analyzer-v1.json
-	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema schemas/workout-v1.2.json -r schemas/ > $(NORMALIZED_SCHEMA_DIR)/workout-v1.2.json
+	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema templates/history-v1.json -r templates/ > $(NORMALIZED_SCHEMA_DIR)/history-v1.json
+	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema templates/analyzer-v1.json -r templates/ > $(NORMALIZED_SCHEMA_DIR)/analyzer-v1.json
+	$(JSONSCHEMA) bundle -d https://json-schema.org/draft/2020-12/schema templates/workout-v1.2.json -r templates/ > $(NORMALIZED_SCHEMA_DIR)/workout-v1.2.json
 
 	@for f in $(NORMALIZED_SCHEMA_DIR)/*.json; do \
 	  echo "Processing $$f"; \

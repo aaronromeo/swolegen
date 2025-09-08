@@ -13,19 +13,10 @@ Hard rules
 - If target load is absent but a load is given, set both target_load and actual_load to that number.
 - If units are in kg, convert to pounds (1 kg = 2.20462 lb) and round to a sensible precision for load_lbs.
 - If a field is unknown and not required by the schema, set it to null.
-- De‑duplicate repeated mentions of the same exercise; consolidate evidence to compute the best “recent_best”.
+- De‑duplicate repeated mentions of the same exercise; consolidate evidence to compute the best "recent_best".
 
 Normalization
 - Slug: lowercase kebab‑case (e.g., incline-dumbbell-press, romanian-deadlift).
-- Pattern (movement taxonomy), pick the best few:
-    - hinge_hip (e.g., RDL, deadlift variants)
-    - squat_knee (e.g., back/front squat, split squat)
-    - push_horizontal (e.g., bench, push‑up, cable chest press)
-    - pull_horizontal (e.g., row variations)
-    - push_vertical (e.g., overhead press; if user forbids OH press, still classify but don’t infer it if ambiguous)
-    - pull_vertical (e.g., pull‑up, lat pulldown)
-    - isolation_biceps, isolation_triceps, isolation_delts, isolation_quads, isolation_hamstrings, isolation_calves
-    - core_anti_extension, core_anti_rotation, core_rotation, core_flexion
 - Tier hint (heuristic):
     - "A" = heavy/priority compound or appears most frequently,
     - "B" = secondary compound or moderate frequency,
@@ -34,6 +25,127 @@ Normalization
     - recent_best.load_lbs: the load in pounds.
     - recent_best.rep_bracket: a compact reps descriptor (e.g., "8", "8-10", or "AMRAP" if clearly stated).
     - If multiple candidates exist, prefer higher load; break ties by higher reps, then most recent date.
+
+Movement taxonomy (fundamental_movement_classification)
+- DECISION RULES (read first)
+    - Push vs Pull: Drives load away from torso = PUSH; draws load toward torso/body = PULL.
+    - Horizontal vs Vertical (push/pull): Use humerus path relative to torso. ~0–45° from torso = HORIZONTAL; ~60–90° toward/away from overhead = VERTICAL. Borderline (incline/landmine): use movement intent (finishes overhead = Vertical).
+    - Squat vs Hinge: SQUAT = knee-dominant, knees travel forward, torso more upright. HINGE = hip-dominant, shins near vertical, torso inclines, minimal knee bend.
+    - Split-stance: Knee-dominant split patterns (split squat, step-up) = SQUAT. Hip-dominant split patterns (split-stance RDL) = HINGE.
+    - Rotation: Any axial trunk rotation or explicit resistance to rotation (anti-rotation) = ROTATION. Pure anti-extension/flexion (planks without twist) = OTHER.
+    - Isolation moves: Single-joint exercises (curls, extensions, flyes, calf raises) = OTHER.
+    - Gait/carries/conditioning: Carries, sleds, cyc erg/rower, running/jumping rope = OTHER (not one of the 7).
+    - Combo lifts: If two patterns are equal, choose the dominant concentric driver (or first-named pattern if still tied).
+    - Machine/brand names do not define the pattern: classify by joint action and load path.
+- CONTRASTIVE PAIRS AND NEAR-MISS NEGATIVES (compact)
+    1. Squat vs Hinge
+        - Goblet Squat -> SQUAT (knees forward, upright torso)
+        - Front Squat -> SQUAT
+        - Romanian Deadlift -> HINGE (hips back, minimal knee bend)
+    2. Horizontal Push vs Vertical Push
+        - Bench Press -> HORIZONTAL_PUSH
+        - Incline DB Press (30–45°) -> HORIZONTAL_PUSH (finishes away from chest, not overhead)
+        - Overhead Press -> VERTICAL_PUSH
+    3. Horizontal Pull vs Vertical Pull
+        - Seated Cable Row -> HORIZONTAL_PULL
+        - Face Pull -> HORIZONTAL_PULL (row path toward face)
+        - Lat Pulldown -> VERTICAL_PULL
+    4. Rotation vs Not Rotation
+        - Cable Woodchop -> ROTATION
+        - Pallof Press -> ROTATION (anti-rotation)
+        - Front Plank -> OTHER (no axial rotation)
+    5. Split-Stance Confusions
+        - RFESS (Bulgarian Split Squat) -> SQUAT
+        - Step-Up -> SQUAT
+        - Split-Stance RDL -> HINGE
+    6. Isolation/Gait/Carries (map to OTHER)
+        - Biceps Curl -> OTHER
+        - Lateral Raise -> OTHER
+        - Farmer’s Carry -> OTHER
+- SYNONYMS -> CANONICAL CLASSES
+    - HORIZONTAL_PUSH: bench press; bp; push-up; pushup; dumbbell bench; db bench; db floor press; machine chest press; svend press; chest press machine.
+    - HORIZONTAL_PULL: row; barbell row; bb row; db row; single-arm row; one-arm row; t-bar row; pendlay row; seated cable row; chest-supported row; face pull.
+    - VERTICAL_PUSH: ohp; overhead press; military press; shoulder press; db shoulder press; push press; arnold press; z-press; landmine press (overhead intent).
+    - VERTICAL_PULL: pullup; pull-up; chinup; chin-up; lat pulldown; wide-grip pulldown; neutral-grip pulldown; single-arm pulldown; kneeling cable pulldown.
+    - SQUAT: squat; back squat; high-bar; low-bar; front squat; goblet squat; box squat; overhead squat; split squat; rfess; bulgarian split squat; step-up; front-foot elevated split squat.
+    - HINGE: deadlift; dl; conventional dl; sumo dl; trap bar deadlift; hex bar deadlift; rdl; romanian deadlift; stiff-leg deadlift; good morning; kb swing; hip thrust; glute bridge; hip hinge.
+    - ROTATION: woodchop; cable chop; russian twist; medball throw (rotational); pallof press; anti-rotation press; kettlebell windmill; windmill.
+- NEGATIVE ALIASES (map to OTHER)
+    - Isolation: biceps curl; hammer curl; triceps extension; pressdown; pec flye; chest fly; reverse flye; lateral raise; rear delt flye; leg extension; leg curl; calf raise; pullover.
+    - Gait/Conditioning: farmer’s carry; suitcase carry; yoke carry; sled push; sled pull; prowler; jump rope; rower; erg; air bike; run; jog; sprint.
+    - Static Core (no rotation): front plank; hollow hold; dead bug; glute bridge hold.
+    - Mobility/Stretch: couch stretch; t-spine opener; pigeon; banded distraction.
+    - Ambiguous brand/positions: "hammer strength", "nautilus", "smith" etc. Classify by joint path, not brand.
+- TINY TEST SET (expected output)
+    - "Incline DB Press" -> {"class":"HORIZONTAL_PUSH","reason":"Press away from chest; not to overhead"}
+    - "Landmine Press" -> {"class":"VERTICAL_PUSH","reason":"Angled bar but overhead press intent"}
+    - "Face Pull" -> {"class":"HORIZONTAL_PULL","reason":"Pull toward face along horizontal path"}
+    - "RFESS (Bulgarian Split Squat)" -> {"class":"SQUAT","reason":"Knee-dominant split squat pattern"}
+    - "KB Swing" -> {"class":"HINGE","reason":"Hip snap with vertical shins"}
+    - "Pallof Press" -> {"class":"ROTATION","reason":"Explicit anti-rotation"}
+    - "Biceps Curl Machine" -> {"class":"OTHER","reason":"Single-joint isolation"}
+- IMPLEMENTATION NOTES
+    - Prefer movement intent and joint kinematics over equipment names or targeted muscles.
+    - For incline/landmine ambiguity, use where the load finishes: overhead = Vertical Push; away from chest = Horizontal Push.
+    - For pulls, use start position of the load: from overhead = Vertical Pull; from in front of torso = Horizontal Pull.
+
+Machine/brand names do not define the pattern: classify by joint action and load path.
+- Pick the best Fundamental Movement pattern classification(s) for each exercise (movement taxonomy) from this list. Reference — Fundamental movement patterns (use id; descriptions/examples are hints):
+=== FUNDAMENTALS TAXONOMY CLASS DEFINITIONS (brief cues) START ===
+    - horizontal_push — Press away from chest (bench/push-up plane). Chest, anterior delts, triceps. e.g., Push-Up, Bench Press, Floor Press, Svend Press
+    - horizontal_pull — Row toward chest/ribs (row plane). Lats and upper back. e.g., Bent-Over Row, Pendlay Row, Single-Arm Row, Inverted Row, T-bar Row, Seated Cable Row
+    - vertical_push — Press to overhead; delts plus scapular upward rotation and cuff stability. e.g., Dumbbell Z-Press, Barbell Overhead Press, Push Press, Dumbbell Shoulder Press
+    - vertical_pull — Pull from overhead toward torso (pull-up/pulldown plane). e.g., Pull-Up, Chin-Up, Lat Pulldown, Kneeling Cable Pulldown
+    - squat — Knee-dominant lower-body pattern; large knee bend, relatively upright torso. e.g., Goblet Squat, Front Squat, Back Squat, Overhead Squat, Lunge, Split Squat
+    - hinge — Hip-dominant posterior-chain pattern; hips back, shins near vertical, neutral spine. e.g., Deadlift, Hip Thrust, Glute Bridge, Romanian Deadlift, Kettlebell Swing
+    - rotation — Twist or resist twist through trunk (rotation or anti-rotation). e.g., Cable Woodchopper, Kettlebell Windmill, Pallof Press, Side Plank, Bird Dog
+    - other — Isolation, gait/conditioning, static core without twist, mobility. e.g., Biceps Curl, Lateral Raise, Farmer’s Carry, Front Plank
+
+=== FUNDAMENTALS TAXONOMY CLASS DEFINITIONS (brief cues) END ===
+
+Equipment taxonomy (equipment)
+- Pick the best few equpment options for each exercise (movement taxonomy) from this list. Reference — Equipment keys (use id in outputs; descriptions/categories are hints):
+=== EQUIPMENT TAXONOMY START ===
+    - eq_bodyweight — Bodyweight Only [Bodyweight]
+    - eq_dumbbells_set_5-50lbs — Dumbbell Set: 5–50 lbs [Free Weights]
+    - eq_dumbbells_set_55-100lbs — Dumbbell Set: 55–100 lbs [Free Weights]
+    - eq_kettlebells_set_5-35lbs — Kettlebells: 5–35 lbs [Free Weights]
+    - eq_kettlebells_set_40-70lbs — Kettlebells: 40–70 lbs [Free Weights]
+    - eq_barbell_45lbs — Barbell – 45 lbs [Bars &amp; Plates]
+    - eq_olympic_barbell_mens_20kg — Olympic Barbell – 20kg (Men&#39;s) [Bars &amp; Plates]
+    - eq_olympic_barbell_womens_15kg — Olympic Barbell – 15kg (Women&#39;s) [Bars &amp; Plates]
+    - eq_weight_plates_5-25lbs — Weight Plates: 5–25 lbs [Bars &amp; Plates]
+    - eq_weight_plates_25-45lbs — Weight Plates: 25–45 lbs [Bars &amp; Plates]
+    - eq_flat_bench — Flat Bench [Benches &amp; Platforms]
+    - eq_adjustable_bench — Adjustable Bench [Benches &amp; Platforms]
+    - eq_hip_thrust_bench_or_pad — Hip Thrust Bench/Pad [Benches &amp; Platforms]
+    - eq_step_platform — Step Platform / Box [Benches &amp; Platforms]
+    - eq_plyo_box — Plyo Box [Benches &amp; Platforms]
+    - eq_power_rack — Power Rack [Racks &amp; Machines]
+    - eq_squat_stand — Squat Stand [Racks &amp; Machines]
+    - eq_smith_machine — Smith Machine [Racks &amp; Machines]
+    - eq_cable_machine_single_stack — Cable Machine (Single Stack) [Racks &amp; Machines]
+    - eq_cable_machine_dual_stack — Cable Machine (Dual Stack) [Racks &amp; Machines]
+    - eq_lat_pulldown — Lat Pulldown Machine [Racks &amp; Machines]
+    - eq_seated_row — Seated Row Machine [Racks &amp; Machines]
+    - eq_cable_attachments_basic — Cable Attachments (Rope, Bar, Single Handles) [Attachments &amp; Bands]
+    - eq_cable_attachments_full — Cable Attachments (Extended Set) [Attachments &amp; Bands]
+    - eq_bands_light_medium — Resistance Bands (Light/Medium) [Attachments &amp; Bands]
+    - eq_bands_full — Resistance Bands (Full Range) [Attachments &amp; Bands]
+    - eq_pullup_bar — Pull-Up Bar [Bodyweight Stations]
+    - eq_assisted_pullup — Assisted Pull-Up Station [Bodyweight Stations]
+    - eq_dip_bars — Dip Bars [Bodyweight Stations]
+    - eq_mat_area — Mat Area [Bodyweight Stations]
+    - eq_treadmill — Treadmill [Cardio]
+    - eq_stationary_bike — Stationary Bike [Cardio]
+    - eq_air_bike — Air Bike [Cardio]
+    - eq_elliptical — Elliptical [Cardio]
+    - eq_rower — Rowing Machine [Cardio]
+    - eq_stair_climber — Stair Climber [Cardio]
+    - eq_sled_and_turf — Sled &amp; Turf [Cardio]
+    - eq_other — Other [Misc]
+
+=== EQUIPMENT TAXONOMY END ===
 
 Acronym & shorthand (expand these when seen)
 - DB: dumbbell, BB: barbell, KB: kettlebell, EZ: EZ‑bar

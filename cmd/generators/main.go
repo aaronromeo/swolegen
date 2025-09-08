@@ -2,7 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"html/template"
 	"os"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -28,7 +30,7 @@ type SchemaFundamental struct {
 }
 
 func main() {
-	b, err := os.ReadFile("schemas/equipment_list.yaml")
+	b, err := os.ReadFile("templates/equipment_list.yaml")
 	if err != nil {
 		panic(err)
 	}
@@ -56,8 +58,8 @@ func main() {
 		panic(err)
 	}
 
-	// Also update schemas/set-v1.json equipment enum from equipment_list.yaml
-	exSchemaPath := "schemas/set-v1.json"
+	// Also update templates/set-v1.json equipment enum from equipment_list.yaml
+	exSchemaPath := "templates/set-v1.json"
 	exb, err := os.ReadFile(exSchemaPath)
 	if err != nil {
 		panic(err)
@@ -92,8 +94,8 @@ func main() {
 		panic("set schema: could not locate properties.equipment.items for enum update")
 	}
 
-	// Update fundamentals enum in schemas/set-v1.json from fundamentals_list.yaml
-	fb, err := os.ReadFile("schemas/fundamentals_list.yaml")
+	// Update fundamentals enum in templates/set-v1.json from fundamentals_list.yaml
+	fb, err := os.ReadFile("templates/fundamentals_list.yaml")
 	if err != nil {
 		panic(err)
 	}
@@ -114,17 +116,17 @@ func main() {
 	if err := json.Unmarshal(exb, &ex); err != nil {
 		panic(err)
 	}
-	// Locate properties.pattern.items.enum
+	// Locate properties.fundamental_movement_classification.items.enum
 	var patternItems map[string]any
 	if props, ok := ex["properties"].(map[string]any); ok {
-		if pattern, ok := props["pattern"].(map[string]any); ok {
+		if pattern, ok := props["fundamental_movement_classification"].(map[string]any); ok {
 			if pi, ok := pattern["items"].(map[string]any); ok {
 				patternItems = pi
 			}
 		}
 	}
 	if patternItems == nil {
-		panic("set schema: could not locate properties.pattern.items for fundamentals enum update")
+		panic("set schema: could not locate properties.fundamental_movement_classification.items for fundamentals enum update")
 	}
 	patternItems["enum"] = fundIds
 
@@ -149,6 +151,59 @@ func main() {
 		panic(err)
 	}
 	if err := os.WriteFile(exSchemaPath, outJSON, 0644); err != nil {
+		panic(err)
+	}
+
+	var eqBldr strings.Builder
+	for _, e := range sel.Equipment {
+		eqBldr.WriteString("    - ")
+		eqBldr.WriteString(e.Id)
+		eqBldr.WriteString(" — ")
+		eqBldr.WriteString(e.Description)
+		eqBldr.WriteString(" [")
+		eqBldr.WriteString(e.Category)
+		eqBldr.WriteString("]\n")
+	}
+
+	var funBldr strings.Builder
+	for _, f := range sfl.Fundamentals {
+		funBldr.WriteString("    - ")
+		funBldr.WriteString(f.Id)
+		funBldr.WriteString(" — ")
+		funBldr.WriteString(f.Description)
+		if len(f.Examples) > 0 {
+			funBldr.WriteString(" e.g., ")
+			for i, ex := range f.Examples {
+				if i > 0 {
+					funBldr.WriteString(", ")
+				}
+				funBldr.WriteString(ex)
+			}
+		}
+		funBldr.WriteString("\n")
+	}
+
+	t, err := template.ParseFiles("templates/history-system.gotxt")
+	if err != nil {
+		panic(err)
+	}
+	historySystemPath := "internal/llm/prompts/history-system.txt"
+	var historySystem = struct {
+		Equipment    string
+		Fundamentals string
+	}{
+		Equipment:    eqBldr.String(),
+		Fundamentals: funBldr.String(),
+	}
+	hsFile, err := os.Create(historySystemPath)
+	if err != nil {
+		panic(err)
+	}
+
+	if err := t.Execute(hsFile, historySystem); err != nil {
+		panic(err)
+	}
+	if err := hsFile.Close(); err != nil {
 		panic(err)
 	}
 }

@@ -633,7 +633,8 @@
       "type": "object",
       "required": [
         "slug",
-        "pattern",
+        "fundamental_movement_classification",
+        "fundamental_movement_rationale",
         "equipment",
         "equipment_other",
         "equipment_notes",
@@ -642,24 +643,6 @@
         "notes"
       ],
       "properties": {
-        "pattern": {
-          "description": "The Fundamental Movement pattern classification(s) for this exercise.",
-          "type": "array",
-          "maxItems": 2,
-          "minItems": 1,
-          "items": {
-            "type": "string",
-            "enum": [
-              "horizontal_push",
-              "horizontal_pull",
-              "vertical_push",
-              "vertical_pull",
-              "squat",
-              "hinge",
-              "rotation"
-            ]
-          }
-        },
         "accomplished": {
           "description": "The actual completed set for this exercise; null if unknown.",
           "type": [
@@ -789,6 +772,30 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "fundamental_movement_classification": {
+          "description": "The Fundamental Movement pattern classification(s) for this exercise.",
+          "type": "array",
+          "maxItems": 2,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "horizontal_push",
+              "horizontal_pull",
+              "vertical_push",
+              "vertical_pull",
+              "squat",
+              "hinge",
+              "rotation",
+              "other"
+            ]
+          }
+        },
+        "fundamental_movement_rationale": {
+          "description": "Short rationale for the Fundamental Movement pattern classification.",
+          "type": "string",
+          "maxLength": 12
         },
         "notes": {
           "description": "Free-form notes about the exercise; set to null if none.",

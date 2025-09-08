@@ -1277,11 +1277,14 @@ type SetV1 struct {
 	// that Bodyweight is not a valid value here, rather use eq_bodyweight.
 	EquipmentOther []string `json:"equipment_other" yaml:"equipment_other" mapstructure:"equipment_other"`
 
+	// The Fundamental Movement pattern classification(s) for this exercise.
+	FundamentalMovementClassification []SetV1FundamentalMovementClassificationElem `json:"fundamental_movement_classification" yaml:"fundamental_movement_classification" mapstructure:"fundamental_movement_classification"`
+
+	// Short rationale for the Fundamental Movement pattern classification.
+	FundamentalMovementRationale string `json:"fundamental_movement_rationale" yaml:"fundamental_movement_rationale" mapstructure:"fundamental_movement_rationale"`
+
 	// Free-form notes about the exercise; set to null if none.
 	Notes *string `json:"notes" yaml:"notes" mapstructure:"notes"`
-
-	// The Fundamental Movement pattern classification(s) for this exercise.
-	Pattern []SetV1PatternElem `json:"pattern" yaml:"pattern" mapstructure:"pattern"`
 
 	// Canonical exercise slug, kebab-case (e.g., "barbell-bench-press").
 	Slug string `json:"slug" yaml:"slug" mapstructure:"slug"`
@@ -1502,17 +1505,18 @@ func (j *SetV1EquipmentElem) UnmarshalJSON(value []byte) error {
 	return nil
 }
 
-type SetV1PatternElem string
+type SetV1FundamentalMovementClassificationElem string
 
-const SetV1PatternElemHinge SetV1PatternElem = "hinge"
-const SetV1PatternElemHorizontalPull SetV1PatternElem = "horizontal_pull"
-const SetV1PatternElemHorizontalPush SetV1PatternElem = "horizontal_push"
-const SetV1PatternElemRotation SetV1PatternElem = "rotation"
-const SetV1PatternElemSquat SetV1PatternElem = "squat"
-const SetV1PatternElemVerticalPull SetV1PatternElem = "vertical_pull"
-const SetV1PatternElemVerticalPush SetV1PatternElem = "vertical_push"
+const SetV1FundamentalMovementClassificationElemHinge SetV1FundamentalMovementClassificationElem = "hinge"
+const SetV1FundamentalMovementClassificationElemHorizontalPull SetV1FundamentalMovementClassificationElem = "horizontal_pull"
+const SetV1FundamentalMovementClassificationElemHorizontalPush SetV1FundamentalMovementClassificationElem = "horizontal_push"
+const SetV1FundamentalMovementClassificationElemOther SetV1FundamentalMovementClassificationElem = "other"
+const SetV1FundamentalMovementClassificationElemRotation SetV1FundamentalMovementClassificationElem = "rotation"
+const SetV1FundamentalMovementClassificationElemSquat SetV1FundamentalMovementClassificationElem = "squat"
+const SetV1FundamentalMovementClassificationElemVerticalPull SetV1FundamentalMovementClassificationElem = "vertical_pull"
+const SetV1FundamentalMovementClassificationElemVerticalPush SetV1FundamentalMovementClassificationElem = "vertical_push"
 
-var enumValues_SetV1PatternElem = []interface{}{
+var enumValues_SetV1FundamentalMovementClassificationElem = []interface{}{
 	"horizontal_push",
 	"horizontal_pull",
 	"vertical_push",
@@ -1520,25 +1524,26 @@ var enumValues_SetV1PatternElem = []interface{}{
 	"squat",
 	"hinge",
 	"rotation",
+	"other",
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
-func (j *SetV1PatternElem) UnmarshalJSON(value []byte) error {
+func (j *SetV1FundamentalMovementClassificationElem) UnmarshalJSON(value []byte) error {
 	var v string
 	if err := json.Unmarshal(value, &v); err != nil {
 		return err
 	}
 	var ok bool
-	for _, expected := range enumValues_SetV1PatternElem {
+	for _, expected := range enumValues_SetV1FundamentalMovementClassificationElem {
 		if reflect.DeepEqual(v, expected) {
 			ok = true
 			break
 		}
 	}
 	if !ok {
-		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_SetV1PatternElem, v)
+		return fmt.Errorf("invalid value (expected one of %#v): %#v", enumValues_SetV1FundamentalMovementClassificationElem, v)
 	}
-	*j = SetV1PatternElem(v)
+	*j = SetV1FundamentalMovementClassificationElem(v)
 	return nil
 }
 
@@ -1592,11 +1597,14 @@ func (j *SetV1) UnmarshalJSON(value []byte) error {
 	if _, ok := raw["equipment_other"]; raw != nil && !ok {
 		return fmt.Errorf("field equipment_other in SetV1: required")
 	}
+	if _, ok := raw["fundamental_movement_classification"]; raw != nil && !ok {
+		return fmt.Errorf("field fundamental_movement_classification in SetV1: required")
+	}
+	if _, ok := raw["fundamental_movement_rationale"]; raw != nil && !ok {
+		return fmt.Errorf("field fundamental_movement_rationale in SetV1: required")
+	}
 	if _, ok := raw["notes"]; raw != nil && !ok {
 		return fmt.Errorf("field notes in SetV1: required")
-	}
-	if _, ok := raw["pattern"]; raw != nil && !ok {
-		return fmt.Errorf("field pattern in SetV1: required")
 	}
 	if _, ok := raw["slug"]; raw != nil && !ok {
 		return fmt.Errorf("field slug in SetV1: required")
@@ -1618,11 +1626,14 @@ func (j *SetV1) UnmarshalJSON(value []byte) error {
 	if plain.EquipmentNotes != nil && len(*plain.EquipmentNotes) > 200 {
 		return fmt.Errorf("field %s length: must be <= %d", "equipment_notes", 200)
 	}
-	if plain.Pattern != nil && len(plain.Pattern) < 1 {
-		return fmt.Errorf("field %s length: must be >= %d", "pattern", 1)
+	if plain.FundamentalMovementClassification != nil && len(plain.FundamentalMovementClassification) < 1 {
+		return fmt.Errorf("field %s length: must be >= %d", "fundamental_movement_classification", 1)
 	}
-	if len(plain.Pattern) > 2 {
-		return fmt.Errorf("field %s length: must be <= %d", "pattern", 2)
+	if len(plain.FundamentalMovementClassification) > 2 {
+		return fmt.Errorf("field %s length: must be <= %d", "fundamental_movement_classification", 2)
+	}
+	if len(plain.FundamentalMovementRationale) > 12 {
+		return fmt.Errorf("field %s length: must be <= %d", "fundamental_movement_rationale", 12)
 	}
 	*j = SetV1(plain)
 	return nil

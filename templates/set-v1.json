@@ -134,14 +134,7 @@
                 "null"
             ]
         },
-        "notes": {
-            "description": "Free-form notes about the exercise; set to null if none.",
-            "type": [
-                "string",
-                "null"
-            ]
-        },
-        "pattern": {
+        "fundamental_movement_classification": {
             "description": "The Fundamental Movement pattern classification(s) for this exercise.",
             "items": {
                 "enum": [
@@ -151,13 +144,26 @@
                     "vertical_pull",
                     "squat",
                     "hinge",
-                    "rotation"
+                    "rotation",
+                    "other"
                 ],
                 "type": "string"
             },
             "maxItems": 2,
             "minItems": 1,
             "type": "array"
+        },
+        "fundamental_movement_rationale": {
+            "description": "Short rationale for the Fundamental Movement pattern classification.",
+            "maxLength": 12,
+            "type": "string"
+        },
+        "notes": {
+            "description": "Free-form notes about the exercise; set to null if none.",
+            "type": [
+                "string",
+                "null"
+            ]
         },
         "slug": {
             "description": "Canonical exercise slug, kebab-case (e.g., \"barbell-bench-press\").",
@@ -175,7 +181,8 @@
     },
     "required": [
         "slug",
-        "pattern",
+        "fundamental_movement_classification",
+        "fundamental_movement_rationale",
         "equipment",
         "equipment_other",
         "equipment_notes",
