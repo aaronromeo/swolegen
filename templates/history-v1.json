@@ -1,0 +1,66 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://swolegen.app/schemas/history-v1.json",
+    "title": "SwoleGen Workout History (v1)",
+    "description": "Structured history of a user’s workouts based on data provided.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "most_recent_sets",
+        "recent_best_sets_30d"
+    ],
+    "properties": {
+        "most_recent_sets": {
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 0,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "workout_date",
+                    "sets"
+                ],
+                "properties": {
+                    "workout_date": {
+                        "description": "Workout date in YYYY-MM-DD.",
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "sets": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "$ref": "./set-v1.json"
+                        }
+                    }
+                }
+            },
+            "description": "Comprehensive array of every set of every exercise in every workout that the user has performed in the past 30 days, ordered by recency (most recent first)."
+        },
+        "recent_best_sets_30d": {
+            "type": "array",
+            "maxItems": 90,
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "set",
+                    "estimated_workout_date"
+                ],
+                "properties": {
+                    "set": {
+                        "$ref": "./set-v1.json"
+                    },
+                    "estimated_workout_date": {
+                        "description": "Estimated workout date in YYYY-MM-DD.",
+                        "format": "date",
+                        "type": "string"
+                    }
+                }
+            },
+            "description": "Array of objects representing the user's most recent best effort sets within the last 30 days. Each entry contains a set object and its estimated_workout_date. Entries should appear at most once, ordered by recency (most recent first). Must contain between 1 and 90 entries. Use this to bias selection and progression toward movements with fresh performance signals."
+        }
+    }
+}

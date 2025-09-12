@@ -1,3 +1,5 @@
+Substitute freely to satisfy equipment/time, following the Substitution Policy. Use Analyzer exercises as benchmarks for movement and intensity, not a strict allow-list.
+
 Analyzer JSON:: |
     ---BEGIN_ANALYZER_JSON---
     %s

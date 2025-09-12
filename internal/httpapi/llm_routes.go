@@ -8,12 +8,31 @@ import (
 
 	"github.com/aaronromeo/swolegen/internal/config"
 	"github.com/aaronromeo/swolegen/internal/llm"
+	"github.com/aaronromeo/swolegen/internal/llm/generated"
 	"github.com/aaronromeo/swolegen/internal/llm/provider"
-	"github.com/aaronromeo/swolegen/internal/llm/schemas"
 	"github.com/gofiber/fiber/v2"
 )
 
 func registerLLM(app *fiber.App, cfg *config.Config, logger *slog.Logger) {
+	app.Post("/llm/history", func(c *fiber.Ctx) error {
+		var in llm.HistoryInputs
+		if err := json.Unmarshal(c.Body(), &in); err != nil {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "invalid json: " + err.Error()})
+		}
+
+		cli, err := newLLMClient(cfg, logger)
+		if err != nil {
+			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+		}
+
+		plan, err := cli.IngestHistory(context.Background(), in)
+		if err != nil {
+			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
+		}
+
+		return c.JSON(plan)
+	})
+
 	app.Post("/llm/analyze", func(c *fiber.Ctx) error {
 		var in llm.AnalyzerInputs
 		if err := json.Unmarshal(c.Body(), &in); err != nil {
@@ -34,7 +53,7 @@ func registerLLM(app *fiber.App, cfg *config.Config, logger *slog.Logger) {
 	})
 
 	app.Post("/llm/generate", func(c *fiber.Ctx) error {
-		var in schemas.AnalyzerV1Json
+		var in generated.AnalyzerV1Json
 		if err := json.Unmarshal(c.Body(), &in); err != nil {
 			return c.Status(http.StatusBadRequest).JSON(fiber.Map{"error": "invalid json: " + err.Error()})
 		}

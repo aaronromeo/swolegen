@@ -9,6 +9,8 @@ import (
 
 const (
 	DefaultModel                             = "gpt-4.1-mini"
+	ResponseFormatHistoryPlan                = "history_ingestor"
+	ResponseFormatHistoryPlanDescription     = "Workout history ingestor JSON"
 	ResponseFormatAnalyzerPlan               = "analyzer_plan"
 	ResponseFormatAnalyzerPlanDescription    = "Workout analyzer plan JSON"
 	ResponseFormatGeneratorOutput            = "generator_output"

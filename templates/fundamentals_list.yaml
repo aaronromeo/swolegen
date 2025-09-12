@@ -1,0 +1,70 @@
+fundamentals_list:
+  - id: "horizontal_push"
+    description: "Press away from chest (bench/push-up plane). Chest, anterior delts, triceps."
+    examples:
+      - "Push-Up"
+      - "Bench Press"
+      - "Floor Press"
+      - "Svend Press"
+
+  - id: "horizontal_pull"
+    description: "Row toward chest/ribs (row plane). Lats and upper back."
+    examples:
+      - "Bent-Over Row"
+      - "Pendlay Row"
+      - "Single-Arm Row"
+      - "Inverted Row"
+      - "T-bar Row"
+      - "Seated Cable Row"
+
+  - id: "vertical_push"
+    description: "Press to overhead; delts plus scapular upward rotation and cuff stability."
+    examples:
+      - "Dumbbell Z-Press"
+      - "Barbell Overhead Press"
+      - "Push Press"
+      - "Dumbbell Shoulder Press"
+
+  - id: "vertical_pull"
+    description: "Pull from overhead toward torso (pull-up/pulldown plane)."
+    examples:
+      - "Pull-Up"
+      - "Chin-Up"
+      - "Lat Pulldown"
+      - "Kneeling Cable Pulldown"
+
+  - id: "squat"
+    description: "Knee-dominant lower-body pattern; large knee bend, relatively upright torso."
+    examples:
+      - "Goblet Squat"
+      - "Front Squat"
+      - "Back Squat"
+      - "Overhead Squat"
+      - "Lunge"
+      - "Split Squat"
+
+  - id: "hinge"
+    description: "Hip-dominant posterior-chain pattern; hips back, shins near vertical, neutral spine."
+    examples:
+      - "Deadlift"
+      - "Hip Thrust"
+      - "Glute Bridge"
+      - "Romanian Deadlift"
+      - "Kettlebell Swing"
+
+  - id: "rotation"
+    description: "Twist or resist twist through trunk (rotation or anti-rotation)."
+    examples:
+      - "Cable Woodchopper"
+      - "Kettlebell Windmill"
+      - "Pallof Press"
+      - "Side Plank"
+      - "Bird Dog"
+
+  - id: "other"
+    description: "Isolation, gait/conditioning, static core without twist, mobility."
+    examples:
+      - "Biceps Curl"
+      - "Lateral Raise"
+      - "Farmer’s Carry"
+      - "Front Plank"
